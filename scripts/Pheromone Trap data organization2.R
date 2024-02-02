@@ -3,7 +3,7 @@
 #### moth count data ####
 #loading data 
 
-moth_counts <- read.csv("Pheromone_trap_moth_counts3.csv")
+moth_counts <- read.csv("input/Pheromone_trap_moth_counts3.csv")
 
 library(janitor) #janitor cleans up column names.It removes all unique characters and replaces spaces with _.
 #piping through `dplyr`
