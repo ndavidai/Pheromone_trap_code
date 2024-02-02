@@ -93,7 +93,8 @@ t_muck  <- moth_counts_2 %>%
   mutate(stand_type = fct_relevel(as.factor(stand_type), "Low","Co-Dom","Dom"),
          muck_count = fct_relevel(as.factor(muck_amount),"Very High","High","Medium","Low")) %>%
   group_by(stand_type, muck_amount) %>%
-  tally()
+  tally() %>%
+  filter(muck_amount != "" & muck_amount != "  ")
 
 
 ## stacked plot of total content amount (categorical) by stand type (categorical), traps with 2 bags already merged
@@ -113,7 +114,7 @@ ggsave("moth_count_plot.png",
        width = dpi = 400)
 
 ## stacked plot of muck amount (categorical) by stand type (categorical), CHECK ERRORS FOR THIS WITH BELLA!!!
-ggplot(t_muck,aes(x=stand_type, y=n,fill=muck_count))+
+ggplot( t_muck,aes(x=stand_type, y=n,fill=muck_amount))+
   geom_col(position = "stack") +
   scale_fill_viridis_d() +
   labs(x = "Stand Type", y = "", fill = "Muck Count") +
