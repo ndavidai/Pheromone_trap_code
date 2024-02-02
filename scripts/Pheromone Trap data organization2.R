@@ -130,6 +130,16 @@ ggsave("muck_count_plot.png",
        width = dpi = 400)
 
 
+## attempt at performing a 1-way and 2-way anova - doesn't work....
+one.way <- aov(muck_amount ~ stand_type, data = moth_counts_2)
+
+summary(one.way)
+
+two.way <- aov(muck_amount ~ stand_type, data = t_muck)
+
+summary(two.way)
+
+
 ## box & whisker plot of moth count (numberical) by Stand type (categorical) - each data point a totalled trap count
 ggplot(moth_counts_2) +
  aes(x = Moths, y = stand_type) +
