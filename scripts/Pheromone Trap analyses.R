@@ -3,34 +3,24 @@
 #### moth count data ####
 #loading data 
 
-moth_counts <- read.csv("input/Pheromone_trap_moth_counts3.csv")
+moth_counts <- read.csv("input/Pheromone_data_consolidated.csv")
 
 library(janitor) #janitor cleans up column names.It removes all unique characters and replaces spaces with _.
 #piping through `dplyr`
 moth_counts_1 <- moth_counts %>%
   clean_names() #Cleans names of an object (usually a data.frame)
 
-## Remove un-needed columns ##
-library(dplyr)
-moth_counts_1 <-moth_counts_1 %>% select(1:10,12:14,17:18)
-
-## Remove un-needed rows ##
-moth_counts_clean <- moth_counts_1[-c(11,18,25,36,43,50,57,64,72,79,90,97,104,112,119,126,133:1058),]
-
-# if any column names need replacing
-colnames(moth_counts_clean)[colnames(moth_counts_clean)=="x_muck_amount"] <- "muck_amount"
-
 # quick visualizations
-summary(moth_counts_clean)
-str(moth_counts_clean)
+summary(moth_counts_1)
+str(moth_counts_1)
 
 # looking for mistakes
-unique(moth_counts_clean$stand_type)
+unique(moth_counts_1$stand_type)
 
 #remove all spaces
 ## in order to standardize all stand type names, remove all spaces
 library(tidyverse)
-moth_counts_clean <- moth_counts_clean %>%
+moth_counts_clean <- moth_counts_1 %>%
   mutate(stand_type = str_replace(stand_type, " ", ""))
 
 unique(moth_counts_clean$stand_type)
@@ -41,22 +31,14 @@ moth_counts_clean <- moth_counts_clean %>%
 
 unique(moth_counts_clean$stand_type)
 
-## Merge duplicate stand types into a total sum mass and moth counts
-moth_counts_total <- moth_counts_clean %>%
-  group_by(stand_type) %>%
-  summarise(Mass = sum(mass_g),
-            Moths = sum(total_moth_count))
-            
-unique(moth_counts_total$Mass)
-unique(moth_counts_total$Moths)
 
-## Merge the original data set with the new totaled data set, the NEW columns are added at the end, and some are doubled
-moth_counts_2 <- merge(moth_counts_clean,moth_counts_total, by="stand_type")
+##### PICK UP HERE.  FIX CODE AND THEN CONITNUE TRYING TO GET SD AND REGRESSION
+
 
 # change stand_type to trap_ID, so that an 'actual' stand_type column can be created
-colnames(moth_counts_2)[colnames(moth_counts_2)=="stand_type"] <- "trap_ID"
+colnames(moth_counts_clean)[colnames(moth_counts_clean)=="stand_type"] <- "trap_ID"
 
-colnames(moth_counts_total)[colnames(moth_counts_total)=="stand_type"] <- "trap_ID"
+colnames(moth_counts_clean)[colnames(moth_counts_total)=="stand_type"] <- "trap_ID"
 
 ## change "Co-Dom" to "Mid" in order to create a unique variable (different from "Dom")
 moth_counts_2 <- moth_counts_2 %>%
