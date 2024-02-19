@@ -60,7 +60,7 @@ library(reshape2)
 # getting some descriptive stats of the data (M and SD)
 with(moth_counts_2, do.call(rbind, tapply(total_continuous, total_categorical, function(x) c(M = mean(x), SD = sd(x)))))
 
-#Multinomial logistic regression
+#Multinomial logistic regression, for categorical data (incorrect - uses moth counts as both predictor and response)
 moth_counts_2$total_categorical <- as.factor(moth_counts_2$total_categorical)
 moth_counts_2$total_categorical2 <- relevel(moth_counts_2$total_categorical, ref = "Low")
 test <- multinom(total_categorical2 ~ stand_type + total_continuous, data = moth_counts_2)
@@ -68,6 +68,18 @@ test <- multinom(total_categorical2 ~ stand_type + total_continuous, data = moth
 summary(test)
 library(sjPlot)
 tab_model(test)
+
+#Multinomial logistic regression, for categorical data (continuous moth counts removed as predictor)
+moth_counts_2$total_categorical <- as.factor(moth_counts_2$total_categorical)
+moth_counts_2$total_categorical2 <- relevel(moth_counts_2$total_categorical, ref = "Low")
+test <- multinom(total_categorical2 ~ stand_type, data = moth_counts_2)
+
+summary(test)
+library(sjPlot)
+tab_model(test)
+
+#Negative Binomial Generalized Linear Model, for continuous data
+
 
 
 
