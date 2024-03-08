@@ -78,8 +78,36 @@ summary(test)
 library(sjPlot)
 tab_model(test)
 
-#Negative Binomial Generalized Linear Model, for continuous data
+##Negative Binomial Generalized Linear Model, for continuous data
 
+#From websites "https://stats.oarc.ucla.edu/r/dae/negative-binomial-regression/" 
 
+#couldn't install "packagename"
+install.packages("packagename")
 
+library(packagename)
+library(foreign)
+library(MASS) 
+negative.binomial(10) 
 
+#using the glm.nb function from the MASS package to estimate a negative binomial regression
+summary(t1 <- glm.nb(total_continuous ~ stand_type, data = moth_counts_2))
+
+#Likelihood ratio tests of Negative Binomial Models
+t2 <- update(t1, . ~ . - prog)
+anova(t1, t2)
+
+#Checking model assumption
+t3 <- glm(total_continuous ~ stand_type, family = "poisson", data = moth_counts_2)
+pchisq(2 * (logLik(t1) - logLik(t3)), df = 1, lower.tail = FALSE)
+
+#get the confidence intervals for the coefficients by profiling the likelihood function
+(est <- cbind(Estimate = coef(t1), confint(t1)))
+#looking at incident rate ratios rather than coefficients. To do this, exponentiate the model coefficients
+exp(est)
+
+#attempt to look at predicted counts for various levels of the predictors.  Doesn't work yet...
+newdata1 <- data.frame(stand_type = factor(1:3, levels = 1:3, 
+    labels = levels(moth_counts_2$stand_type)))
+newdata1$phat <- predict(t1, newdata1, type = "response")
+newdata1
