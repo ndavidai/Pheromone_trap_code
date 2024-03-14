@@ -47,12 +47,23 @@ moth_counts_2$stand_type <- ifelse(grepl("Mid",moth_counts_2$trap_ID), "Co-Dom",
                                    ifelse(grepl("Low",moth_counts_2$trap_ID), "Low",
                                           ifelse(grepl("Dom",moth_counts_2$trap_ID), "Dom", "")))
 
+### box & whisker plot of moth count (numberical) by Stand type (categorical) - each data point a totalled trap count
+ggplot(moth_counts_2) +
+  aes(x = total_continuous, y = stand_type) +
+  geom_boxplot(fill = "#A429AF") +
+  labs(x = "Number of Male Moths", 
+       y = "Oak Presence") +
+  theme_minimal() +
+  theme(plot.caption = element_text(size = NA), axis.title.y = element_text(size = 25L, 
+                                                                            face = "bold"), axis.title.x = element_text(size = 25L, face = "bold"), 
+        axis.text.x=element_text(size=13),axis.text.y=element_text(size=13))
+
 
 library(ggplot2)
 library(forcats)
 
 
-##Multinomial Logistic Regression Analysis (https://stats.oarc.ucla.edu/r/dae/multinomial-logistic-regression/)
+###Multinomial Logistic Regression Analysis (https://stats.oarc.ucla.edu/r/dae/multinomial-logistic-regression/)
 library(foreign)
 library(nnet)
 library(reshape2)
@@ -78,11 +89,11 @@ summary(test)
 library(sjPlot)
 tab_model(test)
 
-##Negative Binomial Generalized Linear Model, for continuous data
+###Negative Binomial Generalized Linear Model, for continuous data
 
 #From websites "https://stats.oarc.ucla.edu/r/dae/negative-binomial-regression/" 
 
-#couldn't install "packagename"
+
 install.packages("packagename")
 
 library(packagename)
@@ -111,3 +122,47 @@ newdata1 <- data.frame(stand_type = factor(1:3, levels = 1:3,
     labels = levels(moth_counts_2$stand_type)))
 newdata1$phat <- predict(t1, newdata1, type = "response")
 newdata1
+
+###Running a Poisson Regression, from website "https://stats.oarc.ucla.edu/r/dae/poisson-regression/"
+summary(moth_counts_2)
+
+install.packages("sandwich")
+install.packages("msm")
+
+library(sandwich)
+library(msm)
+
+#use the 'tapply' function to display summary statistics by program type
+with(moth_counts_2, tapply(total_continuous, stand_type, function(x) {
+  sprintf("M (SD) = %1.2f (%1.2f)", mean(x), sd(x))
+}))
+
+#a conditional histogram, separated by stand type, to show distribution
+ggplot(moth_counts_2, aes(total_continuous, fill = stand_type)) +
+  geom_histogram(binwidth=5.0, position="dodge")
+
+#run a Poisson regression using the 'glm' function
+summary(p1 <- glm(total_continuous ~ stand_type, family="poisson", data=moth_counts_2))
+
+#use package 'sandwich' to obtain robust standard errors, calculate the p-values, and 95% confidence interval.
+cov.p1 <- vcovHC(p1, type="HC0")
+std.err <- sqrt(diag(cov.p1))
+r.est <- cbind(Estimate= coef(p1), "Robust SE" = std.err,
+               "Pr(>|z|)" = 2 * pnorm(abs(coef(p1)/std.err), lower.tail=FALSE),
+               LL = coef(p1) - 1.96 * std.err,
+               UL = coef(p1) + 1.96 * std.err)
+
+r.est
+
+#to try to determine if there are omitted predictor variables, if the linearity assumption holds, or if there is an issue of over-dispersion
+with(p1, cbind(res.deviance = deviance, df = df.residual,
+               p = pchisq(deviance, df.residual, lower.tail=FALSE)))
+
+anova(p1, test="Chisq")
+
+
+##coding to use for graph when continuous oak data is in + another variable
+gplot(moth_counts_2, aes(x = ????, y = phat, colour = stand_type)) +
+  geom_point(aes(y = total_continuous), alpha=.5, position=position_jitter(h=.2)) +
+  geom_line(size = 1) +
+  labs(x = "Stand Type", y = "Male Moth Count")
