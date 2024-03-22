@@ -3,7 +3,7 @@
 #### moth count data ####
 #loading data 
 
-moth_counts <- read.csv("input/Pheromone_data_consolidated.csv")
+moth_counts <- read.csv("input/Pheromone_data_consolidated2.csv")
 
 library(janitor) #janitor cleans up column names.It removes all unique characters and replaces spaces with _.
 #piping through `dplyr`
@@ -14,8 +14,18 @@ moth_counts_1 <- moth_counts %>%
 summary(moth_counts_1)
 str(moth_counts_1)
 
+# change variable type from chr to num for total_from_rand
+moth_counts_1$total_from_rand <- as.numeric(moth_counts_1$total_from_rand)
+
+# quick visualizations again
+summary(moth_counts_1)
+str(moth_counts_1)
+
 # looking for mistakes
 unique(moth_counts_1$stand_type)
+unique(moth_counts_1$moth_content_low_0_20_mid_20_50_high_50_80_very_high_80)
+unique(moth_counts_1$total_consolidated_categorical)
+unique(moth_counts_1$total_from_rand)
 
 #remove all spaces
 ## in order to standardize all stand type names, remove all spaces
@@ -25,6 +35,9 @@ moth_counts_clean <- moth_counts_1 %>%
 
 unique(moth_counts_clean$stand_type)
 
+# Remove un-needed rows #
+moth_counts_clean <- moth_counts_clean[-c(103:118),]
+
 ## again, to remove 2nd space
 moth_counts_clean <- moth_counts_clean %>%
   mutate(stand_type = str_replace(stand_type, " ", ""))
@@ -32,7 +45,9 @@ moth_counts_clean <- moth_counts_clean %>%
 unique(moth_counts_clean$stand_type)
 
 # if any column names need replacing
-colnames(moth_counts_clean)[colnames(moth_counts_clean)=="total_g_continuous"] <- "total_continuous"
+colnames(moth_counts_clean)[colnames(moth_counts_clean)=="total_from_rand"] <- "total_continuous"
+colnames(moth_counts_clean)[colnames(moth_counts_clean)=="total_consolidated_categorical"] <- "total_categorical"
+colnames(moth_counts_clean)[colnames(moth_counts_clean)=="x_quercus"] <- "prop_oak"
 
 # change stand_type to trap_ID, so that an 'actual' stand_type column can be created
 colnames(moth_counts_clean)[colnames(moth_counts_clean)=="stand_type"] <- "trap_ID"
@@ -70,6 +85,7 @@ library(reshape2)
 
 # getting some descriptive stats of the data (M and SD)
 with(moth_counts_2, do.call(rbind, tapply(total_continuous, total_categorical, function(x) c(M = mean(x), SD = sd(x)))))
+with(moth_counts_2, do.call(rbind, tapply(total_continuous, prop_oak, function(x) c(M = mean(x), SD = sd(x)))))
 
 #Multinomial logistic regression, for categorical data (incorrect - uses moth counts as both predictor and response)
 moth_counts_2$total_categorical <- as.factor(moth_counts_2$total_categorical)
@@ -161,8 +177,16 @@ with(p1, cbind(res.deviance = deviance, df = df.residual,
 anova(p1, test="Chisq")
 
 
-##coding to use for graph when continuous oak data is in + another variable
-gplot(moth_counts_2, aes(x = ????, y = phat, colour = stand_type)) +
+##coding to use for graph when continuous oak data is in + another variable (doesn't work yet)
+
+## calculate and store predicted values
+p1$phat <- predict(p1, type="response")
+
+## order by program and then by math
+p <- p1[with(p1, order(prop_oak, surrounded_by)), ]
+
+## create the plot
+ggplot(p1, aes(x = prop_oak, y = phat, colour = prop_oak)) +
   geom_point(aes(y = total_continuous), alpha=.5, position=position_jitter(h=.2)) +
   geom_line(size = 1) +
   labs(x = "Stand Type", y = "Male Moth Count")
