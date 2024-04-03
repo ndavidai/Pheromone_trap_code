@@ -134,6 +134,9 @@ plot(m5)
 
 
 
+
+
+
 ##look up resource to help fix code for this...
 ###Multinomial Logistic Regression Analysis (https://stats.oarc.ucla.edu/r/dae/multinomial-logistic-regression/)
 library(foreign)

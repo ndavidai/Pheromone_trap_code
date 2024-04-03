@@ -33,6 +33,9 @@ library(tidyverse)
 moth_counts_clean <- moth_counts_1 %>%
   mutate(stand_type = str_replace(stand_type, " ", ""))
 
+moth_counts_clean <- moth_counts_1 %>%
+  mutate(stand_type = str_replace(stand_type, " ", ""))
+
 unique(moth_counts_clean$stand_type)
 
 # Remove un-needed rows #
@@ -49,6 +52,9 @@ colnames(moth_counts_clean)[colnames(moth_counts_clean)=="total_from_rand"] <- "
 colnames(moth_counts_clean)[colnames(moth_counts_clean)=="total_consolidated_categorical"] <- "total_categorical"
 colnames(moth_counts_clean)[colnames(moth_counts_clean)=="x_quercus"] <- "prop_oak"
 
+moth_counts_clean <- moth_counts_clean %>%
+  mutate(prop_oak = str_replace(prop_oak, "NA","0"))
+
 # change stand_type to trap_ID, so that an 'actual' stand_type column can be created
 colnames(moth_counts_clean)[colnames(moth_counts_clean)=="stand_type"] <- "trap_ID"
 
@@ -61,6 +67,9 @@ moth_counts_2 <- moth_counts_clean %>%
 moth_counts_2$stand_type <- ifelse(grepl("Mid",moth_counts_2$trap_ID), "Co-Dom",
                                    ifelse(grepl("Low",moth_counts_2$trap_ID), "Low",
                                           ifelse(grepl("Dom",moth_counts_2$trap_ID), "Dom", "")))
+
+#export the cleaned data to use in other analyses script files
+write.csv(moth_counts_2, file = "moth_counts_stats.csv", row.names = FALSE)
 
 ### box & whisker plot of moth count (numberical) by Stand type (categorical) - each data point a totalled trap count
 ggplot(moth_counts_2) +
