@@ -68,52 +68,52 @@ plot + geom_point() +
 
 
 
+###NOT READY YET!
+
+
+
+
 
 ##Section: 04-implement-LMM.R 
 
 # Look at data structure
-str(fish.data)
+str(moth_LMM)
 
-# Look at the distribution of samples for each factor
-table(fish.data[ , c("Lake", "Fish_Species")])
+# Look at the distribution of samples for each categorical factor
+table(moth_LMM[ , c("surrounded_by")])
+table(moth_LMM[ , c("surrounded_by", "classe_d_age")])
 
 # Look at the distribution of continuous variables:
 par(mfrow = c(1, 2), mar = c(4, 4, 1, 1))
-hist(fish.data$Fish_Length, xlab = "Length (mm)", main = "")
-hist(fish.data$Trophic_Pos, xlab = "Trophic position", main = "")
+hist(moth_LMM$prop_oak, xlab = "% Oak", main = "")
+hist(moth_LMM$total_continuous, xlab = "Moth Counts", main = "")
 
-plot(fish.data)
-cor(Fish_Length,Trophic_Pos)
+plot(moth_LMM)
+cor(prop_oak,total_continuous)
 
-## Challenge 3:
 # Use a Z-correction to see if the data have very different scales of variation, based on species or lake
 # this 'standardizes' the scales of variation
 
-# Standardized fish length, with the function scale
-fish.data$Z_Length <- (fish.data$Fish_Length - mean(fish.data$Fish_Length)) / 
-  sd(fish.data$Fish_Length)
+# Standardized prop oak, with a z-correction
+moth_LMM$Z_prop_oak <- (moth_LMM$prop_oak - mean(moth_LMM$prop_oak)) / 
+  sd(moth_LMM$prop_oak)
 
-# Standardized trophic position, with the function scale
-fish.data$Z_TP     <- scale(fish.data$Trophic_Pos)
+# Standardized moth count, with the function scale
+moth_LMM$Z_moth_count     <- scale(moth_LMM$total_continuous)
 
-
-lm.test <- lm(Z_TP ~ Z_Length, data = fish.data)
+lm.test <- lm(Z_moth_count ~ Z_prop_oak, data = moth_LMM)
 
 lm.test.resid <- rstandard(lm.test)
 
 par(mfrow = c(1, 2))
 
-plot(lm.test.resid ~ as.factor(fish.data$Fish_Species),
-     xlab = "Species", ylab = "Standardized residuals")
+plot(lm.test.resid ~ as.factor(moth_LMM$surrounded_by),
+     xlab = "Surrounding Forest", ylab = "Standardized residuals")
 
 abline(0, 0, lty = 2)
 
-plot(lm.test.resid ~ as.factor(fish.data$Lake),
-     xlab = "Lake", ylab = "Standardized residuals")
+plot(lm.test.resid ~ as.factor(moth_LMM$classe_d_age),
+     xlab = "Forest Age", ylab = "Standardized residuals")
 
 abline(0, 0, lty = 2)
 
-lmer(Z_TP ~ Z_Length + (1 | Lake) + (1 | Fish_Species),
-     data = fish.data, REML = TRUE)
-
-source("glmm_funs.R")
