@@ -140,10 +140,21 @@ m6 <- lm(total_continuous ~  prop_oak + x_acer + x_pinus + x_conifers + longitud
 summary(m6)
 AIC(m6)
 
-# left with oaks and pines as the best-fit model for a none-mixed model
+# left with oaks and pines as the best-fit model for a none-mixed model (lowest AIC and p-value)
 m6 <- lm(total_continuous ~  prop_oak + x_pinus , data = moth_glm)
 summary(m6)
 AIC(m6)
+
+# correlation test between different continuous variables
+cor.test(moth_glm$prop_oak, moth_glm$x_pinus)
+cor.test(moth_glm$prop_oak, moth_glm$x_conifers)
+cor.test(moth_glm$prop_oak, moth_glm$x_acer)
+cor.test(moth_glm$prop_oak, moth_glm$longitude_e_w)
+cor.test(moth_glm$prop_oak, moth_glm$densite_du_couvert)
+cor.test(moth_glm$x_conifers, moth_glm$x_pinus)
+cor.test(moth_glm$x_acer, moth_glm$x_pinus)
+
+
 
 
 ## code after this not ready...
