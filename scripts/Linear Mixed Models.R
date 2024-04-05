@@ -45,27 +45,35 @@ plot + geom_point() +
        title = "All data") + 
   fig
 
-# Plot 2 - By surrounding forest type
+# Plot 2 - By surrounding landscape
 plot + geom_point() + 
   facet_wrap(~ surrounded_by) + 
   labs(x = "percent oak", y = "moth count", 
-       title = "By Surrounding Forest Type") + 
+       title = "By Surrounding Landscape Type") + 
   fig
 
 # Plot 3 – By age of forest
 plot + geom_point() + 
-  facet_wrap(~ classe_d_age) + 
+  facet_wrap(~ age_class) + 
   labs(x = "percent oak", y = "moth count", 
        title = "By Forest Age") + 
   fig
 
+# Plot 4 – By forest type
+plot + geom_point() + 
+  facet_wrap(~ forest_type) + 
+  labs(x = "percent oak", y = "moth count", 
+       title = "By Forest Type") + 
+  fig
 
 # Look at data structure
 str(moth_LMM)
 
 # Look at the distribution of samples for each categorical factor
 table(moth_LMM[ , c("surrounded_by")])
-table(moth_LMM[ , c("surrounded_by", "classe_d_age")])
+table(moth_LMM[ , c("surrounded_by", "age_class")])
+table(moth_LMM[ , c("surrounded_by", "forest_type")])
+table(moth_LMM[ , c("forest_type")])
 
 # Look at the distribution of continuous variables:
 par(mfrow = c(1, 2), mar = c(4, 4, 1, 1))
@@ -73,7 +81,6 @@ hist(moth_LMM$prop_oak, xlab = "% Oak", main = "")
 hist(moth_LMM$total_continuous, xlab = "Moth Counts", main = "")
 
 plot(moth_LMM)
-cor(prop_oak,total_continuous)
 
 # Use a Z-correction to see if the data have very different scales of variation, based on species or lake
 # this 'standardizes' the scales of variation
@@ -85,6 +92,10 @@ moth_LMM$Z_prop_oak <- (moth_LMM$prop_oak - mean(moth_LMM$prop_oak)) /
 # Standardized moth count, with the function scale
 moth_LMM$Z_moth_count     <- scale(moth_LMM$total_continuous)
 
+# Standardized longitude, with the function scale
+moth_LMM$Z_longitude    <- scale(moth_LMM$longitude_e_w)
+
+
 lm.test <- lm(Z_moth_count ~ Z_prop_oak, data = moth_LMM)
 
 lm.test.resid <- rstandard(lm.test)
@@ -92,12 +103,17 @@ lm.test.resid <- rstandard(lm.test)
 par(mfrow = c(1, 2))
 
 plot(lm.test.resid ~ as.factor(moth_LMM$surrounded_by),
-     xlab = "Surrounding Forest", ylab = "Standardized residuals")
+     xlab = "Surrounding Landscape", ylab = "Standardized residuals")
 
 abline(0, 0, lty = 2)
 
-plot(lm.test.resid ~ as.factor(moth_LMM$classe_d_age),
+plot(lm.test.resid ~ as.factor(moth_LMM$age_class),
      xlab = "Forest Age", ylab = "Standardized residuals")
+
+abline(0, 0, lty = 2)
+
+plot(lm.test.resid ~ as.factor(moth_LMM$forest_type),
+     xlab = "Forest Type", ylab = "Standardized residuals")
 
 abline(0, 0, lty = 2)
 
