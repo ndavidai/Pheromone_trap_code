@@ -3,7 +3,7 @@
 #### moth count data ####
 #loading data 
 
-moth_counts <- read.csv("input/Pheromone_data_consolidated2.csv")
+moth_counts <- read.csv("input/Pheromone_trap_consolidated3.csv")
 
 library(janitor) #janitor cleans up column names.It removes all unique characters and replaces spaces with _.
 #piping through `dplyr`
@@ -58,6 +58,9 @@ moth_counts_clean <- moth_counts_clean %>%
 # change stand_type to trap_ID, so that an 'actual' stand_type column can be created
 colnames(moth_counts_clean)[colnames(moth_counts_clean)=="stand_type"] <- "trap_ID"
 
+# rename age_class_combined column
+colnames(moth_counts_clean)[colnames(moth_counts_clean)=="age_class_combined"] <- "age_class"
+
 
 ## change "Co-Dom" to "Mid" in order to create a unique variable (different from "Dom")
 moth_counts_2 <- moth_counts_clean %>%
@@ -69,7 +72,7 @@ moth_counts_2$stand_type <- ifelse(grepl("Mid",moth_counts_2$trap_ID), "Co-Dom",
                                           ifelse(grepl("Dom",moth_counts_2$trap_ID), "Dom", "")))
 
 #export the cleaned data to use in other analyses script files
-write.csv(moth_counts_2, file = "moth_counts_stats.csv", row.names = FALSE)
+write.csv(moth_counts_2, file = "input/moth_counts_stats.csv", row.names = FALSE)
 
 ### box & whisker plot of moth count (numberical) by Stand type (categorical) - each data point a totalled trap count
 ggplot(moth_counts_2) +
