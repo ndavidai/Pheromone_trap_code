@@ -134,6 +134,20 @@ opar <- par(mfrow = c(2, 2),
             mar = c(4.1, 4.1, 2.1, 1.1))
 plot(m5)
 
+# for this model, added in one variable at time; then removed one at time, by least significance
+# left with oaks and pines as the best-fit model for a none-mixed model
+m6 <- lm(total_continuous ~  prop_oak + x_acer + x_pinus + x_conifers + longitude_e_w + densite_du_couvert, data = moth_glm)
+summary(m6)
+AIC(m6)
+
+# left with oaks and pines as the best-fit model for a none-mixed model
+m6 <- lm(total_continuous ~  prop_oak + x_pinus , data = moth_glm)
+summary(m6)
+AIC(m6)
+
+
+## code after this not ready...
+
 
 
 

@@ -60,22 +60,6 @@ plot + geom_point() +
   fig
 
 
-
-
-
-
-
-
-
-
-###NOT READY YET!
-
-
-
-
-
-##Section: 04-implement-LMM.R 
-
 # Look at data structure
 str(moth_LMM)
 
