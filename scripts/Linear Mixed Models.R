@@ -8,6 +8,8 @@
 
 moth_LMM <- read.csv("input/moth_glm.csv")
 
+install.packages("Matrix", type = "source")
+
 library(lme4)
 library(MASS)
 library(vcdExtra)
@@ -66,6 +68,13 @@ plot + geom_point() +
        title = "By Forest Type") + 
   fig
 
+# Plot 5 – By patch (site)
+plot + geom_point() + 
+  facet_wrap(~ patch_name) + 
+  labs(x = "percent oak", y = "moth count", 
+       title = "Patch") + 
+  fig
+
 # Look at data structure
 str(moth_LMM)
 
@@ -117,3 +126,20 @@ plot(lm.test.resid ~ as.factor(moth_LMM$forest_type),
 
 abline(0, 0, lty = 2)
 
+plot(lm.test.resid ~ as.factor(moth_LMM$patch_name),
+     xlab = "Patch", ylab = "Standardized residuals")
+
+abline(0, 0, lty = 2)
+
+
+
+#tools::package_dependencies("Matrix", which = "LinkingTo", reverse = TRUE)[[1L]]
+#install.packages("lme4", type = "source")
+
+#remove.packages("Matrix")
+#remove.packages("lme4")
+#install.packages("lme4", type = "source")
+
+library(lme4)
+lmer(Z_moth_count ~ Z_prop_oak + (Z_moth_count | patch_name),
+     data = moth_LMM, REML = TRUE)

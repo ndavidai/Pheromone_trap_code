@@ -34,7 +34,7 @@ moth_glm <- replace(moth_glm,is.na(moth_glm),0)
 unique(moth_glm$prop_oak)
 
 #export this data 
-write.csv(moth_glm, file = "moth_glm.csv", row.names = FALSE)
+write.csv(moth_glm, file = "input/moth_glm.csv", row.names = FALSE)
 
 #using the glm.nb function from the MASS package to estimate a negative binomial regression
 summary(glm <- glm.nb(total_continuous ~ stand_type, data = moth_glm))
