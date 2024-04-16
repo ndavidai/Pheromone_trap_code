@@ -99,4 +99,50 @@ moth_LMM$Z_prop_oak <- (moth_LMM$prop_oak - mean(moth_LMM$prop_oak)) /
   sd(moth_LMM$prop_oak)
 
 # Standardized moth count, with the function scale
-moth_LMM$Z_moth_count     <- scale(moth_LMM$tota
+moth_LMM$Z_moth_count     <- scale(moth_LMM$total_continuous)
+
+# Standardized longitude, with the function scale
+moth_LMM$Z_longitude    <- scale(moth_LMM$longitude_e_w)
+
+
+lm.test <- lm(Z_moth_count ~ Z_prop_oak, data = moth_LMM)
+
+lm.test.resid <- rstandard(lm.test)
+
+par(mfrow = c(1, 2))
+
+plot(lm.test.resid ~ as.factor(moth_LMM$surrounded_by),
+     xlab = "Surrounding Landscape", ylab = "Standardized residuals")
+
+abline(0, 0, lty = 2)
+
+plot(lm.test.resid ~ as.factor(moth_LMM$age_class),
+     xlab = "Forest Age", ylab = "Standardized residuals")
+
+abline(0, 0, lty = 2)
+
+plot(lm.test.resid ~ as.factor(moth_LMM$forest_type),
+     xlab = "Forest Type", ylab = "Standardized residuals")
+
+abline(0, 0, lty = 2)
+
+plot(lm.test.resid ~ as.factor(moth_LMM$patch_name),
+     xlab = "Patch", ylab = "Standardized residuals")
+
+abline(0, 0, lty = 2)
+
+
+
+#tools::package_dependencies("Matrix", which = "LinkingTo", reverse = TRUE)[[1L]]
+#install.packages("lme4", type = "source")
+
+#remove.packages("Matrix")
+#remove.packages("lme4")
+#install.packages("lme4", type = "source")
+
+
+lmer(Z_moth_count ~ Z_prop_oak + (Z_moth_count | patch_name),
+     data = moth_LMM, REML = TRUE)
+
+lmer(Z_TP ~ Z_Length + (1 | Lake) + (1 | Fish_Species),
+     data = fish.data, REML = TRUE)

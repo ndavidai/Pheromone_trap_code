@@ -172,4 +172,24 @@ library(nnet)
 library(reshape2)
 
 # getting some descriptive stats of the data (M and SD)
-with(moth_glm, do.call(rbind, tapply(total_continuous, s
+with(moth_glm, do.call(rbind, tapply(total_continuous, surrounded_by, function(x) c(M = mean(x), SD = sd(x)))))
+with(moth_glm, do.call(rbind, tapply(total_continuous, stand_type, function(x) c(M = mean(x), SD = sd(x)))))
+
+#Multinomial logistic regression, for categorical data (incorrect - uses moth counts as both predictor and response)
+moth_glm$total_continuous <- as.factor(moth_glm$total_continuous)
+moth_glm$total_continuous <- relevel(moth_glm$total_continuous, ref = "0")
+test <- multinom(total_continuous ~ stand_type + surrounded_by, data = moth_glm)
+
+summary(test)
+library(sjPlot)
+tab_model(test)
+
+#Multinomial logistic regression, for categorical data (continuous moth counts removed as predictor)
+moth_counts_2$total_categorical <- as.factor(moth_counts_2$total_categorical)
+moth_counts_2$total_categorical2 <- relevel(moth_counts_2$total_categorical, ref = "Low")
+test <- multinom(total_categorical2 ~ stand_type, data = moth_counts_2)
+
+summary(test)
+library(sjPlot)
+tab_model(test)
+

@@ -199,4 +199,6 @@ p <- p1[with(p1, order(prop_oak, surrounded_by)), ]
 
 ## create the plot
 ggplot(p1, aes(x = prop_oak, y = phat, colour = prop_oak)) +
-  geom_point(aes(y =
+  geom_point(aes(y = total_continuous), alpha=.5, position=position_jitter(h=.2)) +
+  geom_line(size = 1) +
+  labs(x = "Stand Type", y = "Male Moth Count")
