@@ -191,3 +191,45 @@ AIC(two_term_model, smooth_interact)
 
 ###Same AIC between previous 'two_term_model" and "smooth_interact"
 
+
+##Verify:1)the choice of basis dimension k; 2)The residuals plots. EDF should be smaller than 'k'
+#if they are too close, the model is being overly constrained
+k.check(two_term_model)
+k.check(smooth_interact)
+
+par(mfrow = c(2,2))
+gam.check(two_term_model)
+par(mfrow = c(2,2))
+gam.check(smooth_interact)
+
+#there's a larger difference between EDF and k in the two_term_model
+#two_term_model <- gam(total_continuous ~ patch_name + s(prop_oak, k = 6) + x_pinus, 
+#data = moth_GAM, method = "REML")
+
+
+##For an interaction model, need a probability distribution that allows the variance to increase with the mean.
+#'Tweedie' is a family of distributions that has this property and that works well in a GAM 
+smooth_interact_tw <- gam(total_continuous ~ patch_name + s(prop_oak, k = 6, x_pinus),
+                          data = moth_GAM, family = tw(link = "log"), method = "REML")
+
+summary(smooth_interact_tw)$p.table
+
+summary(smooth_interact_tw)$s.table
+
+k.check(smooth_interact_tw)
+
+par(mfrow = c(2,2))
+gam.check(smooth_interact_tw)
+
+AIC(smooth_interact_tw)
+
+?family.mgcv
+
+AIC(smooth_interact, two_term_model, smooth_interact_tw)
+
+#but,lowest AIC is in the 'smooth interact' (regular and Tweedie) models
+#smooth_interact <- gam(total_continuous ~ patch_name + s(prop_oak, x_pinus, k = 6), 
+#data = moth_GAM, method = "REML")
+
+
+
