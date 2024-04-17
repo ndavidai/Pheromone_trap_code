@@ -8,8 +8,23 @@
 
 moth_LMM <- read.csv("input/moth_glm.csv")
 
+install.packages(c("lme4",
+                   "Matrix",
+                   "MASS",
+                   "vcdExtra",
+                   "bbmle",
+                   "MuMIn",
+                   "ggplot2",
+                   "DescTools",
+                   "remotes",
+                   "gridExtra",
+                   "lattice"))
+
+options(repos = c(CRAN = "https://cloud.r-project.org"))
+utils::install.packages("Matrix")
 utils::install.packages("lme4")
 
+library(Matrix)
 library(lme4)
 library(MASS)
 library(vcdExtra)
@@ -98,6 +113,10 @@ plot(moth_LMM)
 moth_LMM$Z_prop_oak <- (moth_LMM$prop_oak - mean(moth_LMM$prop_oak)) / 
   sd(moth_LMM$prop_oak)
 
+# Standardized prop pine, with a z-correction
+moth_LMM$Z_prop_pine <- (moth_LMM$x_pinus - mean(moth_LMM$x_pinus)) / 
+  sd(moth_LMM$x_pinus)
+
 # Standardized moth count, with the function scale
 moth_LMM$Z_moth_count     <- scale(moth_LMM$total_continuous)
 
@@ -132,17 +151,191 @@ plot(lm.test.resid ~ as.factor(moth_LMM$patch_name),
 abline(0, 0, lty = 2)
 
 
+lm.test2 <- lm(Z_moth_count ~ Z_prop_oak + Z_prop_pine, data = moth_LMM)
 
-#tools::package_dependencies("Matrix", which = "LinkingTo", reverse = TRUE)[[1L]]
-#install.packages("lme4", type = "source")
+lm.test2.resid <- rstandard(lm.test)
 
-#remove.packages("Matrix")
-#remove.packages("lme4")
-#install.packages("lme4", type = "source")
+par(mfrow = c(1, 2))
+
+plot(lm.test2.resid ~ as.factor(moth_LMM$surrounded_by),
+     xlab = "Surrounding Landscape", ylab = "Standardized residuals")
+
+abline(0, 0, lty = 2)
+
+plot(lm.test2.resid ~ as.factor(moth_LMM$age_class),
+     xlab = "Forest Age", ylab = "Standardized residuals")
+
+abline(0, 0, lty = 2)
+
+plot(lm.test2.resid ~ as.factor(moth_LMM$forest_type),
+     xlab = "Forest Type", ylab = "Standardized residuals")
+
+abline(0, 0, lty = 2)
+
+plot(lm.test2.resid ~ as.factor(moth_LMM$patch_name),
+     xlab = "Patch", ylab = "Standardized residuals")
+
+abline(0, 0, lty = 2)
 
 
-lmer(Z_moth_count ~ Z_prop_oak + (Z_moth_count | patch_name),
+## implementing an LMM, coding potential models and model selection
+lmer(Z_moth_count ~ Z_prop_oak + (1 | patch_name),
      data = moth_LMM, REML = TRUE)
 
-lmer(Z_TP ~ Z_Length + (1 | Lake) + (1 | Fish_Species),
-     data = fish.data, REML = TRUE)
+lmer(Z_moth_count ~ Z_prop_oak + Z_prop_pine + (1 | patch_name),
+     data = moth_LMM, REML = TRUE)
+
+# Basic linear model / Linear model with no random effects
+M0 <- lm(Z_moth_count ~ Z_prop_oak + Z_prop_pine, data = moth_LMM)
+# Full model with varying intercepts
+M1 <- lmer(Z_moth_count ~ Z_prop_oak + Z_prop_pine + (1 | patch_name) + (1 | stand_type), 
+           data = moth_LMM, REML = FALSE)
+# Full model with varying intercepts and slopes
+M2 <- lmer(Z_moth_count ~ Z_prop_oak + Z_prop_pine + (1 + Z_prop_oak | patch_name) + (1 + Z_prop_oak | stand_type),
+           data = moth_LMM, REML = FALSE)
+# No stand type, varying intercepts only
+M3 <- lmer(Z_moth_count ~ Z_prop_oak + Z_prop_pine + (1 | patch_name), data = moth_LMM, REML = FALSE)
+# No patch, varying intercepts only
+M4 <- lmer(Z_moth_count ~ Z_prop_oak + Z_prop_pine + (1 | stand_type), data = moth_LMM, REML = FALSE)
+
+# No stand type, varying intercepts and slopes
+M5 <- lmer(Z_moth_count ~ Z_prop_oak + (1 + Z_prop_oak | patch_name), 
+           data = moth_LMM, REML = FALSE)
+# No patches, varying intercepts and slopes
+M6 <- lmer(Z_moth_count ~ Z_prop_oak + (1 + Z_prop_oak | stand_type), 
+           data = moth_LMM, REML = FALSE)
+
+# Full model with varying intercepts and slopes only varying by lake
+M7 <- lmer(Z_moth_count ~ Z_prop_oak + Z_prop_pine + (1 | patch_name) + (1 + Z_prop_oak | stand_type),
+           data = moth_LMM, REML = FALSE)
+# Full model with varying intercepts and slopes only varying by species
+M8 <- lmer(Z_moth_count ~ Z_prop_oak + Z_prop_pine + (1 + Z_prop_oak | patch_name) + (1 | stand_type),
+           data = moth_LMM, REML = FALSE)
+
+# Find AIC for all models (Basic linear model) using the package MuMIn
+MuMIn::AICc(M0)
+MuMIn::AICc(M1)
+MuMIn::AICc(M2)
+MuMIn::AICc(M3)
+MuMIn::AICc(M4)
+MuMIn::AICc(M5)
+MuMIn::AICc(M6)
+MuMIn::AICc(M7)
+MuMIn::AICc(M8)
+
+# Table of AIC values
+AIC.table  <- MuMIn::model.sel(M0, M1, M2, M3, M4, M5, M6, M7, M8)
+
+# Select only the columns of interest
+# `df` is the degree of freedom
+# `logLik` is the loglikelihood
+# `delta` is the AICc difference with the lowest value
+(AIC.table <- AIC.table[ , c("df", "logLik", "AICc", "delta")])
+
+#lowest AICs are in M0 & M3 - 
+#M0 shows there is no obvious random effect from either patch or stand type 
+#M3 shows a potential slight random effect from patch 
+
+
+# Take a closer look at M0 and M3.
+# Because comparing two mixed effect models, can set `REML = TRUE` when generating M0 and M3
+M0 <- lm(Z_moth_count ~ Z_prop_oak + Z_prop_pine, data = moth_LMM)
+
+M3 <- lmer(Z_moth_count ~ Z_prop_oak + Z_prop_pine + (1 | patch_name), 
+           data = moth_LMM, REML = TRUE)
+
+# Print a table to compare M0 and M3 
+MuMIn::model.sel(M0,M3)[ , c("df", "logLik", "AICc", "delta")]
+
+# Plot predicted values vs residual values
+par(mar=c(4,4,.5,.5))
+plot(resid(M0) ~ fitted(M0), 
+     xlab = 'Predicted values', 
+     ylab = 'Normalized residuals')
+abline(h = 0, lty = 2)
+
+# Homogeneous dispersion of the residuals shows that the assumption is respected.
+
+# To check the independence of the model residuals, plot residuals vs each covariate of the model
+par(mfrow = c(1,3), mar=c(4,4,.5,.5))
+
+plot(resid(M0) ~ moth_LMM$Z_prop_oak, 
+     xlab = "Prop Oak", ylab = "Normalized residuals")
+abline(h = 0, lty = 2)
+
+plot(resid(M0) ~ moth_LMM$Z_prop_pine, 
+     xlab = "Prop Pine", ylab = "Normalized residuals")
+abline(h = 0, lty = 2)
+
+boxplot(resid(M0) ~ patch_name, data = moth_LMM, 
+        xlab = "Patch Name", ylab = "Normalized residuals")
+abline(h = 0, lty = 2)
+
+boxplot(resid(M8) ~ stand_type, data = moth_LMM, 
+        xlab = "Stand Type", ylab = "Normalized residuals")
+abline(h = 0, lty = 2)
+
+# Homogeneous dispersion of the residuals around 0 = no pattern of residuals depending on the variable, and the assumption is respected
+
+# Check the normality of the model residuals as residuals following a normal distribution indicate that the model is not biased.
+hist(resid(M0))
+(summ_M0 <- summary(M0))
+
+hist(resid(M3))
+(summ_M3 <- summary(M3))
+
+# for producing figures, need the coefficients of the full model that are in the model summary.
+summ_M0$coefficients
+# Intercept = Intercept = 3.344745e-16
+
+# We also need the coefficients for each level of the model, with the `coef` function
+coef(M0)
+
+# a simplified ggplot theme
+fig <- theme_bw() +
+  theme(panel.grid.minor=element_blank(),
+        panel.grid.major=element_blank(),
+        panel.background=element_blank()) +
+  theme(strip.background=element_blank(),
+        strip.text.y = element_text()) +
+  theme(legend.background=element_blank()) +
+  theme(legend.key=element_blank()) +
+  theme(panel.border = element_rect(colour="black", fill=NA))
+
+plot <- ggplot(aes(Z_prop_oak + Z_prop_pine, Z_moth_count), data = moth_LMM)
+Plot_AllData <- plot + geom_point() +
+  xlab("Prop Oak & Pine") + 
+  ylab("Moth Count") +
+  labs(title = "All data") + fig
+
+Plot_AllData + geom_abline(intercept = summ_M0$coefficients[1,1], 
+                           slope     = summ_M0$coefficients[2,1])
+
+# Create a table with the coefs to facilitate their manipulation
+patch_name.coef              <- coef(M3)$patch_name
+colnames(patch_name.coef)    <- c("Intercept", "Slope")
+
+# Figure by patch
+Plot_ByPatch <- plot + 
+  geom_point(aes(colour = factor(patch_name)), size = 4) +
+  xlab("Prop Oak & Pine") + ylab("Moth Count") +
+  labs(title = "By Patch") + fig
+
+# Add in regression lines with the intercepts specific to each lake
+Plot_ByPatch +
+  geom_abline(intercept = patch_name.coef[1,1], 
+              slope     = patch_name.coef[1,2], col = "coral2") +
+  geom_abline(intercept = patch_name.coef[2,1], 
+              slope     = patch_name.coef[2,2], col = "khaki4") +
+  geom_abline(intercept = patch_name.coef[3,1], 
+              slope     = patch_name.coef[3,2], col = "green4") +
+  geom_abline(intercept = patch_name.coef[4,1], 
+              slope     = patch_name.coef[4,2], col = "darkgoldenrod") +
+  geom_abline(intercept = patch_name.coef[5,1], 
+              slope     = patch_name.coef[5,2], col = "royalblue1") +
+  geom_abline(intercept = patch_name.coef[6,1], 
+              slope     = patch_name.coef[6,2], col = "magenta3")
+
+
+
+

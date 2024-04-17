@@ -22,3 +22,11 @@ library(lme4)
 
 lmer(total_continuous ~ prop_oak + (total_continuous | patch_name),
      data = Test1, REML = TRUE)
+
+
+#tools::package_dependencies("Matrix", which = "LinkingTo", reverse = TRUE)[[1L]]
+#install.packages("lme4", type = "source")
+
+#remove.packages("Matrix")
+#remove.packages("lme4")
+#install.packages("lme4", type = "source")
