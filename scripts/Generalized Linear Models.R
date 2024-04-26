@@ -8,6 +8,8 @@
 
 moth_glm <- read.csv("input/moth_counts_stats.csv")
 
+install.packages("forcats")
+
 library(foreign)
 library(MASS) 
 library(ggplot2)

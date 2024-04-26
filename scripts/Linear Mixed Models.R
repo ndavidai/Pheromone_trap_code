@@ -1,5 +1,4 @@
 ### Generalize Linear Mixed Models (LMM) ###
-
 #### using cleaned data originally called "moth_counts_2" from the script "Pheromone Trap Analyses" ####
 ## with assistance from QCBS workshop https://r.qcbs.ca/workshop07/pres-en/workshop07-pres-en.html#1
 
@@ -88,7 +87,30 @@ plot + geom_point() +
   facet_wrap(~ patch_name) + 
   labs(x = "percent oak", y = "moth count", 
        title = "Patch") + 
-  fig
+  stat_smooth(method = "lm")+
+    fig
+
+# Store the plot as an object
+p_patch <- ggplot(data = moth_LMM, aes(x = prop_oak, y = total_continuous)) +
+  geom_point() +
+  facet_wrap(~ patch_name) + 
+  labs(x = "percent oak", y = "moth count", title = "Patch") + 
+  stat_smooth(method = "lm")
+
+
+
+
+#model of moth count by oak, by patch
+by_patch <- lmer(total_continuous ~ prop_oak + (1 | patch_name), data = moth_LMM)
+
+# extract the slopes of each of the 'patch' graphs
+summary(by_patch)$coefficients
+
+coefficients <- summary(by_patch)$coefficients
+
+## Need to graph the slopes of each graph....
+
+
 
 # Look at data structure
 str(moth_LMM)
@@ -152,6 +174,7 @@ abline(0, 0, lty = 2)
 
 
 lm.test2 <- lm(Z_moth_count ~ Z_prop_oak + Z_prop_pine, data = moth_LMM)
+
 
 lm.test2.resid <- rstandard(lm.test)
 
