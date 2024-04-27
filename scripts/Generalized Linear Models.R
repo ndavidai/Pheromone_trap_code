@@ -155,7 +155,7 @@ cor.test(moth_glm$prop_oak, moth_glm$longitude_e_w)
 cor.test(moth_glm$prop_oak, moth_glm$densite_du_couvert)
 cor.test(moth_glm$x_conifers, moth_glm$x_pinus)
 cor.test(moth_glm$x_acer, moth_glm$x_pinus)
-
+cor.test(moth_glm$total_continuous, moth_glm$patch_area)
 
 
 

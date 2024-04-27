@@ -3,7 +3,7 @@
 #### moth count data ####
 #loading data 
 
-moth_counts <- read.csv("input/Pheromone_trap_consolidated3.csv")
+moth_counts <- read.csv("input/Pheromone_trap_consolidated4.csv")
 
 library(janitor) #janitor cleans up column names.It removes all unique characters and replaces spaces with _.
 #piping through `dplyr`
@@ -51,6 +51,7 @@ unique(moth_counts_clean$stand_type)
 colnames(moth_counts_clean)[colnames(moth_counts_clean)=="total_from_rand"] <- "total_continuous"
 colnames(moth_counts_clean)[colnames(moth_counts_clean)=="total_consolidated_categorical"] <- "total_categorical"
 colnames(moth_counts_clean)[colnames(moth_counts_clean)=="x_quercus"] <- "prop_oak"
+colnames(moth_counts_clean)[colnames(moth_counts_clean)=="patch_size_km2"] <- "patch_area"
 
 moth_counts_clean <- moth_counts_clean %>%
   mutate(prop_oak = str_replace(prop_oak, "NA","0"))

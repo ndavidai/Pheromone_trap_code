@@ -218,6 +218,8 @@ M2 <- lmer(Z_moth_count ~ Z_prop_oak + Z_prop_pine + (1 + Z_prop_oak | patch_nam
            data = moth_LMM, REML = FALSE)
 # No stand type, varying intercepts only
 M3 <- lmer(Z_moth_count ~ Z_prop_oak + Z_prop_pine + (1 | patch_name), data = moth_LMM, REML = FALSE)
+M3.1 <- lmer(Z_moth_count ~ Z_prop_oak + Z_prop_pine + (1 | patch_area), data = moth_LMM, REML = FALSE)
+
 # No patch, varying intercepts only
 M4 <- lmer(Z_moth_count ~ Z_prop_oak + Z_prop_pine + (1 | stand_type), data = moth_LMM, REML = FALSE)
 
@@ -240,6 +242,7 @@ MuMIn::AICc(M0)
 MuMIn::AICc(M1)
 MuMIn::AICc(M2)
 MuMIn::AICc(M3)
+MuMIn::AICc(M3.1)
 MuMIn::AICc(M4)
 MuMIn::AICc(M5)
 MuMIn::AICc(M6)
@@ -247,7 +250,7 @@ MuMIn::AICc(M7)
 MuMIn::AICc(M8)
 
 # Table of AIC values
-AIC.table  <- MuMIn::model.sel(M0, M1, M2, M3, M4, M5, M6, M7, M8)
+AIC.table  <- MuMIn::model.sel(M0, M1, M2, M3, M3.1, M4, M5, M6, M7, M8)
 
 # Select only the columns of interest
 # `df` is the degree of freedom
@@ -255,9 +258,10 @@ AIC.table  <- MuMIn::model.sel(M0, M1, M2, M3, M4, M5, M6, M7, M8)
 # `delta` is the AICc difference with the lowest value
 (AIC.table <- AIC.table[ , c("df", "logLik", "AICc", "delta")])
 
-#lowest AICs are in M0 & M3 - 
+#lowest AICs are in M0 & M3 & M3.1 - 
 #M0 shows there is no obvious random effect from either patch or stand type 
 #M3 shows a potential slight random effect from patch 
+#M3.1 shows a potential slight random effect from patch size
 
 
 # Take a closer look at M0 and M3.
@@ -267,12 +271,27 @@ M0 <- lm(Z_moth_count ~ Z_prop_oak + Z_prop_pine, data = moth_LMM)
 M3 <- lmer(Z_moth_count ~ Z_prop_oak + Z_prop_pine + (1 | patch_name), 
            data = moth_LMM, REML = TRUE)
 
+M3.1 <- lmer(Z_moth_count ~ Z_prop_oak + Z_prop_pine + (1 | patch_area), 
+           data = moth_LMM, REML = TRUE)
+
 # Print a table to compare M0 and M3 
-MuMIn::model.sel(M0,M3)[ , c("df", "logLik", "AICc", "delta")]
+MuMIn::model.sel(M0,M3,M3.1)[ , c("df", "logLik", "AICc", "delta")]
 
 # Plot predicted values vs residual values
 par(mar=c(4,4,.5,.5))
 plot(resid(M0) ~ fitted(M0), 
+     xlab = 'Predicted values', 
+     ylab = 'Normalized residuals')
+abline(h = 0, lty = 2)
+
+par(mar=c(4,4,.5,.5))
+plot(resid(M3) ~ fitted(M3), 
+     xlab = 'Predicted values', 
+     ylab = 'Normalized residuals')
+abline(h = 0, lty = 2)
+
+par(mar=c(4,4,.5,.5))
+plot(resid(M3.1) ~ fitted(M3.1), 
      xlab = 'Predicted values', 
      ylab = 'Normalized residuals')
 abline(h = 0, lty = 2)
