@@ -138,7 +138,7 @@ plot(m5)
 
 # for this model, added in one variable at time; then removed one at time, by least significance
 # left with oaks and pines as the best-fit model for a none-mixed model
-m6 <- lm(total_continuous ~  prop_oak + x_acer + x_pinus + x_conifers + longitude_e_w + densite_du_couvert, data = moth_glm)
+m6 <- lm(total_continuous ~  prop_oak + x_acer + x_pinus + x_conifers + longitude_e_w + densite_du_couvert + site_area, data = moth_glm)
 summary(m6)
 AIC(m6)
 
@@ -155,7 +155,8 @@ cor.test(moth_glm$prop_oak, moth_glm$longitude_e_w)
 cor.test(moth_glm$prop_oak, moth_glm$densite_du_couvert)
 cor.test(moth_glm$x_conifers, moth_glm$x_pinus)
 cor.test(moth_glm$x_acer, moth_glm$x_pinus)
-cor.test(moth_glm$total_continuous, moth_glm$patch_area)
+cor.test(moth_glm$total_continuous, moth_glm$site_area)
+cor.test(moth_glm$prop_oak, moth_glm$site_area)
 
 
 

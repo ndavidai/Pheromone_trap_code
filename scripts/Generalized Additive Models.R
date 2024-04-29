@@ -79,6 +79,7 @@ data_plot2
 
 plot(gam_model2)
 
+
 #edf is above 1 (3.49), indicating a curved fit
 
 #also tried with k = 8, which is similar to k = 6, but slightly worse.  Above k = 8, doesn't work
@@ -183,24 +184,37 @@ smooth_interact <- gam(total_continuous ~ patch_name + s(prop_oak, x_pinus, k = 
 summary(smooth_interact)$s.table
 summary(smooth_interact)$p.table
 
+smooth_interact <- gam(total_continuous ~ patch_name + site_area + s(prop_oak, x_pinus, k = 6), 
+                       data = moth_GAM, method = "REML")
+summary(smooth_interact)$s.table
+summary(smooth_interact)$p.table
+
+smooth_interact2 <- gam(total_continuous ~ site_area + s(prop_oak, x_pinus, k = 6), 
+                       data = moth_GAM, method = "REML")
+summary(smooth_interact2)$s.table
+summary(smooth_interact2)$p.table
+
 #EDF = 2, statistically significant p-value (0.017)
 
 #check AIC
-AIC(factor_interact, factor_interact2, factor_interact3, smooth_interact)
-AIC(two_term_model, smooth_interact)
+AIC(factor_interact, factor_interact2, factor_interact3, smooth_interact, smooth_interact2)
+AIC(two_term_model, smooth_interact, smooth_interact2)
 
-###Same AIC between previous 'two_term_model" and "smooth_interact"
+###Same AIC between previous 'two_term_model" and "smooth_interact", "smooth_interact_2" slightly lower AIC
 
 
 ##Verify:1)the choice of basis dimension k; 2)The residuals plots. EDF should be smaller than 'k'
 #if they are too close, the model is being overly constrained
 k.check(two_term_model)
 k.check(smooth_interact)
+k.check(smooth_interact2)
 
 par(mfrow = c(2,2))
 gam.check(two_term_model)
 par(mfrow = c(2,2))
 gam.check(smooth_interact)
+par(mfrow = c(2,2))
+gam.check(smooth_interact2)
 
 #there's a larger difference between EDF and k in the two_term_model
 #two_term_model <- gam(total_continuous ~ patch_name + s(prop_oak, k = 6) + x_pinus, 
@@ -225,9 +239,28 @@ AIC(smooth_interact_tw)
 
 ?family.mgcv
 
-AIC(smooth_interact, two_term_model, smooth_interact_tw)
+smooth_interact2_tw <- gam(total_continuous ~ site_area + s(prop_oak, k = 6, x_pinus),
+                          data = moth_GAM, family = tw(link = "log"), method = "REML")
 
-#but,lowest AIC is in the 'smooth interact' (regular and Tweedie) models
+summary(smooth_interact2_tw)$p.table
+
+summary(smooth_interact2_tw)$s.table
+
+k.check(smooth_interact2_tw)
+
+par(mfrow = c(2,2))
+gam.check(smooth_interact2_tw)
+
+AIC(smooth_interact2_tw)
+
+?family.mgcv
+
+AIC(smooth_interact, two_term_model, smooth_interact_tw, smooth_interact2_tw)
+
+###lowest AIC is in the 'smooth interact2' (regular and Tweedie) models; 
+#followed by the 'smooth interact" models
+#smooth_interact2 <- gam(total_continuous ~ site_area + s(prop_oak, x_pinus, k = 6), 
+#data = moth_GAM, method = "REML")
 #smooth_interact <- gam(total_continuous ~ patch_name + s(prop_oak, x_pinus, k = 6), 
 #data = moth_GAM, method = "REML")
 

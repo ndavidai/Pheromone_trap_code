@@ -98,8 +98,6 @@ p_patch <- ggplot(data = moth_LMM, aes(x = prop_oak, y = total_continuous)) +
   stat_smooth(method = "lm")
 
 
-
-
 #model of moth count by oak, by patch
 by_patch <- lmer(total_continuous ~ prop_oak + (1 | patch_name), data = moth_LMM)
 
@@ -218,7 +216,7 @@ M2 <- lmer(Z_moth_count ~ Z_prop_oak + Z_prop_pine + (1 + Z_prop_oak | patch_nam
            data = moth_LMM, REML = FALSE)
 # No stand type, varying intercepts only
 M3 <- lmer(Z_moth_count ~ Z_prop_oak + Z_prop_pine + (1 | patch_name), data = moth_LMM, REML = FALSE)
-M3.1 <- lmer(Z_moth_count ~ Z_prop_oak + Z_prop_pine + (1 | patch_area), data = moth_LMM, REML = FALSE)
+M3.1 <- lmer(Z_moth_count ~ Z_prop_oak + Z_prop_pine + (1 | site_area), data = moth_LMM, REML = FALSE)
 
 # No patch, varying intercepts only
 M4 <- lmer(Z_moth_count ~ Z_prop_oak + Z_prop_pine + (1 | stand_type), data = moth_LMM, REML = FALSE)
@@ -263,6 +261,8 @@ AIC.table  <- MuMIn::model.sel(M0, M1, M2, M3, M3.1, M4, M5, M6, M7, M8)
 #M3 shows a potential slight random effect from patch 
 #M3.1 shows a potential slight random effect from patch size
 
+summary(M3)
+
 
 # Take a closer look at M0 and M3.
 # Because comparing two mixed effect models, can set `REML = TRUE` when generating M0 and M3
@@ -271,7 +271,7 @@ M0 <- lm(Z_moth_count ~ Z_prop_oak + Z_prop_pine, data = moth_LMM)
 M3 <- lmer(Z_moth_count ~ Z_prop_oak + Z_prop_pine + (1 | patch_name), 
            data = moth_LMM, REML = TRUE)
 
-M3.1 <- lmer(Z_moth_count ~ Z_prop_oak + Z_prop_pine + (1 | patch_area), 
+M3.1 <- lmer(Z_moth_count ~ Z_prop_oak + Z_prop_pine + (1 | site_area), 
            data = moth_LMM, REML = TRUE)
 
 # Print a table to compare M0 and M3 
@@ -325,6 +325,9 @@ hist(resid(M0))
 
 hist(resid(M3))
 (summ_M3 <- summary(M3))
+
+hist(resid(M3.1))
+(summ_M3.1 <- summary(M3.1))
 
 # for producing figures, need the coefficients of the full model that are in the model summary.
 summ_M0$coefficients
