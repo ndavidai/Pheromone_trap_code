@@ -8,12 +8,13 @@
 
 moth_glm <- read.csv("input/moth_counts_stats.csv")
 
-install.packages("forcats")
+
 
 library(foreign)
 library(MASS) 
 library(ggplot2)
 library(forcats)
+library(mgcv)
 negative.binomial(10) 
 
 # quick visualizations
@@ -34,12 +35,16 @@ unique(moth_glm$prop_oak)
 moth_glm <- replace(moth_glm,is.na(moth_glm),0)
 
 unique(moth_glm$prop_oak)
-
+moth_glm$total_continuous <- round(moth_glm$total_continuous)
+moth_glm$patch_name <- factor(moth_glm$patch_name)
 #export this data 
 write.csv(moth_glm, file = "input/moth_glm.csv", row.names = FALSE)
 
 #using the glm.nb function from the MASS package to estimate a negative binomial regression
-summary(glm <- glm.nb(total_continuous ~ stand_type, data = moth_glm))
+
+moth_glmmod1<- gam(total_continuous ~ prop_oak + site_area + x_acer + x_pinus +  surrounded_by+  s(patch_name, bs="re"), data = moth_glm, method = "REML", family = "nb")
+
+summary(moth_glmmod1)
 
 #moths by prop oak
 #use function 'lm' to fit (estimate) the linear model and 'summary' to extract the results
