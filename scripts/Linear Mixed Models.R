@@ -2,7 +2,7 @@
 #### using cleaned data originally called "moth_counts_2" from the script "Pheromone Trap Analyses" ####
 ## with assistance from QCBS workshop https://r.qcbs.ca/workshop07/pres-en/workshop07-pres-en.html#1
 
-
+## worked with Eric looking over script and results
 #loading data 
 
 moth_LMM <- read.csv("input/moth_glm.csv")
