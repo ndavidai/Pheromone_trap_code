@@ -14,7 +14,7 @@ moth_counts_1 <- moth_counts_2024 %>%
   clean_names() #Cleans names of an object (usually a data.frame)
 
 ## Remove un-needed columns ##
-library(dplyr)
+library(tidyverse)
 moth_counts_clean <-moth_counts_1 %>% select(1:5,10:14)
 
 
@@ -35,6 +35,8 @@ unique(moth_counts_clean$patch_name)
 moth_counts_clean <- moth_counts_clean %>%
   mutate(stand_type = str_replace_all(stand_type, 'pine','Pine'))%>%
   mutate(stand_type = str_replace_all(stand_type, 'oak', 'Oak'))
+
+unique(moth_counts_clean$stand_type)
 
 #remove all spaces
 ## in order to standardize all stand type names, remove all spaces
