@@ -16,13 +16,13 @@ moth_counts_1 <- moth_counts_2024 %>%
 
 ## Remove un-needed columns ##
 library(dplyr)
-moth_counts_1 <-moth_counts_1 %>% select(1:5,10:14)
+moth_counts_clean <-moth_counts_1 %>% select(1:5,10:14)
 
-## Remove un-needed rows ##
-moth_counts_clean <- moth_counts_1[-c(11,18,25,36,43,50,57,64,72,79,90,97,104,112,119,126,133:1058),]
+## Remove un-needed rows - unnecessary for 2024 data ##
+#moth_counts_clean <- moth_counts_1[-c(11,18,25,36,43,50,57,64,72,79,90,97,104,112,119,126,133:1058),]
 
 # if any column names need replacing
-colnames(moth_counts_clean)[colnames(moth_counts_clean)=="x_muck_amount"] <- "muck_amount"
+colnames(moth_counts_clean)[colnames(moth_counts_clean)=="x_muck_mass_g"] <- "muck_mass"
 
 # quick visualizations
 summary(moth_counts_clean)
@@ -30,6 +30,7 @@ str(moth_counts_clean)
 
 # looking for mistakes
 unique(moth_counts_clean$stand_type)
+unique(moth_counts_clean$patch_name)
 
 #remove all spaces
 ## in order to standardize all stand type names, remove all spaces
