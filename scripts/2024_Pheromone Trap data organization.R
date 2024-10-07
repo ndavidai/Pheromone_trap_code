@@ -59,63 +59,63 @@ unique(moth_counts_clean$stand_type)
 ## Merge duplicate stand types into a total sum mass and moth counts
 moth_counts_total <- moth_counts_clean %>%
   group_by(stand_type) %>%
-  summarise(Mass = sum(mass_g),
-            Moths = sum(total_moth_count))
+  summarise(Mass = sum(mass_g, na.rm=T),
+            Moths = sum(total_moth,na.rm=T))
             
 unique(moth_counts_total$Mass)
 unique(moth_counts_total$Moths)
 
-## Merge the original data set with the new totaled data set, the NEW columns are added at the end, and some are doubled
-moth_counts_2 <- merge(moth_counts_clean,moth_counts_total, by="stand_type")
+## Not for 2024 - Merge the original data set with the new totaled data set, the NEW columns are added at the end, and some are doubled
+#moth_counts_2 <- merge(moth_counts_clean,moth_counts_total, by="stand_type")
 
 # change stand_type to trap_ID, so that an 'actual' stand_type column can be created
-colnames(moth_counts_2)[colnames(moth_counts_2)=="stand_type"] <- "trap_ID"
+#colnames(moth_counts_clean)[colnames(moth_counts_clean)=="stand_type"] <- "trap_ID"
 
-colnames(moth_counts_total)[colnames(moth_counts_total)=="stand_type"] <- "trap_ID"
+#colnames(moth_counts_total)[colnames(moth_counts_total)=="stand_type"] <- "trap_ID"
 
 ## change "Co-Dom" to "Mid" in order to create a unique variable (different from "Dom")
-moth_counts_2 <- moth_counts_2 %>%
-  mutate(trap_ID = str_replace(trap_ID, "Co-Dom", "Mid"))
+#moth_counts_2 <- moth_counts_2 %>%
+  #mutate(trap_ID = str_replace(trap_ID, "Co-Dom", "Mid"))
 
-moth_counts_total <- moth_counts_total %>%
-  mutate(trap_ID = str_replace(trap_ID, "Co-Dom", "Mid"))
+# moth_counts_total <- moth_counts_total %>%
+#   mutate(trap_ID = str_replace(trap_ID, "Co-Dom", "Mid"))
 
-# create the actual stand_type column, identifying the oak treatment of each trap
-moth_counts_2$stand_type <- ifelse(grepl("Mid",moth_counts_2$trap_ID), "Co-Dom",
-                                   ifelse(grepl("Low",moth_counts_2$trap_ID), "Low",
-                                          ifelse(grepl("Dom",moth_counts_2$trap_ID), "Dom", "")))
-
-moth_counts_total$stand_type <- ifelse(grepl("Mid",moth_counts_total$trap_ID), "Co-Dom",
-                                       ifelse(grepl("Low",moth_counts_total$trap_ID), "Low",
-                                              ifelse(grepl("Dom",moth_counts_total$trap_ID), "Dom", "")))
+# # create the actual stand_type column, identifying the oak treatment of each trap
+# moth_counts_2$stand_type <- ifelse(grepl("Mid",moth_counts_2$trap_ID), "Co-Dom",
+#                                    ifelse(grepl("Low",moth_counts_2$trap_ID), "Low",
+#                                           ifelse(grepl("Dom",moth_counts_2$trap_ID), "Dom", "")))
+# 
+# moth_counts_total$stand_type <- ifelse(grepl("Mid",moth_counts_total$trap_ID), "Co-Dom",
+#                                        ifelse(grepl("Low",moth_counts_total$trap_ID), "Low",
+#                                               ifelse(grepl("Dom",moth_counts_total$trap_ID), "Dom", "")))
 
 
 library(ggplot2)
 library(forcats)
 
-# create dataset with a count of how many of each oak treatment types have low, mid, high moth counts
-t  <- moth_counts_2 %>% 
-  mutate(stand_type = fct_relevel(as.factor(stand_type), "Low","Co-Dom","Dom"),
-         moth_count = fct_relevel(as.factor(total_consolidated),"Very High","High", "Mid","Low")) %>%
-  group_by(stand_type, moth_count) %>%
-  tally()
-
-## Remove un-needed rows ##
-t_clean <- t[-c(5,10,15),]
-
-# create dataset with a count of how many of each oak treatment types had various "muck" amounts
-t_muck  <- moth_counts_2 %>% 
-  mutate(stand_type = fct_relevel(as.factor(stand_type), "Low","Co-Dom","Dom"),
-         muck_count = fct_relevel(as.factor(muck_amount),"Very High","High","Medium","Low")) %>%
-  group_by(stand_type, muck_amount) %>%
-  tally() %>%
-  filter(muck_amount != "" & muck_amount != "  ")
+# # create dataset with a count of how many of each oak treatment types have low, mid, high moth counts
+# t  <- moth_counts_clean %>% 
+#   mutate(stand_type = fct_relevel(as.factor(stand_type), "Low","Co-Dom","Dom"),
+#          moth_count = fct_relevel(as.factor(total_consolidated),"Very High","High", "Mid","Low")) %>%
+#   group_by(stand_type, moth_count) %>%
+#   tally()
+# 
+# ## Remove un-needed rows ##
+# t_clean <- t[-c(5,10,15),]
+# 
+# # create dataset with a count of how many of each oak treatment types had various "muck" amounts
+# t_muck  <- moth_counts_2 %>% 
+#   mutate(stand_type = fct_relevel(as.factor(stand_type), "Low","Co-Dom","Dom"),
+#          muck_count = fct_relevel(as.factor(muck_amount),"Very High","High","Medium","Low")) %>%
+#   group_by(stand_type, muck_amount) %>%
+#   tally() %>%
+#   filter(muck_amount != "" & muck_amount != "  ")
 
 
 ## stacked plot of total content amount (categorical) by stand type (categorical), traps with 2 bags already merged
-ggplot(t_clean,aes(x=stand_type, y=n,fill=moth_count))+
+ggplot(moth_counts_clean,aes(x=stand_type, y=total_moth))+
   geom_col(position = "stack") +
-  scale_fill_viridis_d() +
+  #scale_fill_viridis_d() +
   labs(x = "Stand Type", y = "", fill = "Moth Count") +
   theme_classic()+
         theme(axis.title.x = element_text(size = 18L, face = "bold"), 
