@@ -18,7 +18,7 @@ moth_counts_1 <- moth_counts_2024 %>%
 moth_counts_1 <-moth_counts_1 %>% select(1:5,10:14)
 
 ## Remove un-needed rows ##
-moth_counts_clean <- moth_counts_1[-c(11,18,25,36,43,50,57,64,72,79,90,97,104,112,119,126,133:1058),]
+#moth_counts_clean <- moth_counts_1[-c(11,18,25,36,43,50,57,64,72,79,90,97,104,112,119,126,133:1058),]
 
 # if any column names need replacing
 colnames(moth_counts_clean)[colnames(moth_counts_clean)=="x_muck_mass_g"] <- "muck_mass"
