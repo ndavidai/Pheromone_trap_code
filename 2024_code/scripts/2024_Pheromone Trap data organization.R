@@ -1,24 +1,24 @@
-### Data cleaning ###
+#####################
+### DATA CLEANING ###
+#####################
+
+#Run this to load packages 
+source("2024_code/scripts/Packages.R")
 
 #### 2024 moth count data ####
 #loading data 
 
-moth_counts_2024 <- read.csv("input/Moth count data_2023_2024.csv")
+moth_counts_unedited <- read.csv("input/Moth count data_2023_2024.csv")
 
-#install.packages(c("janitor","dplyr","tidyverse","ggplot2","forcats","foreign","nnet","reshape2"))
+# library(janitor) janitor cleans up column names.It removes all unique characters and replaces spaces with _.
+# piping using `dplyr`
 
-library(dplyr)
-library(janitor) #janitor cleans up column names.It removes all unique characters and replaces spaces with _.
-#piping using `dplyr`
-moth_counts_1 <- moth_counts_2024 %>%
+moth_counts_cleannames <- moth_counts_unedited %>%
   clean_names() #Cleans names of an object (usually a data.frame)
 
 ## Remove un-needed columns ##
-library(tidyverse)
-moth_counts_clean <-moth_counts_1 %>% select(1:5,10:14)
-
-
-#moth_counts_clean <- moth_counts_1[-c(11,18,25,36,43,50,57,64,72,79,90,97,104,112,119,126,133:1058),]
+# uses tidyverse
+moth_counts_clean <-moth_counts_cleannames %>% select(1:5,10:14)
 
 # if any column names need replacing
 colnames(moth_counts_clean)[colnames(moth_counts_clean)=="x_muck_mass_g"] <- "muck_mass"
@@ -50,7 +50,6 @@ unique(moth_counts_clean$stand_type)
 # moth_counts_clean <- moth_counts_clean %>%
 #   mutate(stand_type = str_replace(stand_type, " ", ""))
 
-# unique(moth_counts_clean$stand_type)
 
 ####################################
 ### MERGING FOR  TOTAL SUM GRAPH ###
