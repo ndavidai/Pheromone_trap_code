@@ -5,12 +5,11 @@
 
 moth_counts_2024 <- read.csv("input/Moth count data_2023_2024.csv")
 
-install.packages("janitor",
-                 "dplyr",
-                 "tidyverse")
+#install.packages(c("janitor","dplyr","tidyverse","ggplot2","forcats","foreign","nnet","reshape2"))
 
+library(dplyr)
 library(janitor) #janitor cleans up column names.It removes all unique characters and replaces spaces with _.
-#piping through `dplyr`
+#piping using `dplyr`
 moth_counts_1 <- moth_counts_2024 %>%
   clean_names() #Cleans names of an object (usually a data.frame)
 
@@ -18,7 +17,7 @@ moth_counts_1 <- moth_counts_2024 %>%
 library(dplyr)
 moth_counts_clean <-moth_counts_1 %>% select(1:5,10:14)
 
-## Remove un-needed rows - unnecessary for 2024 data ##
+
 #moth_counts_clean <- moth_counts_1[-c(11,18,25,36,43,50,57,64,72,79,90,97,104,112,119,126,133:1058),]
 
 # if any column names need replacing
@@ -32,19 +31,28 @@ str(moth_counts_clean)
 unique(moth_counts_clean$stand_type)
 unique(moth_counts_clean$patch_name)
 
+#above code found there to be 'oak' and 'Oak', same for pine. Following code replaces pine/oak with Pine/Oak
+moth_counts_clean <- moth_counts_clean %>%
+  mutate(stand_type = str_replace_all(stand_type, 'pine','Pine'))%>%
+  mutate(stand_type = str_replace_all(stand_type, 'oak', 'Oak'))
+
 #remove all spaces
 ## in order to standardize all stand type names, remove all spaces
-library(tidyverse)
-moth_counts_clean <- moth_counts_clean %>%
-  mutate(stand_type = str_replace(stand_type, " ", ""))
+# library(tidyverse)
+# moth_counts_clean <- moth_counts_clean %>%
+#   mutate(stand_type = str_replace(stand_type, " ", ""))
+# 
+# unique(moth_counts_clean$stand_type)
+# 
+# ## again, to remove 2nd space
+# moth_counts_clean <- moth_counts_clean %>%
+#   mutate(stand_type = str_replace(stand_type, " ", ""))
 
-unique(moth_counts_clean$stand_type)
+# unique(moth_counts_clean$stand_type)
 
-## again, to remove 2nd space
-moth_counts_clean <- moth_counts_clean %>%
-  mutate(stand_type = str_replace(stand_type, " ", ""))
-
-unique(moth_counts_clean$stand_type)
+####################################
+### MERGING FOR  TOTAL SUM GRAPH ###
+####################################
 
 ## Merge duplicate stand types into a total sum mass and moth counts
 moth_counts_total <- moth_counts_clean %>%
