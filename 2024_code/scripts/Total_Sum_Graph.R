@@ -1,66 +1,17 @@
-#####################
-### DATA CLEANING ###
-#####################
-
-#Run this to load packages 
-source("2024_code/scripts/Packages.R")
-
-#### 2024 moth count data ####
-#loading data 
-
-moth_counts_unedited <- read.csv("input/Moth count data_2023_2024.csv")
-
-# library(janitor) janitor cleans up column names.It removes all unique characters and replaces spaces with _.
-# piping using `dplyr`
-
-moth_counts_cleannames <- moth_counts_unedited %>%
-  clean_names() #Cleans names of an object (usually a data.frame)
-
-## Remove un-needed columns ##
-# uses tidyverse
-moth_counts_clean <-moth_counts_cleannames %>% select(1:5,10:14)
-
-# if any column names need replacing
-colnames(moth_counts_clean)[colnames(moth_counts_clean)=="x_muck_mass_g"] <- "muck_mass"
-
-# quick visualizations
-summary(moth_counts_clean)
-str(moth_counts_clean)
-
-# looking for mistakes
-unique(moth_counts_clean$stand_type)
-unique(moth_counts_clean$patch_name)
-
-#above code found there to be 'oak' and 'Oak', same for pine. Following code replaces pine/oak with Pine/Oak
-moth_counts_clean <- moth_counts_clean %>%
-  mutate(stand_type = str_replace_all(stand_type, 'pine','Pine'))%>%
-  mutate(stand_type = str_replace_all(stand_type, 'oak', 'Oak'))
-
-unique(moth_counts_clean$stand_type)
-
-#remove all spaces
-## in order to standardize all stand type names, remove all spaces
-# library(tidyverse)
-# moth_counts_clean <- moth_counts_clean %>%
-#   mutate(stand_type = str_replace(stand_type, " ", ""))
-# 
-# unique(moth_counts_clean$stand_type)
-# 
-# ## again, to remove 2nd space
-# moth_counts_clean <- moth_counts_clean %>%
-#   mutate(stand_type = str_replace(stand_type, " ", ""))
-
-
 ####################################
 ### MERGING FOR  TOTAL SUM GRAPH ###
 ####################################
 
+source("2024_code/scripts/2024_Data_Cleaning.R")
+
+
+
 ## Merge duplicate stand types into a total sum mass and moth counts
 moth_counts_total <- moth_counts_clean %>%
   group_by(stand_type) %>%
-  summarise(Mass = sum(mass_g, na.rm=T),
+  summarise(Mass = sum(mass_g, na.rm=T), #na.rm=T so that it ignores NAs and gives actual values 
             Moths = sum(total_moth,na.rm=T))
-            
+
 unique(moth_counts_total$Mass)
 unique(moth_counts_total$Moths)
 
@@ -74,7 +25,7 @@ unique(moth_counts_total$Moths)
 
 ## change "Co-Dom" to "Mid" in order to create a unique variable (different from "Dom")
 #moth_counts_2 <- moth_counts_2 %>%
-  #mutate(trap_ID = str_replace(trap_ID, "Co-Dom", "Mid"))
+#mutate(trap_ID = str_replace(trap_ID, "Co-Dom", "Mid"))
 
 # moth_counts_total <- moth_counts_total %>%
 #   mutate(trap_ID = str_replace(trap_ID, "Co-Dom", "Mid"))
@@ -117,11 +68,11 @@ ggplot(moth_counts_clean,aes(x=stand_type, y=total_moth))+
   #scale_fill_viridis_d() +
   labs(x = "Stand Type", y = "", fill = "Moth Count") +
   theme_classic()+
-        theme(axis.title.x = element_text(size = 18L, face = "bold"), 
-              legend.title = element_text(size = 15L, face = "bold"),
-              legend.text = element_text(size = 12L),
-              axis.text.x=element_text(size=13),
-              axis.text.y=element_text(size=13))
+  theme(axis.title.x = element_text(size = 18L, face = "bold"), 
+        legend.title = element_text(size = 15L, face = "bold"),
+        legend.text = element_text(size = 12L),
+        axis.text.x=element_text(size=13),
+        axis.text.y=element_text(size=13))
 
 ggsave("moth_count_plot.png",
        scale = 1,
@@ -159,15 +110,15 @@ with(t_clean, do.call(rbind, tapply(stand_type, moth_count, function(x) c(M = me
 
 ## box & whisker plot of moth count (numberical) by Stand type (categorical) - each data point a totalled trap count
 ggplot(moth_counts_2) +
- aes(x = Moths, y = stand_type) +
- geom_boxplot(fill = "#A429AF") +
- labs(x = "Number of Male Moths", 
- y = "Oak Presence") +
- theme_minimal() +
- theme(plot.caption = element_text(size = NA), axis.title.y = element_text(size = 25L, 
- face = "bold"), axis.title.x = element_text(size = 25L, face = "bold"), 
- axis.text.x=element_text(size=13),axis.text.y=element_text(size=13))
- 
+  aes(x = Moths, y = stand_type) +
+  geom_boxplot(fill = "#A429AF") +
+  labs(x = "Number of Male Moths", 
+       y = "Oak Presence") +
+  theme_minimal() +
+  theme(plot.caption = element_text(size = NA), axis.title.y = element_text(size = 25L, 
+                                                                            face = "bold"), axis.title.x = element_text(size = 25L, face = "bold"), 
+        axis.text.x=element_text(size=13),axis.text.y=element_text(size=13))
+
 
 #visualize data
 #library(esquisse)
