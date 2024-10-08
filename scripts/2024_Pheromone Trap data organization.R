@@ -15,7 +15,7 @@ moth_counts_1 <- moth_counts_2024 %>%
 
 ## Remove un-needed columns ##
 library(tidyverse)
-moth_counts_clean <-moth_counts_1 %>% select(1:5,10:14)
+moth_counts_clean <-moth_counts_1 %>% select(1:9,14:17)
 
 
 #moth_counts_clean <- moth_counts_1[-c(11,18,25,36,43,50,57,64,72,79,90,97,104,112,119,126,133:1058),]
@@ -60,7 +60,7 @@ unique(moth_counts_clean$stand_type)
 moth_counts_total <- moth_counts_clean %>%
   group_by(stand_type) %>%
   summarise(Mass = sum(mass_g, na.rm=T),
-            Moths = sum(total_moth,na.rm=T))
+            Moths = sum(moth_count,na.rm=T))
             
 unique(moth_counts_total$Mass)
 unique(moth_counts_total$Moths)
@@ -113,7 +113,7 @@ library(forcats)
 
 
 ## stacked plot of total content amount (categorical) by stand type (categorical), traps with 2 bags already merged
-ggplot(moth_counts_clean,aes(x=stand_type, y=total_moth))+
+ggplot(moth_counts_clean,aes(x=stand_type, y=moth_count))+
   geom_col(position = "stack") +
   #scale_fill_viridis_d() +
   labs(x = "Stand Type", y = "", fill = "Moth Count") +
