@@ -15,7 +15,7 @@ moth_counts_1 <- moth_counts_2024 %>%
 
 ## Remove un-needed columns ##
 library(tidyverse)
-moth_counts_clean <-moth_counts_1 %>% select(1:9,14:17)
+moth_counts_clean <-moth_counts_1 %>% select(1:10,15:18)
 
 
 #moth_counts_clean <- moth_counts_1[-c(11,18,25,36,43,50,57,64,72,79,90,97,104,112,119,126,133:1058),]
@@ -39,8 +39,6 @@ moth_counts_clean <- moth_counts_clean %>%
 unique(moth_counts_clean$stand_type)
 
 write.csv(moth_counts_clean, "Moth_count_data_2024.csv")
-
-save(moth_counts_clean, file = "Moth_count_data_2024.csv")
 
 #remove all spaces
 ## in order to standardize all stand type names, remove all spaces
