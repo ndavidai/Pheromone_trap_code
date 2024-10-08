@@ -19,10 +19,6 @@ moth_counts_cleannames <- moth_counts_unedited %>%
 # if any column names need replacing
 colnames(moth_counts_cleannames)[colnames(moth_counts_cleannames)=="x_muck_mass_g"] <- "muck_mass"
 
-# quick visualizations
-summary(moth_counts_clean)
-str(moth_counts_clean)
-
 # looking for mistakes
 unique(moth_counts_cleannames$stand_type)
 unique(moth_counts_cleannames$patch_name)
@@ -40,8 +36,6 @@ unique(moth_counts_pineoakfix$stand_type)
 moth_counts_clean <- moth_counts_pineoakfix %>%
   mutate(patch_name = str_replace_all(patch_name, " ","_"))
 
-## again, to remove 2nd space
-moth_counts_clean <- moth_counts_clean %>%
-  mutate(stand_type = str_replace(stand_type, " ", ""))
-
-
+# quick visualizations if needed
+# summary(moth_counts_clean)
+# str(moth_counts_clean)

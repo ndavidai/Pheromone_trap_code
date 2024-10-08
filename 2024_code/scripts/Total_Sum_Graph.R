@@ -2,8 +2,8 @@
 ### MERGING FOR  TOTAL SUM GRAPH ###
 ####################################
 
+#Run this to load the moth_counts_clean data frame used to make these graphs 
 source("2024_code/scripts/2024_Data_Cleaning.R")
-
 
 
 ## Merge duplicate stand types into a total sum mass and moth counts
