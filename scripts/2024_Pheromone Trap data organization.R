@@ -38,6 +38,10 @@ moth_counts_clean <- moth_counts_clean %>%
 
 unique(moth_counts_clean$stand_type)
 
+write.csv(moth_counts_clean, "Moth_count_data_2024.csv")
+
+save(moth_counts_clean, file = "Moth_count_data_2024.csv")
+
 #remove all spaces
 ## in order to standardize all stand type names, remove all spaces
 # library(tidyverse)
