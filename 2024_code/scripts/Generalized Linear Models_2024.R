@@ -8,6 +8,8 @@
 
 moth_glm <- read.csv("input/Moth_count_data_2024.csv")
 
+install.packages("summarytools")
+install.packages("lme4")
 
 
 library(foreign)
@@ -15,6 +17,8 @@ library(MASS)
 library(ggplot2)
 library(forcats)
 library(mgcv)
+library(summarytools)
+library(lme4)
 negative.binomial(10) 
 
 # quick visualizations
@@ -55,7 +59,42 @@ summary(m1)
 m2 <- lm(moth_count ~ x_pinus, data = moth_glm)
 summary(m2)
 
-#Intercepts of 33.30, 35.93 and slope of ....., far from significant p-value
+m3 <-lm(moth_count ~ stand_category, data = moth_glm)
+summary(m3)
+
+plot(m1)
+summary(m1)
+AIC(m1)
+
+plot(m2)
+summary(m2)
+AIC(m2)
+
+plot(m3)
+summary(m3)
+AIC(m3)
+
+#running glm model as suggested by Sabina, using patches to create a block effect, removing complexity as needed from one model to the next...
+model_1 <- glmer(moth_count ~ stand_category * patch_name + (1|trap_name), family =poisson, data = moth_glm) 
+
+model_2 <- glmer(moth_count ~ stand_category + patch_name + (1|trap_name), family =poisson, data = moth_glm) 
+
+model_3 <- glmer(moth_count ~ stand_category + (1|trap_name), family =poisson, data = moth_glm)
+
+model_4 <- glmer(moth_count ~ stand_category + (1|patch_name), family =poisson, data = moth_glm)
+
+summary(model_1)
+AIC(model_1)
+
+summary(model_2)
+AIC(model_2)
+
+summary(model_3)
+AIC(model_3)
+
+summary(model_4)
+AIC(model_4)
+
 
 #use function 'plot' to graph the scatter plot & 'abline(m1)' to plot the regression line
 plot(moth_count ~ x_quercus, data = moth_glm, 
@@ -63,11 +102,6 @@ plot(moth_count ~ x_quercus, data = moth_glm,
      ylab = "male moth count",
      xlab = "% oak", xlim = c(0,1))
 abline(m1, col = "blue")
-
-# model diagnostics plots to evaluate the model assumptions (of normal distribution, etc)
-opar <- par(mfrow = c(2, 2), 
-            mar = c(4.1, 4.1, 2.1, 1.1))
-plot(m1)
 
 #moths by longitude
 #use function 'lm' to fit (estimate) the linear model and 'summary' to extract the results
