@@ -1,317 +1,317 @@
-"","date","patch_name","stand_type","stand_category","trap_name","x_quercus","x_pinus","stand_area_ha","mass_g","moth_count","muck_mass","other_species_in_lab","field_notes","lab_notes"
-"1","15/07/2024","Mont Saint Hilaire","Oak","C","MSHOak1.1",0.6,0,8.5,0,0,NA,0,"no moths ",NA
-"2","15/07/2024","Mont Saint Hilaire","Oak","C","MSHOak1.2",0.6,0,8.5,0,0,NA,0,"no moths ",NA
-"3","15/07/2024","Mont Saint Hilaire","Oak","C","MSHOak1.3",0.6,0,8.5,0.0929,1,NA,0,NA,NA
-"4","15/07/2024","Mont Saint Hilaire","Oak","C","MSHOak1.4",0.6,0,8.5,0.1308,3,NA,0,NA,NA
-"5","15/07/2024","Mont Saint Hilaire","Oak/Pine","H","MSH2Oak1.1",0.3,0.2,7.6,0,0,NA,0,"no moths ",NA
-"6","15/07/2024","Mont Saint Hilaire","Oak/Pine","H","MSH2Oak1.2",0.3,0.2,7.6,0,0,NA,0,"no moths ",NA
-"7","16/07/2024","Mont Saint Hilaire","Pine","L","MSHPine1.1",0,0.7,3.8,0.136,2,NA,0,NA,NA
-"8","16/07/2024","Mont Saint Hilaire","Oak/Pine","H","MSH2Oak1.3",0.3,0.2,7.6,0,0,NA,0,"no moths ",NA
-"9","16/07/2024","Mont Saint Hilaire","Pine/Oak","I","MSHOP1.1",0.3,0.4,3.5,0.0567,1,NA,0,"2 tussoch moths",NA
-"10","16/07/2024","Mont Saint Hilaire","Pine/Oak","I","MSHOP1.2",0.3,0.4,3.5,NA,NA,NA,NA,"MISSING IN FIELD",NA
-"11","16/07/2024","Mont Saint Hilaire","Oak/Pine","D","MSHOP2.1",0.6,0.1,5.7,0,0,NA,0,"no moths ",NA
-"12","16/07/2024","Mont Saint Hilaire","Oak/Pine","D","MSHOP2.2",0.6,0.1,5.7,0,0,NA,0,"no moths ",NA
-"13","16/07/2024","Mont Saint Hilaire","Oak/Pine","D","MSHOP2.3",0.6,0.1,5.7,0.0445,1,NA,0,"1 tussoch moth",NA
-"14","15/07/2024","Mont Saint Hilaire","MOM",NA,"MSHMOM",0.1,0,4.8,0,0,NA,0,"no moths ",NA
-"15","15/07/2024","Mont Saint Hilaire","MOM",NA,"MSH2MOM",0.1,0,4.8,0,0,NA,0,"no moths ",NA
-"16","15/07/2024","Mont Saint Hilaire","MOM",NA,"MSH2MOM2",0.1,0,4.8,0,0,NA,0,"no moths ",NA
-"17","16/07/2024","Mont Saint Hilaire","Oak/Pine","H","MSH2Oak1.4",0.3,0.2,7.6,0,0,NA,0,"no moths ",NA
-"18","17/07/2024","Orford","Pine","M","MO2Pine2.1",0,0.8,6.8,0,0,NA,0,"no moths ",NA
-"19","17/07/2024","Orford","Pine","M","MO2Pine2.2",0,0.8,6.8,0,0,NA,0,"no moths ",NA
-"20","17/07/2024","Orford","Pine","L","MO2Pine1.1",0,0.7,3.7,0,0,NA,0,"no moths ",NA
-"21","17/07/2024","Orford","Pine","L","MO2Pine1.2",0,0.7,3.7,0,0,NA,0,"trap found open at bottom - closed back up ",NA
-"22","17/07/2024","Orford","Oak","F","MO2Oak1.1",0.4,0.2,8.1,0,0,NA,0,"no moths ",NA
-"23","17/07/2024","Orford","Oak","F","MO2Oak 1.2",0.4,0.2,8.1,0,0,NA,0,"2 tussoch moths",NA
-"24","17/07/2024","Orford","Oak","F","MO2Oak1.3",0.4,0.2,8.1,0,0,NA,0,"no moths ",NA
-"25","17/07/2024","Orford","Pine","J","MO2Pine3.1",0,0.5,4.3,0,0,NA,0,"no moths ",NA
-"26","17/07/2024","Orford","Pine","J","MO2Pine3.2",0,0.5,4.3,0,0,NA,0,"1 unknown moth",NA
-"27","17/07/2024","Orford","MOM",NA,"MO2MOM",0,0,4.6,0,0,NA,0,"no moths ",NA
-"28","18/07/2024","Orford","MOM",NA,"MOMOM",0,0.2,5.9,0,0,NA,0,"no moths ",NA
-"29","18/07/2024","Orford","Oak","E","MOOak1.1",0.5,0,7.1,0,0,NA,0,"no moths ",NA
-"30","18/07/2024","Orford","Oak","E","MOOak1.2",0.5,0,7.1,0,0,NA,0,"no moths ",NA
-"31","18/07/2024","Orford","Oak","E","MOOak1.3",0.5,0,7.1,0,0,NA,0,"no moths ",NA
-"32","18/07/2024","Orford","Oak","A","MOOak2.1",0.8,0,7.8,0.1135,1,NA,0,NA,NA
-"33","18/07/2024","Orford","Oak","A","MOOak2.2",0.8,0,7.8,0,0,NA,0,"no moths ",NA
-"34","18/07/2024","Orford","Oak","A","MOOak2.3",0.8,0,7.8,0,0,NA,0,"no moths ",NA
-"35","18/07/2024","Orford","Oak","E","MOOak3.1",0.5,0,11.8,0,0,NA,0,"no moths ",NA
-"36","18/07/2024","Orford","Oak","E","MOOak3.2",0.5,0,11.8,0,0,NA,0,"no moths ",NA
-"37","18/07/2024","Orford","Oak","E","MOOak3.3",0.5,0,11.8,0,0,NA,0,"no moths ",NA
-"38","18/07/2024","Orford","Pine","J","MOPine1.1",0,0.5,5.1,0,0,NA,0,"no moths ",NA
-"39","18/07/2024","Orford","Pine","J","MOPine1.2",0,0.5,5.1,0,0,NA,0,"no moths ",NA
-"40","18/07/2024","Orford","Pine","L","MOPine2.1",0,0.7,8.3,0,0,NA,0,"no moths ",NA
-"41","18/07/2024","Orford","Pine","L","MOPine2.2",0,0.7,8.3,0.0986,1,NA,0,NA,NA
-"42","18/07/2024","Orford","Pine","L","MOPine2.3",0,0.7,8.3,0,0,NA,0,"no moths ",NA
-"43","18/07/2024","Orford","Pine","L","MO2Pine4.1",0,0.6,7.5,0.0212,1,NA,0,NA,NA
-"44","18/07/2024","Orford","Pine","L","MO2Pine4.2",0,0.6,7.5,0.1166,1,NA,0,NA,NA
-"45","22/07/2024","Oka","MOM",NA,"OkaMOM2",0,0,6.3,NA,23,NA,0,NA,NA
-"46","22/07/2024","Oka","Oak","E","OkaOak1.1",0.4,0.1,8.1,7.4017,102,NA,0,NA,NA
-"47","22/07/2024","Oka","Oak","E","OkaOak1.2",0.4,0.1,8.1,4.6585,61,NA,0,NA,NA
-"48","22/07/2024","Oka","Oak","E","OkaOak1.3",0.4,0.1,8.1,3.345,43,NA,0,NA,NA
-"49","22/07/2024","Oka","Oak","E","OkaOak1.4",0.4,0.1,8.1,3.0355,38,NA,0,NA,NA
-"50","22/07/2024","Oka","Oak","E","OkaOak1.5",0.4,0.1,8.1,1.0043,13,NA,0,NA,NA
-"51","22/07/2024","Oka","Oak","E","OkaOak1.6",0.4,0.1,8.1,3.6032,42,NA,1,NA,"tiny little ant thing "
-"52","22/07/2024","Oka","Pine","I","OkaPine1.1",0.3,0.5,14.2,4.5115,56,NA,0,NA,NA
-"53","22/07/2024","Oka","Pine","I","OkaPine1.2",0.3,0.5,14.2,2.9956,37,NA,0,NA,NA
-"54","22/07/2024","Oka","Pine","I","OkaPine1.3",0.3,0.5,14.2,2.3188,27,NA,0,NA,NA
-"55","22/07/2024","Oka","Pine","I","OkaPine1.4",0.3,0.5,14.2,1.3645,19,NA,1,NA,"tiny little beige moth found "
-"56","22/07/2024","Oka","Pine","I","OkaPine1.5",0.3,0.5,14.2,2.2659,30,NA,0,NA,NA
-"57","22/07/2024","Oka","Pine","I","OkaPine1.6",0.3,0.5,14.2,2.1692,26,NA,0,NA,NA
-"58","22/07/2024","Oka","Pine","I","OkaPine1.7",0.3,0.5,14.2,1.4238,18,NA,0,NA,NA
-"59","22/07/2024","Oka","Oak/Pine","H","OkaOP2.1",0.3,0.2,8,2.404,30,NA,0,NA,NA
-"60","22/07/2024","Oka","Oak/Pine","H","OkaOP2.2",0.3,0.2,8,0.8939,12,NA,0,NA,NA
-"61","22/07/2024","Oka","Oak/Pine","H","OkaOP2.3",0.3,0.2,8,7.078,93,NA,0,NA,NA
-"62","22/07/2024","Oka","Pine","I","OkaPine2.1",0.3,0.5,12.6,7.822,115,NA,0,NA,NA
-"63","22/07/2024","Oka","Pine","I","OkaPine2.2",0.3,0.5,12.6,5.473,76,NA,0,NA,NA
-"64","22/07/2024","Oka","Pine","I","OkaPine2.3",0.3,0.5,12.6,2.6138,32,NA,0,NA,NA
-"65","22/07/2024","Oka","Pine","I","OkaPine2.4",0.3,0.5,12.6,2.8068,33,NA,0,NA,NA
-"66","22/07/2024","Oka","Pine","I","OkaPine2.5",0.3,0.5,12.6,1.0896,13,NA,0,NA,NA
-"67","22/07/2024","Oka","MOM",NA,"OkaMOM1",0.3,0.1,19.1,NA,31,NA,0,NA,NA
-"68","23/07/2024","Oka","Pine/Oak","I","OkaOP3.1",0.3,0.4,18,2.0223,28,NA,0,NA,NA
-"69","23/07/2024","Oka","Pine/Oak","I","OkaOP3.2",0.3,0.4,18,1.5265,21,NA,0,NA,NA
-"70","23/07/2024","Oka","Pine/Oak","I","OkaOP3.3",0.3,0.4,18,2.2873,27,NA,0,NA,NA
-"71","23/07/2024","Oka","Pine/Oak","I","OkaOP3.4",0.3,0.4,18,2.3931,35,NA,0,NA,NA
-"72","23/07/2024","Oka","Pine/Oak","I","OkaOP3.5",0.3,0.4,18,1.9842,27,NA,0,NA,NA
-"73","23/07/2024","Oka","Pine/Oak","I","OkaOP3.6",0.3,0.4,18,4.2652,57,NA,0,"1 tussoch moth",NA
-"74","23/07/2024","Oka","Oak/Pine","H","OkaOP1.1",0.3,0.3,8.3,6.2333,95,NA,0,NA,NA
-"75","23/07/2024","Oka","Oak/Pine","H","OkaOP1.2",0.3,0.3,8.3,9.7215,144,NA,0,NA,NA
-"76","23/07/2024","Oka","Oak/Pine","H","OkaOP1.3",0.3,0.3,8.3,5.5405,73,NA,0,NA,NA
-"77","23/07/2024","Oka","Oak/Pine","H","OkaOP1.4",0.3,0.3,8.3,1.9245,29,NA,1,NA,"1 small fly"
-"78","23/07/2024","Oka","Pine","K","OkaPine3.1",0.1,0.7,11.2,2.9515,36,NA,0,"1 tussoch moth",NA
-"79","23/07/2024","Oka","Pine","K","OkaPine3.2",0.1,0.7,11.2,1.6721,22,NA,0,NA,NA
-"80","23/07/2024","Oka","Pine","K","OkaPine3.3",0.1,0.7,11.2,1.8873,24,NA,0,NA,NA
-"81","23/07/2024","Oka","Pine","K","OkaPine3.4",0.1,0.7,11.2,1.3805,17,NA,0,NA,NA
-"82","23/07/2024","Oka","Pine","K","OkaPine3.5",0.1,0.7,11.2,1.3278,17,NA,0,NA,NA
-"83","24/07/2024","Notre Dame de Bonsecours","Oak","C","NDBOak1.1",0.7,0,7.8,1.6175,19,NA,0,NA,NA
-"84","24/07/2024","Notre Dame de Bonsecours","Oak","C","NDBOak1.2",0.7,0,7.8,1.7895,21,NA,2,NA,"1 small spider and Daddy long leg body"
-"85","24/07/2024","Notre Dame de Bonsecours","Oak","C","NDBOak1.3",0.7,0,7.8,1.6605,17,NA,1,NA,"Daddy long leg body + legs"
-"86","24/07/2024","Notre Dame de Bonsecours","Oak","C","NDBOak1.4",0.7,0,7.8,1.9685,24,NA,0,NA,NA
-"87","24/07/2024","Notre Dame de Bonsecours","Pine","M","NBDPine2.1",0,0.8,4.4,0.5109,6,NA,0,"1 tussoch moth",NA
-"88","24/07/2024","Notre Dame de Bonsecours","Pine","M","NBDPine2.2",0,0.8,4.4,1.0186,12,NA,0,"beetles and lots of flies ",NA
-"89","25/07/2024","Papineauville","Oak","E","PAPOak1.1",0.5,0.1,5.9,2.9672,31,NA,0,NA,NA
-"90","25/07/2024","Papineauville","Oak","E","PAPOak1.2",0.5,0.1,5.9,2.1857,22,NA,0,NA,NA
-"91","25/07/2024","Papineauville","Oak","A","PAPOak2.1",0.8,0,7.3,2.9965,31,NA,0,NA,NA
-"92","25/07/2024","Papineauville","Oak","A","PAPOak2.2",0.8,0,7.3,3.4798,39,NA,0,NA,NA
-"93","25/07/2024","Papineauville","Oak/Pine","H","PAPOP1.1",0.3,0.3,4.8,3.5277,37,NA,0,NA,NA
-"94","25/07/2024","Papineauville","Oak/Pine","H","PAPOP1.2",0.3,0.3,4.8,3.4245,36,NA,0,NA,NA
-"95","25/07/2024","Montebello","Oak","C","MontOak1.1",0.7,0,4.8,5.2375,57,NA,0,NA,NA
-"96","25/07/2024","Montebello","Oak","C","MontOak1.2",0.7,0,4.8,4.2615,35,NA,0,NA,NA
-"97","25/07/2024","Montebello","Pine","I","MontPine2.1",0.3,0.4,7.6,4.3329,44,NA,0,NA,NA
-"98","25/07/2024","Montebello","Pine","I","MontPine2.2",0.3,0.4,7.6,0.9917,12,NA,0,NA,NA
-"99","25/07/2024","Montebello","Pine","I","MontPine2.3",0.3,0.4,7.6,1.9502,22,NA,0,NA,NA
-"100","25/07/2024","Montebello","MOM",NA,"MontMOM",0.1,0,5.7,NA,21,NA,0,NA,NA
-"101","25/07/2024","Montebello","Oak","B","MontOak2.1",0.8,0.1,7.5,0.7036,8,NA,0,NA,NA
-"102","25/07/2024","Montebello","Oak","B","MontOak2.2",0.8,0.1,7.5,2.2237,26,NA,0,NA,NA
-"103","25/07/2024","Montebello","Pine","K","MontPine1.1",0.3,0.6,12.2,1.1568,12,NA,4,NA,"4 black flies big and small"
-"104","25/07/2024","Montebello","Pine","K","MontPine1.2",0.3,0.6,12.2,2.1763,23,NA,0,NA,NA
-"105","25/07/2024","Montebello","Oak/Pine","G","Mont2OP2.1",0.5,0.4,9.7,1.8106,20,NA,0,NA,"20 intact moths + 1 head and 4 wings = 21"
-"106","25/07/2024","Montebello","Oak/Pine","G","Mont2OP2.2",0.5,0.4,9.7,2.6337,30,NA,0,NA,NA
-"107","25/07/2024","Montebello","Pine","M","Mont2Pine1.1",0,0.8,8.2,1.1575,14,NA,0,"already a lot of beetles - moths seem to be largely intact",NA
-"108","25/07/2024","Montebello","Pine","M","Mont2Pine1.2",0,0.8,8.2,4.8233,49,NA,0,NA,NA
-"109","25/07/2024","Montebello","Pine/Oak","I","Mont2OP1.1",0.2,0.4,8.7,1.5639,16,NA,0,NA,NA
-"110","25/07/2024","Montebello","Pine/Oak","I","Mont2OP1.2",0.2,0.4,8.7,1.1219,11,NA,0,NA,NA
-"111","26/07/2024","Notre Dame de Bonsecours","Oak/Pine","F","NDBOP1.1",0.4,0.3,5.5,NA,NA,NA,NA,"Trap completely demolished removed July 26",NA
-"112","26/07/2024","Notre Dame de Bonsecours","MOM",NA,"NDBMOM",0.3,0,4.9,NA,57,NA,0,"already had beetles ",NA
-"113","26/07/2024","Notre Dame de Bonsecours","Pine","H","NDBPine1.1",0.2,0.3,4.9,6.6011,68,NA,0,NA,NA
-"114","26/07/2024","Notre Dame de Bonsecours","Oak/Pine","F","NDBOP2.1",0.4,0.3,5.5,2.8689,30,NA,0,NA,NA
-"115","26/07/2024","Notre Dame de Bonsecours","Oak/Pine","F","NDBOP2.2",0.4,0.3,5.5,4.5682,46,NA,2,NA,"2 daddy long legs"
-"116","26/07/2024","Notre Dame de Bonsecours","Oak/Pine","F","NDBOP2.3",0.4,0.3,5.5,3.7044,42,NA,0,NA,NA
-"117","29/07/2024","Rigaud","Pine/Oak","I","RigOP1.1",0.2,0.4,9.4,0.6396,10,NA,1,NA,"1 small spider"
-"118","29/07/2024","Rigaud","Pine/Oak","I","RigOP1.2",0.2,0.4,9.4,0.4017,5,NA,0,NA,NA
-"119","29/07/2024","Rigaud","Pine/Oak","I","RigOP1.3",0.2,0.4,9.4,0.5924,8,NA,0,NA,NA
-"120","29/07/2024","Rigaud","Oak/Pine","F","RigOP2.1",0.4,0.2,6.5,4.0153,61,NA,0,NA,NA
-"121","29/07/2024","Rigaud","Oak/Pine","F","RigOP2.2",0.4,0.2,6.5,1.8852,22,NA,0,NA,NA
-"122","29/07/2024","Rigaud","Oak/Pine","F","RigOP3.1",0.4,0.2,9.4,0.5131,7,NA,0,NA,NA
-"123","29/07/2024","Rigaud","Oak/Pine","F","RigOP3.2",0.4,0.2,9.4,3.1413,36,NA,0,NA,NA
-"124","29/07/2024","Rigaud","Oak/Pine","F","RigOP3.3",0.4,0.2,9.4,0.2639,6,NA,0,"trap torn on one side, may have lost some moths (taped up)",NA
-"125","29/07/2024","Rigaud","Pine","K","RigPine2.1",0.1,0.6,8.3,1.0678,12,NA,0,NA,NA
-"126","29/07/2024","Rigaud","Pine","K","RigPine2.2",0.1,0.6,8.3,0.2437,3,NA,0,NA,NA
-"127","29/07/2024","Rigaud","Pine","K","RigPine2.3",0.1,0.6,8.3,1.7554,19,NA,0,NA,NA
-"128","29/07/2024","Rigaud","Pine","L","RigPine3.1",0,0.7,3.6,2.0149,25,NA,0,NA,NA
-"129","29/07/2024","Rigaud","Pine","L","RigPine3.2",0,0.7,3.6,0.5344,7,NA,0,NA,NA
-"130","30/07/2024","Rigaud","Oak/Pine","H","RigOP4.1",0.3,0.2,5.3,0.3639,11,NA,4,"a lot of muck, only able to collect a few moths pieces ","11 somewhat intact moths + 4 wings = 11 because no other bodies/heads. Also a couple of flies and other tiny insect body parts"
-"131","30/07/2024","Rigaud","Oak/Pine","H","RigOP4.2",0.3,0.2,5.3,2.3154,35,NA,20,"3 beetles but moths intact","many tiny little flies "
-"132","30/07/2024","Rigaud","Oak","D","RigOak1.1",0.7,0.1,8.4,1.9312,25,NA,5,NA,"tiny little flies"
-"133","30/07/2024","Rigaud","Oak","D","RigOak1.2",0.7,0.1,8.4,2.6175,33,NA,0,NA,NA
-"134","30/07/2024","Rigaud","Oak","D","RigOak1.3",0.7,0.1,8.4,1.4477,17,NA,0,NA,NA
-"135","30/07/2024","Rigaud","Oak","D","RigOak1.4",0.7,0.1,8.4,2.1446,30,NA,0,NA,NA
-"136","30/07/2024","Rigaud","Oak","D","RigOak1.5",0.7,0.1,8.4,6.4402,82,NA,0,NA,NA
-"137","30/07/2024","Rigaud","Pine","I","RigPine4.1",0.2,0.5,3.5,4.1022,51,NA,0,"1 unidentified moth",NA
-"138","30/07/2024","Rigaud","Pine","J","RigPine5.1",0.1,0.5,6.4,4.0068,55,NA,0,NA,NA
-"139","30/07/2024","Rigaud","Oak/Pine","H","RigOP5.1",0.3,0.2,7.6,5.0103,67,NA,0,NA,NA
-"140","30/07/2024","Rigaud","MOM",NA,"RigMOM",0.2,0,7.3,NA,76,NA,0,NA,NA
-"141","01/08/2024","Mont Saint Hilaire","MOM",NA,"MSH2MOM2",0.1,0,4.8,NA,6,NA,0,"little decomposition",NA
-"142","01/08/2024","Mont Saint Hilaire","MOM",NA,"MSH2MOM",0.1,0,4.8,NA,6,NA,0,"little decomposition",NA
-"143","01/08/2024","Mont Saint Hilaire","MOM",NA,"MSHMOM",0.1,0,4.8,NA,19,NA,0,"some decomposition ",NA
-"144","01/08/2024","Mont Saint Hilaire","Oak","H","MSH2Oak1.1",0.3,0.2,7.6,0.2354,3,NA,0,"little decomposition",NA
-"145","01/08/2024","Mont Saint Hilaire","Oak","H","MSH2Oak1.2",0.3,0.2,7.6,0.9479,13,NA,0,"little decomposition",NA
-"146","01/08/2024","Mont Saint Hilaire","Oak","H","MSH2Oak1.3",0.3,0.2,7.6,0.2519,4,NA,0,"few moths ",NA
-"147","01/08/2024","Mont Saint Hilaire","Oak","H","MSH2Oak1.4",0.3,0.2,7.6,2.5012,32,NA,0,"2 tussoch moths",NA
-"148","01/08/2024","Mont Saint Hilaire","Oak","C","MSHOak1.1",0.6,0,8.5,0.1414,2,NA,0,"little decomposition",NA
-"149","01/08/2024","Mont Saint Hilaire","Oak","C","MSHOak1.2",0.6,0,8.5,2.9702,31,NA,0,"little decomposition",NA
-"150","01/08/2024","Mont Saint Hilaire","Oak","C","MSHOak1.3",0.6,0,8.5,3.3886,36,NA,0,"some decomposition ",NA
-"151","01/08/2024","Mont Saint Hilaire","Oak","C","MSHOak1.4",0.6,0,8.5,NA,NA,NA,NA,"Trap bottom slightly opened, not moths in or around the trap, taped up",NA
-"152","01/08/2024","Mont Saint Hilaire","Pine","L","MSHPine1.1",0,0.7,3.8,6.5669,108,NA,0,"lots of moths, little decomposition",NA
-"153","05/08/2024","Mont Royal","Oak/Pine","E","MROP1.1",0.4,0.1,8.9,3.1754,55,NA,0,NA,NA
-"154","05/08/2024","Mont Royal","Oak/Pine","E","MROP1.2",0.4,0.1,8.9,1.0114,20,NA,0,NA,NA
-"155","05/08/2024","Mont Royal","Oak/Pine","E","MROP1.3",0.4,0.1,8.9,0.7044,13,NA,0,NA,NA
-"156","05/08/2024","Mont Royal","Oak/Pine","E","MROP1.4",0.4,0.1,8.9,0.8113,16,NA,0,NA,NA
-"157","05/08/2024","Mont Royal","Oak","A","MROak2.1",0.8,0,6.4,0.797,15,NA,0,NA,NA
-"158","05/08/2024","Mont Royal","Oak","C","MROak1.1",0.6,0,8.6,0.5771,7,NA,0,NA,NA
-"159","05/08/2024","Mont Royal","Oak","C","MROak1.2",0.6,0,8.6,0.9821,20,NA,0,NA,NA
-"160","05/08/2024","Mont Royal","Oak","C","MROak1.3",0.6,0,8.6,0.3457,6,NA,0,NA,NA
-"161","05/08/2024","Mont Royal","Pine","L","MRPine1.1",0.4,0,14,1.09,24,NA,0,NA,NA
-"162","05/08/2024","Mont Royal","MOM","E","MRMOM",0.4,0,14,NA,93,NA,0,NA,NA
-"163","05/08/2024","Mont Royal","Oak","E","MROak3.1",0.4,0,11.7,4.9294,95,NA,0,NA,NA
-"164","05/08/2024","Mont Royal","Oak","E","MROak3.2",0.4,0,11.7,2.6527,49,NA,0,NA,NA
-"165","05/08/2024","Mont Royal","Oak","E","MROak3.3",0.4,0,11.7,NA,NA,NA,NA,"Trap missing, seems to have been removed",NA
-"166","15/08/2024","Orford","Pine","M","MO2Pine2.1",0,0.8,6.8,1.742,42,NA,0,NA,"all intact, wings disregarded"
-"167","15/08/2024","Orford","Pine","M","MO2Pine2.2",0,0.8,6.8,2.3519,53,NA,1,NA,"1 small beetle, wings disregarded"
-"168","15/08/2024","Orford","Pine","L","MO2Pine1.1",0,0.7,3.7,0.8648,21,NA,0,NA,"all intact, wings disregarded "
-"169","15/08/2024","Orford","Pine","L","MO2Pine1.2",0,0.7,3.7,1.0668,27,NA,0,NA,"all intact, no wings "
-"170","15/08/2024","Orford","Oak","F","MO2Oak1.1",0.4,0.2,8.1,5.947,141,NA,0,"Mostly in-tact moths, some beetle, some decomp","mostly intact moths, disregarded wings since moths were intact, bodies were added to total moths "
-"171","15/08/2024","Orford","Oak","F","MO2Oak 1.2",0.4,0.2,8.1,5.592,131,NA,3,"4 non-spongy moths moths, mostly intact, some decomp","3 small flies, 131 intact moths, added the moth bodies (bodies with heads) to total number, wings disregarded"
-"172","15/08/2024","Orford","Oak","F","MO2Oak1.3",0.4,0.2,8.1,2.4693,52,25,8,"intact moths + more advanced stage of decomp ","many smal flies and 1 beetle, mostly in-tact moths + bodies + heads = total, wings disregarded"
-"173","15/08/2024","Orford","Pine","J","MO2Pine3.1",0,0.5,4.3,3.894,85,NA,2,"1 non spongy moth, some fungus on the moths","a few small flies, wings disregarded since moths are intact "
-"174","15/08/2024","Orford","Pine","J","MO2Pine3.2",0,0.5,4.3,3.1737,73,NA,0,NA,"moths intact, disregarded wings "
-"175","15/08/2024","Orford","MOM",NA,"MO2MOM",0,0,4.6,2.6637,69,17.25,7,"some intact moths, many beetles, relatively advanced stage of decomp ","lots of decomposition, very difficult to count wings so the number is not accurate, wings were disregarded, total moth = body + heads + moth count "
-"176","15/08/2024","Orford","Pine","L","MO2Pine4.1",0,0.6,7.5,4.2801,105,NA,3,NA,"1 fly, 1 spider, 1 earwig"
-"177","15/08/2024","Orford","Pine","L","MO2Pine4.2",0,0.6,7.5,4.3327,103,NA,3,NA,"1 non-spongy moth, 2 earwigs, 1 fly"
-"178","16/08/2024","Orford","MOM",NA,"MOMOM",0,0.2,5.9,10.416,254,24,9,"moth in medium level of decomp, powdery but not moldy","decomposition made counting wings hard, total count = body + heads + moths + 1 live moth that flew away, wings disregarded"
-"179","16/08/2024","Orford","Oak","E","MOOak1.1",0.5,0,7.1,19.761,378,NA,2,"1 beetle","1 fly, 1 beetle"
-"180","16/08/2024","Orford","Oak","E","MOOak1.2",0.5,0,7.1,6.1547,139,NA,2,"1 live moth flew away (ADDED TO TOTAL)","1 beetle, 1 stink bug,"
-"181","16/08/2024","Orford","Oak","E","MOOak1.3",0.5,0,7.1,14.318,263,NA,2,"several beetles but all moths intact ","2 flies"
-"182","16/08/2024","Orford","Oak","A","MOOak2.1",0.8,0,7.8,5.1015,144,19.5,6,"moths in medium level of decomp","6 tiny flies, lots of decomp, wings hard to count and disregarded, total count = body + heads + moths"
-"183","16/08/2024","Orford","Oak","A","MOOak2.2",0.8,0,7.8,4.5178,91,NA,2,NA,"moths intact, 2 flies"
-"184","16/08/2024","Orford","Oak","A","MOOak2.3",0.8,0,7.8,5.0056,108,NA,0,"1 moth flew away (ADDED TO TOTAL)","moths intact, wing disregarded, total moths = moth count + 1 live moth"
-"185","16/08/2024","Orford","Oak","E","MOOak3.1",0.5,0,11.8,7.0338,142,NA,2,"some beetles, moths mostly intact, some decomp","total moths = count + bodies, wings disregarded, 2 beetles"
-"186","16/08/2024","Orford","Oak","E","MOOak3.2",0.5,0,11.8,4.681,93,NA,2,"a few beetles, dropped 1 moth (ADDED TO TOTAL)","2 large flies, total moths = count + dropped moth, wings disregarded"
-"187","16/08/2024","Orford","Oak","E","MOOak3.3",0.5,0,11.8,1.5711,37,NA,0,"few beetles ","intact moths "
-"188","16/08/2024","Orford","Pine","J","MOPine1.1",0,0.5,5.1,3.1984,86,NA,0,NA,"16 tiny flies, moths intact"
-"189","16/08/2024","Orford","Pine","J","MOPine1.2",0,0.5,5.1,4.7583,114,NA,4,NA,"1 harvestmen, 3 flies"
-"190","16/08/2024","Orford","Pine","J","MOPine2.1",0,0.7,8.3,2.677,78,NA,2,"one beetle ","2 tiny flies, wings disregarded"
-"191","16/08/2024","Orford","Pine","L","MOPine2.2",0,0.7,8.3,2.3127,53,NA,2,NA,"2 tiny flies, wings disregarded"
-"192","16/08/2024","Orford","Pine","L","MOPine2.3",0,0.7,8.3,2.549,65,NA,5,NA,"5 tiny flies"
-"193","20/08/2024","Oka","Oak","E","OkaOak1.1",0.4,0.1,8.1,7.1054,161,NA,4,"2 american dagger moths in trap","1 spider, 3 flies, total moths = moth count + bodies , wings ignored"
-"194","20/08/2024","Oka","Oak","E","OkaOak1.2",0.4,0.1,8.1,3.7078,91,NA,9,NA,"9 other species (1 spider, 7 flies, 1 mosquito), total moths = moth count + body/head (i ripped this one in half by accident), wings ignored"
-"195","20/08/2024","Oka","Oak","E","OkaOak1.3",0.4,0.1,8.1,3.5431,52,NA,0,"flies and a few beetles, trap was very wet ","moths were still sort of damp, weight probably higher than it should be, whole intact moths. Maybe compare with other bags with similar #s?"
-"196","20/08/2024","Oka","Oak","E","OkaOak1.4",0.4,0.1,8.1,2.4113,41,NA,4,"a few beetles ","1 harvestmen, 1 moth, 2 flies, total moths = moth count + head"
-"197","20/08/2024","Oka","Oak","E","OkaOak1.5",0.4,0.1,8.1,0.9733,7,6.75,6,"several beetles, very wet ","6 species (4 flies, 2 small beetles), extremely decomposed, bits of wings, bits of heads, clumps of matter that is impossible to decipher"
-"198","20/08/2024","Oka","Oak","E","OkaOak1.6",0.4,0.1,8.1,3.7155,59,NA,5,NA,"5 species (3 flies, 1 harvestmen, 1 ant, 1 spider?), total moths = moth count + body"
-"199","20/08/2024","Oka","Pine","I","OkaPine1.1",0.3,0.5,14.2,8.6922,93,41.5,15,"lots of beetles, heavy decomp ","species (mix of flies, beetles, winged insects) decomposition made counting wings impossible, total moths = moth count + heads + body "
-"200","20/08/2024","Oka","Pine","I","OkaPine1.2",0.3,0.5,14.2,2.6415,61,NA,1,NA,"1 fly, moths in good state"
-"201","20/08/2024","Oka","Pine","I","OkaPine1.3",0.3,0.5,14.2,3.3347,38,32,16,"lots of beetles, heavy decomp, 2 HEAD DROPPED","wings uncountable, species ( mostly flies, 1 beetle, 1 stink bug), total moths = moth count + bodies + head + 2 heads that fell"
-"202","20/08/2024","Oka","Pine","I","OkaPine1.4",0.3,0.5,14.2,2.0052,51,NA,0,NA,"moths were in good state "
-"203","20/08/2024","Oka","Pine","I","OkaPine1.5",0.3,0.5,14.2,1.9145,43,NA,0,"catepillars ","moths were in good state "
-"204","20/08/2024","Oka","Pine","I","OkaPine1.6",0.3,0.5,14.2,1.8471,39,NA,0,"some beetles ","total moths = moth count + bodies + head, wings ignored "
-"205","20/08/2024","Oka","Pine","I","OkaPine1.7",0.3,0.5,14.2,1.3836,24,NA,0,"flies and stink bug","wings ignored, total moths = moth count + body "
-"206","20/08/2024","Oka","Oak/Pine","H","OkaOP2.1",0.3,0.2,8,3.2715,63,NA,1,"caterpillars ","moths intact, wings ignored, 1 fly"
-"207","20/08/2024","Oka","Oak/Pine","F","OkaOP2.2",0.4,0.2,8,1.337,0,41,0,"tons of beetles, full of muck",NA
-"208","20/08/2024","Oka","Oak/Pine","F","OkaOP2.3",0.4,0.2,8,10.1172,28,38,0,"tons of beetles, full of muck, 3 DROPPED HEADS ADDED TO TOTAL","wings impossible to count, complete mush, very wet, total moths = moths + bodies + heads + heads dropped (3)"
-"209","20/08/2024","Oka","Pine","I","OkaPine2.1",0.3,0.5,12.6,11.5901,145,NA,12,"lots of beetles, some decomp","some wet some dry, species (mostly flies, 1 large beetle), total moths = moths + bodies + heads, wings disregarded"
-"210","20/08/2024","Oka","Pine","I","OkaPine2.2",0.3,0.5,12.6,8.4408,112,NA,24,"a lot of beetles, some decomp","lots of flies, total moths = moths + body"
-"211","20/08/2024","Oka","Pine","I","OkaPine2.3",0.3,0.5,12.6,4.0437,60,NA,3,"a few beetles ","some dry some wet, total count = moths + bodies + heads, wings disregarded"
-"212","20/08/2024","Oka","Pine","I","OkaPine2.4",0.3,0.5,12.6,4.4075,111,NA,2,NA,"moths intact and dry, wings disregarded, 2 flies"
-"213","20/08/2024","Oka","Pine","I","OkaPine2.5",0.3,0.5,12.6,3.4808,59,31,19,"many beetles, advanced decomp ","very decomposed and wet, 19 species (mostly flies, a harvestmen, couple beetle looking species), total count = moth count  + body, wings disregarded"
-"214","20/08/2024","Oka","Oak/Pine","H","OkaOP1.1",0.3,0.3,8.3,3.9406,83,NA,10,"a few beetles ","species (mostly flies, 1 beetle), moths relatively dry, total moths = moths + heads + bodies"
-"215","20/08/2024","Oka","Oak/Pine","H","OkaOP1.2",0.3,0.3,8.3,4.5086,100,NA,2,"a few beetles ","2 flies, moths dry, total moths = moths + bodies"
-"216","20/08/2024","Oka","Oak/Pine","H","OkaOP1.3",0.3,0.3,8.3,2.8778,69,NA,0,NA,"dry moths"
-"217","20/08/2024","Oka","Oak/Pine","H","OkaOP1.4",0.3,0.3,8.3,1.0701,21,NA,1,NA,"1 fly, wings ignored"
-"218","20/08/2024","Oka","Pine","K","OkaPine3.1",0.1,0.7,11.2,6.2444,54,17.5,35,"some beetles, advanced decomp","A LOT of flies, total moths = moths + heads + bodies, wet "
-"219","20/08/2024","Oka","Pine","K","OkaPine3.2",0.1,0.7,11.2,1.2362,26,NA,2,NA,"very slightly wet, wings disregarded, total moths = moths + bodies, 2 flies"
-"220","20/08/2024","Oka","Pine","K","OkaPine3.3",0.1,0.7,11.2,3.0035,27,13.5,5,"some beetles, advanced decomp ","2 fleis, wet, wings disregarded, total moths = moths + bodies + heads"
-"221","20/08/2024","Oka","Pine","K","OkaPine3.4",0.1,0.7,11.2,1.6297,18,8,5,"some beetles, advanced decomp ","2 flies, mostly dry, total moths = moths + bodies + heads, wings ignored"
-"222","21/08/2024","Notre Dame de Bonsecours","Oak","C","NDBOak1.1",0.7,0,7.8,1.7052,27,NA,7,"some beetles, minimal decomp","5 species (1 spider, 7 flies), total = moths + bodies"
-"223","21/08/2024","Notre Dame de Bonsecours","Oak","C","NDBOak1.2",0.7,0,7.8,2.1501,20,NA,29,"some beetles, minimal decomp","a LOT of tiny flies, total = moths + bodies + heads, slightly wet "
-"224","21/08/2024","Notre Dame de Bonsecours","Oak","C","NDBOak1.3",0.7,0,7.8,1.4126,1,65.5,0,"heavy decomp, full of muck","extremely decomposed,  difficult to count body parts, wet, total = moth + bodies + heads "
-"225","21/08/2024","Notre Dame de Bonsecours","Oak","C","NDBOak1.4",0.7,0,7.8,2.5885,1,23.25,2,"heavy decomp, full of muck","2 beetles, extremely decomposed, difficult to count body parts, wet, total = moth + bodies + heads"
-"226","21/08/2024","Notre Dame de Bonsecours","Pine","M","NBDPine2.1",0,0.8,4.4,1.6434,35,NA,3,"2 looper moths","moths intact, 2 flies, total moths = moth + head"
-"227","21/08/2024","Notre Dame de Bonsecours","Pine","M","NBDPine2.2",0,0.8,4.4,1.4135,27,NA,6,"flies + grasshoppers ","6 flies, moths intact, total = moths + bodies"
-"228","21/08/2024","Notre Dame de Bonsecours","MOM",NA,"NDBMOM",0.3,0,4.9,3.3531,32,32,7,"heavy decomp, many beetles, full muck ","a lot of pieces of beetles, species (3 flies, 4 beetles), total = moths + heads + bodies, wings disregarded"
-"229","21/08/2024","Notre Dame de Bonsecours","Pine","H","NDBPine1.1",0.2,0.3,4.9,3.6474,14,28.25,11,"heavy decomp, full muck","extremely decomposed,  difficult to count body parts, wet, total = moth + bodies + heads, species (beetles, small beetles, flies)"
-"230","21/08/2024","Notre Dame de Bonsecours","Oak/Pine","F","NDBOP2.1",0.4,0.3,5.5,3.6489,74,NA,6,"2 looper moth","moths intact, 6 flies, total = moths + bodies"
-"231","21/08/2024","Notre Dame de Bonsecours","Oak/Pine","F","NDBOP2.2",0.4,0.3,5.5,2.5899,44,NA,11,"a few beetles, 1 looper moth","moths intact, mostly flies + 1 harvestment + 1 looper moth"
-"232","21/08/2024","Notre Dame de Bonsecours","Oak/Pine","F","NDBOP2.3",0.4,0.3,5.5,1.9309,47,NA,7,"3 non-spongy moths moths","6 flies, intact and dry, total = moths +  body"
-"233","22/08/2024","Papineauville","Oak","E","PAPOak1.1",0.5,0.1,5.9,0.2776,0,51,0,"heavy decomp, many beetles","basically nothing left to count but a few heads/thoraxes, need to see if we can convert muck g = moth counts "
-"234","22/08/2024","Papineauville","Oak","E","PAPOak1.2",0.5,0.1,5.9,5.3245,114,NA,5,"a few beetles, 2 looper moths","5 species (4 looper moths 1 fly), wings ignored, total = Moths + bodies, dry"
-"235","22/08/2024","Papineauville","Oak","A","PAPOak2.1",0.8,0,7.3,5.8158,104,NA,4,"some beetles, minimal decomp","4 flies, total moths = moths + heads + bodies, mostly dry"
-"236","22/08/2024","Papineauville","Oak","A","PAPOak2.2",0.8,0,7.3,3.1308,1,44,1,"advanced decomp, many beetles","very decomposed, 1 fly, total moths = moths + heads + bodies, wet"
-"237","22/08/2024","Papineauville","Oak/Pine","H","PAPOP1.1",0.3,0.3,4.8,8.0552,37,25.25,6,"advanced decomp, many beetles","wing count is a rough estimate due to decomposition, total moths = bodies + heads + moths , 6 flies, wet"
-"238","22/08/2024","Papineauville","Oak/Pine","H","PAPOP1.2",0.3,0.3,4.8,10.5414,62,38,5,"advanced decomp, many beetles","wing count is a rough estimate due to decomposition, total moths = bodies + heads + moths , 5flies + 1 moth, wet"
-"239","22/08/2024","Montebello","Oak","C","MontOak1.1",0.7,0,4.8,2.6575,63,NA,1,"a few beetles","dry, 1 fly, moths intact, bunch of little pieces of traps in bag"
-"240","22/08/2024","Montebello","Oak","C","MontOak1.2",0.7,0,4.8,4.3999,6,32,1,"advanced decomp, many beetles","wet, 1 beetle, total = moths + bodies + heads, wings ignored"
-"241","22/08/2024","Montebello","Pine","I","MontPine2.1",0.3,0.4,7.6,4.2866,21,32.5,9,"advanced decomp, many beetles","wet, 9 flies, total = moths + bodies + heads, wings ignored"
-"242","22/08/2024","Montebello","Pine","I","MontPine2.2",0.3,0.4,7.6,5.1035,7,34,1,"advanced decomp, many beetles, +1 HEAD ADDED TO TOTAL","wet, 1 beetle, total = moths + bodies + heads, wings ignored"
-"243","22/08/2024","Montebello","Pine","I","MontPine2.3",0.3,0.4,7.6,0.0267,1,NA,0,"Trap was opened, only 1 moth left","one dry moth"
-"244","22/08/2024","Montebello","MOM",NA,"MontMOM",0.1,0,5.7,3.4527,18,22.5,10,"advanced decomp, many beetles","wet, 4 flies + many other species that are hard to ID, total = moths + bodies + heads"
-"245","22/08/2024","Montebello","Oak","B","MontOak2.1",0.8,0.1,7.5,0.3889,0,6.5,9,"advanced decomp, many beetles, 4 non-spongy moths","dry, 9 flies, barely recognizable moths pieces. No idea how to count total here"
-"246","22/08/2024","Montebello","Oak","B","MontOak2.2",0.8,0.1,7.5,2.9983,77,NA,5,NA,"2 flies + 3 looper moths , wings ignored, dry"
-"247","22/08/2024","Montebello","Pine","K","MontPine1.1",0.3,0.6,12.2,0.6459,18,NA,0,NA,"dry, wings ignored "
-"248","22/08/2024","Montebello","Pine","K","MontPine1.2",0.3,0.6,12.2,2.7966,52,NA,17,"few beetles, minimum decomp, 4 looper moths","mostly dry, 17 species (mostly flies, some small true bugs/beetles), total moths = moths + heads + bodies,"
-"249","22/08/2024","Montebello","Pine","M","Mont2Pine1.1",0,0.8,8.2,NA,NA,NA,NA,"TRAP FOUND OPEN - NOTHING INSIDE",NA
-"250","22/08/2024","Montebello","Pine","M","Mont2Pine1.2",0,0.8,8.2,1.6589,0,42.5,0,"heavy decomp, full muck","extremely difficult to ID body parts, wings completely torn (ignored), total = bodies + heads"
-"251","22/08/2024","Montebello","Pine/Oak","I","Mont2OP1.1",0.2,0.4,8.7,2.7408,46,60,15,"advanced decomp, many beetles ","many small species of beetles and decomposer beetles, difficult to ID body parts, wings completely torn (ignored) "
-"252","22/08/2024","Montebello","Pine/Oak","I","Mont2OP1.2",0.2,0.4,8.7,NA,3,NA,NA,"TRAP FOUND OPEN - 3 MOTHS ON GROUND (COUNTED)",NA
-"253","23/08/2024","Montebello","Oak/Pine","G","Mont2OP2.1",0.5,0.4,9.7,0.2832,0,62,1,"heavy decomp, full muck, tons of beetles ","extremely decomposed, only thorax/heads left, wings ignored "
-"254","23/08/2024","Montebello","Oak/Pine","G","Mont2OP2.2",0.5,0.4,9.7,1.2981,39,NA,3,NA,"3 flies , moths intact, dry"
-"255","23/08/2024","Oka","Pine","K","OkaPine3.5",0.1,0.7,11.2,3.2258,10,40.5,8,"heavy decomp, full muck, tons of beetles ","bunch of pieces of beetles, total = moths + bodies + heads , wet "
-"256","23/08/2024","Oka","MOM",NA,"OkaMOM1",0.3,0.1,19.1,5.9724,95,NA,19,"a few beetles, moths still intact after whole summer??","lots of flies, total moths = moths + body"
-"257","23/08/2024","Oka","Pine/Oak","I","OkaOP3.1",0.3,0.4,18,1.6061,32,NA,0,"one wasp, one caterpillar ","mostly dry, intact"
-"258","23/08/2024","Oka","Pine/Oak","I","OkaOP3.2",0.3,0.4,18,1.6173,26,NA,0,"some caterpillars ","mostly dry, intact, total = heads + bodies + moths, wings ignored "
-"259","23/08/2024","Oka","Pine/Oak","I","OkaOP3.3",0.3,0.4,18,4.1593,42,NA,3,"a few beetles. minimal decomp","3 flies, a bit wet, total = heads + bodies + moth, wings ignored"
-"260","23/08/2024","Oka","Pine/Oak","I","OkaOP3.4",0.3,0.4,18,2.4591,36,NA,2,"few beetles","2 flies, total = heads + bodies + moths, wings ignored"
-"261","23/08/2024","Oka","Pine/Oak","I","OkaOP3.5",0.3,0.4,18,3.8597,17,14,38,"advanced decomp, many beetles","a TON of flies, total = heads + bodies + moths, wings ignored, wet"
-"262","23/08/2024","Oka","Pine/Oak","I","OkaOP3.6",0.3,0.4,18,3.9317,61,NA,1,NA,"1 fly, total = bodies + moths, wings ignored, somewhat dry"
-"263","23/08/2024","Oka","MOM",NA,"OkaMOM2",0,0,6.3,3.5644,52,NA,3,"a few beetles, moths still intact after whole summer??","3 flies, total = bodies + moths + heads, wings ignored"
-"264","26/08/2024","Mont Saint Hilaire","Oak","H","MSH2Oak1.1",0.3,0.2,7.6,0.0684,3,NA,0,"No decomp, lady bugs ","total = bodies + heads + moths "
-"265","26/08/2024","Mont Saint Hilaire","Oak","H","MSH2Oak1.2",0.3,0.2,7.6,0.0385,1,NA,0,"No decomp ","1 moth"
-"266","26/08/2024","Mont Saint Hilaire","Oak","C","MSHOak1.1",0.6,0,8.5,0.1352,1,NA,1,"minimum decomp, something ate a lot of the heads and bodies ","1 fly, total = bodies + heads + moths"
-"267","26/08/2024","Mont Saint Hilaire","Oak","C","MSHOak1.2",0.6,0,8.5,0.3335,9,NA,0,"no decomp",NA
-"268","26/08/2024","Mont Saint Hilaire","Oak","C","MSHOak1.3",0.6,0,8.5,0.8726,24,NA,2,"No decomp, pale beauty + spiders ","1 harvestmen, 1 caterpillar"
-"269","26/08/2024","Mont Saint Hilaire","Oak","C","MSHOak1.4",0.6,0,8.5,0.4567,13,NA,1,"No decomp, some fungus ",NA
-"270","27/08/2024","Mont Saint Hilaire","Pine","L","MSHPine1.1",0,0.7,3.8,0.3035,12,NA,NA,NA,NA
-"271","27/08/2024","Mont Saint Hilaire","MOM",NA,"MSH2MOM2",0.1,0,4.8,0.247,9,NA,0,"minimum decomp, fungus present ",NA
-"272","27/08/2024","Mont Saint Hilaire","MOM",NA,"MSH2MOM",0.1,0,4.8,0.2058,7,NA,1,"minimum decomp, fungus present ","1 fly"
-"273","27/08/2024","Mont Saint Hilaire","MOM",NA,"MSHMOM",0.1,0,4.8,0.2492,0,41,0,"heavy decomp","very decomposed, hard to ID parts, wings hard to count, wings ignored "
-"274","27/08/2024","Mont Saint Hilaire","Oak","H","MSH2Oak1.3",0.3,0.2,7.6,0.0646,2,NA,0,"minimum decomp, tiny bit of fungus ",NA
-"275","27/08/2024","Mont Saint Hilaire","Oak","H","MSH2Oak1.4",0.3,0.2,7.6,NA,NA,NA,NA,"Completely torn apart, nothing recovered",NA
-"276","27/08/2024","Mont Saint Hilaire","Pine/Oak","I","MSHOP1.1",0.3,0.4,3.5,0.3971,13,NA,1,"minimum decomp, a lot of fungus ","1 fly"
-"277","27/08/2024","Mont Saint Hilaire","Oak/Pine","D","MSHOP2.1",0.6,0.1,5.7,0.0193,1,NA,0,"trap ripped to shred, 1 moth found on the ground with some wings","just 1 moth for total"
-"278","27/08/2024","Mont Saint Hilaire","Oak/Pine","D","MSHOP2.2",0.6,0.1,5.7,0.7164,22,NA,1,"minimum decomp, 1 spider, 1 fly, 1 tussock moth, 1 beetle, fugus present","1 fly, moths intact"
-"279","27/08/2024","Mont Saint Hilaire","Oak/Pine","D","MSHOP2.3",0.6,0.1,5.7,2.15,60,NA,3,"minimum decomp, few beetles, lots of fungus, some flies,","3 flies, total = moths + bodies"
-"280","29/08/2024","Rigaud","Pine/Oak","I","RigOP1.1",0.2,0.4,9.4,0.2639,6,2.5,9,"some decomp, some beetles, 2 looper moths","8 flies (1 beetle thing?), total = moths + bodies + heads, dry"
-"281","29/08/2024","Rigaud","Pine/Oak","I","RigOP1.2",0.2,0.4,9.4,0.3602,10,NA,0,"no decomp, 1 fly","intact moths "
-"282","29/08/2024","Rigaud","Pine/Oak","I","RigOP1.3",0.2,0.4,9.4,0.1568,6,15,1,"advanced decomp, 1 looper moth, many beetles","1 small beetle, very decomposed"
-"283","29/08/2024","Rigaud","Oak/Pine","F","RigOP2.1",0.4,0.2,6.5,0.6253,21,NA,4,"some decomp, fungus present, 1 looper moth, flies","4 flies, moths intact"
-"284","29/08/2024","Rigaud","Oak/Pine","F","RigOP2.2",0.4,0.2,6.5,0.1693,5,NA,0,"some decomp, fungus present, 1 fly, some fungus",NA
-"285","29/08/2024","Rigaud","Oak/Pine","F","RigOP3.1",0.4,0.2,9.4,0.1544,6,NA,0,"some decomp, 2 beetles, 3 flies, pale beauty, 2 looper moths","bits of 1 moth head = 1, total = head + body + moths"
-"286","29/08/2024","Rigaud","Oak/Pine","F","RigOP3.2",0.4,0.2,9.4,0.707,25,NA,0,"min decomp, fungus present, 2 looper moths","moths intact, total = heads + bodies + moths"
-"287","29/08/2024","Rigaud","Oak/Pine","F","RigOP3.3",0.4,0.2,9.4,0.5759,7,NA,8,"open and torn, some beetles, advanced decomp, some stuff still collected ","lots of insects pieces (some flies, large beetle pieces, small beetles), total = heads + bodies + moths "
-"288","29/08/2024","Rigaud","Pine","K","RigPine2.1",0.1,0.6,8.3,0.1708,5,NA,0,"3 daddy long legs, 1 fly, min decomp","intact moths "
-"289","29/08/2024","Rigaud","Pine","K","RigPine2.2",0.1,0.6,8.3,0,0,NA,0,"1 harvestmen, 1 caterpillar, NO MOTHS","NO MOTHS "
-"290","29/08/2024","Rigaud","Pine","K","RigPine2.3",0.1,0.6,8.3,0.018,0,46,0,"full muck, heavy decomp, many beetles ","2 very decomposed thoraxes"
-"291","29/08/2024","Rigaud","Pine","L","RigPine3.1",0,0.7,3.6,0.4468,16,NA,3,NA,"2 harvest men + 1 spider, moths intact"
-"292","29/08/2024","Rigaud","Pine","L","RigPine3.2",0,0.7,3.6,0.2913,10,NA,NA,"1 looper moth, min decomp, spiders, 1 fly","moths intact "
-"293","30/08/2024","Rigaud","Oak/Pine","H","RigOP4.1",0.3,0.2,5.3,NA,NA,NA,NA,"Bottom opened, beetles on ground, full decomp ","NA "
-"294","30/08/2024","Rigaud","Oak/Pine","H","RigOP4.2",0.3,0.2,5.3,0.2636,9,NA,0,"1 harvestmen, 1 fly, fungus present, min decomp","intact moths "
-"295","30/08/2024","Rigaud","Oak","D","RigOak1.1",0.7,0.1,8.4,0.1261,4,6,2,"advanced decomp, 1 looper moth, many beetles","2 flies, total = head + body + moths"
-"296","30/08/2024","Rigaud","Oak","D","RigOak1.2",0.7,0.1,8.4,0.0745,2,32,2,"heavy decomp, many beetles","2 flies, total = heads + moths"
-"297","30/08/2024","Rigaud","Oak","D","RigOak1.3",0.7,0.1,8.4,0.2314,6,0,0,"min decomp, some fungus, no beetles ","intact moths "
-"298","30/08/2024","Rigaud","Oak","D","RigOak1.4",0.7,0.1,8.4,0.1853,4,NA,4,"min decomp, some fungus, ant","intact moths "
-"299","30/08/2024","Rigaud","Oak","D","RigOak1.5",0.7,0.1,8.4,0.5796,16,NA,6,"some beetles, some decomp, 1 looper moth, flies","6 flies, total = heads + body + moths"
-"300","30/08/2024","Rigaud","Pine","I","RigPine4.1",0.2,0.5,3.5,0.3184,10,NA,0,"couple spiders, 1 looper, min fingus, min decomp","moths intact"
-"301","30/08/2024","Rigaud","Pine","J","RigPine5.1",0.1,0.5,6.4,0.3534,13,NA,1,"couple beetles, min decomp, tussock moth, spiders","moths intact"
-"302","30/08/2024","Rigaud","Oak/Pine","H","RigOP5.1",0.3,0.2,7.6,0.3211,12,NA,4,"min decomp, multiple flies, min fungus, ","3 flies + spider, moths mostly intact"
-"303","30/08/2024","Rigaud","MOM",NA,"RigMOM",0.2,0,7.3,2.8864,82,NA,4,"min decomp, fungus, few beetles, NOT MUCK","4 flies, lots of feces, total = moths + heads"
-"304","02/09/2024","Mont Royal","Oak/Pine","E","MROP1.1",0.4,0.1,8.9,0.1716,5,NA,0,NA,"intact moths "
-"305","02/09/2024","Mont Royal","Oak/Pine","E","MROP1.2",0.4,0.1,8.9,0,0,NA,0,"NO MOTHS ",NA
-"306","02/09/2024","Mont Royal","Oak/Pine","E","MROP1.3",0.4,0.1,8.9,0.0709,2,NA,0,"flies, spiders, caterpillars ","intact moths "
-"307","02/09/2024","Mont Royal","Oak/Pine","E","MROP1.4",0.4,0.1,8.9,0.0843,1,NA,0,NA,"intact moths "
-"308","02/09/2024","Mont Royal","Oak","C","MROak2.1",0.8,0,6.4,0,0,NA,0,"NO MOTHS ",NA
-"309","02/09/2024","Mont Royal","Oak","C","MROak1.1",0.6,0,8.6,0.0131,0,NA,0,"snail + flies","wings ignored "
-"310","02/09/2024","Mont Royal","Oak","C","MROak1.2",0.6,0,8.6,0,0,NA,0,"NO MOTHS ",NA
-"311","02/09/2024","Mont Royal","Oak","C","MROak1.3",0.6,0,8.6,0,0,NA,0,"NO MOTHS ",NA
-"312","02/09/2024","Mont Royal","Pine","L","MRPine1.1",0.4,0,14,0.0093,1,NA,0,NA,"moth intact"
-"313","02/09/2024","Mont Royal","MOM","E","MRMOM",0.4,0,14,NA,NA,75.5,NA,"complete muck, tons of beetles, nothing was collected ",NA
-"314","02/09/2024","Mont Royal","Oak","E","MROak3.1",0.4,0,11.7,0.0189,1,NA,0,NA,"moth intact"
-"315","02/09/2024","Mont Royal","Oak","E","MROak3.2",0.4,0,11.7,0.1158,3,NA,0,NA,"3 moths with fungus"
-"316","02/09/2024","Mont Royal","Oak","E","MROak3.3",0.4,0,11.7,NA,NA,NA,NA,"TRAP MISSING ",NA
+date,patch_name,stand_type,stand_category,trap_name,x_quercus,x_pinus,stand_area_ha,mass_g,moth_count,muck_mass,other_species_in_lab,field_notes,lab_notes
+15/07/2024,Mont Saint Hilaire,Oak,C,MSHOak1.1,0.6,0,8.5,0,0,NA,0,no moths ,NA
+15/07/2024,Mont Saint Hilaire,Oak,C,MSHOak1.2,0.6,0,8.5,0,0,NA,0,no moths ,NA
+15/07/2024,Mont Saint Hilaire,Oak,C,MSHOak1.3,0.6,0,8.5,0.0929,1,NA,0,NA,NA
+15/07/2024,Mont Saint Hilaire,Oak,C,MSHOak1.4,0.6,0,8.5,0.1308,3,NA,0,NA,NA
+15/07/2024,Mont Saint Hilaire,Oak/Pine,H,MSH2Oak1.1,0.3,0.2,7.6,0,0,NA,0,no moths ,NA
+15/07/2024,Mont Saint Hilaire,Oak/Pine,H,MSH2Oak1.2,0.3,0.2,7.6,0,0,NA,0,no moths ,NA
+16/07/2024,Mont Saint Hilaire,Pine,L,MSHPine1.1,0,0.7,3.8,0.136,2,NA,0,NA,NA
+16/07/2024,Mont Saint Hilaire,Oak/Pine,H,MSH2Oak1.3,0.3,0.2,7.6,0,0,NA,0,no moths ,NA
+16/07/2024,Mont Saint Hilaire,Pine/Oak,I,MSHOP1.1,0.3,0.4,3.5,0.0567,1,NA,0,2 tussoch moths,NA
+16/07/2024,Mont Saint Hilaire,Pine/Oak,I,MSHOP1.2,0.3,0.4,3.5,NA,NA,NA,NA,MISSING IN FIELD,NA
+16/07/2024,Mont Saint Hilaire,Oak/Pine,D,MSHOP2.1,0.6,0.1,5.7,0,0,NA,0,no moths ,NA
+16/07/2024,Mont Saint Hilaire,Oak/Pine,D,MSHOP2.2,0.6,0.1,5.7,0,0,NA,0,no moths ,NA
+16/07/2024,Mont Saint Hilaire,Oak/Pine,D,MSHOP2.3,0.6,0.1,5.7,0.0445,1,NA,0,1 tussoch moth,NA
+15/07/2024,Mont Saint Hilaire,MOM,NA,MSHMOM,0.1,0,4.8,0,0,NA,0,no moths ,NA
+15/07/2024,Mont Saint Hilaire,MOM,NA,MSH2MOM,0.1,0,4.8,0,0,NA,0,no moths ,NA
+15/07/2024,Mont Saint Hilaire,MOM,NA,MSH2MOM2,0.1,0,4.8,0,0,NA,0,no moths ,NA
+16/07/2024,Mont Saint Hilaire,Oak/Pine,H,MSH2Oak1.4,0.3,0.2,7.6,0,0,NA,0,no moths ,NA
+17/07/2024,Orford,Pine,M,MO2Pine2.1,0,0.8,6.8,0,0,NA,0,no moths ,NA
+17/07/2024,Orford,Pine,M,MO2Pine2.2,0,0.8,6.8,0,0,NA,0,no moths ,NA
+17/07/2024,Orford,Pine,L,MO2Pine1.1,0,0.7,3.7,0,0,NA,0,no moths ,NA
+17/07/2024,Orford,Pine,L,MO2Pine1.2,0,0.7,3.7,0,0,NA,0,trap found open at bottom - closed back up ,NA
+17/07/2024,Orford,Oak,F,MO2Oak1.1,0.4,0.2,8.1,0,0,NA,0,no moths ,NA
+17/07/2024,Orford,Oak,F,MO2Oak 1.2,0.4,0.2,8.1,0,0,NA,0,2 tussoch moths,NA
+17/07/2024,Orford,Oak,F,MO2Oak1.3,0.4,0.2,8.1,0,0,NA,0,no moths ,NA
+17/07/2024,Orford,Pine,J,MO2Pine3.1,0,0.5,4.3,0,0,NA,0,no moths ,NA
+17/07/2024,Orford,Pine,J,MO2Pine3.2,0,0.5,4.3,0,0,NA,0,1 unknown moth,NA
+17/07/2024,Orford,MOM,NA,MO2MOM,0,0,4.6,0,0,NA,0,no moths ,NA
+18/07/2024,Orford,MOM,NA,MOMOM,0,0.2,5.9,0,0,NA,0,no moths ,NA
+18/07/2024,Orford,Oak,E,MOOak1.1,0.5,0,7.1,0,0,NA,0,no moths ,NA
+18/07/2024,Orford,Oak,E,MOOak1.2,0.5,0,7.1,0,0,NA,0,no moths ,NA
+18/07/2024,Orford,Oak,E,MOOak1.3,0.5,0,7.1,0,0,NA,0,no moths ,NA
+18/07/2024,Orford,Oak,A,MOOak2.1,0.8,0,7.8,0.1135,1,NA,0,NA,NA
+18/07/2024,Orford,Oak,A,MOOak2.2,0.8,0,7.8,0,0,NA,0,no moths ,NA
+18/07/2024,Orford,Oak,A,MOOak2.3,0.8,0,7.8,0,0,NA,0,no moths ,NA
+18/07/2024,Orford,Oak,E,MOOak3.1,0.5,0,11.8,0,0,NA,0,no moths ,NA
+18/07/2024,Orford,Oak,E,MOOak3.2,0.5,0,11.8,0,0,NA,0,no moths ,NA
+18/07/2024,Orford,Oak,E,MOOak3.3,0.5,0,11.8,0,0,NA,0,no moths ,NA
+18/07/2024,Orford,Pine,J,MOPine1.1,0,0.5,5.1,0,0,NA,0,no moths ,NA
+18/07/2024,Orford,Pine,J,MOPine1.2,0,0.5,5.1,0,0,NA,0,no moths ,NA
+18/07/2024,Orford,Pine,L,MOPine2.1,0,0.7,8.3,0,0,NA,0,no moths ,NA
+18/07/2024,Orford,Pine,L,MOPine2.2,0,0.7,8.3,0.0986,1,NA,0,NA,NA
+18/07/2024,Orford,Pine,L,MOPine2.3,0,0.7,8.3,0,0,NA,0,no moths ,NA
+18/07/2024,Orford,Pine,L,MO2Pine4.1,0,0.6,7.5,0.0212,1,NA,0,NA,NA
+18/07/2024,Orford,Pine,L,MO2Pine4.2,0,0.6,7.5,0.1166,1,NA,0,NA,NA
+22/07/2024,Oka,MOM,NA,OkaMOM2,0,0,6.3,NA,23,NA,0,NA,NA
+22/07/2024,Oka,Oak,E,OkaOak1.1,0.4,0.1,8.1,7.4017,102,NA,0,NA,NA
+22/07/2024,Oka,Oak,E,OkaOak1.2,0.4,0.1,8.1,4.6585,61,NA,0,NA,NA
+22/07/2024,Oka,Oak,E,OkaOak1.3,0.4,0.1,8.1,3.345,43,NA,0,NA,NA
+22/07/2024,Oka,Oak,E,OkaOak1.4,0.4,0.1,8.1,3.0355,38,NA,0,NA,NA
+22/07/2024,Oka,Oak,E,OkaOak1.5,0.4,0.1,8.1,1.0043,13,NA,0,NA,NA
+22/07/2024,Oka,Oak,E,OkaOak1.6,0.4,0.1,8.1,3.6032,42,NA,1,NA,tiny little ant thing 
+22/07/2024,Oka,Pine,I,OkaPine1.1,0.3,0.5,14.2,4.5115,56,NA,0,NA,NA
+22/07/2024,Oka,Pine,I,OkaPine1.2,0.3,0.5,14.2,2.9956,37,NA,0,NA,NA
+22/07/2024,Oka,Pine,I,OkaPine1.3,0.3,0.5,14.2,2.3188,27,NA,0,NA,NA
+22/07/2024,Oka,Pine,I,OkaPine1.4,0.3,0.5,14.2,1.3645,19,NA,1,NA,tiny little beige moth found 
+22/07/2024,Oka,Pine,I,OkaPine1.5,0.3,0.5,14.2,2.2659,30,NA,0,NA,NA
+22/07/2024,Oka,Pine,I,OkaPine1.6,0.3,0.5,14.2,2.1692,26,NA,0,NA,NA
+22/07/2024,Oka,Pine,I,OkaPine1.7,0.3,0.5,14.2,1.4238,18,NA,0,NA,NA
+22/07/2024,Oka,Oak/Pine,H,OkaOP2.1,0.3,0.2,8,2.404,30,NA,0,NA,NA
+22/07/2024,Oka,Oak/Pine,H,OkaOP2.2,0.3,0.2,8,0.8939,12,NA,0,NA,NA
+22/07/2024,Oka,Oak/Pine,H,OkaOP2.3,0.3,0.2,8,7.078,93,NA,0,NA,NA
+22/07/2024,Oka,Pine,I,OkaPine2.1,0.3,0.5,12.6,7.822,115,NA,0,NA,NA
+22/07/2024,Oka,Pine,I,OkaPine2.2,0.3,0.5,12.6,5.473,76,NA,0,NA,NA
+22/07/2024,Oka,Pine,I,OkaPine2.3,0.3,0.5,12.6,2.6138,32,NA,0,NA,NA
+22/07/2024,Oka,Pine,I,OkaPine2.4,0.3,0.5,12.6,2.8068,33,NA,0,NA,NA
+22/07/2024,Oka,Pine,I,OkaPine2.5,0.3,0.5,12.6,1.0896,13,NA,0,NA,NA
+22/07/2024,Oka,MOM,NA,OkaMOM1,0.3,0.1,19.1,NA,31,NA,0,NA,NA
+23/07/2024,Oka,Pine/Oak,I,OkaOP3.1,0.3,0.4,18,2.0223,28,NA,0,NA,NA
+23/07/2024,Oka,Pine/Oak,I,OkaOP3.2,0.3,0.4,18,1.5265,21,NA,0,NA,NA
+23/07/2024,Oka,Pine/Oak,I,OkaOP3.3,0.3,0.4,18,2.2873,27,NA,0,NA,NA
+23/07/2024,Oka,Pine/Oak,I,OkaOP3.4,0.3,0.4,18,2.3931,35,NA,0,NA,NA
+23/07/2024,Oka,Pine/Oak,I,OkaOP3.5,0.3,0.4,18,1.9842,27,NA,0,NA,NA
+23/07/2024,Oka,Pine/Oak,I,OkaOP3.6,0.3,0.4,18,4.2652,57,NA,0,1 tussoch moth,NA
+23/07/2024,Oka,Oak/Pine,H,OkaOP1.1,0.3,0.3,8.3,6.2333,95,NA,0,NA,NA
+23/07/2024,Oka,Oak/Pine,H,OkaOP1.2,0.3,0.3,8.3,9.7215,144,NA,0,NA,NA
+23/07/2024,Oka,Oak/Pine,H,OkaOP1.3,0.3,0.3,8.3,5.5405,73,NA,0,NA,NA
+23/07/2024,Oka,Oak/Pine,H,OkaOP1.4,0.3,0.3,8.3,1.9245,29,NA,1,NA,1 small fly
+23/07/2024,Oka,Pine,K,OkaPine3.1,0.1,0.7,11.2,2.9515,36,NA,0,1 tussoch moth,NA
+23/07/2024,Oka,Pine,K,OkaPine3.2,0.1,0.7,11.2,1.6721,22,NA,0,NA,NA
+23/07/2024,Oka,Pine,K,OkaPine3.3,0.1,0.7,11.2,1.8873,24,NA,0,NA,NA
+23/07/2024,Oka,Pine,K,OkaPine3.4,0.1,0.7,11.2,1.3805,17,NA,0,NA,NA
+23/07/2024,Oka,Pine,K,OkaPine3.5,0.1,0.7,11.2,1.3278,17,NA,0,NA,NA
+24/07/2024,Notre Dame de Bonsecours,Oak,C,NDBOak1.1,0.7,0,7.8,1.6175,19,NA,0,NA,NA
+24/07/2024,Notre Dame de Bonsecours,Oak,C,NDBOak1.2,0.7,0,7.8,1.7895,21,NA,2,NA,1 small spider and Daddy long leg body
+24/07/2024,Notre Dame de Bonsecours,Oak,C,NDBOak1.3,0.7,0,7.8,1.6605,17,NA,1,NA,Daddy long leg body + legs
+24/07/2024,Notre Dame de Bonsecours,Oak,C,NDBOak1.4,0.7,0,7.8,1.9685,24,NA,0,NA,NA
+24/07/2024,Notre Dame de Bonsecours,Pine,M,NBDPine2.1,0,0.8,4.4,0.5109,6,NA,0,1 tussoch moth,NA
+24/07/2024,Notre Dame de Bonsecours,Pine,M,NBDPine2.2,0,0.8,4.4,1.0186,12,NA,0,beetles and lots of flies ,NA
+25/07/2024,Papineauville,Oak,E,PAPOak1.1,0.5,0.1,5.9,2.9672,31,NA,0,NA,NA
+25/07/2024,Papineauville,Oak,E,PAPOak1.2,0.5,0.1,5.9,2.1857,22,NA,0,NA,NA
+25/07/2024,Papineauville,Oak,A,PAPOak2.1,0.8,0,7.3,2.9965,31,NA,0,NA,NA
+25/07/2024,Papineauville,Oak,A,PAPOak2.2,0.8,0,7.3,3.4798,39,NA,0,NA,NA
+25/07/2024,Papineauville,Oak/Pine,H,PAPOP1.1,0.3,0.3,4.8,3.5277,37,NA,0,NA,NA
+25/07/2024,Papineauville,Oak/Pine,H,PAPOP1.2,0.3,0.3,4.8,3.4245,36,NA,0,NA,NA
+25/07/2024,Montebello,Oak,C,MontOak1.1,0.7,0,4.8,5.2375,57,NA,0,NA,NA
+25/07/2024,Montebello,Oak,C,MontOak1.2,0.7,0,4.8,4.2615,35,NA,0,NA,NA
+25/07/2024,Montebello,Pine,I,MontPine2.1,0.3,0.4,7.6,4.3329,44,NA,0,NA,NA
+25/07/2024,Montebello,Pine,I,MontPine2.2,0.3,0.4,7.6,0.9917,12,NA,0,NA,NA
+25/07/2024,Montebello,Pine,I,MontPine2.3,0.3,0.4,7.6,1.9502,22,NA,0,NA,NA
+25/07/2024,Montebello,MOM,NA,MontMOM,0.1,0,5.7,NA,21,NA,0,NA,NA
+25/07/2024,Montebello,Oak,B,MontOak2.1,0.8,0.1,7.5,0.7036,8,NA,0,NA,NA
+25/07/2024,Montebello,Oak,B,MontOak2.2,0.8,0.1,7.5,2.2237,26,NA,0,NA,NA
+25/07/2024,Montebello,Pine,K,MontPine1.1,0.3,0.6,12.2,1.1568,12,NA,4,NA,4 black flies big and small
+25/07/2024,Montebello,Pine,K,MontPine1.2,0.3,0.6,12.2,2.1763,23,NA,0,NA,NA
+25/07/2024,Montebello,Oak/Pine,G,Mont2OP2.1,0.5,0.4,9.7,1.8106,20,NA,0,NA,20 intact moths + 1 head and 4 wings = 21
+25/07/2024,Montebello,Oak/Pine,G,Mont2OP2.2,0.5,0.4,9.7,2.6337,30,NA,0,NA,NA
+25/07/2024,Montebello,Pine,M,Mont2Pine1.1,0,0.8,8.2,1.1575,14,NA,0,already a lot of beetles - moths seem to be largely intact,NA
+25/07/2024,Montebello,Pine,M,Mont2Pine1.2,0,0.8,8.2,4.8233,49,NA,0,NA,NA
+25/07/2024,Montebello,Pine/Oak,I,Mont2OP1.1,0.2,0.4,8.7,1.5639,16,NA,0,NA,NA
+25/07/2024,Montebello,Pine/Oak,I,Mont2OP1.2,0.2,0.4,8.7,1.1219,11,NA,0,NA,NA
+26/07/2024,Notre Dame de Bonsecours,Oak/Pine,F,NDBOP1.1,0.4,0.3,5.5,NA,NA,NA,NA,Trap completely demolished removed July 26,NA
+26/07/2024,Notre Dame de Bonsecours,MOM,NA,NDBMOM,0.3,0,4.9,NA,57,NA,0,already had beetles ,NA
+26/07/2024,Notre Dame de Bonsecours,Pine,H,NDBPine1.1,0.2,0.3,4.9,6.6011,68,NA,0,NA,NA
+26/07/2024,Notre Dame de Bonsecours,Oak/Pine,F,NDBOP2.1,0.4,0.3,5.5,2.8689,30,NA,0,NA,NA
+26/07/2024,Notre Dame de Bonsecours,Oak/Pine,F,NDBOP2.2,0.4,0.3,5.5,4.5682,46,NA,2,NA,2 daddy long legs
+26/07/2024,Notre Dame de Bonsecours,Oak/Pine,F,NDBOP2.3,0.4,0.3,5.5,3.7044,42,NA,0,NA,NA
+29/07/2024,Rigaud,Pine/Oak,I,RigOP1.1,0.2,0.4,9.4,0.6396,10,NA,1,NA,1 small spider
+29/07/2024,Rigaud,Pine/Oak,I,RigOP1.2,0.2,0.4,9.4,0.4017,5,NA,0,NA,NA
+29/07/2024,Rigaud,Pine/Oak,I,RigOP1.3,0.2,0.4,9.4,0.5924,8,NA,0,NA,NA
+29/07/2024,Rigaud,Oak/Pine,F,RigOP2.1,0.4,0.2,6.5,4.0153,61,NA,0,NA,NA
+29/07/2024,Rigaud,Oak/Pine,F,RigOP2.2,0.4,0.2,6.5,1.8852,22,NA,0,NA,NA
+29/07/2024,Rigaud,Oak/Pine,F,RigOP3.1,0.4,0.2,9.4,0.5131,7,NA,0,NA,NA
+29/07/2024,Rigaud,Oak/Pine,F,RigOP3.2,0.4,0.2,9.4,3.1413,36,NA,0,NA,NA
+29/07/2024,Rigaud,Oak/Pine,F,RigOP3.3,0.4,0.2,9.4,0.2639,6,NA,0,"trap torn on one side, may have lost some moths (taped up)",NA
+29/07/2024,Rigaud,Pine,K,RigPine2.1,0.1,0.6,8.3,1.0678,12,NA,0,NA,NA
+29/07/2024,Rigaud,Pine,K,RigPine2.2,0.1,0.6,8.3,0.2437,3,NA,0,NA,NA
+29/07/2024,Rigaud,Pine,K,RigPine2.3,0.1,0.6,8.3,1.7554,19,NA,0,NA,NA
+29/07/2024,Rigaud,Pine,L,RigPine3.1,0,0.7,3.6,2.0149,25,NA,0,NA,NA
+29/07/2024,Rigaud,Pine,L,RigPine3.2,0,0.7,3.6,0.5344,7,NA,0,NA,NA
+30/07/2024,Rigaud,Oak/Pine,H,RigOP4.1,0.3,0.2,5.3,0.3639,11,NA,4,"a lot of muck, only able to collect a few moths pieces ",11 somewhat intact moths + 4 wings = 11 because no other bodies/heads. Also a couple of flies and other tiny insect body parts
+30/07/2024,Rigaud,Oak/Pine,H,RigOP4.2,0.3,0.2,5.3,2.3154,35,NA,20,3 beetles but moths intact,many tiny little flies 
+30/07/2024,Rigaud,Oak,D,RigOak1.1,0.7,0.1,8.4,1.9312,25,NA,5,NA,tiny little flies
+30/07/2024,Rigaud,Oak,D,RigOak1.2,0.7,0.1,8.4,2.6175,33,NA,0,NA,NA
+30/07/2024,Rigaud,Oak,D,RigOak1.3,0.7,0.1,8.4,1.4477,17,NA,0,NA,NA
+30/07/2024,Rigaud,Oak,D,RigOak1.4,0.7,0.1,8.4,2.1446,30,NA,0,NA,NA
+30/07/2024,Rigaud,Oak,D,RigOak1.5,0.7,0.1,8.4,6.4402,82,NA,0,NA,NA
+30/07/2024,Rigaud,Pine,I,RigPine4.1,0.2,0.5,3.5,4.1022,51,NA,0,1 unidentified moth,NA
+30/07/2024,Rigaud,Pine,J,RigPine5.1,0.1,0.5,6.4,4.0068,55,NA,0,NA,NA
+30/07/2024,Rigaud,Oak/Pine,H,RigOP5.1,0.3,0.2,7.6,5.0103,67,NA,0,NA,NA
+30/07/2024,Rigaud,MOM,NA,RigMOM,0.2,0,7.3,NA,76,NA,0,NA,NA
+01/08/2024,Mont Saint Hilaire,MOM,NA,MSH2MOM2,0.1,0,4.8,NA,6,NA,0,little decomposition,NA
+01/08/2024,Mont Saint Hilaire,MOM,NA,MSH2MOM,0.1,0,4.8,NA,6,NA,0,little decomposition,NA
+01/08/2024,Mont Saint Hilaire,MOM,NA,MSHMOM,0.1,0,4.8,NA,19,NA,0,some decomposition ,NA
+01/08/2024,Mont Saint Hilaire,Oak,H,MSH2Oak1.1,0.3,0.2,7.6,0.2354,3,NA,0,little decomposition,NA
+01/08/2024,Mont Saint Hilaire,Oak,H,MSH2Oak1.2,0.3,0.2,7.6,0.9479,13,NA,0,little decomposition,NA
+01/08/2024,Mont Saint Hilaire,Oak,H,MSH2Oak1.3,0.3,0.2,7.6,0.2519,4,NA,0,few moths ,NA
+01/08/2024,Mont Saint Hilaire,Oak,H,MSH2Oak1.4,0.3,0.2,7.6,2.5012,32,NA,0,2 tussoch moths,NA
+01/08/2024,Mont Saint Hilaire,Oak,C,MSHOak1.1,0.6,0,8.5,0.1414,2,NA,0,little decomposition,NA
+01/08/2024,Mont Saint Hilaire,Oak,C,MSHOak1.2,0.6,0,8.5,2.9702,31,NA,0,little decomposition,NA
+01/08/2024,Mont Saint Hilaire,Oak,C,MSHOak1.3,0.6,0,8.5,3.3886,36,NA,0,some decomposition ,NA
+01/08/2024,Mont Saint Hilaire,Oak,C,MSHOak1.4,0.6,0,8.5,NA,NA,NA,NA,"Trap bottom slightly opened, not moths in or around the trap, taped up",NA
+01/08/2024,Mont Saint Hilaire,Pine,L,MSHPine1.1,0,0.7,3.8,6.5669,108,NA,0,"lots of moths, little decomposition",NA
+05/08/2024,Mont Royal,Oak/Pine,E,MROP1.1,0.4,0.1,8.9,3.1754,55,NA,0,NA,NA
+05/08/2024,Mont Royal,Oak/Pine,E,MROP1.2,0.4,0.1,8.9,1.0114,20,NA,0,NA,NA
+05/08/2024,Mont Royal,Oak/Pine,E,MROP1.3,0.4,0.1,8.9,0.7044,13,NA,0,NA,NA
+05/08/2024,Mont Royal,Oak/Pine,E,MROP1.4,0.4,0.1,8.9,0.8113,16,NA,0,NA,NA
+05/08/2024,Mont Royal,Oak,A,MROak2.1,0.8,0,6.4,0.797,15,NA,0,NA,NA
+05/08/2024,Mont Royal,Oak,C,MROak1.1,0.6,0,8.6,0.5771,7,NA,0,NA,NA
+05/08/2024,Mont Royal,Oak,C,MROak1.2,0.6,0,8.6,0.9821,20,NA,0,NA,NA
+05/08/2024,Mont Royal,Oak,C,MROak1.3,0.6,0,8.6,0.3457,6,NA,0,NA,NA
+05/08/2024,Mont Royal,Pine,L,MRPine1.1,0.4,0,14,1.09,24,NA,0,NA,NA
+05/08/2024,Mont Royal,MOM,E,MRMOM,0.4,0,14,NA,93,NA,0,NA,NA
+05/08/2024,Mont Royal,Oak,E,MROak3.1,0.4,0,11.7,4.9294,95,NA,0,NA,NA
+05/08/2024,Mont Royal,Oak,E,MROak3.2,0.4,0,11.7,2.6527,49,NA,0,NA,NA
+05/08/2024,Mont Royal,Oak,E,MROak3.3,0.4,0,11.7,NA,NA,NA,NA,"Trap missing, seems to have been removed",NA
+15/08/2024,Orford,Pine,M,MO2Pine2.1,0,0.8,6.8,1.742,42,NA,0,NA,"all intact, wings disregarded"
+15/08/2024,Orford,Pine,M,MO2Pine2.2,0,0.8,6.8,2.3519,53,NA,1,NA,"1 small beetle, wings disregarded"
+15/08/2024,Orford,Pine,L,MO2Pine1.1,0,0.7,3.7,0.8648,21,NA,0,NA,"all intact, wings disregarded "
+15/08/2024,Orford,Pine,L,MO2Pine1.2,0,0.7,3.7,1.0668,27,NA,0,NA,"all intact, no wings "
+15/08/2024,Orford,Oak,F,MO2Oak1.1,0.4,0.2,8.1,5.947,141,NA,0,"Mostly in-tact moths, some beetle, some decomp","mostly intact moths, disregarded wings since moths were intact, bodies were added to total moths "
+15/08/2024,Orford,Oak,F,MO2Oak 1.2,0.4,0.2,8.1,5.592,131,NA,3,"4 non-spongy moths moths, mostly intact, some decomp","3 small flies, 131 intact moths, added the moth bodies (bodies with heads) to total number, wings disregarded"
+15/08/2024,Orford,Oak,F,MO2Oak1.3,0.4,0.2,8.1,2.4693,52,25,8,intact moths + more advanced stage of decomp ,"many smal flies and 1 beetle, mostly in-tact moths + bodies + heads = total, wings disregarded"
+15/08/2024,Orford,Pine,J,MO2Pine3.1,0,0.5,4.3,3.894,85,NA,2,"1 non spongy moth, some fungus on the moths","a few small flies, wings disregarded since moths are intact "
+15/08/2024,Orford,Pine,J,MO2Pine3.2,0,0.5,4.3,3.1737,73,NA,0,NA,"moths intact, disregarded wings "
+15/08/2024,Orford,MOM,NA,MO2MOM,0,0,4.6,2.6637,69,17.25,7,"some intact moths, many beetles, relatively advanced stage of decomp ","lots of decomposition, very difficult to count wings so the number is not accurate, wings were disregarded, total moth = body + heads + moth count "
+15/08/2024,Orford,Pine,L,MO2Pine4.1,0,0.6,7.5,4.2801,105,NA,3,NA,"1 fly, 1 spider, 1 earwig"
+15/08/2024,Orford,Pine,L,MO2Pine4.2,0,0.6,7.5,4.3327,103,NA,3,NA,"1 non-spongy moth, 2 earwigs, 1 fly"
+16/08/2024,Orford,MOM,NA,MOMOM,0,0.2,5.9,10.416,254,24,9,"moth in medium level of decomp, powdery but not moldy","decomposition made counting wings hard, total count = body + heads + moths + 1 live moth that flew away, wings disregarded"
+16/08/2024,Orford,Oak,E,MOOak1.1,0.5,0,7.1,19.761,378,NA,2,1 beetle,"1 fly, 1 beetle"
+16/08/2024,Orford,Oak,E,MOOak1.2,0.5,0,7.1,6.1547,139,NA,2,1 live moth flew away (ADDED TO TOTAL),"1 beetle, 1 stink bug,"
+16/08/2024,Orford,Oak,E,MOOak1.3,0.5,0,7.1,14.318,263,NA,2,several beetles but all moths intact ,2 flies
+16/08/2024,Orford,Oak,A,MOOak2.1,0.8,0,7.8,5.1015,144,19.5,6,moths in medium level of decomp,"6 tiny flies, lots of decomp, wings hard to count and disregarded, total count = body + heads + moths"
+16/08/2024,Orford,Oak,A,MOOak2.2,0.8,0,7.8,4.5178,91,NA,2,NA,"moths intact, 2 flies"
+16/08/2024,Orford,Oak,A,MOOak2.3,0.8,0,7.8,5.0056,108,NA,0,1 moth flew away (ADDED TO TOTAL),"moths intact, wing disregarded, total moths = moth count + 1 live moth"
+16/08/2024,Orford,Oak,E,MOOak3.1,0.5,0,11.8,7.0338,142,NA,2,"some beetles, moths mostly intact, some decomp","total moths = count + bodies, wings disregarded, 2 beetles"
+16/08/2024,Orford,Oak,E,MOOak3.2,0.5,0,11.8,4.681,93,NA,2,"a few beetles, dropped 1 moth (ADDED TO TOTAL)","2 large flies, total moths = count + dropped moth, wings disregarded"
+16/08/2024,Orford,Oak,E,MOOak3.3,0.5,0,11.8,1.5711,37,NA,0,few beetles ,intact moths 
+16/08/2024,Orford,Pine,J,MOPine1.1,0,0.5,5.1,3.1984,86,NA,0,NA,"16 tiny flies, moths intact"
+16/08/2024,Orford,Pine,J,MOPine1.2,0,0.5,5.1,4.7583,114,NA,4,NA,"1 harvestmen, 3 flies"
+16/08/2024,Orford,Pine,J,MOPine2.1,0,0.7,8.3,2.677,78,NA,2,one beetle ,"2 tiny flies, wings disregarded"
+16/08/2024,Orford,Pine,L,MOPine2.2,0,0.7,8.3,2.3127,53,NA,2,NA,"2 tiny flies, wings disregarded"
+16/08/2024,Orford,Pine,L,MOPine2.3,0,0.7,8.3,2.549,65,NA,5,NA,5 tiny flies
+20/08/2024,Oka,Oak,E,OkaOak1.1,0.4,0.1,8.1,7.1054,161,NA,4,2 american dagger moths in trap,"1 spider, 3 flies, total moths = moth count + bodies , wings ignored"
+20/08/2024,Oka,Oak,E,OkaOak1.2,0.4,0.1,8.1,3.7078,91,NA,9,NA,"9 other species (1 spider, 7 flies, 1 mosquito), total moths = moth count + body/head (i ripped this one in half by accident), wings ignored"
+20/08/2024,Oka,Oak,E,OkaOak1.3,0.4,0.1,8.1,3.5431,52,NA,0,"flies and a few beetles, trap was very wet ","moths were still sort of damp, weight probably higher than it should be, whole intact moths. Maybe compare with other bags with similar #s?"
+20/08/2024,Oka,Oak,E,OkaOak1.4,0.4,0.1,8.1,2.4113,41,NA,4,a few beetles ,"1 harvestmen, 1 moth, 2 flies, total moths = moth count + head"
+20/08/2024,Oka,Oak,E,OkaOak1.5,0.4,0.1,8.1,0.9733,7,6.75,6,"several beetles, very wet ","6 species (4 flies, 2 small beetles), extremely decomposed, bits of wings, bits of heads, clumps of matter that is impossible to decipher"
+20/08/2024,Oka,Oak,E,OkaOak1.6,0.4,0.1,8.1,3.7155,59,NA,5,NA,"5 species (3 flies, 1 harvestmen, 1 ant, 1 spider?), total moths = moth count + body"
+20/08/2024,Oka,Pine,I,OkaPine1.1,0.3,0.5,14.2,8.6922,93,41.5,15,"lots of beetles, heavy decomp ","species (mix of flies, beetles, winged insects) decomposition made counting wings impossible, total moths = moth count + heads + body "
+20/08/2024,Oka,Pine,I,OkaPine1.2,0.3,0.5,14.2,2.6415,61,NA,1,NA,"1 fly, moths in good state"
+20/08/2024,Oka,Pine,I,OkaPine1.3,0.3,0.5,14.2,3.3347,38,32,16,"lots of beetles, heavy decomp, 2 HEAD DROPPED","wings uncountable, species ( mostly flies, 1 beetle, 1 stink bug), total moths = moth count + bodies + head + 2 heads that fell"
+20/08/2024,Oka,Pine,I,OkaPine1.4,0.3,0.5,14.2,2.0052,51,NA,0,NA,moths were in good state 
+20/08/2024,Oka,Pine,I,OkaPine1.5,0.3,0.5,14.2,1.9145,43,NA,0,catepillars ,moths were in good state 
+20/08/2024,Oka,Pine,I,OkaPine1.6,0.3,0.5,14.2,1.8471,39,NA,0,some beetles ,"total moths = moth count + bodies + head, wings ignored "
+20/08/2024,Oka,Pine,I,OkaPine1.7,0.3,0.5,14.2,1.3836,24,NA,0,flies and stink bug,"wings ignored, total moths = moth count + body "
+20/08/2024,Oka,Oak/Pine,H,OkaOP2.1,0.3,0.2,8,3.2715,63,NA,1,caterpillars ,"moths intact, wings ignored, 1 fly"
+20/08/2024,Oka,Oak/Pine,F,OkaOP2.2,0.4,0.2,8,1.337,0,41,0,"tons of beetles, full of muck",NA
+20/08/2024,Oka,Oak/Pine,F,OkaOP2.3,0.4,0.2,8,10.1172,28,38,0,"tons of beetles, full of muck, 3 DROPPED HEADS ADDED TO TOTAL","wings impossible to count, complete mush, very wet, total moths = moths + bodies + heads + heads dropped (3)"
+20/08/2024,Oka,Pine,I,OkaPine2.1,0.3,0.5,12.6,11.5901,145,NA,12,"lots of beetles, some decomp","some wet some dry, species (mostly flies, 1 large beetle), total moths = moths + bodies + heads, wings disregarded"
+20/08/2024,Oka,Pine,I,OkaPine2.2,0.3,0.5,12.6,8.4408,112,NA,24,"a lot of beetles, some decomp","lots of flies, total moths = moths + body"
+20/08/2024,Oka,Pine,I,OkaPine2.3,0.3,0.5,12.6,4.0437,60,NA,3,a few beetles ,"some dry some wet, total count = moths + bodies + heads, wings disregarded"
+20/08/2024,Oka,Pine,I,OkaPine2.4,0.3,0.5,12.6,4.4075,111,NA,2,NA,"moths intact and dry, wings disregarded, 2 flies"
+20/08/2024,Oka,Pine,I,OkaPine2.5,0.3,0.5,12.6,3.4808,59,31,19,"many beetles, advanced decomp ","very decomposed and wet, 19 species (mostly flies, a harvestmen, couple beetle looking species), total count = moth count  + body, wings disregarded"
+20/08/2024,Oka,Oak/Pine,H,OkaOP1.1,0.3,0.3,8.3,3.9406,83,NA,10,a few beetles ,"species (mostly flies, 1 beetle), moths relatively dry, total moths = moths + heads + bodies"
+20/08/2024,Oka,Oak/Pine,H,OkaOP1.2,0.3,0.3,8.3,4.5086,100,NA,2,a few beetles ,"2 flies, moths dry, total moths = moths + bodies"
+20/08/2024,Oka,Oak/Pine,H,OkaOP1.3,0.3,0.3,8.3,2.8778,69,NA,0,NA,dry moths
+20/08/2024,Oka,Oak/Pine,H,OkaOP1.4,0.3,0.3,8.3,1.0701,21,NA,1,NA,"1 fly, wings ignored"
+20/08/2024,Oka,Pine,K,OkaPine3.1,0.1,0.7,11.2,6.2444,54,17.5,35,"some beetles, advanced decomp","A LOT of flies, total moths = moths + heads + bodies, wet "
+20/08/2024,Oka,Pine,K,OkaPine3.2,0.1,0.7,11.2,1.2362,26,NA,2,NA,"very slightly wet, wings disregarded, total moths = moths + bodies, 2 flies"
+20/08/2024,Oka,Pine,K,OkaPine3.3,0.1,0.7,11.2,3.0035,27,13.5,5,"some beetles, advanced decomp ","2 fleis, wet, wings disregarded, total moths = moths + bodies + heads"
+20/08/2024,Oka,Pine,K,OkaPine3.4,0.1,0.7,11.2,1.6297,18,8,5,"some beetles, advanced decomp ","2 flies, mostly dry, total moths = moths + bodies + heads, wings ignored"
+21/08/2024,Notre Dame de Bonsecours,Oak,C,NDBOak1.1,0.7,0,7.8,1.7052,27,NA,7,"some beetles, minimal decomp","5 species (1 spider, 7 flies), total = moths + bodies"
+21/08/2024,Notre Dame de Bonsecours,Oak,C,NDBOak1.2,0.7,0,7.8,2.1501,20,NA,29,"some beetles, minimal decomp","a LOT of tiny flies, total = moths + bodies + heads, slightly wet "
+21/08/2024,Notre Dame de Bonsecours,Oak,C,NDBOak1.3,0.7,0,7.8,1.4126,1,65.5,0,"heavy decomp, full of muck","extremely decomposed,  difficult to count body parts, wet, total = moth + bodies + heads "
+21/08/2024,Notre Dame de Bonsecours,Oak,C,NDBOak1.4,0.7,0,7.8,2.5885,1,23.25,2,"heavy decomp, full of muck","2 beetles, extremely decomposed, difficult to count body parts, wet, total = moth + bodies + heads"
+21/08/2024,Notre Dame de Bonsecours,Pine,M,NBDPine2.1,0,0.8,4.4,1.6434,35,NA,3,2 looper moths,"moths intact, 2 flies, total moths = moth + head"
+21/08/2024,Notre Dame de Bonsecours,Pine,M,NBDPine2.2,0,0.8,4.4,1.4135,27,NA,6,flies + grasshoppers ,"6 flies, moths intact, total = moths + bodies"
+21/08/2024,Notre Dame de Bonsecours,MOM,NA,NDBMOM,0.3,0,4.9,3.3531,32,32,7,"heavy decomp, many beetles, full muck ","a lot of pieces of beetles, species (3 flies, 4 beetles), total = moths + heads + bodies, wings disregarded"
+21/08/2024,Notre Dame de Bonsecours,Pine,H,NDBPine1.1,0.2,0.3,4.9,3.6474,14,28.25,11,"heavy decomp, full muck","extremely decomposed,  difficult to count body parts, wet, total = moth + bodies + heads, species (beetles, small beetles, flies)"
+21/08/2024,Notre Dame de Bonsecours,Oak/Pine,F,NDBOP2.1,0.4,0.3,5.5,3.6489,74,NA,6,2 looper moth,"moths intact, 6 flies, total = moths + bodies"
+21/08/2024,Notre Dame de Bonsecours,Oak/Pine,F,NDBOP2.2,0.4,0.3,5.5,2.5899,44,NA,11,"a few beetles, 1 looper moth","moths intact, mostly flies + 1 harvestment + 1 looper moth"
+21/08/2024,Notre Dame de Bonsecours,Oak/Pine,F,NDBOP2.3,0.4,0.3,5.5,1.9309,47,NA,7,3 non-spongy moths moths,"6 flies, intact and dry, total = moths +  body"
+22/08/2024,Papineauville,Oak,E,PAPOak1.1,0.5,0.1,5.9,0.2776,0,51,0,"heavy decomp, many beetles","basically nothing left to count but a few heads/thoraxes, need to see if we can convert muck g = moth counts "
+22/08/2024,Papineauville,Oak,E,PAPOak1.2,0.5,0.1,5.9,5.3245,114,NA,5,"a few beetles, 2 looper moths","5 species (4 looper moths 1 fly), wings ignored, total = Moths + bodies, dry"
+22/08/2024,Papineauville,Oak,A,PAPOak2.1,0.8,0,7.3,5.8158,104,NA,4,"some beetles, minimal decomp","4 flies, total moths = moths + heads + bodies, mostly dry"
+22/08/2024,Papineauville,Oak,A,PAPOak2.2,0.8,0,7.3,3.1308,1,44,1,"advanced decomp, many beetles","very decomposed, 1 fly, total moths = moths + heads + bodies, wet"
+22/08/2024,Papineauville,Oak/Pine,H,PAPOP1.1,0.3,0.3,4.8,8.0552,37,25.25,6,"advanced decomp, many beetles","wing count is a rough estimate due to decomposition, total moths = bodies + heads + moths , 6 flies, wet"
+22/08/2024,Papineauville,Oak/Pine,H,PAPOP1.2,0.3,0.3,4.8,10.5414,62,38,5,"advanced decomp, many beetles","wing count is a rough estimate due to decomposition, total moths = bodies + heads + moths , 5flies + 1 moth, wet"
+22/08/2024,Montebello,Oak,C,MontOak1.1,0.7,0,4.8,2.6575,63,NA,1,a few beetles,"dry, 1 fly, moths intact, bunch of little pieces of traps in bag"
+22/08/2024,Montebello,Oak,C,MontOak1.2,0.7,0,4.8,4.3999,6,32,1,"advanced decomp, many beetles","wet, 1 beetle, total = moths + bodies + heads, wings ignored"
+22/08/2024,Montebello,Pine,I,MontPine2.1,0.3,0.4,7.6,4.2866,21,32.5,9,"advanced decomp, many beetles","wet, 9 flies, total = moths + bodies + heads, wings ignored"
+22/08/2024,Montebello,Pine,I,MontPine2.2,0.3,0.4,7.6,5.1035,7,34,1,"advanced decomp, many beetles, +1 HEAD ADDED TO TOTAL","wet, 1 beetle, total = moths + bodies + heads, wings ignored"
+22/08/2024,Montebello,Pine,I,MontPine2.3,0.3,0.4,7.6,0.0267,1,NA,0,"Trap was opened, only 1 moth left",one dry moth
+22/08/2024,Montebello,MOM,NA,MontMOM,0.1,0,5.7,3.4527,18,22.5,10,"advanced decomp, many beetles","wet, 4 flies + many other species that are hard to ID, total = moths + bodies + heads"
+22/08/2024,Montebello,Oak,B,MontOak2.1,0.8,0.1,7.5,0.3889,0,6.5,9,"advanced decomp, many beetles, 4 non-spongy moths","dry, 9 flies, barely recognizable moths pieces. No idea how to count total here"
+22/08/2024,Montebello,Oak,B,MontOak2.2,0.8,0.1,7.5,2.9983,77,NA,5,NA,"2 flies + 3 looper moths , wings ignored, dry"
+22/08/2024,Montebello,Pine,K,MontPine1.1,0.3,0.6,12.2,0.6459,18,NA,0,NA,"dry, wings ignored "
+22/08/2024,Montebello,Pine,K,MontPine1.2,0.3,0.6,12.2,2.7966,52,NA,17,"few beetles, minimum decomp, 4 looper moths","mostly dry, 17 species (mostly flies, some small true bugs/beetles), total moths = moths + heads + bodies,"
+22/08/2024,Montebello,Pine,M,Mont2Pine1.1,0,0.8,8.2,NA,NA,NA,NA,TRAP FOUND OPEN - NOTHING INSIDE,NA
+22/08/2024,Montebello,Pine,M,Mont2Pine1.2,0,0.8,8.2,1.6589,0,42.5,0,"heavy decomp, full muck","extremely difficult to ID body parts, wings completely torn (ignored), total = bodies + heads"
+22/08/2024,Montebello,Pine/Oak,I,Mont2OP1.1,0.2,0.4,8.7,2.7408,46,60,15,"advanced decomp, many beetles ","many small species of beetles and decomposer beetles, difficult to ID body parts, wings completely torn (ignored) "
+22/08/2024,Montebello,Pine/Oak,I,Mont2OP1.2,0.2,0.4,8.7,NA,3,NA,NA,TRAP FOUND OPEN - 3 MOTHS ON GROUND (COUNTED),NA
+23/08/2024,Montebello,Oak/Pine,G,Mont2OP2.1,0.5,0.4,9.7,0.2832,0,62,1,"heavy decomp, full muck, tons of beetles ","extremely decomposed, only thorax/heads left, wings ignored "
+23/08/2024,Montebello,Oak/Pine,G,Mont2OP2.2,0.5,0.4,9.7,1.2981,39,NA,3,NA,"3 flies , moths intact, dry"
+23/08/2024,Oka,Pine,K,OkaPine3.5,0.1,0.7,11.2,3.2258,10,40.5,8,"heavy decomp, full muck, tons of beetles ","bunch of pieces of beetles, total = moths + bodies + heads , wet "
+23/08/2024,Oka,MOM,NA,OkaMOM1,0.3,0.1,19.1,5.9724,95,NA,19,"a few beetles, moths still intact after whole summer??","lots of flies, total moths = moths + body"
+23/08/2024,Oka,Pine/Oak,I,OkaOP3.1,0.3,0.4,18,1.6061,32,NA,0,"one wasp, one caterpillar ","mostly dry, intact"
+23/08/2024,Oka,Pine/Oak,I,OkaOP3.2,0.3,0.4,18,1.6173,26,NA,0,some caterpillars ,"mostly dry, intact, total = heads + bodies + moths, wings ignored "
+23/08/2024,Oka,Pine/Oak,I,OkaOP3.3,0.3,0.4,18,4.1593,42,NA,3,a few beetles. minimal decomp,"3 flies, a bit wet, total = heads + bodies + moth, wings ignored"
+23/08/2024,Oka,Pine/Oak,I,OkaOP3.4,0.3,0.4,18,2.4591,36,NA,2,few beetles,"2 flies, total = heads + bodies + moths, wings ignored"
+23/08/2024,Oka,Pine/Oak,I,OkaOP3.5,0.3,0.4,18,3.8597,17,14,38,"advanced decomp, many beetles","a TON of flies, total = heads + bodies + moths, wings ignored, wet"
+23/08/2024,Oka,Pine/Oak,I,OkaOP3.6,0.3,0.4,18,3.9317,61,NA,1,NA,"1 fly, total = bodies + moths, wings ignored, somewhat dry"
+23/08/2024,Oka,MOM,NA,OkaMOM2,0,0,6.3,3.5644,52,NA,3,"a few beetles, moths still intact after whole summer??","3 flies, total = bodies + moths + heads, wings ignored"
+26/08/2024,Mont Saint Hilaire,Oak,H,MSH2Oak1.1,0.3,0.2,7.6,0.0684,3,NA,0,"No decomp, lady bugs ",total = bodies + heads + moths 
+26/08/2024,Mont Saint Hilaire,Oak,H,MSH2Oak1.2,0.3,0.2,7.6,0.0385,1,NA,0,No decomp ,1 moth
+26/08/2024,Mont Saint Hilaire,Oak,C,MSHOak1.1,0.6,0,8.5,0.1352,1,NA,1,"minimum decomp, something ate a lot of the heads and bodies ","1 fly, total = bodies + heads + moths"
+26/08/2024,Mont Saint Hilaire,Oak,C,MSHOak1.2,0.6,0,8.5,0.3335,9,NA,0,no decomp,NA
+26/08/2024,Mont Saint Hilaire,Oak,C,MSHOak1.3,0.6,0,8.5,0.8726,24,NA,2,"No decomp, pale beauty + spiders ","1 harvestmen, 1 caterpillar"
+26/08/2024,Mont Saint Hilaire,Oak,C,MSHOak1.4,0.6,0,8.5,0.4567,13,NA,1,"No decomp, some fungus ",NA
+27/08/2024,Mont Saint Hilaire,Pine,L,MSHPine1.1,0,0.7,3.8,0.3035,12,NA,NA,NA,NA
+27/08/2024,Mont Saint Hilaire,MOM,NA,MSH2MOM2,0.1,0,4.8,0.247,9,NA,0,"minimum decomp, fungus present ",NA
+27/08/2024,Mont Saint Hilaire,MOM,NA,MSH2MOM,0.1,0,4.8,0.2058,7,NA,1,"minimum decomp, fungus present ",1 fly
+27/08/2024,Mont Saint Hilaire,MOM,NA,MSHMOM,0.1,0,4.8,0.2492,0,41,0,heavy decomp,"very decomposed, hard to ID parts, wings hard to count, wings ignored "
+27/08/2024,Mont Saint Hilaire,Oak,H,MSH2Oak1.3,0.3,0.2,7.6,0.0646,2,NA,0,"minimum decomp, tiny bit of fungus ",NA
+27/08/2024,Mont Saint Hilaire,Oak,H,MSH2Oak1.4,0.3,0.2,7.6,NA,NA,NA,NA,"Completely torn apart, nothing recovered",NA
+27/08/2024,Mont Saint Hilaire,Pine/Oak,I,MSHOP1.1,0.3,0.4,3.5,0.3971,13,NA,1,"minimum decomp, a lot of fungus ",1 fly
+27/08/2024,Mont Saint Hilaire,Oak/Pine,D,MSHOP2.1,0.6,0.1,5.7,0.0193,1,NA,0,"trap ripped to shred, 1 moth found on the ground with some wings",just 1 moth for total
+27/08/2024,Mont Saint Hilaire,Oak/Pine,D,MSHOP2.2,0.6,0.1,5.7,0.7164,22,NA,1,"minimum decomp, 1 spider, 1 fly, 1 tussock moth, 1 beetle, fugus present","1 fly, moths intact"
+27/08/2024,Mont Saint Hilaire,Oak/Pine,D,MSHOP2.3,0.6,0.1,5.7,2.15,60,NA,3,"minimum decomp, few beetles, lots of fungus, some flies,","3 flies, total = moths + bodies"
+29/08/2024,Rigaud,Pine/Oak,I,RigOP1.1,0.2,0.4,9.4,0.2639,6,2.5,9,"some decomp, some beetles, 2 looper moths","8 flies (1 beetle thing?), total = moths + bodies + heads, dry"
+29/08/2024,Rigaud,Pine/Oak,I,RigOP1.2,0.2,0.4,9.4,0.3602,10,NA,0,"no decomp, 1 fly",intact moths 
+29/08/2024,Rigaud,Pine/Oak,I,RigOP1.3,0.2,0.4,9.4,0.1568,6,15,1,"advanced decomp, 1 looper moth, many beetles","1 small beetle, very decomposed"
+29/08/2024,Rigaud,Oak/Pine,F,RigOP2.1,0.4,0.2,6.5,0.6253,21,NA,4,"some decomp, fungus present, 1 looper moth, flies","4 flies, moths intact"
+29/08/2024,Rigaud,Oak/Pine,F,RigOP2.2,0.4,0.2,6.5,0.1693,5,NA,0,"some decomp, fungus present, 1 fly, some fungus",NA
+29/08/2024,Rigaud,Oak/Pine,F,RigOP3.1,0.4,0.2,9.4,0.1544,6,NA,0,"some decomp, 2 beetles, 3 flies, pale beauty, 2 looper moths","bits of 1 moth head = 1, total = head + body + moths"
+29/08/2024,Rigaud,Oak/Pine,F,RigOP3.2,0.4,0.2,9.4,0.707,25,NA,0,"min decomp, fungus present, 2 looper moths","moths intact, total = heads + bodies + moths"
+29/08/2024,Rigaud,Oak/Pine,F,RigOP3.3,0.4,0.2,9.4,0.5759,7,NA,8,"open and torn, some beetles, advanced decomp, some stuff still collected ","lots of insects pieces (some flies, large beetle pieces, small beetles), total = heads + bodies + moths "
+29/08/2024,Rigaud,Pine,K,RigPine2.1,0.1,0.6,8.3,0.1708,5,NA,0,"3 daddy long legs, 1 fly, min decomp",intact moths 
+29/08/2024,Rigaud,Pine,K,RigPine2.2,0.1,0.6,8.3,0,0,NA,0,"1 harvestmen, 1 caterpillar, NO MOTHS",NO MOTHS 
+29/08/2024,Rigaud,Pine,K,RigPine2.3,0.1,0.6,8.3,0.018,0,46,0,"full muck, heavy decomp, many beetles ",2 very decomposed thoraxes
+29/08/2024,Rigaud,Pine,L,RigPine3.1,0,0.7,3.6,0.4468,16,NA,3,NA,"2 harvest men + 1 spider, moths intact"
+29/08/2024,Rigaud,Pine,L,RigPine3.2,0,0.7,3.6,0.2913,10,NA,NA,"1 looper moth, min decomp, spiders, 1 fly",moths intact 
+30/08/2024,Rigaud,Oak/Pine,H,RigOP4.1,0.3,0.2,5.3,NA,NA,NA,NA,"Bottom opened, beetles on ground, full decomp ",NA 
+30/08/2024,Rigaud,Oak/Pine,H,RigOP4.2,0.3,0.2,5.3,0.2636,9,NA,0,"1 harvestmen, 1 fly, fungus present, min decomp",intact moths 
+30/08/2024,Rigaud,Oak,D,RigOak1.1,0.7,0.1,8.4,0.1261,4,6,2,"advanced decomp, 1 looper moth, many beetles","2 flies, total = head + body + moths"
+30/08/2024,Rigaud,Oak,D,RigOak1.2,0.7,0.1,8.4,0.0745,2,32,2,"heavy decomp, many beetles","2 flies, total = heads + moths"
+30/08/2024,Rigaud,Oak,D,RigOak1.3,0.7,0.1,8.4,0.2314,6,0,0,"min decomp, some fungus, no beetles ",intact moths 
+30/08/2024,Rigaud,Oak,D,RigOak1.4,0.7,0.1,8.4,0.1853,4,NA,4,"min decomp, some fungus, ant",intact moths 
+30/08/2024,Rigaud,Oak,D,RigOak1.5,0.7,0.1,8.4,0.5796,16,NA,6,"some beetles, some decomp, 1 looper moth, flies","6 flies, total = heads + body + moths"
+30/08/2024,Rigaud,Pine,I,RigPine4.1,0.2,0.5,3.5,0.3184,10,NA,0,"couple spiders, 1 looper, min fingus, min decomp",moths intact
+30/08/2024,Rigaud,Pine,J,RigPine5.1,0.1,0.5,6.4,0.3534,13,NA,1,"couple beetles, min decomp, tussock moth, spiders",moths intact
+30/08/2024,Rigaud,Oak/Pine,H,RigOP5.1,0.3,0.2,7.6,0.3211,12,NA,4,"min decomp, multiple flies, min fungus, ","3 flies + spider, moths mostly intact"
+30/08/2024,Rigaud,MOM,NA,RigMOM,0.2,0,7.3,2.8864,82,NA,4,"min decomp, fungus, few beetles, NOT MUCK","4 flies, lots of feces, total = moths + heads"
+02/09/2024,Mont Royal,Oak/Pine,E,MROP1.1,0.4,0.1,8.9,0.1716,5,NA,0,NA,intact moths 
+02/09/2024,Mont Royal,Oak/Pine,E,MROP1.2,0.4,0.1,8.9,0,0,NA,0,NO MOTHS ,NA
+02/09/2024,Mont Royal,Oak/Pine,E,MROP1.3,0.4,0.1,8.9,0.0709,2,NA,0,"flies, spiders, caterpillars ",intact moths 
+02/09/2024,Mont Royal,Oak/Pine,E,MROP1.4,0.4,0.1,8.9,0.0843,1,NA,0,NA,intact moths 
+02/09/2024,Mont Royal,Oak,C,MROak2.1,0.8,0,6.4,0,0,NA,0,NO MOTHS ,NA
+02/09/2024,Mont Royal,Oak,C,MROak1.1,0.6,0,8.6,0.0131,0,NA,0,snail + flies,wings ignored 
+02/09/2024,Mont Royal,Oak,C,MROak1.2,0.6,0,8.6,0,0,NA,0,NO MOTHS ,NA
+02/09/2024,Mont Royal,Oak,C,MROak1.3,0.6,0,8.6,0,0,NA,0,NO MOTHS ,NA
+02/09/2024,Mont Royal,Pine,L,MRPine1.1,0.4,0,14,0.0093,1,NA,0,NA,moth intact
+02/09/2024,Mont Royal,MOM,E,MRMOM,0.4,0,14,NA,NA,75.5,NA,"complete muck, tons of beetles, nothing was collected ",NA
+02/09/2024,Mont Royal,Oak,E,MROak3.1,0.4,0,11.7,0.0189,1,NA,0,NA,moth intact
+02/09/2024,Mont Royal,Oak,E,MROak3.2,0.4,0,11.7,0.1158,3,NA,0,NA,3 moths with fungus
+02/09/2024,Mont Royal,Oak,E,MROak3.3,0.4,0,11.7,NA,NA,NA,NA,TRAP MISSING ,NA
