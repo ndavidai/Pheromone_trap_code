@@ -4,7 +4,7 @@
 
 #Run without the '#' to install the packages 
 
-#install.packages(c("janitor","dplyr","tidyverse","ggplot2","forcats","foreign","nnet","reshape2","esquisse", "summarytools", "lme4"))
+#install.packages(c("janitor","dplyr","tidyverse","ggplot2","forcats","foreign","nnet","reshape2","esquisse", "summarytools", "lme4", "tidyr","plotrix"))
 
 #Packages to load
 #There is code at the top of each script that runs this script which will load packages needed
@@ -20,3 +20,7 @@ library(reshape2)
 library(esquisse)
 library(summarytools)
 library(lme4)
+library(tidyr)
+library(plotrix)
+
+
