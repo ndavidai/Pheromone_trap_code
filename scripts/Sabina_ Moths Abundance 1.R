@@ -1,4 +1,5 @@
 
+
 #### 10-10-2024
 
 rm(list = ls()) # to clear the environment
@@ -45,7 +46,7 @@ library(dplyr)
 # Checking unique combinations
 table(moth_data$stand_category, moth_data$patch_name)
 
-# Summary statistics for moth_count by stand_category
+# Summary statistics for moth_count by stand_category and stand_type
 summary_stats <- moth_data %>%
   group_by(stand_category, stand_type) %>%
   summarise(
@@ -56,11 +57,42 @@ summary_stats <- moth_data %>%
 
 print(summary_stats, n=22)
 
+
+# Summary statistics for moth_count by stand_category only
+summary_stats_2 <- moth_data %>%
+  group_by(stand_category) %>%
+  summarise(
+    mean_count = mean(moth_count, na.rm = TRUE),
+    sd_count = sd(moth_count, na.rm = TRUE),
+    count = n()
+  )
+
+print(summary_stats_2, n=22)
+
+# Summary statistics for moth_count by stand_type
+summary_stats_3 <- moth_data %>%
+  group_by(stand_type) %>%
+  summarise(
+    mean_count = mean(moth_count, na.rm = TRUE),
+    sd_count = sd(moth_count, na.rm = TRUE),
+    count = n()
+  )
+
+print(summary_stats_3, n=22)
+
+## Remove MOM row
+moth_by_stand_summary_stats <- summary_stats_3[-c(1),]
+
+print(moth_by_stand_summary_stats, n=22)
+
+
 ## Upon checking i see that you have a 14th stand category for stand_category, which was typo mistake i guess as NA
 # i did converted it into N, if that is okay, otherwise reverse, there is also 1 empty row for the stand category, 
 ## You can inspect that in your main data, Also there is an overlap in your categorization: for example there are 2 D categories, 
 ### 3 E categories, H as well, and I
 ### I would leave it to you to fix that,  
+
+
 
 #inspect visually
 p1 <- ggplot(moth_data, aes(x = stand_category, y = moth_count)) +
@@ -88,6 +120,28 @@ p2 <- ggplot(moth_data, aes(x = stand_type, y = moth_count)) +
 
 
 print(p2)
+
+
+p3 <- ggplot(moth_by_stand_summary_stats, aes(x = stand_type, y = mean_count)) +
+  geom_boxplot() +
+  labs(title = "Distribution of Moth Counts by Stand Type",
+       x = "Stand Type",
+       y = "Moth Count") +
+  theme_minimal()
+
+print(p3)
+
+
+p4 <- ggplot(moth_by_stand_summary_stats, aes(x=stand_type), fill=class) + 
+  geom_boxplot(aes(lower=mean_count-sd_count , upper=mean_count+sd_count , 
+                   middle=mean_count , ymin=mean_count-3*sd_count , ymax=mean_count+3*sd_count),
+               stat="identity") +
+  labs(title = "Distribution of Moth Counts by Stand Type",
+     x = "Stand Type",
+     y = "Mean Moth Count") +
+theme_classic()
+  
+print(p4)
 
 ## Some outliers in Oak, and MOM, but i kept the stand type in your model instead of stand_category
 
@@ -141,8 +195,8 @@ check_overdispersion(model_1b)
 check_model(model_1b)
 
 ####### Patch_name Model
-model_1c <- glmer.nb(moth_count ~ patch_name + (1|trap_name), family = nbiom2(), data = moth_data,
-                     control = glmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 100000))
+model_1c <- glmer.nb(moth_count ~ patch_name + (1|trap_name), family = nbiom2(), data = moth_data
+                     )
 summary(model_1c)
 
 check_overdispersion(model_1c)
@@ -154,7 +208,7 @@ check_model(model_1c)
 #Use the car package to check Variance Inflation Factors (VIFs):
  
 library(car)
-vif(model_1c),
+vif(model_1c)
 
 
 
@@ -162,8 +216,8 @@ vif(model_1c),
 ### To better understand the effects of each patch, you can visualize the estimates with confidence intervals:
 ##USe
 
-library(effects),
-plot(allEffects(model_1c)),
+library(effects)
+plot(allEffects(model_1c))
 
 ### If you need the same plot for better visualization via ggplot2, gather all the attributes manually
 # 1.Extract the fixed effects estimates
@@ -209,7 +263,7 @@ fixed_effects_df <- fixed_effects_df %>%
   )
 
 # 8. Plot the estimates
-p3 <- ggplot(fixed_effects_df, aes(x = reorder(patch_name, Estimate), y = Estimate)) +
+p5 <- ggplot(fixed_effects_df, aes(x = reorder(patch_name, Estimate), y = Estimate)) +
   geom_point(size = 3, color = "blue") +  # Plot points for estimates 
   geom_errorbar(aes(ymin = CI_Lower, ymax = CI_Upper), width = 0.2, color = "blue") +  # Error bars for CIs
   labs(
@@ -227,7 +281,7 @@ p3 <- ggplot(fixed_effects_df, aes(x = reorder(patch_name, Estimate), y = Estima
                                                                       # moth counts 
 
 
-print(p3)
+print(p5)
 
 ggsave("stand composition Effecting Moth's Population.png", plot = p3, width = 10, height = 8, dpi = 300)
 
@@ -254,3 +308,4 @@ AIC(model_3)
 
 summary(model_4)
 AIC(model_4)
+
