@@ -4,7 +4,7 @@
 
 #Run without the '#' to install the packages 
 
-#install.packages(c("janitor","dplyr","tidyverse","ggplot2","forcats","foreign","nnet","reshape2","esquisse", "summarytools", "lme4", "tidyr","plotrix","MetBrewer","viridis"))
+#install.packages(c("janitor","dplyr","tidyverse","ggplot2","forcats","foreign","nnet","reshape2","esquisse", "summarytools", "lme4", "tidyr","plotrix","MetBrewer","viridis","performance","car","effects"))
 
 #Packages to load
 #There is code at the top of 2024_Data_Cleaning.R that runs these packages
@@ -25,6 +25,9 @@ library(plotrix) #used for std.error
 library(sjPlot)
 library(MetBrewer)#nice colourblind friendly options
 library(viridis)#nice colourblind friendly options
+library(performance)
+library(car)
+library(effects)
 
 
 
