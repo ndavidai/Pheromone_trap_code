@@ -5,6 +5,8 @@
 #Run this to load packages 
 source("2024_code/scripts/Packages.R")
 
+#There is code at the top of all other scripts that runs this script automatically to load the data
+
 #### 2024 moth count data ####
 #loading data 
 
