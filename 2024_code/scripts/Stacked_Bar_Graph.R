@@ -15,38 +15,31 @@ moth_counts_clean %>%
   geom_col()+
   theme_minimal()+
   labs(x="Patch Name", y= "Moth Count")+
-  scale_y_continuous(limits = c(0, 4000), minor_breaks = seq(0, 4500, 1000))+
+  scale_y_continuous(limits = c(0, 4000))+
   theme(legend.background = element_rect("white"),
-        axis.text.x = element_text(angle = 45, hjust = 1))
+        axis.text.x = element_text(angle = 45, hjust = 1),
+        panel.border = element_rect(colour = "black", fill=NA, linewidth = 1.5),
+        legend.position = "none",
+        axis.title.y = element_text(vjust = 3))+
+  scale_fill_manual(values = safe_colorblind_palette)
 #Not super useful because the data is heavily skewed by the number of traps in a location (Oka had so many traps)
 
-#Second graph is simply just one with the clean data set but looking at the forest typings (A-M)
-moth_stacked_barplot <- moth_counts_clean %>%
-  ggplot(aes(x=patch_name, y=moth_count, fill=stand_category)) +
-  geom_col()+
-  theme_minimal()+
-  labs(x="Patch Name", y= "Moth Count")+
-  scale_y_continuous(limits = c(0, 4500), minor_breaks = seq(0, 4500, 1000))+
-  theme(legend.background = element_rect("white"),
-        axis.text.x = element_text(angle = 45, hjust = 1))
+#Second graph is simply just one with the clean data set but looking at the patch categories (A-M)
 
-#NA's are still in this data set, lets look at a version without NAs next
-
-#Graph without NA's in stand_category
+#NA's are still in this data set, so lets remove them
 moth_counts_clean_woNA <- subset(moth_counts_clean, stand_category != "NA")
-
-#moth_stacked_barplot_woNA <- add this when ready
 
 moth_counts_clean_woNA %>%
   ggplot(aes(x=patch_name, y=moth_count, fill=stand_category)) +
   geom_col()+
   theme_minimal()+
   labs(x="Patch Name", y= "Moth Count")+
-  scale_y_continuous(limits = c(0, 4500), minor_breaks = seq(0, 4500, 1000))+
+  scale_y_continuous(limits = c(0, 4000))+
   theme(legend.background = element_rect("white"),
-         axis.text.x = element_text(angle = 45, hjust = 1))
-
-#moth_stacked_barplot_woNA
+        axis.text.x = element_text(angle = 45, hjust = 1, face ="bold"),
+        panel.border = element_rect(colour = "black", fill=NA, linewidth = 1.5),
+        axis.title.y = element_text(vjust = 3, face="bold"))+
+  scale_fill_viridis_d(option = "H", name = "Patch Category") #Colour blind pallette  :) 
 
 #####
 
@@ -66,7 +59,7 @@ moth_counts_summarized %>%
   theme(legend.background = element_rect("white"),
         axis.text.x = element_text(angle = 45, hjust = 1))
 
-moth_counts_summarized_woNA <- subset(moth_counts_summarized, stand_category != "NA")
+moth_counts_summarized_woNA <- subset(moth_counts_summarized2, stand_category != "NA")
 
 moth_counts_summarized_woNA %>%
   ggplot(aes(x=patch_name, y=mean_moth_count, fill=stand_category)) +
@@ -77,6 +70,11 @@ moth_counts_summarized_woNA %>%
   theme(legend.background = element_rect("white"),
         axis.text.x = element_text(angle = 45, hjust = 1))
 
+display_all(sequential = FALSE, colorblind_only = T)
 
+library(MetBrewer)
 
+install.packages("viridis")
+
+library(vi)
   
