@@ -36,9 +36,9 @@ moth_counts_clean_woNA %>%
   labs(x="Patch Name", y= "Moth Count")+
   scale_y_continuous(limits = c(0, 4000))+
   theme(legend.background = element_rect("white"),
-        axis.text.x = element_text(angle = 45, hjust = 1, face ="bold"),
+        axis.text.x = element_text(angle = 45, hjust = 1),
         panel.border = element_rect(colour = "black", fill=NA, linewidth = 1.5),
-        axis.title.y = element_text(vjust = 3, face="bold"))+
+        axis.title.y = element_text(vjust = 3))+
   scale_fill_viridis_d(option = "H", name = "Patch Category") #Colour blind pallette  :) 
 
 #####
@@ -54,27 +54,65 @@ moth_counts_summarized %>%
   ggplot(aes(x=patch_name, y=mean_moth_count, fill=patch_name)) +
   geom_col()+
   theme_minimal()+
-  labs(x="Patch Name", y= "Moth Count")+
-  scale_y_continuous()+
+  labs(x="Patch Name", y= "Mean Moth Count")+
+  scale_y_continuous(limits = c(0, 400))+
   theme(legend.background = element_rect("white"),
-        axis.text.x = element_text(angle = 45, hjust = 1))
+        axis.text.x = element_text(angle = 45, hjust = 1),
+        panel.border = element_rect(colour = "black", fill=NA, linewidth = 1.5),
+        legend.position = "none",
+        axis.title.y = element_text(vjust = 3))+
+  scale_fill_manual(values = safe_colorblind_palette)
 
-moth_counts_summarized_woNA <- subset(moth_counts_summarized2, stand_category != "NA")
+moth_counts_summarized_woNA <- subset(moth_counts_summarized, stand_category != "NA")  
 
 moth_counts_summarized_woNA %>%
   ggplot(aes(x=patch_name, y=mean_moth_count, fill=stand_category)) +
   geom_col()+
   theme_minimal()+
-  labs(x="Patch Name", y= "Moth Count")+
+  labs(x="Patch Name", y= "Mean Moth Count")+
+  scale_y_continuous(limits = c(0, 320))+
+  theme(legend.background = element_rect("white"),
+        axis.text.x = element_text(angle = 45, hjust = 1),
+        panel.border = element_rect(colour = "black", fill=NA, linewidth = 1.5),
+        axis.title.y = element_text(vjust = 3))+
+  scale_fill_viridis_d(option = "H", name = "Patch Category") #Colour blind pallette  :) 
+
+#####
+
+#Graph of the mean number of moths found in each stand_category 
+
+moth_counts_summarized_woNA %>%
+  ggplot(aes(x=stand_category, y=mean_moth_count, fill=stand_category)) +
+  geom_col()+
+  theme_minimal()+
+  labs(x="Stand Category", y= "Mean Moth Count")+
   scale_y_continuous()+
   theme(legend.background = element_rect("white"),
-        axis.text.x = element_text(angle = 45, hjust = 1))
+        axis.text.x = element_text(hjust = 1),
+        panel.border = element_rect(colour = "black", fill=NA, linewidth = 1.5),
+        legend.position = "none",
+        axis.title.y = element_text(vjust = 3))+
+  scale_fill_viridis_d(option = "H", name = "Patch Category") #Colour blind pallette  :)
 
-display_all(sequential = FALSE, colorblind_only = T)
+#####
 
-library(MetBrewer)
+#Graph of the avg number of moths found in the each stand type
 
-install.packages("viridis")
+moth_counts_summarized_standtype_woNA <- moth_counts_clean_woNA %>% 
+  group_by(patch_name, stand_type) %>% #groups the data in these groups to perform the following operations
+  summarize(mean_moth_count = mean(moth_count, na.rm = T),
+            SE = std.error(moth_count, na.rm = T))
 
-library(vi)
-  
+moth_counts_summarized_standtype_woNA %>%
+  ggplot(aes(x=stand_type, y=mean_moth_count, fill=patch_name)) +
+  geom_col()+
+  theme_minimal()+
+  labs(x="Stand Type", y= "Mean Moth Count")+
+  scale_y_continuous()+
+  theme(legend.background = element_rect("white"),
+        axis.text.x = element_text(hjust = 1),
+        panel.border = element_rect(colour = "black", fill=NA, linewidth = 1.5),
+        ais.title.y = element_text(vjust = 3))+
+  scale_fill_manual(values = safe_colorblind_palette) #Colour blind pallette  :)
+
+
