@@ -30,7 +30,6 @@ library(car)
 library(effects)
 
 
-
 #####
 
 #Additional: Colourblind package obtained from the rcartocolor package (not installed)
