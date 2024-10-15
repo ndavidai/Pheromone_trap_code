@@ -31,6 +31,8 @@ library(effects) #install.packages("effects")
 library(MASS) #install.packages("MASS")
 library(mgcv) #install.packages("mgcv")
 library(Matrix)
+library(car)
+library(effects)
 
 #####
 
