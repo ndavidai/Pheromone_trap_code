@@ -49,7 +49,7 @@ moth_count_ST_summary_noMOM <- moth_count_ST_summary[-c(1),] #removes the first 
 moth_count_ST_summary_noMOM %>%
 ggplot(aes(x=stand_type, fill=stand_type)) + 
   geom_boxplot(aes(lower=mean_count-sd_count , upper=mean_count+sd_count ,
-                   middle=mean_count , ymin=mean_count-3.5*sd_count , ymax=mean_count+3.5*sd_count),
+                   middle=mean_count , ymin=meavn_count-3.5*sd_count , ymax=mean_count+3.5*sd_count),
                stat="identity", ) +
   scale_fill_manual(values = c("#88CCEE", "#CC6677", "#DDCC77", "#117733"))+
   geom_jitter(data = moth_counts_summarized, aes(x=stand_type, y=mean_moth_count), size=2)+
