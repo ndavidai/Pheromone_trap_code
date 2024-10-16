@@ -194,7 +194,7 @@ check_overdispersion(model_1b)
 
 check_model(model_1b)
 
-####### Patch_name Model
+####### Patch_name Model with random effect
 model_1c <- glmer.nb(moth_count ~ patch_name + (1|trap_name), family = nbiom2(), data = moth_data
                      )
 summary(model_1c)
@@ -210,7 +210,14 @@ check_model(model_1c)
 library(car)
 vif(model_1c)
 
+####### Patch_name Model, not with random effect - keeping all the factors the same
+model_1d <- glmer.nb(moth_count ~ (patch_name | trap_name), family = nbiom2(), data = moth_data
+)
+summary(model_1d)
 
+check_overdispersion(model_1d)
+
+check_model(model_1d)
 
 ###Visualize Fixed Effects:
 ### To better understand the effects of each patch, you can visualize the estimates with confidence intervals:
