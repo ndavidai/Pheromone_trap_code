@@ -211,9 +211,7 @@ library(car)
 vif(model_1c)
 
 ####### Patch_name Model, not with random effect - keeping all the factors the same
-model_1d <- glmer.nb(moth_count ~ (patch_name | trap_name), family = nbiom2(), data = moth_data
-)
-summary(model_1d)
+model_1d <- glmer.nb(moth_count ~ patch_name + (patch_name | trap_name), family = nbiom2(), data = moth_data)
 
 check_overdispersion(model_1d)
 
@@ -292,6 +290,17 @@ print(p5)
 
 ggsave("stand composition Effecting Moth's Population.png", plot = p3, width = 10, height = 8, dpi = 300)
 
+
+p6 <- ggplot(moth_data, aes(x= patch_name, 
+                            y= moth_count, 
+                            group = trap_name))+
+  geom_smooth(method = "lm", 
+              se= FALSE, 
+              linewidth = 0.5, 
+              colour ="grey")+
+  geom_point(shape = 21)
+
+print(p6)
 
 ######################################################################################################
 ####### May be confirm the model with some 1 else as well. Thats what I got.  
