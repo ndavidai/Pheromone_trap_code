@@ -9,6 +9,8 @@ source("2024_code/scripts/2024_Data_Cleaning.R")
 
 ## MAKING GRAPHS ##
 
+# My work 
+
 #First have to generate the mean moth counts, can do this with summariz(/s)e 
 moth_counts_noMOM <- subset(moth_counts_clean, stand_type != "MOM")
 
@@ -30,6 +32,8 @@ moth_counts_clean_woNA <- subset(moth_counts_clean, stand_category != "NA")
 
 #####
 
+#Sabina Work 
+
 # Summary statistics for moth_count by stand_type
 moth_count_ST_summary <- moth_counts_clean %>%
   group_by(stand_type) %>%
@@ -49,14 +53,20 @@ moth_count_ST_summary_noMOM <- moth_count_ST_summary[-c(1),] #removes the first 
 moth_count_ST_summary_noMOM %>%
 ggplot(aes(x=stand_type, fill=stand_type)) + 
   geom_boxplot(aes(lower=mean_count-sd_count , upper=mean_count+sd_count ,
-                   middle=mean_count , ymin=meavn_count-3.5*sd_count , ymax=mean_count+3.5*sd_count),
+                   middle=mean_count , ymin=mean_count-3.5*sd_count , ymax=mean_count+3.5*sd_count),
                stat="identity", ) +
-  scale_fill_manual(values = c("#88CCEE", "#CC6677", "#DDCC77", "#117733"))+
+  scale_fill_met_d(name = "Egypt")+
   geom_jitter(data = moth_counts_summarized, aes(x=stand_type, y=mean_moth_count), size=2)+
   labs(x = "Stand Type",
        y = "Mean Moth Count")+
-  theme_classic()
+  theme_classic()+
+  theme(legend.background = element_rect("white"),
+        panel.border = element_rect(colour = "black", fill=NA, linewidth = 1.25),
+        axis.title.y = element_text(vjust = 2),
+        axis.title.x = element_text(vjust = -1),
+        legend.position = 'none')
+  
 
-
+ggsave(filename="MeanMothCount_StandType_BoxPlot_Jitter.png", path="2024_code/Graphs", dpi = 600, width = 15, height = 15, units = "cm")
 
 
