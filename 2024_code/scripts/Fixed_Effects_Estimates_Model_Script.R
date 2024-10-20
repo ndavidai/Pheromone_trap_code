@@ -53,13 +53,13 @@ ggplot(fixed_effects_df, aes(x = reorder(patch_name, Estimate), y = Estimate)) +
     x = "Patch Name",
     y = "Estimate (log scale)")+
   theme_minimal()+
-  theme(text = element_text(size = 16), 
+  theme(text = element_text(size = 19), 
         axis.text.x = element_text(angle = 45, hjust = 1),
                 panel.border = element_rect(colour = "black", fill=NA, linewidth = 1.5),
         axis.title.y = element_text(vjust = 2))+
-  geom_hline(yintercept = 0, linetype = "dashed", color = "red", size=1.25) # Add a horizontal line at y = 0
+  geom_hline(yintercept = 0, linetype = "dashed", color = "red", linewidth=1.25) # Add a horizontal line at y = 0
 # above 0 are the positive estimates with greater 
 # moth counts 
 
 
-ggsave("Effect_of_Stand_Type_on_Moth_Population.png", path="2024_code/Graphs",width = 12, height = 10, dpi = 600, bg="white")
+ggsave("Effect_of_Stand_Type_on_Moth_Population.png", path="2024_code/Graphs",width = 10, height = 8, dpi = 600, bg="white")
