@@ -69,6 +69,7 @@ summary_stats_2 <- moth_data %>%
 
 print(summary_stats_2, n=22)
 
+
 # Summary statistics for moth_count by stand_type
 summary_stats_3 <- moth_data %>%
   group_by(stand_type) %>%
