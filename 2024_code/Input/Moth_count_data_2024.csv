@@ -142,10 +142,10 @@ date,patch_name,stand_type,stand_category,trap_name,x_quercus,x_pinus,stand_area
 01/08/2024,Mont Saint Hilaire,MOM,NA,MSH2MOM2,0.1,0,4.8,NA,6,NA,0,little decomposition,NA
 01/08/2024,Mont Saint Hilaire,MOM,NA,MSH2MOM,0.1,0,4.8,NA,6,NA,0,little decomposition,NA
 01/08/2024,Mont Saint Hilaire,MOM,NA,MSHMOM,0.1,0,4.8,NA,19,NA,0,some decomposition ,NA
-01/08/2024,Mont Saint Hilaire,Oak,H,MSH2Oak1.1,0.3,0.2,7.6,0.2354,3,NA,0,little decomposition,NA
-01/08/2024,Mont Saint Hilaire,Oak,H,MSH2Oak1.2,0.3,0.2,7.6,0.9479,13,NA,0,little decomposition,NA
-01/08/2024,Mont Saint Hilaire,Oak,H,MSH2Oak1.3,0.3,0.2,7.6,0.2519,4,NA,0,few moths ,NA
-01/08/2024,Mont Saint Hilaire,Oak,H,MSH2Oak1.4,0.3,0.2,7.6,2.5012,32,NA,0,2 tussoch moths,NA
+01/08/2024,Mont Saint Hilaire,Oak/Pine,H,MSH2Oak1.1,0.3,0.2,7.6,0.2354,3,NA,0,little decomposition,NA
+01/08/2024,Mont Saint Hilaire,Oak/Pine,H,MSH2Oak1.2,0.3,0.2,7.6,0.9479,13,NA,0,little decomposition,NA
+01/08/2024,Mont Saint Hilaire,Oak/Pine,H,MSH2Oak1.3,0.3,0.2,7.6,0.2519,4,NA,0,few moths ,NA
+01/08/2024,Mont Saint Hilaire,Oak/Pine,H,MSH2Oak1.4,0.3,0.2,7.6,2.5012,32,NA,0,2 tussoch moths,NA
 01/08/2024,Mont Saint Hilaire,Oak,C,MSHOak1.1,0.6,0,8.5,0.1414,2,NA,0,little decomposition,NA
 01/08/2024,Mont Saint Hilaire,Oak,C,MSHOak1.2,0.6,0,8.5,2.9702,31,NA,0,little decomposition,NA
 01/08/2024,Mont Saint Hilaire,Oak,C,MSHOak1.3,0.6,0,8.5,3.3886,36,NA,0,some decomposition ,NA
@@ -262,8 +262,8 @@ date,patch_name,stand_type,stand_category,trap_name,x_quercus,x_pinus,stand_area
 23/08/2024,Oka,Pine/Oak,I,OkaOP3.5,0.3,0.4,18,3.8597,17,14,38,"advanced decomp, many beetles","a TON of flies, total = heads + bodies + moths, wings ignored, wet"
 23/08/2024,Oka,Pine/Oak,I,OkaOP3.6,0.3,0.4,18,3.9317,61,NA,1,NA,"1 fly, total = bodies + moths, wings ignored, somewhat dry"
 23/08/2024,Oka,MOM,NA,OkaMOM2,0,0,6.3,3.5644,52,NA,3,"a few beetles, moths still intact after whole summer??","3 flies, total = bodies + moths + heads, wings ignored"
-26/08/2024,Mont Saint Hilaire,Oak,H,MSH2Oak1.1,0.3,0.2,7.6,0.0684,3,NA,0,"No decomp, lady bugs ",total = bodies + heads + moths 
-26/08/2024,Mont Saint Hilaire,Oak,H,MSH2Oak1.2,0.3,0.2,7.6,0.0385,1,NA,0,No decomp ,1 moth
+26/08/2024,Mont Saint Hilaire,Oak/Pine,H,MSH2Oak1.1,0.3,0.2,7.6,0.0684,3,NA,0,"No decomp, lady bugs ",total = bodies + heads + moths 
+26/08/2024,Mont Saint Hilaire,Oak/Pine,H,MSH2Oak1.2,0.3,0.2,7.6,0.0385,1,NA,0,No decomp ,1 moth
 26/08/2024,Mont Saint Hilaire,Oak,C,MSHOak1.1,0.6,0,8.5,0.1352,1,NA,1,"minimum decomp, something ate a lot of the heads and bodies ","1 fly, total = bodies + heads + moths"
 26/08/2024,Mont Saint Hilaire,Oak,C,MSHOak1.2,0.6,0,8.5,0.3335,9,NA,0,no decomp,NA
 26/08/2024,Mont Saint Hilaire,Oak,C,MSHOak1.3,0.6,0,8.5,0.8726,24,NA,2,"No decomp, pale beauty + spiders ","1 harvestmen, 1 caterpillar"
@@ -272,8 +272,8 @@ date,patch_name,stand_type,stand_category,trap_name,x_quercus,x_pinus,stand_area
 27/08/2024,Mont Saint Hilaire,MOM,NA,MSH2MOM2,0.1,0,4.8,0.247,9,NA,0,"minimum decomp, fungus present ",NA
 27/08/2024,Mont Saint Hilaire,MOM,NA,MSH2MOM,0.1,0,4.8,0.2058,7,NA,1,"minimum decomp, fungus present ",1 fly
 27/08/2024,Mont Saint Hilaire,MOM,NA,MSHMOM,0.1,0,4.8,0.2492,0,41,0,heavy decomp,"very decomposed, hard to ID parts, wings hard to count, wings ignored "
-27/08/2024,Mont Saint Hilaire,Oak,H,MSH2Oak1.3,0.3,0.2,7.6,0.0646,2,NA,0,"minimum decomp, tiny bit of fungus ",NA
-27/08/2024,Mont Saint Hilaire,Oak,H,MSH2Oak1.4,0.3,0.2,7.6,NA,NA,NA,NA,"Completely torn apart, nothing recovered",NA
+27/08/2024,Mont Saint Hilaire,Oak/Pine,H,MSH2Oak1.3,0.3,0.2,7.6,0.0646,2,NA,0,"minimum decomp, tiny bit of fungus ",NA
+27/08/2024,Mont Saint Hilaire,Oak/Pine,H,MSH2Oak1.4,0.3,0.2,7.6,NA,NA,NA,NA,"Completely torn apart, nothing recovered",NA
 27/08/2024,Mont Saint Hilaire,Pine/Oak,I,MSHOP1.1,0.3,0.4,3.5,0.3971,13,NA,1,"minimum decomp, a lot of fungus ",1 fly
 27/08/2024,Mont Saint Hilaire,Oak/Pine,D,MSHOP2.1,0.6,0.1,5.7,0.0193,1,NA,0,"trap ripped to shred, 1 moth found on the ground with some wings",just 1 moth for total
 27/08/2024,Mont Saint Hilaire,Oak/Pine,D,MSHOP2.2,0.6,0.1,5.7,0.7164,22,NA,1,"minimum decomp, 1 spider, 1 fly, 1 tussock moth, 1 beetle, fugus present","1 fly, moths intact"
