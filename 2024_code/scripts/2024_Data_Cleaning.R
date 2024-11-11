@@ -52,7 +52,7 @@ grouped_data <- moth_counts_clean %>%
   group_by(patch_name, stand_type,stand_category,trap_name) %>% #groups the data in these group(s) to perform the following operations
   summarize(total_moth_count = sum(moth_count, na.rm = T))
 
-#write.csv(grouped_data, file = "Grouped_data.csv")
+#write.csv(grouped_data, file = "Grouped_data.csv") #use this to download the grouped_data dateframe
 
 
   
