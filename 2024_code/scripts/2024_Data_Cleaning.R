@@ -38,6 +38,23 @@ moth_counts_unedited <- read.csv("2024_code/input/Moth_count_data_2024.csv")
 moth_counts_clean <- moth_counts_unedited %>%
   mutate(patch_name = str_replace_all(patch_name, " ","_"))
 
+moth_counts_clean$stand_category[is.na(moth_counts_clean$stand_category)] <- "MOM" #replaces NA's with "MOM" in stand category
+
 # quick visualizations if needed
 # summary(moth_counts_clean)
 # str(moth_counts_clean)
+
+#####
+
+#just total moths =
+
+grouped_data <- moth_counts_clean %>%
+  group_by(patch_name, stand_type,stand_category,trap_name) %>% #groups the data in these group(s) to perform the following operations
+  summarize(total_moth_count = sum(moth_count, na.rm = T))
+
+#write.csv(grouped_data, file = "Grouped_data.csv") #use this to download the grouped_data dateframe
+
+
+  
+
+

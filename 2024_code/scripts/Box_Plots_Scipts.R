@@ -56,7 +56,7 @@ ggplot(aes(x=stand_type, fill=stand_type)) +
                    middle=mean_count , ymin=mean_count-3.5*sd_count , ymax=mean_count+3.5*sd_count),
                stat="identity", ) +
   scale_fill_met_d(name = "Egypt")+
-  geom_jitter(data = moth_counts_summarized, aes(x=stand_type, y=mean_moth_count), size=2)+
+  geom_jitter(data = moth_counts_summarized, aes(x=stand_type, y=mean_moth_count), size=1.5)+
   labs(x = "Stand Type",
        y = "Mean Moth Count")+
   theme_classic()+
@@ -67,6 +67,6 @@ ggplot(aes(x=stand_type, fill=stand_type)) +
         legend.position = 'none')
   
 
-ggsave(filename="MeanMothCount_StandType_BoxPlot_Jitter.png", path="2024_code/Graphs", dpi = 600, width = 15, height = 15, units = "cm")
+ggsave(filename="MeanMothCount_StandType_BoxPlot_Jitter.png", path="2024_code/Graphs", dpi = 600, width = 10, height = 10, units = "cm")
 
 

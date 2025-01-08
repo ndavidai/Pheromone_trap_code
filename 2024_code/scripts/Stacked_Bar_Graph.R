@@ -83,10 +83,10 @@ moth_counts_summarized_woNA %>%
 
 #Graph of the mean number of moths found in each stand_category 
 
-breaks <- c("A >=80/0", "B >=80/10", "C 60-70/0", "D 60-70/10", #used to create the legend
-  "E 40-50/10","F 40-50/20-30","G 40-50/40-50",
-  "H 20-30/20-30","I 20-30/40-50","J 0-10/40-50",
-  "K 10-30/60-70","L 0/60-70","M 0->=80")
+legend_labels <- c("A ≥80 / 0", "B ≥80 / 10", "C 60-70 / 0", "D 60-70 / 10", #used to create the legend with composition %s
+  "E 40-50 / 10","F 40-50 / 20-30","G 40-50 / 40-50",
+  "H 20-30 / 20-30","I 20-30 / 40-50","J 0-10 / 40-50",
+  "K 10-30 / 60-70","L 0 / 60-70","M 0 / ≥80")
 
 moth_counts_stand_category <- moth_counts_clean_woNA %>% 
   group_by(stand_category) %>% #groups the data in these groups to perform the following operations
@@ -98,7 +98,7 @@ moth_counts_stand_category %>%
   geom_col()+
   geom_errorbar(aes(ymin=mean_moth_count-SE_moth_count, ymax=mean_moth_count+SE_moth_count), width=0.25, linewidth=1.25, colour="lightsteelblue3")+
   labs(x="Stand Category", y= "Mean Moth Count")+
-  scale_fill_viridis_d(option = "H", name= "Patch Category (Oak/Pine %)", labels=breaks)+
+  scale_fill_viridis_d(option = "H", name= "Patch Category (Oak/Pine %)", labels=legend_labels)+
     scale_y_continuous()+ 
   theme_minimal()+
   theme(legend.background = element_rect("white"),
@@ -106,13 +106,15 @@ moth_counts_stand_category %>%
         axis.title.y = element_text(vjust = 3))
   
   
-ggsave("stand_category_bar_SE.png", path = "2024_code/Graphs", dpi = 600, width = 20, height = 15, units = "cm", bg= "white") #NEED TO ADD BACKGROUND = WHITE BECAUSE theme.minimal IS A TRANSPARENT PNG BACKGROUND
+ggsave("stand_category_bar_SE.png", path = "2024_code/Graphs", dpi = 600, width = 15, height = 10, units = "cm", bg= "white") #NEED TO ADD BACKGROUND = WHITE BECAUSE theme.minimal IS A TRANSPARENT PNG BACKGROUND
 
 #####
 
 #Graph of the avg number of moths found in the each stand type
 
 moth_count_cleanwoNAandMOM <- subset(moth_counts_clean_woNA, stand_type != "MOM")
+
+legend_labels2 <- c("Mont Royal","Mont Saint Hilaire","Montebello","Notre Dame de Bonsecours","Oka","Orford","Papineauville","Rigaud")
 
 moth_counts_summarized_standtype_woNAandMOM <- moth_count_cleanwoNAandMOM %>% 
   group_by(patch_name, stand_type) %>% #groups the data in these groups to perform the following operations
@@ -126,7 +128,7 @@ moth_counts_summarized_standtype_woNAandMOM %>%
   theme(legend.background = element_rect("white"),
         panel.border = element_rect(colour = "black", fill=NA, linewidth = 1.5),
         axis.title.y = element_text(vjust = 3))+
-  scale_fill_manual(name="Patch Name",values=safe_colorblind_palette_edited) #Colour blind pallette  :)
+  scale_fill_manual(name="Patch Name",values=safe_colorblind_palette_edited, labels = legend_labels2) #Colour blind pallette  :)
 
 ggsave("AverageMoth_Stand_Type.png", path = "2024_code/Graphs", dpi = 600, width = 15, height = 10, units = "cm", bg= "white") #NEED TO ADD BACKGROUND = WHITE BECAUSE theme.minimal IS A TRANSPARENT PNG BACKGROUND
 
