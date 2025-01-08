@@ -41,3 +41,4 @@ library(MetBrewer)
 
 safe_colorblind_palette_edited <- c("#88CCEE", "#CC6677", "#DDCC77", "#117733", "#332288", "#AA4499", 
                              "#44AA99", "#661100") #HEX CODES OBTAINED FROM rcartocolor package
+
