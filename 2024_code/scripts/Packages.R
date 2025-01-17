@@ -5,6 +5,8 @@
 #Run without the '#' to install the packages 
 
 #install.packages(c("janitor","dplyr","tidyverse","ggplot2","forcats","foreign","nnet","reshape2","esquisse", "summarytools", "lme4", "tidyr","plotrix","MetBrewer","viridis","performance","car","effects","MASS","mgcv","Matrix","MetBrewer"))
+#install.packages("Matrix", type = "source")
+#install.packages("lme4", type = "source")
 
 #Packages to load
 #There is code at the top of 2024_Data_Cleaning.R that runs these packages
@@ -30,10 +32,11 @@ library(car) #install.packages("car")
 library(effects) #install.packages("effects")
 library(MASS) #install.packages("MASS")
 library(mgcv) #install.packages("mgcv")
-library(Matrix)
+library(Matrix) # its dependency on lme4 package 
 library(car)
 library(effects)
 library(MetBrewer)
+negative.binomial(10)
 
 #####
 
