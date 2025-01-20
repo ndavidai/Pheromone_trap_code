@@ -3,6 +3,9 @@
 
 rm(list = ls()) # to clear the environment
 
+#Run this to load packages 
+source("2024_code/scripts/Packages.R")
+
 complete_moth_2024 <- read.csv("input/2024_consolidated_moth_counts.csv")
 #complete - consolidation of July and Aug moth counts, 2024
 #clean_complete - only includes traps that had clean counts for BOTH July and Aug
@@ -143,7 +146,14 @@ complete_moth_2024$stand_type <- as.factor(complete_moth_2024$stand_type)
 dfSummary(complete_moth_2024)
 str(complete_moth_2024)
 
-#running glm model, family=poisson, using Patch as a 'random effect'
+####### Stand_type model
+model <- glm(clean_complete ~ stand_type, family = poisson, data = complete_moth_2024)
+summary(model)
+
+check_overdispersion(model)
+check_model(model)
+
+###running glm model, family=poisson, using Patch as a 'random effect'
 
 #for stand type
 model_1 <- glmer(clean_complete ~ stand_type + (1|patch_name), family =poisson, data = complete_moth_2024)
@@ -169,7 +179,7 @@ check_model(model_1)  ### for plotting model residuals: can inspect the messages
 check_overdispersion(model_2)
 #data is overdispersed
 
-check_model(model_1)  
+check_model(model_2)  
 
 
 ### Try both with negative binomial and random effect of patch name
@@ -179,7 +189,7 @@ summary(model_1a)
 check_overdispersion(model_1a)
 check_model(model_1a)
 #AIC = 1213, variance by trap name = 0.228, and no overdispersion 
-##MUCH lower AIC compared to poisson model, variance about the same
+####MUCH lower AIC in the neg binomial compared to poisson model, variance about the same
 
 model_2a <- glmer.nb(clean_complete ~ stand_category + (1|patch_name), family =nbinom2(), data = complete_moth_2024)
 summary(model_2a)
@@ -187,41 +197,23 @@ summary(model_2a)
 check_overdispersion(model_2a)
 check_model(model_2a)
 #AIC = 1222, variance by trap name = 0.256, and no overdispersion 
-##MUCH lower AIC compared to poisson model, variance about the same
-
-####### Stand_type model
-model_1b <- glm(clean_complete ~ stand_type, family = poisson, data = complete_moth_2024)
-summary(model_1b)
-
-check_overdispersion(model_1b)
-check_model(model_1b)
-
-### Try both with negative binomial and random effect of patch name
-model_1c <- glmer.nb(clean_complete ~ stand_type + (1|patch_name), family = nbinom2(), data = complete_moth_2024)
-summary(model_1c)
-
-check_overdispersion(model_1c)
-check_model(model_1c)
-
-model_2c <- glmer.nb(clean_complete ~ stand_category + (1|patch_name), family = nbinom2(), data = complete_moth_2024)
-summary(model_2c)
-
-check_overdispersion(model_2c)
-check_model(model_2c)
+####MUCH lower AIC in the neg binomial compared to poisson model, variance about the same
 
 
-####### Patch_name Model with random effect
-model_3 <- glmer.nb(clean_complete ~ patch_name + (1|trap_name), family = nbiom2(), data = complete_moth_2024)
+####### Patch_name Model with Stand Type as a random effect
+model_3 <- glmer.nb(clean_complete ~ patch_name + (1|stand_type), family = nbiom2(), data = complete_moth_2024)
 summary(model_3)
+#AIC = 1206, variance by stand type = 0.0175, and no overdispersion 
 
 check_overdispersion(model_3)
 check_model(model_3)
 
-#Check for Multicollinearity:
+#If there are more than one variables being examined, check for Multicollinearity:
 #With categorical variables like patch_name with many levels, multicollinearity can be an issue. 
 #Use the car package to check Variance Inflation Factors (VIFs): A VIF of 1 means there is no correlation, 1-5 is moderate (usually acceptable), higher values indicate greater correlation
  
 vif(model_1)
+vif(model_1a)
 vif(model_2)
 
 ####### Patch_name Model, not with random effect - keeping all the factors the same
@@ -234,19 +226,20 @@ vif(model_2)
 ### To better understand the effects of each patch, visualize the estimates with confidence intervals:
 ##Use library(effects)
 
+plot(allEffects(model))
+plot(allEffects(model_1))
 plot(allEffects(model_1a))
 plot(allEffects(model_1b))
-plot(allEffects(model_1c))
-
+plot(allEffects(model_2))
 plot(allEffects(model_2a))
-plot(allEffects(model_2c))
+plot(allEffects(model_2b))
 
 plot(allEffects(model_3))
 
 ### For better visualization of the same plot,via ggplot2, gather all the attributes manually
 # 1.Extract the fixed effects estimates
-fixed_effects <- summary(model_1)$coefficients
-fixed_effects_2 <- summary(model_2)$coefficients
+fixed_effects <- summary(model_1a)$coefficients
+fixed_effects_2 <- summary(model_2a)$coefficients
 
 # 2.Convert it to a data frame for easier manipulation
 fixed_effects_df <- as.data.frame(fixed_effects)
@@ -369,36 +362,38 @@ print(p8)
 
 
 
- 
+
+##other models to try, with additional variables 
+model_4 <- glmer(clean_complete ~ stand_category + ?? + (1|patch_name), family =poisson, data = complete_moth_2024)
+
+model_5 <- glmer(clean_complete ~ stand_type + ?? + (1|patch_name), family =poisson, data = complete_moth_2024)
 
 
-
-
-model_3 <- glmer(clean_complete ~ stand_category + patch_name + (1|trap_name), family =poisson, data = complete_moth_2024)
-
-model_4 <- glmer(clean_complete ~ stand_category + (1|trap_name), family =poisson, data = complete_moth_2024)
-
-model_5 <- glmer(clean_complete ~ stand_type + patch_name + (1|trap_name), family =poisson, data = complete_moth_2024)
-
-model_6 <- glmer(clean_complete ~ stand_type + (1|trap_name), family =poisson, data = complete_moth_2024)
-
-
+##Poisson 
 summary(model_1)
 AIC(model_1)
 
 summary(model_2)
 AIC(model_2)
 
+##Negative Binomial
+summary(model_1a)
+AIC(model_1a)
+
+summary(model_2a)
+AIC(model_2a)
+
 summary(model_3)
 AIC(model_3)
 
+##Poisson
 summary(model_4)
 AIC(model_4)
 
 summary(model_5)
 AIC(model_5)
 
-summary(model_6)
-AIC(model_6)
+###In Summary: Negative Binomial models appear to have lower AIC and no overdispersion, compared to Poisson models
+
 
 
