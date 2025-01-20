@@ -143,17 +143,17 @@ complete_moth_2024$stand_type <- as.factor(complete_moth_2024$stand_type)
 dfSummary(complete_moth_2024)
 str(complete_moth_2024)
 
-#running glm model, family=poisson, as suggested by Sabina, using patches to create a block effect, removing complexity as needed from one model to the next...
+#running glm model, family=poisson, using Patch as a 'random effect'
 
 #for stand type
-model_1 <- glmer(clean_complete ~ patch_name * stand_type + (1|trap_name), family =poisson, data = complete_moth_2024)
+model_1 <- glmer(clean_complete ~ stand_type + (1|patch_name), family =poisson, data = complete_moth_2024)
 summary(model_1)
-### AIC=1205, variance in your trap_name (random factor) = 0.3141 
+### AIC=3875, variance in patch_name (random factor) = 0.286 
 
 #for stand category
-model_2 <- glmer(clean_complete ~ patch_name * stand_category + (1|trap_name), family =poisson, data = complete_moth_2024)
+model_2 <- glmer(clean_complete ~ stand_category + (1|patch_name), family =poisson, data = complete_moth_2024)
 summary(model_2)
-### AIC=1198, variance in your trap_name (random factor) = 0.2476 
+### AIC=3696, variance in patch_name (random factor) = 0.275 
 
 
 ## Check model performance via package "performance"
@@ -161,28 +161,33 @@ summary(model_2)
 
 check_overdispersion(model_1)
 ###Overdispersion, should be 1 or around 1 for good fit. 
+#data is overdispersed
+
 check_model(model_1)  ### for plotting model residuals: can inspect the messages for each residual plot
                       ### if it follows the instruction on top of each plot, your model is a good fit.
 
 check_overdispersion(model_2)
+#data is overdispersed
+
 check_model(model_1)  
 
 
-### Try both with negative binomial and random effect of trap name
-model_1a <- glmer.nb(clean_complete ~ stand_type + (1|trap_name), family =nbinom2(), data = complete_moth_2024)
+### Try both with negative binomial and random effect of patch name
+model_1a <- glmer.nb(clean_complete ~ stand_type + (1|patch_name), family =nbinom2(), data = complete_moth_2024)
 summary(model_1a)
 
 check_overdispersion(model_1a)
 check_model(model_1a)
-#higher AIC, variance by trap name, and dispersion ratio compared to poisson model
+#AIC = 1213, variance by trap name = 0.228, and no overdispersion 
+##MUCH lower AIC compared to poisson model, variance about the same
 
-model_2a <- glmer.nb(clean_complete ~ stand_category + (1|trap_name), family =nbinom2(), data = complete_moth_2024)
+model_2a <- glmer.nb(clean_complete ~ stand_category + (1|patch_name), family =nbinom2(), data = complete_moth_2024)
 summary(model_2a)
 
 check_overdispersion(model_2a)
 check_model(model_2a)
-#higher AIC, variance by trap name, and dispersion ratio compared to poisson model
-
+#AIC = 1222, variance by trap name = 0.256, and no overdispersion 
+##MUCH lower AIC compared to poisson model, variance about the same
 
 ####### Stand_type model
 model_1b <- glm(clean_complete ~ stand_type, family = poisson, data = complete_moth_2024)
