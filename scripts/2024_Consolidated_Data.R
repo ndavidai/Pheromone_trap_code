@@ -140,7 +140,7 @@ theme_classic()
   
 print(p4)
 
-#Convert stand_category and patch name into factors
+#Convert stand_category and patch_name into factors
 complete_moth_2024_variables$patch_name <- as.factor(complete_moth_2024_variables$patch_name)
 complete_moth_2024_variables$stand_type <- as.factor(complete_moth_2024_variables$stand_type)
 
@@ -365,33 +365,28 @@ print(p8)
 
 
 ##other models to try, with additional variables 
-model_4 <- glmer(clean_complete ~ stand_category + ?? + (1|patch_name), family =poisson, data = complete_moth_2024_variables)
+model_4 <- glmer.nb(clean_complete ~ stand_type + landscape_type + (1|patch_name), family =nbinom2(), data = complete_moth_2024_variables)
+summary(model_4)
 
-model_5 <- glmer(clean_complete ~ stand_type + ?? + (1|patch_name), family =poisson, data = complete_moth_2024_variables)
+check_overdispersion(model_4)
+check_model(model_4)
+
+model_5 <- glmer.nb(clean_complete ~ patch_name + landscape_type + (1|stand_type), family = nbiom2(), data = complete_moth_2024_variables)
+summary(model_5)
+
+check_overdispersion(model_5)
+check_model(model_5)
 
 
 ##Poisson 
-summary(model_1)
 AIC(model_1)
-
-summary(model_2)
 AIC(model_2)
 
 ##Negative Binomial
-summary(model_1a)
-AIC(model_1a)
-
-summary(model_2a)
 AIC(model_2a)
-
-summary(model_3)
+AIC(model_1a)
 AIC(model_3)
-
-##Poisson
-summary(model_4)
 AIC(model_4)
-
-summary(model_5)
 AIC(model_5)
 
 ###In Summary: Negative Binomial models appear to have lower AIC and no overdispersion, compared to Poisson models
