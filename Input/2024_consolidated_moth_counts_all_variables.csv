@@ -1,0 +1,154 @@
+﻿,patch_name,stand_type,landscape_type,stand_category,Percent_Oak,Percent_Pine,stand_area_ha,trap_name,longitude,total_moth_count,complete ,clean_complete,reason_incomplete
+1,Mont_Royal,MOM,urban,E,0.40,0.00,14.0,MRMOM,-73.59218029,93,93,93,NA
+2,Mont_Royal,Oak,urban,A,0.80,0.00,6.4,MROak2.1,-73.58858806,15,15,15,NA
+3,Mont_Royal,Oak,urban,C,0.60,0.00,8.6,MROak1.1,-73.58862712,7,7,7,NA
+4,Mont_Royal,Oak,urban,C,0.60,0.00,8.6,MROak1.2,-73.58738426,20,20,20,NA
+5,Mont_Royal,Oak,urban,C,0.60,0.00,8.6,MROak1.3,-73.58927127,6,6,6,NA
+6,Mont_Royal,Oak,urban,E,0.40,0.00,11.7,MROak3.1,-73.61059815,96,96,96,NA
+7,Mont_Royal,Oak,urban,E,0.40,0.00,11.7,MROak3.2,-73.60980668,52,52,52,NA
+8,Mont_Royal,Oak,urban,E,0.40,0.00,11.7,MROak3.3,-73.60889037,0,NA,NA,Missing in field
+9,Mont_Royal,Oak/Pine,urban,E,0.40,0.10,8.9,MROP1.1,-73.59217007,60,60,60,NA
+10,Mont_Royal,Oak/Pine,urban,E,0.40,0.10,8.9,MROP1.2,-73.59133632,20,20,20,NA
+11,Mont_Royal,Oak/Pine,urban,E,0.40,0.10,8.9,MROP1.3,-73.59048539,15,15,15,NA
+12,Mont_Royal,Oak/Pine,urban,E,0.40,0.10,8.9,MROP1.4,-73.59044925,17,17,17,NA
+13,Mont_Royal,Pine,urban,L,0.40,0.00,14.0,MRPine1.1,-73.58716381,25,25,25,NA
+14,Mont_Saint_Hilaire,MOM,agricultural,MOM,0.10,0.00,4.8,MSH2MOM,-73.1520256,13,13,13,NA
+15,Mont_Saint_Hilaire,MOM,agricultural,MOM,0.10,0.00,4.8,MSH2MOM2,-73.15055123,15,15,15,NA
+16,Mont_Saint_Hilaire,MOM,agricultural,MOM,0.10,0.00,4.8,MSHMOM,-73.15348841,19,19,19,NA
+17,Mont_Saint_Hilaire,Oak,agricultural,C,0.60,0.00,8.5,MSHOak1.1,-73.1725616,3,3,3,NA
+18,Mont_Saint_Hilaire,Oak,agricultural,C,0.60,0.00,8.5,MSHOak1.2,-73.17252673,40,40,40,NA
+19,Mont_Saint_Hilaire,Oak,agricultural,C,0.60,0.00,8.5,MSHOak1.3,-73.17309176,61,61,61,NA
+20,Mont_Saint_Hilaire,Oak,agricultural,C,0.60,0.00,8.5,MSHOak1.4,-73.17277693,16,NA,NA,Trap damaged 
+21,Mont_Saint_Hilaire,Oak/Pine,agricultural,D,0.60,0.10,5.7,MSHOP2.1,-73.16282024,1,NA,NA,Trap damaged 
+22,Mont_Saint_Hilaire,Oak/Pine,agricultural,D,0.60,0.10,5.7,MSHOP2.2,-73.16406772,22,22,22,NA
+23,Mont_Saint_Hilaire,Oak/Pine,agricultural,D,0.60,0.10,5.7,MSHOP2.3,-73.16557688,61,61,61,NA
+24,Mont_Saint_Hilaire,Oak/Pine,agricultural,H,0.30,0.20,7.6,MSH2Oak1.1,-73.15527787,6,6,6,NA
+25,Mont_Saint_Hilaire,Oak/Pine,agricultural,H,0.30,0.20,7.6,MSH2Oak1.2,-73.15571406,14,14,14,NA
+26,Mont_Saint_Hilaire,Oak/Pine,agricultural,H,0.30,0.20,7.6,MSH2Oak1.3,-73.16050532,6,6,6,NA
+27,Mont_Saint_Hilaire,Oak/Pine,agricultural,H,0.30,0.20,7.6,MSH2Oak1.4,-73.15951215,32,NA,NA,Trap damaged 
+28,Mont_Saint_Hilaire,Pine,agricultural,L,0.00,0.70,3.8,MSHPine1.1,-73.1633322,122,122,122,NA
+29,Mont_Saint_Hilaire,Pine/Oak,agricultural,I,0.30,0.40,3.5,MSHOP1.1,-73.161485,14,14,14,NA
+30,Mont_Saint_Hilaire,Pine/Oak,agricultural,I,0.30,0.40,3.5,MSHOP1.2,-73.16269744,0,NA,NA,Missing in field
+31,Montebello,MOM,forest ,MOM,0.10,0.00,5.7,MontMOM,-74.96243505,39,39,39,NA
+32,Montebello,Oak,forest ,B,0.80,0.10,7.5,MontOak2.1,-74.96128522,8,8,NA,Muck
+33,Montebello,Oak,forest ,B,0.80,0.10,7.5,MontOak2.2,-74.95988209,103,103,103,NA
+34,Montebello,Oak,forest ,C,0.70,0.00,4.8,MontOak1.1,-74.96358077,120,120,120,NA
+35,Montebello,Oak,forest ,C,0.70,0.00,4.8,MontOak1.2,-74.96501248,41,41,NA,Muck
+36,Montebello,Oak/Pine,forest ,G,0.50,0.40,9.7,Mont2OP2.1,-74.92175801,20,20,NA,Muck
+37,Montebello,Oak/Pine,forest ,G,0.50,0.40,9.7,Mont2OP2.2,-74.92261942,69,69,69,NA
+38,Montebello,Pine,forest ,I,0.30,0.40,7.6,MontPine2.1,-74.97038134,65,65,NA,Muck
+39,Montebello,Pine,forest ,I,0.30,0.40,7.6,MontPine2.2,-74.97268861,19,19,NA,Muck
+40,Montebello,Pine,forest ,I,0.30,0.40,7.6,MontPine2.3,-74.97366934,23,NA,NA,Trap damaged 
+41,Montebello,Pine,forest ,K,0.30,0.60,12.2,MontPine1.1,-74.96112554,30,30,30,NA
+42,Montebello,Pine,forest ,K,0.30,0.60,12.2,MontPine1.2,-74.96201327,75,75,75,NA
+43,Montebello,Pine,forest ,M,0.00,0.80,8.2,Mont2Pine1.1,-74.91400626,14,NA,NA,Trap damaged 
+44,Montebello,Pine,forest ,M,0.00,0.80,8.2,Mont2Pine1.2,-74.9123137,49,49,NA,Muck
+45,Montebello,Pine/Oak,forest ,I,0.20,0.40,8.7,Mont2OP1.1,-74.91205981,62,62,NA,Muck
+46,Montebello,Pine/Oak,forest ,I,0.20,0.40,8.7,Mont2OP1.2,-74.91218948,14,NA,NA,Trap damaged 
+47,Notre_Dame_de_Bonsecours,MOM,forest ,MOM,0.30,0.00,4.9,NDBMOM,-74.90083812,89,89,89,NA
+48,Notre_Dame_de_Bonsecours,Oak,forest ,C,0.70,0.00,7.8,NDBOak1.1,-74.90154966,46,46,46,NA
+49,Notre_Dame_de_Bonsecours,Oak,forest ,C,0.70,0.00,7.8,NDBOak1.2,-74.90152717,41,41,41,NA
+50,Notre_Dame_de_Bonsecours,Oak,forest ,C,0.70,0.00,7.8,NDBOak1.3,-74.89949827,18,18,NA,Muck
+51,Notre_Dame_de_Bonsecours,Oak,forest ,C,0.70,0.00,7.8,NDBOak1.4,-74.89810528,25,25,NA,Muck
+52,Notre_Dame_de_Bonsecours,Oak/Pine,forest ,F,0.40,0.30,5.5,NDBOP1.1,-74.8904555,0,NA,NA,Trap damaged 
+53,Notre_Dame_de_Bonsecours,Oak/Pine,forest ,F,0.40,0.30,5.5,NDBOP2.1,-74.90869045,104,104,104,NA
+54,Notre_Dame_de_Bonsecours,Oak/Pine,forest ,F,0.40,0.30,5.5,NDBOP2.2,-74.90787213,90,90,90,NA
+55,Notre_Dame_de_Bonsecours,Oak/Pine,forest ,F,0.40,0.30,5.5,NDBOP2.3,-74.90792167,89,89,89,NA
+56,Notre_Dame_de_Bonsecours,Pine,forest ,H,0.20,0.30,4.9,NDBPine1.1,-74.90298816,82,82,NA,Muck
+57,Notre_Dame_de_Bonsecours,Pine,forest ,M,0.00,0.80,4.4,NBDPine2.1,-74.89585784,41,41,41,NA
+58,Notre_Dame_de_Bonsecours,Pine,forest ,M,0.00,0.80,4.4,NBDPine2.2,-74.89545199,39,39,39,NA
+59,Oka,MOM,agricultural,MOM,0.30,0.10,19.1,OkaMOM1,-74.04560882,126,126,126,NA
+60,Oka,MOM,agricultural,MOM,0.00,0.00,6.3,OkaMOM2,-74.05562242,75,75,75,NA
+61,Oka,Oak,agricultural,E,0.40,0.10,8.1,OkaOak1.1,-74.05530073,263,263,263,NA
+62,Oka,Oak,agricultural,E,0.40,0.10,8.1,OkaOak1.2,-74.05667586,152,152,152,NA
+63,Oka,Oak,agricultural,E,0.40,0.10,8.1,OkaOak1.3,-74.05567456,95,95,95,NA
+64,Oka,Oak,agricultural,E,0.40,0.10,8.1,OkaOak1.4,-74.05428425,79,79,79,NA
+65,Oka,Oak,agricultural,E,0.40,0.10,8.1,OkaOak1.5,-74.05293468,20,20,20,NA
+66,Oka,Oak,agricultural,E,0.40,0.10,8.1,OkaOak1.6,-74.05192341,101,101,101,NA
+67,Oka,Oak/Pine,agricultural,H,0.30,0.30,8.3,OkaOP1.1,-74.04137609,178,178,178,NA
+68,Oka,Oak/Pine,agricultural,H,0.30,0.30,8.3,OkaOP1.2,-74.0400812,244,244,244,NA
+69,Oka,Oak/Pine,agricultural,H,0.30,0.30,8.3,OkaOP1.3,-74.03736404,142,142,142,NA
+70,Oka,Oak/Pine,agricultural,H,0.30,0.30,8.3,OkaOP1.4,-74.03598425,50,50,50,NA
+71,Oka,Oak/Pine,agricultural,H,0.30,0.20,8.0,OkaOP2.1,-74.04816748,93,93,93,NA
+72,Oka,Oak/Pine,agricultural,H,0.30,0.20,8.0,OkaOP2.2,-74.04891908,12,12,NA,Muck
+73,Oka,Oak/Pine,agricultural,H,0.30,0.20,8.0,OkaOP2.3,-74.04785237,121,121,NA,Muck
+74,Oka,Pine,agricultural,I,0.30,0.50,14.2,OkaPine1.1,-74.05322755,149,149,149,NA
+75,Oka,Pine,agricultural,I,0.30,0.50,14.2,OkaPine1.2,-74.04944144,98,98,98,NA
+76,Oka,Pine,agricultural,I,0.30,0.50,14.2,OkaPine1.3,-74.05109871,65,65,65,NA
+77,Oka,Pine,agricultural,I,0.30,0.50,14.2,OkaPine1.4,-74.05019774,70,70,70,NA
+78,Oka,Pine,agricultural,I,0.30,0.50,14.2,OkaPine1.5,-74.05074902,73,73,73,NA
+79,Oka,Pine,agricultural,I,0.30,0.50,14.2,OkaPine1.6,-74.04890466,65,65,65,NA
+80,Oka,Pine,agricultural,I,0.30,0.50,14.2,OkaPine1.7,-74.04944228,42,42,42,NA
+81,Oka,Pine,agricultural,I,0.30,0.50,12.6,OkaPine2.1,-74.04659374,260,260,260,NA
+82,Oka,Pine,agricultural,I,0.30,0.50,12.6,OkaPine2.2,-74.04519504,188,188,188,NA
+83,Oka,Pine,agricultural,I,0.30,0.50,12.6,OkaPine2.3,-74.04381232,92,92,92,NA
+84,Oka,Pine,agricultural,I,0.30,0.50,12.6,OkaPine2.4,-74.04503943,144,144,144,NA
+85,Oka,Pine,agricultural,I,0.30,0.50,12.6,OkaPine2.5,-74.04621005,72,72,NA,Muck
+86,Oka,Pine,agricultural,K,0.10,0.70,11.2,OkaPine3.1,-74.03687207,90,90,NA,Muck
+87,Oka,Pine,agricultural,K,0.10,0.70,11.2,OkaPine3.2,-74.03739145,48,48,48,NA
+88,Oka,Pine,agricultural,K,0.10,0.70,11.2,OkaPine3.3,-74.03810442,51,51,NA,Muck
+89,Oka,Pine,agricultural,K,0.10,0.70,11.2,OkaPine3.4,-74.0397378,35,35,NA,Muck
+90,Oka,Pine,agricultural,K,0.10,0.70,11.2,OkaPine3.5,-74.03975498,27,27,NA,Muck
+91,Oka,Pine/Oak,agricultural,I,0.30,0.40,18.0,OkaOP3.1,-74.04304253,60,60,60,NA
+92,Oka,Pine/Oak,agricultural,I,0.30,0.40,18.0,OkaOP3.2,-74.04188398,47,47,47,NA
+93,Oka,Pine/Oak,agricultural,I,0.30,0.40,18.0,OkaOP3.3,-74.04202773,69,69,69,NA
+94,Oka,Pine/Oak,agricultural,I,0.30,0.40,18.0,OkaOP3.4,-74.04393436,71,71,71,NA
+95,Oka,Pine/Oak,agricultural,I,0.30,0.40,18.0,OkaOP3.5,-74.04411323,44,44,NA,Muck
+96,Oka,Pine/Oak,agricultural,I,0.30,0.40,18.0,OkaOP3.6,-74.0454276,118,118,118,NA
+97,Orford,MOM,forest ,MOM,0.00,0.00,4.6,MO2MOM,,69,69,69,NA
+98,Orford,MOM,forest ,MOM,0.00,0.20,5.9,MOMOM,-72.22345951,254,254,254,NA
+99,Orford,Oak,forest ,A,0.80,0.00,7.8,MOOak2.1,-72.24305774,145,145,145,NA
+100,Orford,Oak,forest ,A,0.80,0.00,7.8,MOOak2.2,-72.24187992,91,91,91,NA
+101,Orford,Oak,forest ,A,0.80,0.00,7.8,MOOak2.3,-72.24622057,108,108,108,NA
+102,Orford,Oak,forest ,E,0.50,0.00,7.1,MOOak1.1,-72.22629302,378,378,378,NA
+103,Orford,Oak,forest ,E,0.50,0.00,7.1,MOOak1.2,-72.22766215,139,139,139,NA
+104,Orford,Oak,forest ,E,0.50,0.00,7.1,MOOak1.3,-72.22803145,263,263,263,NA
+105,Orford,Oak,forest ,E,0.50,0.00,11.8,MOOak3.1,-72.24271626,142,142,142,NA
+106,Orford,Oak,forest ,E,0.50,0.00,11.8,MOOak3.2,-72.24457084,93,93,93,NA
+107,Orford,Oak,forest ,E,0.50,0.00,11.8,MOOak3.3,-72.2456677,37,37,37,NA
+108,Orford,Oak,forest ,F,0.40,0.20,8.1,MO2Oak 1.2,-72.19329857,131,131,131,NA
+109,Orford,Oak,forest ,F,0.40,0.20,8.1,MO2Oak1.1,-72.1922785,141,141,141,NA
+110,Orford,Oak,forest ,F,0.40,0.20,8.1,MO2Oak1.3,-72.19403668,52,52,52,NA
+111,Orford,Pine,forest ,J,0.00,0.50,4.3,MO2Pine3.1,-72.17194945,85,85,85,NA
+112,Orford,Pine,forest ,J,0.00,0.50,4.3,MO2Pine3.2,-72.17316323,73,73,73,NA
+113,Orford,Pine,forest ,J,0.00,0.50,5.1,MOPine1.1,-72.23032997,86,86,86,NA
+114,Orford,Pine,forest ,J,0.00,0.50,5.1,MOPine1.2,-72.23170219,114,114,114,NA
+115,Orford,Pine,forest ,L,0.00,0.70,3.7,MO2Pine1.1,-72.19705937,21,21,21,NA
+116,Orford,Pine,forest ,L,0.00,0.70,3.7,MO2Pine1.2,-72.19695669,27,27,27,NA
+117,Orford,Pine,forest ,L,0.00,0.60,7.5,MO2Pine4.1,-72.176276,106,106,106,NA
+118,Orford,Pine,forest ,L,0.00,0.60,7.5,MO2Pine4.2,-72.17533967,104,104,104,NA
+119,Orford,Pine,forest ,L,0.00,0.70,8.3,MOPine2.1,-72.21840229,78,78,78,NA
+120,Orford,Pine,forest ,L,0.00,0.70,8.3,MOPine2.2,-72.2166814,54,54,54,NA
+121,Orford,Pine,forest ,L,0.00,0.70,8.3,MOPine2.3,-72.21780675,65,65,65,NA
+122,Orford,Pine,forest ,M,0.00,0.80,6.8,MO2Pine2.1,-72.19391301,42,42,42,NA
+123,Orford,Pine,forest ,M,0.00,0.80,6.8,MO2Pine2.2,-72.19206241,53,53,53,NA
+124,Papineauville,Oak,agricultural,A,0.80,0.00,7.3,PAPOak2.1,-75.02363241,135,135,135,NA
+125,Papineauville,Oak,agricultural,A,0.80,0.00,7.3,PAPOak2.2,-75.02390231,40,40,NA,Muck
+126,Papineauville,Oak,agricultural,E,0.50,0.10,5.9,PAPOak1.1,-75.02676381,31,31,NA,Muck
+127,Papineauville,Oak,agricultural,E,0.50,0.10,5.9,PAPOak1.2,-75.02600072,136,136,136,NA
+128,Papineauville,Oak/Pine,agricultural,H,0.30,0.30,4.8,PAPOP1.1,-75.02769805,74,74,NA,Muck
+129,Papineauville,Oak/Pine,agricultural,H,0.30,0.30,4.8,PAPOP1.2,-75.02756696,98,98,NA,Muck
+130,Rigaud,MOM,agricultural,MOM,0.20,0.00,7.3,RigMOM,-74.31043748,158,158,158,NA
+131,Rigaud,Oak,agricultural,D,0.70,0.10,8.4,RigOak1.1,-74.31821094,29,29,NA,Muck
+132,Rigaud,Oak,agricultural,D,0.70,0.10,8.4,RigOak1.2,-74.31922984,35,35,NA,Muck
+133,Rigaud,Oak,agricultural,D,0.70,0.10,8.4,RigOak1.3,-74.32022134,23,23,23,NA
+134,Rigaud,Oak,agricultural,D,0.70,0.10,8.4,RigOak1.4,-74.32146597,34,34,34,NA
+135,Rigaud,Oak,agricultural,D,0.70,0.10,8.4,RigOak1.5,-74.32242335,98,98,98,NA
+136,Rigaud,Oak/Pine,agricultural,F,0.40,0.20,6.5,RigOP2.1,-74.30587135,82,82,82,NA
+137,Rigaud,Oak/Pine,agricultural,F,0.40,0.20,6.5,RigOP2.2,-74.30845013,27,27,27,NA
+138,Rigaud,Oak/Pine,agricultural,F,0.40,0.20,9.4,RigOP3.1,-74.30604737,13,13,13,NA
+139,Rigaud,Oak/Pine,agricultural,F,0.40,0.20,9.4,RigOP3.2,-74.3023704,61,61,61,NA
+140,Rigaud,Oak/Pine,agricultural,F,0.40,0.20,9.4,RigOP3.3,-74.30165576,13,NA,NA,Trap damaged 
+141,Rigaud,Oak/Pine,agricultural,H,0.30,0.20,5.3,RigOP4.1,-74.31535271,11,NA,NA,Trap damaged 
+142,Rigaud,Oak/Pine,agricultural,H,0.30,0.20,5.3,RigOP4.2,-74.31665207,44,44,44,NA
+143,Rigaud,Oak/Pine,agricultural,H,0.30,0.20,7.6,RigOP5.1,-74.31959965,79,79,79,NA
+144,Rigaud,Pine,agricultural,I,0.20,0.50,3.5,RigPine4.1,-74.32183343,61,61,61,NA
+145,Rigaud,Pine,agricultural,J,0.10,0.50,6.4,RigPine5.1,-74.31734121,68,68,68,NA
+146,Rigaud,Pine,agricultural,K,0.10,0.60,8.3,RigPine2.1,-74.30726828,17,17,17,NA
+147,Rigaud,Pine,agricultural,K,0.10,0.60,8.3,RigPine2.2,-74.30848322,3,3,3,NA
+148,Rigaud,Pine,agricultural,K,0.10,0.60,8.3,RigPine2.3,-74.30962913,19,19,NA,Muck
+149,Rigaud,Pine,agricultural,L,0.00,0.70,3.6,RigPine3.1,-74.30551118,41,41,41,NA
+150,Rigaud,Pine,agricultural,L,0.00,0.70,3.6,RigPine3.2,-74.30691096,17,17,17,NA
+151,Rigaud,Pine/Oak,agricultural,I,0.20,0.40,9.4,RigOP1.1,-74.30921632,16,16,16,NA
+152,Rigaud,Pine/Oak,agricultural,I,0.20,0.40,9.4,RigOP1.2,-74.31039247,15,15,15,NA
+153,Rigaud,Pine/Oak,agricultural,I,0.20,0.40,9.4,RigOP1.3,-74.31172343,14,14,NA,Muck
