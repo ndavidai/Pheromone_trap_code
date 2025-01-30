@@ -17,6 +17,12 @@ complete_moth_2024_variables <- read.csv("input/2024_consolidated_moth_counts_al
 dfSummary(complete_moth_2024_variables)
 str(complete_moth_2024_variables)
 
+#Remove MOM traps from either "stand type" or "stand category"
+stand_type_filtered <- complete_moth_2024_variables %>%
+  filter(stand_type != "MOM")
+stand_category_filtered <- complete_moth_2024_variables %>%
+  filter(stand_category != "MOM")
+
 #check to see the distribution of your 'complete' count data
 hist(complete_moth_2024_variables$complete, 
           main = "Histogram of Moth count", 
@@ -97,8 +103,8 @@ moth_by_stand_summary_stats_2 <- summary_stats_4[-c(1),]
 print(moth_by_stand_summary_stats_2, n=22)
 
 
-#inspect visually by Stand Category
-p1 <- ggplot(complete_moth_2024_variables, aes(x = stand_category, y = clean_complete)) +
+#inspect visually by Stand Category, no MOM's
+p1 <- ggplot(stand_category_filtered, aes(x = stand_category, y = clean_complete)) +
       geom_boxplot() +
       labs(title = "Distribution of Moth Counts by Stand Category",
        x = "Stand Category",
@@ -107,9 +113,8 @@ p1 <- ggplot(complete_moth_2024_variables, aes(x = stand_category, y = clean_com
 
 print(p1)
 
-
-##Stand_type rather than category. 
-p2 <- ggplot(complete_moth_2024_variables, aes(x = stand_type, y = clean_complete)) +
+##Stand_type rather than category, no MOM's 
+p2 <- ggplot(stand_type_filtered, aes(x = stand_type, y = clean_complete)) +
   geom_boxplot() +
   labs(title = "Distribution of Moth Counts by Stand Type",
        x = "Stand Type",
@@ -118,7 +123,8 @@ p2 <- ggplot(complete_moth_2024_variables, aes(x = stand_type, y = clean_complet
 
 print(p2)
 
-##'clean_complete' moth counts without MOMs
+
+##'clean_complete' moth count means without MOMs
 p3 <- ggplot(moth_by_stand_summary_stats_2, aes(x = stand_type, y = mean_count)) +
   geom_boxplot() +
   labs(title = "Distribution of Moth Counts by Stand Type",
@@ -143,12 +149,17 @@ print(p4)
 #Convert stand_category and patch_name into factors
 complete_moth_2024_variables$patch_name <- as.factor(complete_moth_2024_variables$patch_name)
 complete_moth_2024_variables$stand_type <- as.factor(complete_moth_2024_variables$stand_type)
+stand_type_filtered$patch_name <- as.factor(stand_type_filtered$patch_name)
+stand_type_filtered$stand_type <- as.factor(stand_type_filtered$stand_type)
 
 dfSummary(complete_moth_2024_variables)
 str(complete_moth_2024_variables)
 
+dfSummary(stand_type_filtered)
+str(stand_type_filtered)
+
 ####### Stand_type model
-model <- glm(clean_complete ~ stand_type, family = poisson, data = complete_moth_2024_variables)
+model <- glm(clean_complete ~ stand_type, family = poisson, data = stand_type_filtered)
 summary(model)
 
 check_overdispersion(model)
@@ -157,12 +168,12 @@ check_model(model)
 ###running glm model, family=poisson, using Patch as a 'random effect'
 
 #for stand type
-model_1 <- glmer(clean_complete ~ stand_type + (1|patch_name), family =poisson, data = complete_moth_2024_variables)
+model_1 <- glmer(clean_complete ~ stand_type + (1|patch_name), family =poisson, data = stand_type_filtered)
 summary(model_1)
 ### AIC=3875, variance in patch_name (random factor) = 0.286 
 
 #for stand category
-model_2 <- glmer(clean_complete ~ stand_category + (1|patch_name), family =poisson, data = complete_moth_2024_variables)
+model_2 <- glmer(clean_complete ~ stand_category + (1|patch_name), family =poisson, data = stand_type_filtered)
 summary(model_2)
 ### AIC=3696, variance in patch_name (random factor) = 0.275 
 
@@ -184,7 +195,7 @@ check_model(model_2)
 
 
 ### Try both with negative binomial and random effect of patch name
-model_1a <- glmer.nb(clean_complete ~ stand_type + (1|patch_name), family =nbinom2(), data = complete_moth_2024_variables)
+model_1a <- glmer.nb(clean_complete ~ stand_type + (1|patch_name), family =nbinom2(), data = stand_type_filtered)
 summary(model_1a)
 
 check_overdispersion(model_1a)
@@ -192,7 +203,7 @@ check_model(model_1a)
 #AIC = 1213, variance by patch name = 0.228, and no overdispersion 
 ####MUCH lower AIC in the neg binomial compared to poisson model, variance about the same
 
-model_2a <- glmer.nb(clean_complete ~ stand_category + (1|patch_name), family =nbinom2(), data = complete_moth_2024_variables)
+model_2a <- glmer.nb(clean_complete ~ stand_category + (1|patch_name), family =nbinom2(), data = stand_type_filtered)
 summary(model_2a)
 
 check_overdispersion(model_2a)
@@ -202,7 +213,7 @@ check_model(model_2a)
 
 
 ####### Patch_name Model with Stand Type as a random effect
-model_3 <- glmer.nb(clean_complete ~ patch_name + (1|stand_type), family = nbiom2(), data = complete_moth_2024_variables)
+model_3 <- glmer.nb(clean_complete ~ patch_name + (1|stand_type), family = nbiom2(), data = stand_type_filtered)
 summary(model_3)
 #AIC = 1206, variance by stand type = 0.0175, and no overdispersion 
 
@@ -339,7 +350,7 @@ print(p6)
 ggsave("stand composition Effecting Moth's Population.png", plot = p3, width = 10, height = 8, dpi = 300)
 
 
-p7 <- ggplot(complete_moth_2024_variables, aes(x= patch_name, 
+p7 <- ggplot(stand_type_filtered, aes(x= patch_name, 
                             y= clean_complete, 
                             group = trap_name))+
   geom_smooth(method = "lm", 
@@ -350,7 +361,7 @@ p7 <- ggplot(complete_moth_2024_variables, aes(x= patch_name,
 
 print(p7)
 
-p8 <- ggplot(complete_moth_2024_variables, aes(x= stand_type, 
+p8 <- ggplot(stand_type_filtered, aes(x= stand_type, 
                                      y= clean_complete, 
                                      group = trap_name))+
   geom_smooth(method = "lm", 
@@ -365,13 +376,13 @@ print(p8)
 
 
 ##other models to try, with additional variables 
-model_4 <- glmer.nb(clean_complete ~ stand_type + landscape_type + (1|patch_name), family =nbinom2(), data = complete_moth_2024_variables)
+model_4 <- glmer.nb(clean_complete ~ stand_type + landscape_type + (1|patch_name), family =nbinom2(), data = stand_type_filtered)
 summary(model_4)
 
 check_overdispersion(model_4)
 check_model(model_4)
 
-model_5 <- glmer.nb(clean_complete ~ patch_name + landscape_type + (1|stand_type), family = nbiom2(), data = complete_moth_2024_variables)
+model_5 <- glmer.nb(clean_complete ~ patch_name + landscape_type + (1|stand_type), family = nbiom2(), data = stand_type_filtered)
 summary(model_5)
 
 check_overdispersion(model_5)
