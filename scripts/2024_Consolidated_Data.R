@@ -17,6 +17,7 @@ complete_moth_2024_variables <- read.csv("input/2024_consolidated_moth_counts_al
 dfSummary(complete_moth_2024_variables)
 str(complete_moth_2024_variables)
 
+
 #Remove MOM traps from either "stand type" or "stand category"
 stand_type_filtered <- complete_moth_2024_variables %>%
   filter(stand_type != "MOM")
@@ -50,10 +51,11 @@ table(complete_moth_2024_variables$stand_type, complete_moth_2024_variables$patc
 
 # Summary statistics for 'complete' moth count by stand_category and stand_type
 summary_stats <- complete_moth_2024_variables %>%
-  group_by(stand_category, stand_type) %>%
+  group_by(stand_category, stand_type, patch_name) %>%
   summarise(
     mean_count = mean(complete, na.rm = TRUE),
     sd_count = sd(complete, na.rm = TRUE),
+    var_count = var(complete, na.rm = TRUE),
     count = n()
   )
 
@@ -101,6 +103,89 @@ print(moth_by_stand_summary_stats, n=22)
 ## Remove MOM row in 'clean_complete' moth counts
 moth_by_stand_summary_stats_2 <- summary_stats_4[-c(1),]
 print(moth_by_stand_summary_stats_2, n=22)
+
+
+##visualize stand types for each patch separately
+p <- ggplot(stand_category_filtered, aes(x = stand_type, y = clean_complete)) +
+  geom_point() + 
+  facet_wrap(~ patch_name)
+
+print (p)
+
+##separate Stand Type column so that we have a Stand ID for each stand in each patch
+stand_ID_filtered <- stand_type_filtered %>% 
+  separate(trap_name, into = c("stand_ID", "trap_number"), remove = FALSE, sep = "\\." ) %>% 
+  glimpse()
+
+stand_ID_filtered_1 <- stand_category_filtered %>% 
+  separate(trap_name, into = c("stand_ID", "trap_number"), remove = FALSE, sep = "\\." ) %>% 
+  glimpse()
+
+
+# Visualizations, by patch ------------------------------------------------
+
+##visualize stand types for each patch separately
+p_1 <- ggplot(stand_ID_filtered, aes(x = stand_ID, y = clean_complete, colour = stand_type)) +
+  geom_point(position = position_jitter(height = 0, width = 0.1)) + 
+  facet_wrap(~ patch_name, scales = "free_x")
+
+print (p_1)
+
+##visualize stand categories for each patch separately
+p_2 <- ggplot(stand_ID_filtered_1, aes(x = stand_ID, y = clean_complete, 
+                                       colour = stand_category)) +
+  geom_point(position = position_jitter(height = 0, width = 0.1)) + 
+  facet_wrap(~ patch_name, scales = "free_x")
+
+print (p_2)
+
+# Random Effects Model ----------------------------------------------------
+model_inter_poisson <- glmer(clean_complete ~ (1|trap_name) + (1|stand_ID) + (1|patch_name), 
+                  family =poisson(), data = stand_ID_filtered_1)
+summary(model_inter_poisson)
+
+check_overdispersion(model_inter_poisson)
+check_model(model_inter_poisson)
+
+
+model_inter_nb <- glmer.nb(clean_complete ~ (1|stand_ID)  + (1|patch_name), family =nbinom2(), 
+                     data = stand_ID_filtered_1)
+summary(model_inter_nb)
+
+check_overdispersion(model_inter_nb)
+check_model(model_inter_nb)
+
+
+# Contrasts ---------------------------------------------------------------
+stand_ID_filtered$stand_type %>% unique() %>% dput()
+
+ordered(stand_ID_filtered$stand_type, levels = c("Oak", "Oak/Pine", "Pine/Oak", "Pine"))
+
+stand_ID_filtered$stand_type_ord <- ordered(stand_ID_filtered$stand_type, 
+                                            levels = c("Oak", "Oak/Pine", "Pine/Oak", "Pine"))
+
+model_inter_poisson_2 <- glmer(clean_complete ~ (1|trap_name) + (1|stand_ID) + 
+                                 (1|patch_name) + stand_type_ord, 
+                             family =poisson(), data = stand_ID_filtered)
+summary(model_inter_poisson_2)
+
+check_overdispersion(model_inter_poisson_2)
+check_model(model_inter_poisson_2)
+
+model_inter_poisson_3 <- glmer(clean_complete ~ (1|trap_name) + (1|stand_ID) + 
+                                 (1+stand_type_ord|patch_name) + stand_type_ord, 
+                               family =poisson(), data = stand_ID_filtered)
+summary(model_inter_poisson_3)
+
+
+
+
+##visualize % oak and pine for each patch separately
+p_3 <- ggplot(stand_ID_filtered_1, aes(x = Percent_Oak, y = Percent_Pine, colour = stand_category, size = clean_complete)) +
+  geom_point() + 
+  facet_wrap(~ patch_name)
+
+print (p_3)
 
 
 #inspect visually by Stand Category, no MOM's
@@ -198,6 +283,12 @@ check_model(model_2)
 model_1a <- glmer.nb(clean_complete ~ stand_type + (1|patch_name), family =nbinom2(), data = stand_type_filtered)
 summary(model_1a)
 
+# Perform Type III ANOVA (Sum of Squares)
+##Use Type III SS when you want to test the significance of predictors in a model with multiple factors, especially when dealing with unbalanced designs.
+##Type III sum of squares are “partial.”  In essence, every term in the model is tested in light of every other term in the model, meaning that main effects are tested in light of interaction terms as well as in light of other main effects. 
+anova_results <- Anova(model_1a, type = "III")
+summary(anova_results)
+
 check_overdispersion(model_1a)
 check_model(model_1a)
 #AIC = 1213, variance by patch name = 0.228, and no overdispersion 
@@ -205,6 +296,9 @@ check_model(model_1a)
 
 model_2a <- glmer.nb(clean_complete ~ stand_category + (1|patch_name), family =nbinom2(), data = stand_type_filtered)
 summary(model_2a)
+
+anova_2a_results <- Anova(model_2a, type = "III")
+summary(anova_2a_results)
 
 check_overdispersion(model_2a)
 check_model(model_2a)
@@ -216,6 +310,9 @@ check_model(model_2a)
 model_3 <- glmer.nb(clean_complete ~ patch_name + (1|stand_type), family = nbiom2(), data = stand_type_filtered)
 summary(model_3)
 #AIC = 1206, variance by stand type = 0.0175, and no overdispersion 
+
+anova_3_results <- Anova(model_3, type = "III")
+summary(anova_3_results)
 
 check_overdispersion(model_3)
 check_model(model_3)
@@ -379,11 +476,17 @@ print(p8)
 model_4 <- glmer.nb(clean_complete ~ stand_type + landscape_type + (1|patch_name), family =nbinom2(), data = stand_type_filtered)
 summary(model_4)
 
+anova_4_results <- Anova(model_4, type = "III")
+summary(anova_4_results)
+
 check_overdispersion(model_4)
 check_model(model_4)
 
 model_5 <- glmer.nb(clean_complete ~ patch_name + landscape_type + (1|stand_type), family = nbiom2(), data = stand_type_filtered)
 summary(model_5)
+
+anova_5_results <- Anova(model_5, type = "III")
+summary(anova_5_results)
 
 check_overdispersion(model_5)
 check_model(model_5)
