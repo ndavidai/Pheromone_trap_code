@@ -24,6 +24,9 @@ stand_type_filtered <- complete_moth_2024_variables %>%
 stand_category_filtered <- complete_moth_2024_variables %>%
   filter(stand_category != "MOM")
 
+
+# Data Summaries ----------------------------------------------------------
+
 #check to see the distribution of your 'complete' count data
 hist(complete_moth_2024_variables$complete, 
           main = "Histogram of Moth count", 
@@ -105,6 +108,8 @@ moth_by_stand_summary_stats_2 <- summary_stats_4[-c(1),]
 print(moth_by_stand_summary_stats_2, n=22)
 
 
+# Visualizations ----------------------------------------------------------
+
 ##visualize stand types for each patch separately
 p <- ggplot(stand_category_filtered, aes(x = stand_type, y = clean_complete)) +
   geom_point() + 
@@ -122,8 +127,6 @@ stand_ID_filtered_1 <- stand_category_filtered %>%
   glimpse()
 
 
-# Visualizations, by patch ------------------------------------------------
-
 ##visualize stand types for each patch separately
 p_1 <- ggplot(stand_ID_filtered, aes(x = stand_ID, y = clean_complete, colour = stand_type)) +
   geom_point(position = position_jitter(height = 0, width = 0.1)) + 
@@ -140,15 +143,26 @@ p_2 <- ggplot(stand_ID_filtered_1, aes(x = stand_ID, y = clean_complete,
 print (p_2)
 
 # Random Effects Model ----------------------------------------------------
-model_inter_poisson <- glmer(clean_complete ~ (1|trap_name) + (1|stand_ID) + (1|patch_name), 
+##Poisson, using all levels of data collection as a random effect 
+model_inter_poisson <- glmer(clean_complete ~ (1|trap_name) + 
+                               (1|stand_ID) + (1|patch_name), 
                   family =poisson(), data = stand_ID_filtered_1)
 summary(model_inter_poisson)
+
+##patch is the least variable among the random effects; individual traps
+##are highly variable
 
 check_overdispersion(model_inter_poisson)
 check_model(model_inter_poisson)
 
+##In this case, the Poisson and NB are the same, so can just use Poisson
 
-model_inter_nb <- glmer.nb(clean_complete ~ (1|stand_ID)  + (1|patch_name), family =nbinom2(), 
+##Negative binomial, with all levels, except the lowest (trap name)
+##No need to use, as Poisson works well and isn't overdispered
+##In this case, the Poisson and NB are the same, so can just use Poisson
+
+model_inter_nb <- glmer.nb(clean_complete ~ (1|stand_ID)  + 
+                             (1|patch_name), family =nbinom2(), 
                      data = stand_ID_filtered_1)
 summary(model_inter_nb)
 
@@ -157,12 +171,25 @@ check_model(model_inter_nb)
 
 
 # Contrasts ---------------------------------------------------------------
+## Use Polynomial Contrast, which is an appropriate option for determining an
+##intercept when the x-axis follows a sequence (Oak to Pine proportions).
+##calculates a global average and then measures polynomial contrasts to 1 degree
+##less than the # of variables (for stand type=>3). Basically, can look at whether
+##the intermediate compositions have more contrast to each other than to the
+##extremes (x1 = L (how does increasing oak density increase moth), 
+##x2 = Q (to what extent are intermediate more/less than pine), x3 = C 
+##(do we see contrasting affects of oak/pine vs pine/oak))
+
+
+## control/shift/M gives '%>%' in R
 stand_ID_filtered$stand_type %>% unique() %>% dput()
 
-ordered(stand_ID_filtered$stand_type, levels = c("Oak", "Oak/Pine", "Pine/Oak", "Pine"))
+ordered(stand_ID_filtered$stand_type, levels = c("Oak", "Oak/Pine", "Pine/Oak", 
+                                                 "Pine"))
 
 stand_ID_filtered$stand_type_ord <- ordered(stand_ID_filtered$stand_type, 
-                                            levels = c("Oak", "Oak/Pine", "Pine/Oak", "Pine"))
+                                            levels = c("Oak", "Oak/Pine", 
+                                                       "Pine/Oak", "Pine"))
 
 model_inter_poisson_2 <- glmer(clean_complete ~ (1|trap_name) + (1|stand_ID) + 
                                  (1|patch_name) + stand_type_ord, 
@@ -172,11 +199,18 @@ summary(model_inter_poisson_2)
 check_overdispersion(model_inter_poisson_2)
 check_model(model_inter_poisson_2)
 
+
+##using random slopes as well as an intercept to account for the fact that 
+##there is an average effect of stand type BUT individual sites respond differently
+##to it
 model_inter_poisson_3 <- glmer(clean_complete ~ (1|trap_name) + (1|stand_ID) + 
                                  (1+stand_type_ord|patch_name) + stand_type_ord, 
                                family =poisson(), data = stand_ID_filtered)
 summary(model_inter_poisson_3)
 
+
+
+# Previous data and models exploration ------------------------------------
 
 
 
