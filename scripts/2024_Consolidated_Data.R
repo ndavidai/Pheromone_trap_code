@@ -44,12 +44,15 @@ hist(complete_moth_2024_variables$clean_complete,
      border = "black")
 
 
-#Calculate the mean and standard deviation of 'complete' moth counts for each level of stand_category to see if there are differences.
+#Calculate the mean and standard deviation of 'complete' moth counts for each 
+#level of stand_category to see if there are differences.
 
 # Checking unique combinations
-table(complete_moth_2024_variables$stand_category, complete_moth_2024_variables$patch_name)
+table(complete_moth_2024_variables$stand_category, 
+      complete_moth_2024_variables$patch_name)
 
-table(complete_moth_2024_variables$stand_type, complete_moth_2024_variables$patch_name)
+table(complete_moth_2024_variables$stand_type, 
+      complete_moth_2024_variables$patch_name)
 
 
 # Summary statistics for 'complete' moth count by stand_category and stand_type
@@ -178,7 +181,7 @@ check_model(model_inter_nb)
 ##the intermediate compositions have more contrast to each other than to the
 ##extremes (x1 = L (how does increasing oak density increase moth), 
 ##x2 = Q (to what extent are intermediate more/less than pine), x3 = C 
-##(do we see contrasting affects of oak/pine vs pine/oak))
+##(do we see contrasting effects of oak/pine vs pine/oak))
 
 
 ## control/shift/M gives '%>%' in R
@@ -207,6 +210,127 @@ model_inter_poisson_3 <- glmer(clean_complete ~ (1|trap_name) + (1|stand_ID) +
                                  (1+stand_type_ord|patch_name) + stand_type_ord, 
                                family =poisson(), data = stand_ID_filtered)
 summary(model_inter_poisson_3)
+
+
+
+# By Month - Moth data separated by Month, not consolidated --------------------------
+
+moth_2024_by_month <- read.csv("input/Moth_count_data_2024.csv")
+#moth_count - count for either July or August collection, 2024
+
+##To explore the distribution of your variables and count data like moth_count
+# quick visualizations
+dfSummary(moth_2024_by_month)
+str(moth_2024_by_month)
+
+#Remove MOM traps from either "stand type" or "stand category"
+stand_type_filtered_by_month <- moth_2024_by_month %>%
+  filter(stand_type != "MOM")
+stand_category_filtered_by_month <- moth_2024_by_month %>%
+  filter(stand_category != "MOM")
+
+# Data Summaries ----------------------------------------------------------
+
+#check to see the distribution of your 'moth_count' count data
+hist(moth_2024_by_month$moth_count, 
+     main = "Histogram of Moth count", 
+     xlab = "Spongy moth", 
+     ylab = "Frequency", 
+     col = "purple", 
+     border = "black")
+
+#Calculate the mean and standard deviation of moth counts for each level of 
+#stand_category to see if there are differences.
+
+# Checking unique combinations
+table(moth_2024_by_month$stand_category, 
+      moth_2024_by_month$patch_name)
+
+table(moth_2024_by_month$stand_type, 
+      moth_2024_by_month$patch_name)
+
+# Summary statistics for moth count by stand_category and stand_type
+summary_stats_3 <- moth_2024_by_month %>%
+  group_by(stand_category, stand_type, patch_name) %>%
+  summarise(
+    mean_count = mean(moth_count, na.rm = TRUE),
+    sd_count = sd(moth_count, na.rm = TRUE),
+    var_count = var(moth_count, na.rm = TRUE),
+    count = n()
+  )
+
+print(summary_stats_3, n=22)
+
+# Summary statistics for moth count by stand_category only
+summary_stats_4 <- moth_2024_by_month %>%
+  group_by(stand_category) %>%
+  summarise(
+    mean_count = mean(moth_count, na.rm = TRUE),
+    sd_count = sd(moth_count, na.rm = TRUE),
+    count = n()
+  )
+
+print(summary_stats_4, n=22)
+
+
+# Summary statistics for 'complete' moth count by stand_type
+summary_stats_3 <- complete_moth_2024_variables %>%
+  group_by(stand_type) %>%
+  summarise(
+    mean_count = mean(complete, na.rm = TRUE),
+    sd_count = sd(complete, na.rm = TRUE),
+    count = n()
+  )
+
+print(summary_stats_3, n=22)
+
+# Summary statistics for 'clean_complete' moth count by stand_type
+summary_stats_4 <- complete_moth_2024_variables %>%
+  group_by(stand_type) %>%
+  summarise(
+    mean_count = mean(clean_complete, na.rm = TRUE),
+    sd_count = sd(clean_complete, na.rm = TRUE),
+    count = n()
+  )
+
+print(summary_stats_4, n=22)
+
+# Visualizations ----------------------------------------------------------
+
+##visualize stand types for each patch separately
+p_month <- ggplot(stand_category_filtered_by_month, aes(x = stand_type, 
+                                                        y = moth_count)) + 
+  geom_point() + 
+  facet_wrap(~ patch_name)
+
+print (p_month)
+
+##separate Stand Type column so that we have a Stand ID for each stand in each patch
+stand_ID_filtered_by_month <- stand_type_filtered_by_month %>% 
+  separate(trap_name, into = c("stand_ID", "trap_number"), remove = FALSE, 
+           sep = "\\." ) %>% 
+  glimpse()
+
+stand_ID_filtered_by_month_1 <- stand_category_filtered_by_month %>% 
+  separate(trap_name, into = c("stand_ID", "trap_number"), remove = FALSE, 
+           sep = "\\." ) %>% 
+  glimpse()
+
+##visualize stand types for each patch separately
+p_month_1 <- ggplot(stand_ID_filtered_by_month, aes(x = stand_ID, 
+          y = moth_count, colour = stand_type)) +
+  geom_point(position = position_jitter(height = 0, width = 0.1)) + 
+  facet_wrap(~ patch_name, scales = "free_x")
+
+print (p_month_1)
+
+##visualize stand categories for each patch separately
+p_month_2 <- ggplot(stand_ID_filtered_by_month_1, aes(x = stand_ID, 
+            y = moth_count, colour = stand_category)) +
+  geom_point(position = position_jitter(height = 0, width = 0.1)) + 
+  facet_wrap(~ patch_name, scales = "free_x")
+
+print (p_month_2)
 
 
 
