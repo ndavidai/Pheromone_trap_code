@@ -205,7 +205,8 @@ check_model(model_inter_poisson_2)
 
 ##using random slopes as well as an intercept to account for the fact that 
 ##there is an average effect of stand type BUT individual sites respond differently
-##to it
+##to it - this is important because the effect of stand type clearly varies from
+##patch to patch
 model_inter_poisson_3 <- glmer(clean_complete ~ (1|trap_name) + (1|stand_ID) + 
                                  (1+stand_type_ord|patch_name) + stand_type_ord, 
                                family =poisson(), data = stand_ID_filtered)
@@ -331,6 +332,74 @@ p_month_2 <- ggplot(stand_ID_filtered_by_month_1, aes(x = stand_ID,
   facet_wrap(~ patch_name, scales = "free_x")
 
 print (p_month_2)
+
+# Random Effects Model ----------------------------------------------------
+##Poisson, using all levels of data collection as a random effect 
+model_bymonth_poisson <- glmer(moth_count ~ (1|sample_month) + (1|trap_name) + 
+                               (1|stand_ID) + (1|patch_name), 
+                             family =poisson(), data = stand_ID_filtered_by_month_1)
+summary(model_bymonth_poisson)
+
+##patch is the least variable among the random effects; individual traps
+##are highly variable
+
+check_overdispersion(model_bymonth_poisson)
+check_model(model_bymonth_poisson)
+
+##In this case, the Poisson and NB are the same, so can just use Poisson
+
+##Negative binomial, with all levels, except the lowest (trap name)
+##No need to use, as Poisson works well and isn't overdispered
+##In this case, the Poisson and NB are the same, so can just use Poisson
+
+model_bymonth_nb <- glmer.nb(moth_count ~ (1|trap_name) + (1|stand_ID)  + 
+                             (1|patch_name), family =nbinom2(), 
+                           data = stand_ID_filtered_by_month_1)
+summary(model_bymonth_nb)
+
+check_overdispersion(model_bymonth_nb)
+check_model(model_bymonth_nb)
+
+# Contrasts ---------------------------------------------------------------
+## Use Polynomial Contrast, which is an appropriate option for determining an
+##intercept when the x-axis follows a sequence (Oak to Pine proportions).
+##calculates a global average and then measures polynomial contrasts to 1 degree
+##less than the # of variables (for stand type=>3). Basically, can look at whether
+##the intermediate compositions have more contrast to each other than to the
+##extremes (x1 = L (how does increasing oak density increase moth), 
+##x2 = Q (to what extent are intermediate more/less than pine), x3 = C 
+##(do we see contrasting effects of oak/pine vs pine/oak))
+
+
+## control/shift/M gives '%>%' in R
+stand_ID_filtered_by_month_1$stand_type %>% unique() %>% dput()
+
+ordered(stand_ID_filtered_by_month_1$stand_type, levels = c("Oak", "Oak/Pine", 
+                                                            "Pine/Oak", "Pine"))
+
+stand_ID_filtered_by_month_1$stand_type_ord <- 
+                              ordered(stand_ID_filtered_by_month_1$stand_type, 
+                              levels = c("Oak", "Oak/Pine", "Pine/Oak", "Pine"))
+
+model_bymonth_poisson_2 <- glmer(moth_count ~ (1|sample_month) + (1|trap_name) 
+                            + (1|stand_ID) + (1|patch_name) + stand_type_ord, 
+                            family =poisson(), data = stand_ID_filtered_by_month_1)
+summary(model_bymonth_poisson_2)
+
+check_overdispersion(model_bymonth_poisson_2)
+check_model(model_bymonth_poisson_2)
+
+
+##using random slopes as well as an intercept to account for the fact that 
+##there is an average effect of stand type BUT individual sites respond differently
+##to it - this is important because the effect of stand type clearly varies from
+##patch to patch
+model_bymonth_poisson_3 <- glmer(moth_count ~ (1|sample_month) + (1|trap_name) + 
+            (1|stand_ID) + (1+stand_type_ord|patch_name) + 
+            stand_type_ord, family =poisson(), data = stand_ID_filtered_by_month_1)
+summary(model_bymonth_poisson_3)
+
+
 
 
 
