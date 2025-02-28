@@ -70,8 +70,32 @@ hist(complete_2023_2024$clean_complete,
 table(stand_category_filtered$stand_category, 
       stand_category_filtered$patch_name)
 
-table(stand_type_filtered$stand_type, 
+table(stand_type_filtered$stand_type,
       stand_type_filtered$patch_name)
+
+# Set the levels of 'stand_type' to ensure the correct order
+stand_type_filtered$stand_type <- factor(stand_type_filtered$stand_type, 
+                              levels = c("Oak", "Oak/Pine", "Oak/Other", 
+                                  "Pine/Oak", "Pine", "Other"))
+
+# Create the 'stand-type by patch' table
+table(stand_type_filtered$stand_type, stand_type_filtered$patch_name)
+
+# Create the contingency table
+contingency_table <- table(stand_type_filtered$stand_type, stand_type_filtered$patch_name)
+
+# Convert the table to a data frame
+contingency_df <- as.data.frame(contingency_table)
+
+# Create a plot (heatmap) of the contingency table
+ggplot(contingency_df, aes(x = Var1, y = Var2, fill = Freq)) +
+  geom_tile() +
+  scale_fill_gradient(low = "white", high = "darkred") +
+  labs(x = "Stand Type", y = "Patch Name", fill = "Frequency") +
+  theme_minimal()
+
+# Save the plot as an image (e.g., PNG)
+ggsave("contingency_table_heatmap.png", width = 7.5, height = 6)
 
 
 # Summary statistics for moth count by stand_category and stand_type
@@ -109,6 +133,19 @@ summary_stats_3 <- stand_type_filtered %>%
   )
 
 print(summary_stats_3, n=22)
+
+# Round numeric columns to 2 decimal places
+summary_stats_3$mean_count <- round(summary_stats_3$mean_count, 2)
+summary_stats_3$sd_count <- round(summary_stats_3$sd_count, 2)
+summary_stats_3$count <- round(summary_stats_3$count, 2)
+
+
+# Convert the table to a data frame
+summary_table <- as.data.frame(summary_stats_3)
+
+# Save it as a CSV file
+write.csv(summary_table, file = "Summary Stats by Stand Type.csv", 
+          row.names = FALSE)
 
 
 # Summary statistics for moth count by patch
@@ -174,12 +211,29 @@ p <- ggplot(stand_ID_filtered, aes(x = stand_type, y = clean_complete)) +
 print (p)
 
 
+##visualize moth counts by stand types, for each patch separately
+p_1 <- ggplot(stand_ID_filtered, aes(x = stand_type_ord, y = clean_complete, 
+                                       colour = stand_type)) +
+  geom_point(position = position_jitter(height = 0, width = 0.1)) + 
+  facet_wrap(~ patch_name, scales = "free_x") +
+  labs(x = "Stand Type", y = "Total Moth Counts", fill = "Stand Type") +
+  theme(axis.text.x = element_blank(),
+  axis.ticks.x = element_blank())
+  # Remove x-axis labels and ticks from the individual facets
+  
+print (p_1)
+
+# Save the plot as an image (e.g., PNG)
+ggsave("moth counts by stand type.png", width = 9, height = 7)
+
 ##visualize stand types, by patch ID, for each patch separately
-p_1 <- ggplot(stand_ID_filtered, aes(x = stand_ID, y = clean_complete, colour = stand_type)) +
+p_1.1 <- ggplot(stand_ID_filtered, aes(x = stand_ID, y = clean_complete, 
+                                     colour = stand_type)) +
   geom_point(position = position_jitter(height = 0, width = 0.1)) + 
   facet_wrap(~ patch_name, scales = "free_x")
 
-print (p_1)
+print (p_1.1)
+
 
 ##visualize stand categories, by patch ID, for each patch separately
 p_2 <- ggplot(stand_ID_filtered_1, aes(x = stand_ID, y = clean_complete, 
