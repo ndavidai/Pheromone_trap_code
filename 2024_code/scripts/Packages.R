@@ -4,7 +4,9 @@
 
 #Run without the '#' to install the packages 
 
-#install.packages(c("janitor","dplyr","tidyverse","ggplot2","forcats","foreign","nnet","reshape2","esquisse", "summarytools", "lme4", "tidyr","plotrix","MetBrewer","viridis","performance","car","effects","MASS","mgcv","Matrix","MetBrewer"))
+#install.packages(c(janitor","usethis", "dplyr","tidyverse","ggplot2","forcats","foreign",
+#"nnet","reshape2","esquisse", "summarytools", "lme4", "tidyr","plotrix","MetBrewer",
+#"viridis","performance","car","effects","MASS","mgcv","Matrix","MetBrewer", "marginaleffects))
 #install.packages("Matrix", type = "source")
 #install.packages("lme4", type = "source")
 
@@ -36,6 +38,7 @@ library(Matrix) # its dependency on lme4 package
 library(car)
 library(effects)
 library(MetBrewer)
+library(marginaleffects)
 negative.binomial(10)
 
 #####

@@ -88,6 +88,8 @@ contingency_table <- table(stand_type_filtered$stand_type, stand_type_filtered$p
 contingency_df <- as.data.frame(contingency_table)
 
 # Create a plot (heatmap) of the contingency table
+contingency_df 
+
 ggplot(contingency_df, aes(x = Var1, y = Var2, fill = Freq)) +
   geom_tile() +
   scale_fill_gradient(low = "white", high = "darkred") +
@@ -123,13 +125,15 @@ summary_stats_2 <- stand_category_filtered %>%
 print(summary_stats_2, n=22)
 
 
-# Summary statistics for moth count by stand_type
+# Summary statistics for moth count by stand_type, differentiating between
+##traps set and traps with usable data
 summary_stats_3 <- stand_type_filtered %>%
   group_by(stand_type) %>%
   summarise(
     mean_count = mean(clean_complete, na.rm = TRUE),
     sd_count = sd(clean_complete, na.rm = TRUE),
-    count = n()
+    n_traps = n(),
+    n_obs = sum(!is.na (clean_complete))
   )
 
 print(summary_stats_3, n=22)
@@ -166,7 +170,9 @@ summary_stats_5 <- stand_type_filtered %>%
     mean_count = mean(clean_complete, na.rm = TRUE),
     sd_count = sd(clean_complete, na.rm = TRUE),
     var_count = var(clean_complete, na.rm = TRUE),
-    count = n()
+    n_traps = n(),
+    n_obs = sum(!is.na (clean_complete))
+    
   )
 
 print(summary_stats_5, n=22)
@@ -215,7 +221,7 @@ print (p)
 p_1 <- ggplot(stand_ID_filtered, aes(x = stand_type_ord, y = clean_complete, 
                                        colour = stand_type)) +
   geom_point(position = position_jitter(height = 0, width = 0.1)) + 
-  facet_wrap(~ patch_name, scales = "free_x") +
+  facet_wrap(~ patch_name) +
   labs(x = "Stand Type", y = "Total Moth Counts", fill = "Stand Type") +
   theme(axis.text.x = element_blank(),
   axis.ticks.x = element_blank())
@@ -261,15 +267,12 @@ print (p_4)
 
 # Random Effects Model ----------------------------------------------------
 
-####NOT WORKING - Warning messages (Hessian) - need to figure out what's going
-##on with the model
 ##Poisson, using all levels of data collection as a random effect 
-model_complete_poisson <- glmer(clean_complete ~ (1|trap_name) + 
-                               (1|stand_ID) + (1|patch_name), 
-                  family =poisson(), data = stand_ID_filtered)
+model_complete_poisson <- glmer(
+  round(clean_complete) ~ (1|trap_name) + 
+    (1|stand_ID) + (1|patch_name), 
+  family =poisson(), data = stand_ID_filtered)
 summary(model_complete_poisson)
-
-
 
 check_overdispersion(model_complete_poisson)
 check_model(model_complete_poisson)
@@ -280,7 +283,7 @@ check_model(model_complete_poisson)
 ##having 50 or more warnings
 ##If Poisson and NB are the same, can just use Poisson
 
-model_complete_nb <- glmer.nb(clean_complete ~ (1|stand_ID)  + 
+model_complete_nb <- glmer.nb(round(clean_complete) ~ (1|stand_ID)  + 
                              (1|patch_name), family =nbinom2(), 
                      data = stand_ID_filtered)
 summary(model_complete_nb)
@@ -302,24 +305,49 @@ check_model(model_complete_nb)
 
 ## control/shift/M gives '%>%' in R
 
-##ALSO NOT WORKING!!!
-
-model_complete_poisson_2 <- glmer(clean_complete ~ (1|trap_name) + (1|stand_ID) + 
-                                 (1|patch_name) + stand_type_ord, 
-                             family =poisson(), data = stand_ID_filtered)
+model_complete_poisson_2 <- glmer(
+  round(clean_complete) ~ (1|trap_name) 
+  + (1|stand_ID) + 
+    (1|patch_name) + stand_type_ord, 
+  family =poisson(), data = stand_ID_filtered)
 summary(model_complete_poisson_2)
 
-check_overdispersion(model_complete_complete_2)
+check_overdispersion(model_complete_poisson_2)
 check_model(model_complete_poisson_2)
 
+##using the 'marginaleffects' package, we can run model-based predictions 
+#(prediction => outcome expected by a fitted model for a given combination
+#of predictor values)
+plot_predictions(model_complete_poisson_2, condition = "stand_type_ord")
 
 ##using random slopes as well as an intercept to account for the fact that 
 ##there is an average effect of stand type BUT individual sites respond differently
 ##to it - this is important because the effect of stand type clearly varies from
 ##patch to patch
-model__complete_3 <- glmer(clean_complete ~ (1|trap_name) + (1|stand_ID) + 
-                                 (1+stand_type_ord|patch_name) + stand_type_ord, 
-                               family =poisson(), data = stand_ID_filtered)
-summary(model_complete_poisson_3)
+model_complete_3 <- glmer(
+  round(clean_complete) ~ (1|trap_name) + (1|stand_ID) + 
+    (1+stand_type_ord|patch_name) + stand_type_ord, 
+  family =poisson(), data = stand_ID_filtered)
+summary(model_complete_3)
+
+help('isSingular')
+
+check_overdispersion(model_complete_3)
+check_model(model_complete_3)
+
+plot_predictions(model_complete_3, condition = "stand_type_ord")
+
+#model 3 struggles with processing both stand type and a random effect on
+#top of stand ID - too many variables
+#simplify the model by - actually ends up being like poisson model 2...
+model_complete_4 <- glmer(
+  round(clean_complete) ~ (1|trap_name) + (1|stand_ID) + 
+    (1|patch_name), 
+  family =poisson(), data = stand_ID_filtered)
+summary(model_complete_4)
+
+
+check_overdispersion(model_complete_4)
+check_model(model_complete_4)
 
 
