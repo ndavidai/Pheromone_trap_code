@@ -87,6 +87,9 @@ contingency_table <- table(stand_type_filtered$stand_type, stand_type_filtered$p
 # Convert the table to a data frame
 contingency_df <- as.data.frame(contingency_table)
 
+
+# Heatmap stands by patch -------------------------------------------------
+
 # Create a plot (heatmap) of the contingency table
 contingency_df 
 
@@ -124,6 +127,8 @@ summary_stats_2 <- stand_category_filtered %>%
 
 print(summary_stats_2, n=22)
 
+
+# Table to use -----------------------------------------------------------
 
 # Summary statistics for moth count by stand_type, differentiating between
 ##traps set and traps with usable data
@@ -217,6 +222,9 @@ p <- ggplot(stand_ID_filtered, aes(x = stand_type, y = clean_complete)) +
 print (p)
 
 
+# Graph to use ------------------------------------------------------------
+
+
 ##visualize moth counts by stand types, for each patch separately
 p_1 <- ggplot(stand_ID_filtered, aes(x = stand_type_ord, y = clean_complete, 
                                        colour = stand_type)) +
@@ -304,6 +312,9 @@ check_model(model_complete_nb)
 
 
 ## control/shift/M gives '%>%' in R
+
+
+# Best Model --------------------------------------------------------------
 
 model_complete_poisson_2 <- glmer(
   round(clean_complete) ~ (1|trap_name) 
