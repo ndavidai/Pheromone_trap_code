@@ -1,10 +1,10 @@
 
 #### 21-02-25
 
-rm(list = ls()) # to clear the environment
-
-#Run this to load packages 
-source("2024_code/scripts/Packages.R")
+library(tidyverse)
+library(lme4)
+library(performance)
+library(summarytools)
 
 
 complete_2023_2024 <- read.csv("input/2023_2024_all_moth_counts.csv")
@@ -100,16 +100,16 @@ ggplot(contingency_df, aes(x = Var1, y = Var2, fill = Freq)) +
   theme_minimal()
 
 # Save the plot as an image (e.g., PNG)
-ggsave("contingency_table_heatmap.png", width = 7.5, height = 6)
+#ggsave("contingency_table_heatmap.png", width = 7.5, height = 6)
 
 
 # Summary statistics for moth count by stand_category and stand_type
 summary_stats <- stand_type_filtered %>%
   group_by(stand_category, stand_type, patch_name) %>%
   summarise(
-    mean_count = mean(clean_complete, na.rm = TRUE),
-    sd_count = sd(clean_complete, na.rm = TRUE),
-    var_count = var(clean_complete, na.rm = TRUE),
+    mean_count = mean(total_moth_count, na.rm = TRUE),
+    sd_count = sd(total_moth_count, na.rm = TRUE),
+    var_count = var(total_moth_count, na.rm = TRUE),
     count = n()
   )
 
@@ -117,15 +117,15 @@ print(summary_stats, n=22)
 
 
 # Summary statistics moth count by stand_category only
-summary_stats_2 <- stand_category_filtered %>%
-  group_by(stand_category) %>%
-  summarise(
-    mean_count = mean(clean_complete, na.rm = TRUE),
-    sd_count = sd(clean_complete, na.rm = TRUE),
-    count = n()
-  )
-
-print(summary_stats_2, n=22)
+# summary_stats_2 <- stand_category_filtered %>%
+#   group_by(stand_category) %>%
+#   summarise(
+#     mean_count = mean(clean_complete, na.rm = TRUE),
+#     sd_count = sd(clean_complete, na.rm = TRUE),
+#     count = n()
+#   )
+# 
+# print(summary_stats_2, n=22)
 
 
 # Table to use -----------------------------------------------------------
@@ -146,15 +146,15 @@ print(summary_stats_3, n=22)
 # Round numeric columns to 2 decimal places
 summary_stats_3$mean_count <- round(summary_stats_3$mean_count, 2)
 summary_stats_3$sd_count <- round(summary_stats_3$sd_count, 2)
-summary_stats_3$count <- round(summary_stats_3$count, 2)
+summary_stats_3$count <- round(summary_stats_3$n_obs, 2)
 
 
 # Convert the table to a data frame
 summary_table <- as.data.frame(summary_stats_3)
 
 # Save it as a CSV file
-write.csv(summary_table, file = "Summary Stats by Stand Type.csv", 
-          row.names = FALSE)
+#write.csv(summary_table, file = "Summary Stats by Stand Type.csv", 
+          #row.names = FALSE)
 
 
 # Summary statistics for moth count by patch
@@ -169,18 +169,18 @@ summary_stats_4 <- stand_type_filtered %>%
 print(summary_stats_4, n=22)
 
 # Summary statistics for moth count by stand_type and patch
-summary_stats_5 <- stand_type_filtered %>%
-  group_by(stand_type, patch_name) %>%
-  summarise(
-    mean_count = mean(clean_complete, na.rm = TRUE),
-    sd_count = sd(clean_complete, na.rm = TRUE),
-    var_count = var(clean_complete, na.rm = TRUE),
-    n_traps = n(),
-    n_obs = sum(!is.na (clean_complete))
-    
-  )
-
-print(summary_stats_5, n=22)
+# summary_stats_5 <- stand_type_filtered %>%
+#   group_by(stand_type, patch_name) %>%
+#   summarise(
+#     mean_count = mean(clean_complete, na.rm = TRUE),
+#     sd_count = sd(clean_complete, na.rm = TRUE),
+#     var_count = var(clean_complete, na.rm = TRUE),
+#     n_traps = n(),
+#     n_obs = sum(!is.na (clean_complete))
+#     
+#   )
+# 
+# print(summary_stats_5, n=22)
 
 ## Remove MOM row in 'complete' moth counts
 moth_by_stand_summary_stats <- summary_stats_3[-c(1),]
@@ -215,11 +215,11 @@ stand_ID_filtered$stand_type_ord <- ordered(stand_ID_filtered$stand_type,
                                                 "Pine/Oak", "Pine", "Other"))
 ######continue from here...
 ##visualize stand types for each patch separately
-p <- ggplot(stand_ID_filtered, aes(x = stand_type, y = clean_complete)) +
-  geom_point(stat = "identity") + 
-  facet_wrap(~ patch_name)
-
-print (p)
+# p <- ggplot(stand_ID_filtered, aes(x = stand_type, y = clean_complete)) +
+#   geom_point(stat = "identity") + 
+#   facet_wrap(~ patch_name)
+# 
+# print (p)
 
 
 # Graph to use ------------------------------------------------------------
@@ -238,52 +238,53 @@ p_1 <- ggplot(stand_ID_filtered, aes(x = stand_type_ord, y = clean_complete,
 print (p_1)
 
 # Save the plot as an image (e.g., PNG)
-ggsave("moth counts by stand type.png", width = 9, height = 7)
+#ggsave("moth counts by stand type.png", width = 9, height = 7)
 
 ##visualize stand types, by patch ID, for each patch separately
-p_1.1 <- ggplot(stand_ID_filtered, aes(x = stand_ID, y = clean_complete, 
-                                     colour = stand_type)) +
-  geom_point(position = position_jitter(height = 0, width = 0.1)) + 
-  facet_wrap(~ patch_name, scales = "free_x")
-
-print (p_1.1)
+# p_1.1 <- ggplot(stand_ID_filtered, aes(x = stand_ID, y = clean_complete, 
+#                                      colour = stand_type)) +
+#   geom_point(position = position_jitter(height = 0, width = 0.1)) + 
+#   facet_wrap(~ patch_name, scales = "free_x")
+# 
+# print (p_1.1)
 
 
 ##visualize stand categories, by patch ID, for each patch separately
-p_2 <- ggplot(stand_ID_filtered_1, aes(x = stand_ID, y = clean_complete, 
-                                       colour = stand_category)) +
-  geom_point(position = position_jitter(height = 0, width = 0.1)) + 
-  facet_wrap(~ patch_name, scales = "free_x")
-
-print (p_2)
+# p_2 <- ggplot(stand_ID_filtered_1, aes(x = stand_ID, y = clean_complete, 
+#                                        colour = stand_category)) +
+#   geom_point(position = position_jitter(height = 0, width = 0.1)) + 
+#   facet_wrap(~ patch_name, scales = "free_x")
+# 
+# print (p_2)
 
 ##visualize stand types for each patch separately
-p_3 <- ggplot(stand_ID_filtered, aes(x = stand_type, y = clean_complete, colour = stand_type)) +
-  geom_point(position = position_jitter(height = 0, width = 0.1)) + 
-  facet_wrap(~ patch_name, scales = "free_x")
-
-print (p_3)
+# p_3 <- ggplot(stand_ID_filtered, aes(x = stand_type, y = clean_complete, colour = stand_type)) +
+#   geom_point(position = position_jitter(height = 0, width = 0.1)) + 
+#   facet_wrap(~ patch_name, scales = "free_x")
+# 
+# print (p_3)
 
 ##visualize stand categories for each patch separately
-p_4 <- ggplot(stand_ID_filtered_1, aes(x = stand_category, y = clean_complete, 
-                                       colour = stand_category)) +
-  geom_point(position = position_jitter(height = 0, width = 0.1)) + 
-  facet_wrap(~ patch_name, scales = "free_x")
-
-print (p_4)
+# p_4 <- ggplot(stand_ID_filtered_1, aes(x = stand_category, y = clean_complete, 
+#                                        colour = stand_category)) +
+#   geom_point(position = position_jitter(height = 0, width = 0.1)) + 
+#   facet_wrap(~ patch_name, scales = "free_x")
+# 
+# print (p_4)
 
 
 # Random Effects Model ----------------------------------------------------
 
 ##Poisson, using all levels of data collection as a random effect 
-model_complete_poisson <- glmer(
-  round(clean_complete) ~ (1|trap_name) + 
-    (1|stand_ID) + (1|patch_name), 
-  family =poisson(), data = stand_ID_filtered)
-summary(model_complete_poisson)
-
-check_overdispersion(model_complete_poisson)
-check_model(model_complete_poisson)
+# model_complete_poisson <- glmer(
+#   round(clean_complete) ~ (1|trap_name) + 
+#     (1|stand_ID) + (1|patch_name), 
+#   family =poisson(), data = stand_ID_filtered)
+# summary(model_complete_poisson)
+# 
+# 
+# performance::check_overdispersion(model_complete_poisson)
+# performance::check_model(model_complete_poisson)
 
 
 ##Negative binomial, with all levels, except the lowest (trap name)
@@ -291,13 +292,13 @@ check_model(model_complete_poisson)
 ##having 50 or more warnings
 ##If Poisson and NB are the same, can just use Poisson
 
-model_complete_nb <- glmer.nb(round(clean_complete) ~ (1|stand_ID)  + 
-                             (1|patch_name), family =nbinom2(), 
-                     data = stand_ID_filtered)
-summary(model_complete_nb)
-
-check_overdispersion(model_complete_nb)
-check_model(model_complete_nb)
+# model_complete_nb <- glmer.nb(round(clean_complete) ~ (1|stand_ID)  + 
+#                              (1|patch_name), family =nbinom2(), 
+#                      data = stand_ID_filtered)
+# summary(model_complete_nb)
+# 
+# performance::check_overdispersion(model_complete_nb)
+# performance::check_model(model_complete_nb)
 
 
 # Contrasts ---------------------------------------------------------------
@@ -323,12 +324,14 @@ model_complete_poisson_2 <- glmer(
   family =poisson(), data = stand_ID_filtered)
 summary(model_complete_poisson_2)
 
-check_overdispersion(model_complete_poisson_2)
-check_model(model_complete_poisson_2)
+performance::check_overdispersion(model_complete_poisson_2)
+performance::check_model(model_complete_poisson_2)
 
 ##using the 'marginaleffects' package, we can run model-based predictions 
 #(prediction => outcome expected by a fitted model for a given combination
 #of predictor values)
+library(marginaleffects)
+
 plot_predictions(model_complete_poisson_2, condition = "stand_type_ord")
 
 ##using random slopes as well as an intercept to account for the fact that 
@@ -341,24 +344,81 @@ model_complete_3 <- glmer(
   family =poisson(), data = stand_ID_filtered)
 summary(model_complete_3)
 
-help('isSingular')
+#help('isSingular')
 
-check_overdispersion(model_complete_3)
-check_model(model_complete_3)
+performance::check_overdispersion(model_complete_3)
+performance::check_model(model_complete_3)
 
 plot_predictions(model_complete_3, condition = "stand_type_ord")
 
 #model 3 struggles with processing both stand type and a random effect on
 #top of stand ID - too many variables
 #simplify the model by - actually ends up being like poisson model 2...
-model_complete_4 <- glmer(
-  round(clean_complete) ~ (1|trap_name) + (1|stand_ID) + 
-    (1|patch_name), 
+# model_complete_4 <- glmer(
+#   round(clean_complete) ~ (1|trap_name) + (1|stand_ID) + 
+#     (1|patch_name), 
+#   family =poisson(), data = stand_ID_filtered)
+# summary(model_complete_4)
+# 
+# 
+# performance::check_overdispersion(model_complete_4)
+# performance::check_model(model_complete_4)
+
+
+# Censored data - brms ----------------------------------------------------
+
+#' ## Censoring
+#' this is *fun* and so **helpful**
+
+##Ensuring system configuration to be able to compile C++ and 
+#installing rstan
+
+#'remotes::install_github("stan-dev/rstan", ref = "develop", subdir = "rstan/rstan")
+
+library(brms)
+
+?brmsformula
+
+##using model_complete_poisson_2, but converting it to a 'brm' model instead
+#of 'glmer'
+
+brm_model_1 <- brm(
+  round(clean_complete) ~ (1|trap_name) 
+  + (1|stand_ID) + 
+    (1|patch_name) + stand_type_ord, 
   family =poisson(), data = stand_ID_filtered)
-summary(model_complete_4)
+summary(brm_model_1)
+
+plot_predictions(brm_model_1, condition = "stand_type_ord")
+
+#taking the same model as above (adding 'Year') and adding the censored
+#data to it
+#'I have data that is "right censored". This is because each of my data points
+#'is either a complete or a partial count. The partial data indicates 
+#'a minimum value, where the actual value is necessarily above the available
+#'data, we just don't know by how much. 
+
+brm_model_2 <- brm(
+  total_moth_count|cens(censored) ~ (1|trap_name) 
+  + (1|stand_ID) + Year +
+    (1|patch_name) + stand_type_ord, 
+  family =poisson(), data = stand_ID_filtered)
+summary(brm_model_2)
 
 
-check_overdispersion(model_complete_4)
-check_model(model_complete_4)
+plot_predictions(brm_model_2, condition = "stand_type_ord")
 
+##same as above, but for 'model_complete_3' using random slopes as well as 
+#an intercept 
 
+brm_model_3 <- brm(
+  total_moth_count|cens(censored) ~ (1|trap_name) 
+  + (1|stand_ID) + Year +
+    (1+stand_type_ord|patch_name) + stand_type_ord, 
+  family =poisson(), data = stand_ID_filtered)
+#control = list(adapt_delta = 0.999, stepsize = 0.001, max_treedepth = 20)
+summary(brm_model_3)
+
+#help('isSingular')
+
+plot_predictions(brm_model_3, condition = "stand_type_ord")
