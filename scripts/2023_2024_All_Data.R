@@ -5,6 +5,7 @@ library(tidyverse)
 library(lme4)
 library(performance)
 library(summarytools)
+library(ggeffects)
 
 
 complete_2023_2024 <- read.csv("input/2023_2024_all_moth_counts.csv")
@@ -287,16 +288,75 @@ print (p_1)
 # performance::check_model(model_complete_poisson)
 
 
+
+# Oak and Pine Models -----------------------------------------------------
+
+#Poisson, using all levels of data collection as a random effect, except Oak
+#which is being fitted as a fixed effect
+model_complete_poisson_oak <- glmer(
+  round(clean_complete) ~ (1|trap_name) +
+    (Percent_Oak) + (1|patch_name),
+  family =poisson(), data = stand_ID_filtered)
+summary(model_complete_poisson_oak)
+
+
+performance::check_overdispersion(model_complete_poisson_oak)
+performance::check_model(model_complete_poisson_oak)
+
+#Poisson, using all levels of data collection as a random effect, except Pine
+#which is being fitted as a fixed effect
+model_complete_poisson_pine <- glmer(
+  round(clean_complete) ~ (1|trap_name) +
+    (Percent_Pine) + (1|patch_name),
+  family =poisson(), data = stand_ID_filtered)
+summary(model_complete_poisson_pine)
+
+
+performance::check_overdispersion(model_complete_poisson_pine)
+performance::check_model(model_complete_poisson_pine)
+
+
+#model for Oak and Pine together
+model_both <- glmer(round(clean_complete) ~ Percent_Pine + Percent_Oak + 
+                      (1 | trap_name) + (1 | patch_name), 
+                    data = stand_ID_filtered, family = poisson)
+
+summary(model_both)
+performance::check_overdispersion(model_both)
+
+#model for Oak and Pine together, adding an interaction of oak & pine
+model_both_2 <- glmer(round(clean_complete) ~ Percent_Pine + Percent_Oak + 
+                      (1 | trap_name) + (1 | patch_name) + 
+                      (Percent_Pine * Percent_Oak), 
+                    data = stand_ID_filtered, family = poisson)
+
+summary(model_both_2)
+performance::check_overdispersion(model_both_2)
+
+
+
+ggplot(stand_ID_filtered, aes(x = Percent_Oak, y = clean_complete)) +
+  geom_point(alpha = 0.5) +
+  stat_smooth(method = "glm", method.args = list(family = "poisson"), 
+              se = TRUE, color = "darkgreen") +
+  labs(
+    title = "Effect of Percent Oak on Moth Counts",
+    x = "% Oak Cover",
+    y = "Moth Count"
+  ) +
+  theme_minimal()
+
+
 ##Negative binomial, with all levels, except the lowest (trap name)
-##Worked, in comparison to Poisson model, but still gave a message of 
+##Worked, in comparison to Poisson model, but still gave a message of
 ##having 50 or more warnings
 ##If Poisson and NB are the same, can just use Poisson
 
-# model_complete_nb <- glmer.nb(round(clean_complete) ~ (1|stand_ID)  + 
-#                              (1|patch_name), family =nbinom2(), 
+# model_complete_nb <- glmer.nb(round(clean_complete) ~ (1|stand_ID)  +
+#                              (1|patch_name), family =nbinom2(),
 #                      data = stand_ID_filtered)
 # summary(model_complete_nb)
-# 
+#
 # performance::check_overdispersion(model_complete_nb)
 # performance::check_model(model_complete_nb)
 
@@ -326,6 +386,7 @@ summary(model_complete_poisson_2)
 
 performance::check_overdispersion(model_complete_poisson_2)
 performance::check_model(model_complete_poisson_2)
+
 
 ##using the 'marginaleffects' package, we can run model-based predictions 
 #(prediction => outcome expected by a fitted model for a given combination
@@ -402,7 +463,7 @@ brm_model_2 <- brm(
   total_moth_count|cens(censored) ~ (1|trap_name) 
   + (1|stand_ID) + Year +
     (1|patch_name) + stand_type_ord, 
-  family =poisson(), data = stand_ID_filtered)
+  family =poisson(), data = stand_ID_filtered, iter = 4000)
 summary(brm_model_2)
 
 
@@ -415,10 +476,17 @@ brm_model_3 <- brm(
   total_moth_count|cens(censored) ~ (1|trap_name) 
   + (1|stand_ID) + Year +
     (1+stand_type_ord|patch_name) + stand_type_ord, 
-  family =poisson(), data = stand_ID_filtered)
+  family =poisson(), data = stand_ID_filtered, iter = 4000,
+  control = list(adapt_delta = 0.999, stepsize = 0.001, max_treedepth = 20)
+)
 #control = list(adapt_delta = 0.999, stepsize = 0.001, max_treedepth = 20)
 summary(brm_model_3)
 
 #help('isSingular')
 
 plot_predictions(brm_model_3, condition = "stand_type_ord")
+
+loo_2 <- loo(brm_model_2)
+loo_3 <- loo(brm_model_3)
+loo_compare(loo_2, loo_3)
+
