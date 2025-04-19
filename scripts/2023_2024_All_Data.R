@@ -377,6 +377,31 @@ AIC(all_variables_model)
 #checking for multicollinearity between variables
 vif(all_variables_model)
 
+# checking for co-variation between numberic predictors
+#in a Pearson correlation matrix
+numeric_vars <- stand_ID_filtered[, c("Percent_Oak", "Percent_Pine", "longitude", 
+                                      "forest_area_km2", "stand_area_ha")]
+# Correlation matrix
+cor(numeric_vars, use = "complete.obs")
+
+#checking for interaction between oak and landscape type
+interaction_model <- lm(clean_complete ~ Percent_Oak * landscape_type + 
+                          Percent_Pine + longitude + forest_area_km2 + stand_area_ha, 
+                        data = stand_ID_filtered)
+summary(interaction_model)
+AIC(interaction_model)
+
+ggplot(stand_ID_filtered, aes(x = Percent_Oak, y = clean_complete, color = landscape_type)) +
+  geom_point(alpha = 0.6) +  # Add raw data points with transparency
+  geom_smooth(method = "lm", se = FALSE) +  # Add regression lines by group
+  theme_minimal() +
+  labs(
+    title = "Interaction: Effect of Percent Oak on Clean Complete by Landscape Type",
+    x = "Percent Oak",
+    y = "Clean Complete",
+    color = "Landscape Type"
+  )
+
 # Contrasts ---------------------------------------------------------------
 ## Use Polynomial Contrast, which is an appropriate option for determining an
 ##intercept when the x-axis follows a sequence (Oak to Pine proportions).
