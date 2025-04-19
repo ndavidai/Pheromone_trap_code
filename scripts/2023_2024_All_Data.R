@@ -6,6 +6,9 @@ library(lme4)
 library(performance)
 library(summarytools)
 library(ggeffects)
+library(marginaleffects)
+library(brms)
+library(car)
 
 
 complete_2023_2024 <- read.csv("input/2023_2024_all_moth_counts.csv")
@@ -360,6 +363,19 @@ ggplot(stand_ID_filtered, aes(x = Percent_Oak, y = clean_complete)) +
 # performance::check_overdispersion(model_complete_nb)
 # performance::check_model(model_complete_nb)
 
+
+# All Variables -----------------------------------------------------------
+
+##Fitting a linear model with all of the possible response variables, to 
+#explore a correlation between all possible variables and moth counts
+all_variables_model <- lm(clean_complete ~  Percent_Oak + Percent_Pine + 
+              landscape_type + longitude + forest_area_km2 + stand_area_ha, 
+              data = stand_ID_filtered)
+summary(all_variables_model)
+AIC(all_variables_model)
+
+#checking for multicollinearity between variables
+vif(all_variables_model)
 
 # Contrasts ---------------------------------------------------------------
 ## Use Polynomial Contrast, which is an appropriate option for determining an
