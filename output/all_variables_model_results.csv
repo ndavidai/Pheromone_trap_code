@@ -1,0 +1,9 @@
+"term","estimate","std.error","statistic","p.value"
+"(Intercept)",45.3343,447.2763,0.1014,0.9194
+"Percent_Oak",53.9611,19.8437,2.7193,0.0072
+"Percent_Pine",38.3415,20.1926,1.8988,0.0592
+"landscape_typeforest ",26.0092,12.5025,2.0803,0.0389
+"landscape_typeurban",-13.142,11.9139,-1.1031,0.2715
+"longitude",0.3119,6.1184,0.051,0.9594
+"forest_area_km2",-0.0282,0.0156,-1.8146,0.0712
+"stand_area_ha",1.3013,1.0883,1.1958,0.2333

@@ -1,0 +1,27 @@
+
+Call:
+lm(formula = clean_complete ~ Percent_Oak + Percent_Pine + landscape_type + 
+    longitude + forest_area_km2 + stand_area_ha, data = stand_ID_filtered)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+-72.57 -33.67 -10.56  22.70 296.01 
+
+Coefficients:
+                       Estimate Std. Error t value Pr(>|t|)   
+(Intercept)            45.33425  447.27628   0.101  0.91938   
+Percent_Oak            53.96111   19.84370   2.719  0.00718 **
+Percent_Pine           38.34154   20.19256   1.899  0.05917 . 
+landscape_typeforest   26.00915   12.50253   2.080  0.03890 * 
+landscape_typeurban   -13.14196   11.91391  -1.103  0.27145   
+longitude               0.31189    6.11840   0.051  0.95940   
+forest_area_km2        -0.02823    0.01556  -1.815  0.07124 . 
+stand_area_ha           1.30133    1.08827   1.196  0.23334   
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 51.82 on 182 degrees of freedom
+  (55 observations deleted due to missingness)
+Multiple R-squared:  0.1144,	Adjusted R-squared:  0.08037 
+F-statistic:  3.36 on 7 and 182 DF,  p-value: 0.002153
+

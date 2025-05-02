@@ -9,6 +9,9 @@ library(ggeffects)
 library(marginaleffects)
 library(brms)
 library(car)
+library(viridis)
+library(broom)
+library(knitr)
 
 
 complete_2023_2024 <- read.csv("input/2023_2024_all_moth_counts.csv")
@@ -59,7 +62,7 @@ unique(stand_category_filtered$stand_category)
 
 #check to see the distribution of moth count data
 hist(complete_2023_2024$clean_complete, 
-          main = "Histogram of Moth count", 
+          main = " ", 
           xlab = "Spongy moth", 
           ylab = "Frequency", 
           col = "darkblue", 
@@ -318,7 +321,6 @@ summary(model_complete_poisson_pine)
 performance::check_overdispersion(model_complete_poisson_pine)
 performance::check_model(model_complete_poisson_pine)
 
-
 #model for Oak and Pine together
 model_both <- glmer(round(clean_complete) ~ Percent_Pine + Percent_Oak + 
                       (1 | trap_name) + (1 | patch_name), 
@@ -350,6 +352,46 @@ ggplot(stand_ID_filtered, aes(x = Percent_Oak, y = clean_complete)) +
   theme_minimal()
 
 
+# Checking Maple ----------------------------------------------------------
+
+#Poisson, using all levels of data collection as a random effect, except Maple
+#which is being fitted as a fixed effect
+model_complete_poisson_maple <- glmer(
+  round(clean_complete) ~ (1|trap_name) +
+    (Percent_Maple) + (1|patch_name),
+  family =poisson(), data = stand_ID_filtered)
+summary(model_complete_poisson_maple)
+
+performance::check_overdispersion(model_complete_poisson_maple)
+performance::check_model(model_complete_poisson_maple)
+
+#model for Oak and Maple together
+model_oak_maple <- glmer(round(clean_complete) ~ Percent_Maple + Percent_Oak + 
+                      (1 | trap_name) + (1 | patch_name), 
+                    data = stand_ID_filtered, family = poisson)
+
+summary(model_oak_maple)
+performance::check_overdispersion(model_oak_maple)
+
+#model for Oak and Maple together, adding an interaction of oak & maple
+model_oak_maple_2 <- glmer(round(clean_complete) ~ Percent_Maple + 
+                             Percent_Oak + 
+                        (1 | trap_name) + (1 | patch_name) + 
+                        (Percent_Maple * Percent_Oak), 
+                      data = stand_ID_filtered, family = poisson)
+
+summary(model_oak_maple_2)
+performance::check_overdispersion(model_oak_maple_2)
+
+#model for Oak, Maple, and Pine together
+model_all <- glmer(round(clean_complete) ~ Percent_Maple + Percent_Oak + 
+                           Percent_Pine + (1 | trap_name) + (1 | patch_name), 
+                         data = stand_ID_filtered, family = poisson)
+
+summary(model_all)
+performance::check_overdispersion(model_all)
+
+
 ##Negative binomial, with all levels, except the lowest (trap name)
 ##Worked, in comparison to Poisson model, but still gave a message of
 ##having 50 or more warnings
@@ -374,6 +416,41 @@ all_variables_model <- lm(clean_complete ~  Percent_Oak + Percent_Pine +
 summary(all_variables_model)
 AIC(all_variables_model)
 
+print(summary(all_variables_model))
+
+# Tidy up the coefficient table and round
+tidy_part <- tidy(all_variables_model)
+tidy_part[, -1] <- round(tidy_part[, -1], 3)
+
+# Model fit stats (like R-squared)
+glance_part <- glance(all_variables_model)
+glance_part <- round(glance_part, 3)
+
+# Save both to a nicely formatted markdown file
+sink("all_variables_model_summary.txt")
+
+cat("## Coefficients:\n")
+print(kable(tidy_part, format = "markdown"))
+
+cat("\n## Model Fit Statistics:\n")
+print(kable(glance_part, format = "markdown"))
+
+sink()
+
+
+# Save it as a CSV file
+# Tidy the model and round numeric columns
+tidy_model <- tidy(all_variables_model)
+
+# Round all numeric columns (except the term column) to 3 decimal places
+tidy_model[ , -1] <- round(tidy_model[ , -1], 4)
+
+# Print a clean table to the console or a markdown/HTML-friendly output
+kable(tidy_model, digits = 4, caption = "all_variables_model_results.csv")
+
+write.csv(tidy_model, "all_variables_model_results.csv", row.names = FALSE)
+
+
 #checking for multicollinearity between variables
 vif(all_variables_model)
 
@@ -396,11 +473,12 @@ ggplot(stand_ID_filtered, aes(x = Percent_Oak, y = clean_complete, color = lands
   geom_smooth(method = "lm", se = FALSE) +  # Add regression lines by group
   theme_minimal() +
   labs(
-    title = "Interaction: Effect of Percent Oak on Clean Complete by Landscape Type",
+    title = " ",
     x = "Percent Oak",
-    y = "Clean Complete",
+    y = "Moth Counts",
     color = "Landscape Type"
-  )
+  ) +
+  scale_color_viridis_d(option = "D")  # You can also try options "A", "B", "C", "E"
 
 # Contrasts ---------------------------------------------------------------
 ## Use Polynomial Contrast, which is an appropriate option for determining an
