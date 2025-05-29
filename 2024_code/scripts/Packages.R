@@ -11,6 +11,8 @@
 #install.packages("Matrix", type = "source")
 #install.packages("lme4", type = "source")
 
+install.packages("kableExtra")
+
 
 #Packages to load
 #There is code at the top of 2024_Data_Cleaning.R that runs these packages
@@ -43,6 +45,7 @@ library(MetBrewer)
 library(marginaleffects)
 library(brms)
 negative.binomial(10)
+library(kableExtra)
 
 #####
 

@@ -12,6 +12,9 @@ library(car)
 library(viridis)
 library(broom)
 library(knitr)
+library(dplyr)
+library(kableExtra)
+library(gt)
 
 
 complete_2023_2024 <- read.csv("input/2023_2024_all_moth_counts.csv")
@@ -108,6 +111,45 @@ ggplot(contingency_df, aes(x = Var1, y = Var2, fill = Freq)) +
 
 # Save the plot as an image (e.g., PNG)
 #ggsave("contingency_table_heatmap.png", width = 7.5, height = 6)
+
+#convert the data in the heatmap plot to a table format
+wide_table <- contingency_df %>%
+  pivot_wider(names_from = Var1, values_from = Freq, values_fill = 0)
+
+print(wide_table)
+
+gt_table <- wide_table %>%
+  gt() %>%
+  cols_label(
+    Var2 = "Patch Name"
+  ) %>%
+  tab_options(
+    table.font.size = 12,
+    heading.title.font.size = 16,
+    heading.subtitle.font.size = 14
+  ) %>%
+  cols_align(
+    align = "center",
+    columns = everything()
+  ) %>%
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = cells_column_labels(everything())
+  ) %>%
+  tab_style(  # Custom striping on even-numbered rows
+    style = cell_fill(color = "#f9f9f0"),  # You can change this color
+    locations = cells_body(rows = seq(2, nrow(wide_table), 2))
+  )
+
+gtsave(gt_table, "heatmap_table.png")      # Image
+gtsave(gt_table, "heatmap_table.html")     # Web preview
+
+
+kable(wide_table, format = "latex", booktabs = TRUE, caption = "Heatmap Table") %>%
+  kable_styling(latex_options = c("striped", "hold_position"))
+
+ggsave("kable", width = 7.5, height = 6)
+
 
 
 # Summary statistics for moth count by stand_category and stand_type
