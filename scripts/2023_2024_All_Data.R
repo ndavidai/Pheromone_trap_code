@@ -116,6 +116,23 @@ ggplot(contingency_df, aes(x = Var1, y = Var2, fill = Freq)) +
 wide_table <- contingency_df %>%
   pivot_wider(names_from = Var1, values_from = Freq, values_fill = 0)
 
+wide_table <- wide_table %>%
+  mutate(
+    Var2 = trimws(as.character(Var2)),
+    Var2 = dplyr::recode(Var2,
+                          "Mont_Gauvin/Glen" = "Mont Gauvin",
+                          "Mont_Royal" = "Mont Royal",
+                          "Mont_Saint_Bruno" = "Mont Saint Bruno",
+                          "Mont_Saint_Hilaire" = "Mont Saint Hilaire",
+                          "Notre_Dame_de_Bonsecours" = "Notre Dame de Bonsecours",
+                          "Oka" = "Parc Oka",
+                          "Orford" = "Mont Orford",
+                          "Parc_Michel_Chartrand" = "Parc Michel Chartrand",
+                          "Parc_Pointe_aux_Prairies" = "Parc Pointe aux Prairies",
+                          "Rigaud" = "Mont Rigaud",
+                         ))
+
+
 print(wide_table)
 
 gt_table <- wide_table %>%
@@ -144,9 +161,12 @@ gt_table <- wide_table %>%
 gtsave(gt_table, "heatmap_table.png")      # Image
 gtsave(gt_table, "heatmap_table.html")     # Web preview
 
+version$version.string
+
 
 kable(wide_table, format = "latex", booktabs = TRUE, caption = "Heatmap Table") %>%
   kable_styling(latex_options = c("striped", "hold_position"))
+
 
 ggsave("kable", width = 7.5, height = 6)
 
@@ -586,6 +606,21 @@ plot_predictions(model_complete_3, condition = "stand_type_ord")
 # performance::check_overdispersion(model_complete_4)
 # performance::check_model(model_complete_4)
 
+
+# Citations ---------------------------------------------------------------
+
+##   @Manual{,
+##     title = {R: A Language and Environment for Statistical Computing},
+##     author = {{R Core Team}},
+##     organization = {R Foundation for Statistical Computing},
+##     address = {Vienna, Austria},
+##     year = {2021},
+##     url = {https://www.R-project.org/},
+##   }
+
+version$version.string
+
+citation("lme4")
 
 # Censored data - brms ----------------------------------------------------
 
