@@ -135,6 +135,18 @@ wide_table <- wide_table %>%
 
 print(wide_table)
 
+patch_order <- c("Papineauville", "Montebello", "Notre Dame de Bonsecours",
+                 "Kenauk", "Brownsburg", "Mont Rigaud", "Parc Oka",
+                 "Mont Royal",
+                 "Parc Pointe aux Prairies", "Parc Michel Chartrand",
+                 "Mont Saint Bruno", "Mont Saint Hilaire","Mont Gauvin",
+                 "Mont Orford", "Hatley")
+wide_table <- wide_table %>%
+  mutate(Var2 = factor(Var2, levels = patch_order)) %>%
+  arrange(Var2)
+
+print(wide_table)
+
 gt_table <- wide_table %>%
   gt() %>%
   cols_label(
@@ -164,11 +176,6 @@ gtsave(gt_table, "heatmap_table.html")     # Web preview
 version$version.string
 
 
-kable(wide_table, format = "latex", booktabs = TRUE, caption = "Heatmap Table") %>%
-  kable_styling(latex_options = c("striped", "hold_position"))
-
-
-ggsave("kable", width = 7.5, height = 6)
 
 
 
@@ -472,6 +479,8 @@ performance::check_overdispersion(model_all)
 
 ##Fitting a linear model with all of the possible response variables, to 
 #explore a correlation between all possible variables and moth counts
+
+
 all_variables_model <- lm(clean_complete ~  Percent_Oak + Percent_Pine + 
               landscape_type + longitude + forest_area_km2 + stand_area_ha, 
               data = stand_ID_filtered)
@@ -529,6 +538,20 @@ interaction_model <- lm(clean_complete ~ Percent_Oak * landscape_type +
                         data = stand_ID_filtered)
 summary(interaction_model)
 AIC(interaction_model)
+performance::check_overdispersion(interaction_model)
+
+#checking for interaction between oak and landscape type, with a glm model
+interaction_model_glm <- glmer(round(clean_complete) ~ 
+                                 Percent_Oak * landscape_type + 
+                                 Percent_Pine + 
+                      (1 | trap_name) + (1 | patch_name), 
+                    data = stand_ID_filtered, family = poisson)
+
+summary(interaction_model_glm)
+AIC(interaction_model_glm)
+performance::check_overdispersion(interaction_model_glm)
+performance::check_model(interaction_model_glm)
+
 
 ggplot(stand_ID_filtered, aes(x = Percent_Oak, y = clean_complete, color = landscape_type)) +
   geom_point(alpha = 0.6) +  # Add raw data points with transparency
@@ -605,6 +628,31 @@ plot_predictions(model_complete_3, condition = "stand_type_ord")
 # 
 # performance::check_overdispersion(model_complete_4)
 # performance::check_model(model_complete_4)
+
+# Heatmap oak/pine spectrum -----------------------------------------------
+
+# Create the 'oak/pine spectrum' table
+table(stand_category_filtered$Percent_Oak, 
+      stand_category_filtered$Percent_Pine)
+
+# Create the contingency table
+contingency_table <- table(stand_type_filtered$Percent_Oak, 
+                           stand_type_filtered$Percent_Pine)
+
+# Convert the table to a data frame
+contingency_df <- as.data.frame(contingency_table)
+
+# Create a plot (heatmap) of the contingency table
+contingency_df 
+
+ggplot(contingency_df, aes(x = Var1, y = Var2, fill = Freq)) +
+  geom_tile() +
+  scale_fill_gradient(low = "white", high = "darkred") +
+  labs(x = "Proportion Oak", y = "Proportion Pine", fill = "Frequency") +
+  theme_minimal()
+
+# Save the plot as an image (e.g., PNG)
+#ggsave("oak_pine_heatmap.png", width = 7.5, height = 6)
 
 
 # Citations ---------------------------------------------------------------
