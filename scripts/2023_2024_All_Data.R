@@ -15,6 +15,8 @@ library(knitr)
 library(dplyr)
 library(kableExtra)
 library(gt)
+library(modelsummary)
+library(sjPlot)
 
 
 complete_2023_2024 <- read.csv("input/2023_2024_all_moth_counts.csv")
@@ -66,7 +68,7 @@ unique(stand_category_filtered$stand_category)
 #check to see the distribution of moth count data
 hist(complete_2023_2024$clean_complete, 
           main = " ", 
-          xlab = "Spongy moth", 
+          xlab = "Spongy moth count/trap", 
           ylab = "Frequency", 
           col = "darkblue", 
           border = "black")
@@ -133,7 +135,7 @@ wide_table <- wide_table %>%
                          ))
 
 
-print(wide_table)
+##print(wide_table)
 
 patch_order <- c("Papineauville", "Montebello", "Notre Dame de Bonsecours",
                  "Kenauk", "Brownsburg", "Mont Rigaud", "Parc Oka",
@@ -145,7 +147,7 @@ wide_table <- wide_table %>%
   mutate(Var2 = factor(Var2, levels = patch_order)) %>%
   arrange(Var2)
 
-print(wide_table)
+##print(wide_table)
 
 gt_table <- wide_table %>%
   gt() %>%
@@ -170,8 +172,8 @@ gt_table <- wide_table %>%
     locations = cells_body(rows = seq(2, nrow(wide_table), 2))
   )
 
-gtsave(gt_table, "heatmap_table.png")      # Image
-gtsave(gt_table, "heatmap_table.html")     # Web preview
+##gtsave(gt_table, "heatmap_table.png")      # Image
+##gtsave(gt_table, "heatmap_table.html")     # Web preview
 
 version$version.string
 
@@ -189,7 +191,7 @@ summary_stats <- stand_type_filtered %>%
     count = n()
   )
 
-print(summary_stats, n=22)
+##print(summary_stats, n=22)
 
 
 # Summary statistics moth count by stand_category only
@@ -226,7 +228,7 @@ summary_stats_3$count <- round(summary_stats_3$n_obs, 2)
 
 
 # Convert the table to a data frame
-summary_table <- as.data.frame(summary_stats_3)
+#summary_table <- as.data.frame(summary_stats_3)
 
 # Save it as a CSV file
 #write.csv(summary_table, file = "Summary Stats by Stand Type.csv", 
@@ -481,56 +483,103 @@ performance::check_overdispersion(model_all)
 #explore a correlation between all possible variables and moth counts
 
 
-all_variables_model <- lm(clean_complete ~  Percent_Oak + Percent_Pine + 
-              landscape_type + longitude + forest_area_km2 + stand_area_ha, 
-              data = stand_ID_filtered)
-summary(all_variables_model)
-AIC(all_variables_model)
+#all_variables_model <- lm(clean_complete ~  Percent_Oak + Percent_Pine + 
+#              landscape_type + longitude + forest_area_km2 + stand_area_ha, 
+#              data = stand_ID_filtered)
+#summary(all_variables_model)
+#AIC(all_variables_model)
 
-print(summary(all_variables_model))
+#print(summary(all_variables_model))
+
+#checking for multicollinearity between variables
+#the vif method is appropriate for linear models (lm, glm)
+#vif(all_variables_model)
 
 # Tidy up the coefficient table and round
-tidy_part <- tidy(all_variables_model)
-tidy_part[, -1] <- round(tidy_part[, -1], 3)
+#tidy_part <- tidy(all_variables_model)
+#tidy_part[, -1] <- round(tidy_part[, -1], 3)
 
 # Model fit stats (like R-squared)
-glance_part <- glance(all_variables_model)
-glance_part <- round(glance_part, 3)
+#glance_part <- glance(all_variables_model)
+#glance_part <- round(glance_part, 3)
 
 # Save both to a nicely formatted markdown file
-sink("all_variables_model_summary.txt")
+#sink("all_variables_model_summary.txt")
 
-cat("## Coefficients:\n")
-print(kable(tidy_part, format = "markdown"))
+#cat("## Coefficients:\n")
+#print(kable(tidy_part, format = "markdown"))
 
-cat("\n## Model Fit Statistics:\n")
-print(kable(glance_part, format = "markdown"))
+#cat("\n## Model Fit Statistics:\n")
+#print(kable(glance_part, format = "markdown"))
 
-sink()
+#sink()
 
 
 # Save it as a CSV file
 # Tidy the model and round numeric columns
-tidy_model <- tidy(all_variables_model)
+#tidy_model <- tidy(all_variables_model)
 
 # Round all numeric columns (except the term column) to 3 decimal places
-tidy_model[ , -1] <- round(tidy_model[ , -1], 4)
+#tidy_model[ , -1] <- round(tidy_model[ , -1], 4)
 
 # Print a clean table to the console or a markdown/HTML-friendly output
-kable(tidy_model, digits = 4, caption = "all_variables_model_results.csv")
+#kable(tidy_model, digits = 4, caption = "all_variables_model_results.csv")
 
-write.csv(tidy_model, "all_variables_model_results.csv", row.names = FALSE)
+#write.csv(tidy_model, "all_variables_model_results.csv", row.names = FALSE)
 
 
-#checking for multicollinearity between variables
-vif(all_variables_model)
 
-# checking for co-variation between numberic predictors
+##Fitting a poisson model with all of the possible response variables, to 
+#explore a correlation between all possible variables and moth counts
+
+all_variables_poisson <- glmer(round(clean_complete) ~ (1|trap_name) + 
+              Percent_Oak + Percent_Pine + landscape_type + longitude + 
+              forest_area_km2 + stand_area_ha + (1|patch_name),
+              family = poisson(), data = stand_ID_filtered)
+
+summary(all_variables_poisson)
+AIC(all_variables_poisson)
+
+print(summary(all_variables_poisson))
+
+tab_model(all_variables_poisson,
+          show.ci = FALSE,     # hide CI since you only want SE & p
+          show.stat = TRUE,    # show test statistics
+          p.style = "numeric") # show numeric p-values
+
+
+# Print a clean table to the console or a markdown/HTML-friendly output
+# Save directly to a file
+#tab_model(all_variables_poisson,
+#          show.stat = TRUE,
+#          p.style = "numeric",
+#          file = "model_summary.doc")   # can be .doc, .html, .htm
+
+#checking for collinearity between variables
+#using the 'performance' package, which is built for linear 
+#mixed models (glmer)
+collinearity <- check_collinearity(all_variables_poisson)
+print(collinearity)
+
+# Convert to a regular data frame
+col_df <- as.data.frame(collinearity)
+print(col_df)
+
+write.csv(as.data.frame(collinearity),
+          "Multicollinearity check (VIF).csv",
+          row.names = FALSE)
+
+
+# checking for co-variation between numeric predictors
 #in a Pearson correlation matrix
 numeric_vars <- stand_ID_filtered[, c("Percent_Oak", "Percent_Pine", "longitude", 
                                       "forest_area_km2", "stand_area_ha")]
 # Correlation matrix
 cor(numeric_vars, use = "complete.obs")
+
+write.csv(cor, "correlation_matrix.csv", row.names = TRUE)
+
+
 
 #checking for interaction between oak and landscape type
 interaction_model <- lm(clean_complete ~ Percent_Oak * landscape_type + 
