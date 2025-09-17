@@ -3,9 +3,9 @@
 #### using cleaned data originally called "moth_counts_2" from the script "Pheromone Trap Analyses" ####
 ## with assistance from QCBS workshop https://r.qcbs.ca/workshop08/pres-en/workshop08-pres-en.html#1
 
-install.packages("ggplot2")
-install.packages("mgcv")
-install.packages("itsadug")
+#install.packages("ggplot2")
+#install.packages("mgcv")
+#install.packages("itsadug")
 
 library(ggplot2)
 library(mgcv)
@@ -17,7 +17,7 @@ library(mgcv, quietly = TRUE)
 
 #loading data 
 
-moth_GAM <- read.csv("input/moth_glm.csv")
+moth_GAM <- read.csv("input/old/moth_glm.csv")
 
 summary(moth_GAM)
 str(moth_GAM)

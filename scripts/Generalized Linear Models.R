@@ -6,7 +6,7 @@
 
 #loading data 
 
-moth_glm <- read.csv("input/moth_counts_stats.csv")
+moth_glm <- read.csv("input/old/moth_counts_stats.csv")
 
 
 
@@ -15,6 +15,8 @@ library(MASS)
 library(ggplot2)
 library(forcats)
 library(mgcv)
+library(modelsummary)
+library(pandoc)
 negative.binomial(10) 
 
 # quick visualizations
@@ -38,7 +40,7 @@ unique(moth_glm$prop_oak)
 moth_glm$total_continuous <- round(moth_glm$total_continuous)
 moth_glm$patch_name <- factor(moth_glm$patch_name)
 #export this data 
-write.csv(moth_glm, file = "input/moth_glm.csv", row.names = FALSE)
+#write.csv(moth_glm, file = "input/moth_glm.csv", row.names = FALSE)
 
 #using the glm.nb function from the MASS package to estimate a negative binomial regression
 
@@ -148,9 +150,24 @@ summary(m6)
 AIC(m6)
 
 # left with oaks and pines as the best-fit model for a none-mixed model (lowest AIC and p-value)
-m6 <- lm(total_continuous ~  prop_oak + x_pinus , data = moth_glm)
+m7 <- lm(total_continuous ~  prop_oak + x_pinus , data = moth_glm)
+summary(m7)
+AIC(m7)
+
 summary(m6)
-AIC(m6)
+summary(m7)
+
+#make a comparison table of m6 and m7, the models with the signficant results
+modelsummary(list(m6,m7))
+
+modelsummary(
+  list("All Variables" = m6, "Oak and Pine" = m7),
+  statistic = c("std.error", "p.value"),
+  stars = TRUE
+)
+
+modelsummary(list("All Variables" = m6, "Oak and Pine" = m7), statistic = c("std.error", "p.value"),
+             stars = TRUE, output = "year_1_model_comparison.docx")
 
 # correlation test between different continuous variables
 cor.test(moth_glm$prop_oak, moth_glm$x_pinus)

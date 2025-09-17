@@ -5,23 +5,23 @@
 ## worked with Eric looking over script and results
 #loading data 
 
-moth_LMM <- read.csv("input/moth_glm.csv")
+moth_LMM <- read.csv("input/old/moth_glm.csv")
 
-install.packages(c("lme4",
-                   "Matrix",
-                   "MASS",
-                   "vcdExtra",
-                   "bbmle",
-                   "MuMIn",
-                   "ggplot2",
-                   "DescTools",
-                   "remotes",
-                   "gridExtra",
-                   "lattice"))
+#install.packages(c("lme4",
+#                   "Matrix",
+#                    "MASS",
+#                   "vcdExtra",
+#                   "bbmle",
+#                   "MuMIn",
+#                   "ggplot2",
+#                   "DescTools",
+#                   "remotes",
+#                   "gridExtra",
+#                   "lattice"))
 
-options(repos = c(CRAN = "https://cloud.r-project.org"))
-utils::install.packages("Matrix")
-utils::install.packages("lme4")
+#options(repos = c(CRAN = "https://cloud.r-project.org"))
+#utils::install.packages("Matrix")
+#utils::install.packages("lme4")
 
 library(Matrix)
 library(lme4)

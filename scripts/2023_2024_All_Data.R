@@ -614,10 +614,10 @@ tab_model(interaction_model_glm,
 
 # Print a clean table to the console or a markdown/HTML-friendly output
 # Save directly to a file
-tab_model(interaction_model_glm,
-         show.stat = TRUE,
-          p.style = "numeric",
-          file = "interaction_model_summary.doc")   # can be .doc, .html, .htm
+#tab_model(interaction_model_glm,
+#         show.stat = TRUE,
+#          p.style = "numeric",
+#          file = "interaction_model_summary.doc")   # can be .doc, .html, .htm
 
 
 ggplot(stand_ID_filtered, aes(x = Percent_Oak, y = clean_complete, color = landscape_type)) +
