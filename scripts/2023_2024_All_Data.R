@@ -565,9 +565,9 @@ print(collinearity)
 col_df <- as.data.frame(collinearity)
 print(col_df)
 
-write.csv(as.data.frame(collinearity),
-          "Multicollinearity check (VIF).csv",
-          row.names = FALSE)
+#write.csv(as.data.frame(collinearity),
+ #         "Multicollinearity check (VIF).csv",
+ #         row.names = FALSE)
 
 
 # checking for co-variation between numeric predictors
@@ -577,8 +577,13 @@ numeric_vars <- stand_ID_filtered[, c("Percent_Oak", "Percent_Pine", "longitude"
 # Correlation matrix
 cor(numeric_vars, use = "complete.obs")
 
-write.csv(cor, "correlation_matrix.csv", row.names = TRUE)
+library(gt)
 
+cor_mat <- cor(numeric_vars, use = "complete.obs")
+cor_df <- as.data.frame(round(cor_mat, 3))
+cor_df |> gt::gt() |> gt::tab_caption("Correlation Matrix")
+
+#write.csv(cor_df, "correlation_matrix.csv", row.names = TRUE)
 
 
 #checking for interaction between oak and landscape type
@@ -600,6 +605,19 @@ summary(interaction_model_glm)
 AIC(interaction_model_glm)
 performance::check_overdispersion(interaction_model_glm)
 performance::check_model(interaction_model_glm)
+
+tab_model(interaction_model_glm,
+          show.ci = FALSE,     # hide CI since you only want SE & p
+          show.stat = TRUE,    # show test statistics
+          p.style = "numeric") # show numeric p-values
+
+
+# Print a clean table to the console or a markdown/HTML-friendly output
+# Save directly to a file
+tab_model(interaction_model_glm,
+         show.stat = TRUE,
+          p.style = "numeric",
+          file = "interaction_model_summary.doc")   # can be .doc, .html, .htm
 
 
 ggplot(stand_ID_filtered, aes(x = Percent_Oak, y = clean_complete, color = landscape_type)) +
