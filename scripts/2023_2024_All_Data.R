@@ -65,6 +65,26 @@ unique(stand_category_filtered$stand_category)
 
 # Data Summaries ----------------------------------------------------------
 
+total_moths_2023_2024 <- sum(complete_2023_2024$clean_complete, na.rm = TRUE)
+print(total_moths_2023_2024)
+
+n_distinct(complete_2023_2024$trap_name)
+
+n_distinct(stand_ID_filtered$stand_ID)
+
+n_distinct(stand_ID_filtered$patch_name)
+
+
+total_traps_2023_2024 <- sum(complete_2023_2024$trap_name, na.rm = TRUE)
+print(total_traps_2023_2024)
+
+total_stands_2023_2024 <- sum(stand_ID_filtered$stand_ID, na.rm = TRUE)
+print(total_stands_2023_2024)
+
+total_patches_2023_2024 <- sum(stand_ID_filtered$patch_name, na.rm = TRUE)
+print(total_patches_2023_2024)
+
+
 #check to see the distribution of moth count data
 hist(complete_2023_2024$clean_complete, 
           main = " ", 
