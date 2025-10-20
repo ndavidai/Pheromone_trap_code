@@ -1,6 +1,13 @@
 
 #### 21-02-25
 
+#install.packages("glmmTMB", type = "source")
+#install.packages("glmmTMB", type = "source", repos = "https://cloud.r-project.org")
+#install.packages("remotes")
+#remotes::install_version("TMB", version = "1.9.17")
+
+
+
 library(tidyverse)
 library(lme4)
 library(performance)
@@ -17,6 +24,10 @@ library(kableExtra)
 library(gt)
 library(modelsummary)
 library(sjPlot)
+library(glmmTMB)
+library(COMPoissonReg)
+library(Rcpp)
+library(numDeriv)
 
 
 complete_2023_2024 <- read.csv("input/2023_2024_all_moth_counts.csv")
@@ -399,6 +410,23 @@ summary(model_complete_poisson_oak)
 
 performance::check_overdispersion(model_complete_poisson_oak)
 performance::check_model(model_complete_poisson_oak)
+
+
+## to account for the fact that the model is UNDERdispersed 
+#(counts vary less than expected under a Poisson model), use a 
+#Conway–Maxwell–Poisson (COM-Poisson) distribution model which allows 
+#the estimated ν (an introduced dispersion parameter) to increase (>1), 
+#shrinking the variance toward the observed level.
+packageVersion("TMB")
+packageVersion("glmmTMB")
+
+model_complete_comp_oak <- glmmTMB(
+  round(clean_complete) ~ Percent_Oak + (1 | trap_name) + (1 | patch_name),
+  family = compois(),
+  data = stand_ID_filtered
+)
+
+
 
 #Poisson, using all levels of data collection as a random effect, except Pine
 #which is being fitted as a fixed effect
