@@ -1,13 +1,6 @@
 
 #### 21-02-25
 
-#install.packages("glmmTMB", type = "source")
-#install.packages("glmmTMB", type = "source", repos = "https://cloud.r-project.org")
-#install.packages("remotes")
-#remotes::install_version("TMB", version = "1.9.17")
-
-
-
 library(tidyverse)
 library(lme4)
 library(performance)
@@ -76,6 +69,15 @@ unique(stand_category_filtered$stand_category)
 
 # Data Summaries ----------------------------------------------------------
 
+##separate Stand Type column so that we have a Stand ID for each stand in each patch
+stand_ID_filtered <- stand_type_filtered %>% 
+  separate(trap_name, into = c("stand_ID", "trap_number"), remove = FALSE, sep = "\\." ) %>% 
+  glimpse()
+
+stand_ID_filtered_1 <- stand_category_filtered %>% 
+  separate(trap_name, into = c("stand_ID", "trap_number"), remove = FALSE, sep = "\\." ) %>% 
+  glimpse()
+
 total_moths_2023_2024 <- sum(complete_2023_2024$clean_complete, na.rm = TRUE)
 print(total_moths_2023_2024)
 
@@ -86,14 +88,15 @@ n_distinct(stand_ID_filtered$stand_ID)
 n_distinct(stand_ID_filtered$patch_name)
 
 
-total_traps_2023_2024 <- sum(complete_2023_2024$trap_name, na.rm = TRUE)
-print(total_traps_2023_2024)
 
-total_stands_2023_2024 <- sum(stand_ID_filtered$stand_ID, na.rm = TRUE)
-print(total_stands_2023_2024)
+#total_traps_2023_2024 <- sum(complete_2023_2024$trap_name, na.rm = TRUE)
+#print(total_traps_2023_2024)
 
-total_patches_2023_2024 <- sum(stand_ID_filtered$patch_name, na.rm = TRUE)
-print(total_patches_2023_2024)
+#total_stands_2023_2024 <- sum(stand_ID_filtered$stand_ID, na.rm = TRUE)
+#print(total_stands_2023_2024)
+
+#total_patches_2023_2024 <- sum(stand_ID_filtered$patch_name, na.rm = TRUE)
+#print(total_patches_2023_2024)
 
 
 #check to see the distribution of moth count data
@@ -103,6 +106,14 @@ hist(complete_2023_2024$clean_complete,
           ylab = "Frequency", 
           col = "darkblue", 
           border = "black")
+
+hist(complete_2023_2024$clean_complete, 
+     main = " ", 
+     xlab = "Spongy moth count/trap", 
+     ylab = "Frequency", 
+     col = "blue", 
+     border = "black",
+     breaks = 50)  # increase this number to make bins smaller
 
 
 #Calculate the mean and standard deviation of moth counts for each 
@@ -305,99 +316,15 @@ print(moth_by_stand_summary_stats_2, n=22)
 # Visualizations ----------------------------------------------------------
 
 ##separate Stand Type column so that we have a Stand ID for each stand in each patch
-stand_ID_filtered <- stand_type_filtered %>% 
-  separate(trap_name, into = c("stand_ID", "trap_number"), remove = FALSE, sep = "\\." ) %>% 
-  glimpse()
+#stand_ID_filtered <- stand_type_filtered %>% 
+ # separate(trap_name, into = c("stand_ID", "trap_number"), remove = FALSE, sep = "\\." ) %>% 
+ # glimpse()
 
-stand_ID_filtered_1 <- stand_category_filtered %>% 
-  separate(trap_name, into = c("stand_ID", "trap_number"), remove = FALSE, sep = "\\." ) %>% 
-  glimpse()
+#stand_ID_filtered_1 <- stand_category_filtered %>% 
+  #separate(trap_name, into = c("stand_ID", "trap_number"), remove = FALSE, sep = "\\." ) %>% 
+  #glimpse()
 
 ##Order Stand Types so shown on X-axis in order of decreasing oak
-stand_ID_filtered$stand_type %>% unique() %>% dput()
-
-ordered(stand_ID_filtered$stand_type, levels = c("Oak", "Oak/Pine", "Oak/Other", 
-                                                 "Pine/Oak", "Pine", "Other"))
-
-stand_ID_filtered$stand_type_ord <- ordered(stand_ID_filtered$stand_type, 
-                                      levels = c("Oak", "Oak/Pine", "Oak/Other", 
-                                                "Pine/Oak", "Pine", "Other"))
-######continue from here...
-##visualize stand types for each patch separately
-# p <- ggplot(stand_ID_filtered, aes(x = stand_type, y = clean_complete)) +
-#   geom_point(stat = "identity") + 
-#   facet_wrap(~ patch_name)
-# 
-# print (p)
-
-
-# Graph to use ------------------------------------------------------------
-
-
-##visualize moth counts by stand types, for each patch separately
-p_1 <- ggplot(stand_ID_filtered, aes(x = stand_type_ord, y = clean_complete, 
-                                       colour = stand_type)) +
-  geom_point(position = position_jitter(height = 0, width = 0.1)) + 
-  facet_wrap(~ patch_name) +
-  labs(x = "Stand Type", y = "Total Moth Counts", fill = "Stand Type") +
-  theme(axis.text.x = element_blank(),
-  axis.ticks.x = element_blank())
-  # Remove x-axis labels and ticks from the individual facets
-  
-print (p_1)
-
-# Save the plot as an image (e.g., PNG)
-#ggsave("moth counts by stand type.png", width = 9, height = 7)
-
-##visualize stand types, by patch ID, for each patch separately
-# p_1.1 <- ggplot(stand_ID_filtered, aes(x = stand_ID, y = clean_complete, 
-#                                      colour = stand_type)) +
-#   geom_point(position = position_jitter(height = 0, width = 0.1)) + 
-#   facet_wrap(~ patch_name, scales = "free_x")
-# 
-# print (p_1.1)
-
-
-##visualize stand categories, by patch ID, for each patch separately
-# p_2 <- ggplot(stand_ID_filtered_1, aes(x = stand_ID, y = clean_complete, 
-#                                        colour = stand_category)) +
-#   geom_point(position = position_jitter(height = 0, width = 0.1)) + 
-#   facet_wrap(~ patch_name, scales = "free_x")
-# 
-# print (p_2)
-
-##visualize stand types for each patch separately
-# p_3 <- ggplot(stand_ID_filtered, aes(x = stand_type, y = clean_complete, colour = stand_type)) +
-#   geom_point(position = position_jitter(height = 0, width = 0.1)) + 
-#   facet_wrap(~ patch_name, scales = "free_x")
-# 
-# print (p_3)
-
-##visualize stand categories for each patch separately
-# p_4 <- ggplot(stand_ID_filtered_1, aes(x = stand_category, y = clean_complete, 
-#                                        colour = stand_category)) +
-#   geom_point(position = position_jitter(height = 0, width = 0.1)) + 
-#   facet_wrap(~ patch_name, scales = "free_x")
-# 
-# print (p_4)
-
-
-# Random Effects Model ----------------------------------------------------
-
-##Poisson, using all levels of data collection as a random effect 
-# model_complete_poisson <- glmer(
-#   round(clean_complete) ~ (1|trap_name) + 
-#     (1|stand_ID) + (1|patch_name), 
-#   family =poisson(), data = stand_ID_filtered)
-# summary(model_complete_poisson)
-# 
-# 
-# performance::check_overdispersion(model_complete_poisson)
-# performance::check_model(model_complete_poisson)
-
-
-
-# Oak and Pine Models -----------------------------------------------------
 
 #Poisson, using all levels of data collection as a random effect, except Oak
 #which is being fitted as a fixed effect
@@ -407,9 +334,52 @@ model_complete_poisson_oak <- glmer(
   family =poisson(), data = stand_ID_filtered)
 summary(model_complete_poisson_oak)
 
-
 performance::check_overdispersion(model_complete_poisson_oak)
 performance::check_model(model_complete_poisson_oak)
+#Heavily underdispersed, indicating that the moth counts are less variable
+#than expected
+
+##Run the same basic model, but have stands nested within patches as a 
+#random effects, first keeping in trap_name as a random effect and then 
+#removing it
+
+model_complete_poisson_oak_nested <- glmer(
+  round(clean_complete) ~ Percent_Oak + 
+    (1 | trap_name) + 
+    (1 | patch_name/stand_ID),   # nesting structure
+  family = poisson(),
+  data = stand_ID_filtered
+)
+summary(model_complete_poisson_oak_nested)
+
+performance::check_overdispersion(model_complete_poisson_oak_nested)
+performance::check_model(model_complete_poisson_oak_nested)
+
+
+model_complete_poisson_oak_nested_1 <- glmer(
+  round(clean_complete) ~ Percent_Oak + 
+    #(1 | trap_name) + 
+    (1 | patch_name/stand_ID),   # nesting structure
+  family = poisson(),
+  data = stand_ID_filtered
+)
+summary(model_complete_poisson_oak_nested_1)
+
+performance::check_overdispersion(model_complete_poisson_oak_nested_1)
+performance::check_model(model_complete_poisson_oak_nested_1)
+
+
+#Try 3 levels of random effects
+model_complete_poisson_oak_nested_2 <- glmer(
+  round(clean_complete) ~ Percent_Oak + 
+    (1 | patch_name/stand_ID/trap_name),   # nesting structure
+  family = poisson(),
+  data = stand_ID_filtered
+)
+summary(model_complete_poisson_oak_nested_2)
+
+performance::check_overdispersion(model_complete_poisson_oak_nested_2)
+performance::check_model(model_complete_poisson_oak_nested_2)
 
 
 ## to account for the fact that the model is UNDERdispersed 
@@ -436,9 +406,46 @@ model_complete_poisson_pine <- glmer(
   family =poisson(), data = stand_ID_filtered)
 summary(model_complete_poisson_pine)
 
-
 performance::check_overdispersion(model_complete_poisson_pine)
 performance::check_model(model_complete_poisson_pine)
+
+#Again, heavily underdispersed, indicating that the moth counts are 
+#less variable than expected
+##Run the same basic model, but have stands nested within patches as a 
+#random effects, first keeping in trap_name as a random effect and then 
+#removing it
+
+model_complete_poisson_pine_nested <- glmer(
+  round(clean_complete) ~ (Percent_Pine) + 
+    (1 | trap_name) + 
+    (1 | patch_name/stand_ID),   # nesting structure
+  family = poisson(),
+  data = stand_ID_filtered)
+summary(model_complete_poisson_pine_nested)
+
+performance::check_overdispersion(model_complete_poisson_pine_nested)
+performance::check_model(model_complete_poisson_pine_nested)
+
+model_complete_poisson_pine_nested_1 <- glmer(
+  round(clean_complete) ~ (Percent_Pine) + 
+    #(1 | trap_name) + 
+    (1 | patch_name/stand_ID),   # nesting structure
+  family = poisson(),
+  data = stand_ID_filtered)
+summary(model_complete_poisson_pine_nested_1)
+
+performance::check_overdispersion(model_complete_poisson_pine_nested_1)
+performance::check_model(model_complete_poisson_pine_nested_1)
+
+model_complete_poisson_pine_nested_2 <- glmer(
+  round(clean_complete) ~ (Percent_Pine) + 
+    (1 | patch_name/stand_ID/trap_name),   # nesting structure
+  family = poisson(),
+  data = stand_ID_filtered)
+summary(model_complete_poisson_pine_nested_2)
+
+performance::check_overdispersion(model_complete_poisson_pine_nested_2)
+performance::check_model(model_complete_poisson_pine_nested_2)
 
 #model for Oak and Pine together
 model_both <- glmer(round(clean_complete) ~ Percent_Pine + Percent_Oak + 
@@ -447,6 +454,44 @@ model_both <- glmer(round(clean_complete) ~ Percent_Pine + Percent_Oak +
 
 summary(model_both)
 performance::check_overdispersion(model_both)
+
+#Again, heavily underdispersed, indicating that the moth counts are 
+#less variable than expected
+##Run the same basic model, but have stands nested within patches as a 
+#random effects, first keeping in trap_name as a random effect and then 
+#removing it
+
+model_both_nested <- glmer(
+            round(clean_complete) ~ Percent_Pine + Percent_Oak + 
+            (1 | trap_name) + 
+            (1 | patch_name/stand_ID), # nesting structure
+            family = poisson(), 
+            data = stand_ID_filtered)
+
+summary(model_both_nested)
+performance::check_overdispersion(model_both_nested)
+
+
+model_both_nested_1 <- glmer(
+  round(clean_complete) ~ Percent_Pine + Percent_Oak + 
+    #(1 | trap_name) + 
+    (1 | patch_name/stand_ID), # nesting structure
+  family = poisson(), 
+  data = stand_ID_filtered)
+
+summary(model_both_nested_1)
+performance::check_overdispersion(model_both_nested_1)
+
+
+model_both_nested_2 <- glmer(
+  round(clean_complete) ~ Percent_Pine + Percent_Oak + 
+    (1 | patch_name/stand_ID/trap_name), # nesting structure
+  family = poisson(), 
+  data = stand_ID_filtered)
+
+summary(model_both_nested_2)
+performance::check_overdispersion(model_both_nested_2)
+
 
 #model for Oak and Pine together, adding an interaction of oak & pine
 model_both_2 <- glmer(round(clean_complete) ~ Percent_Pine + Percent_Oak + 
@@ -784,6 +829,21 @@ ggplot(contingency_df, aes(x = Var1, y = Var2, fill = Freq)) +
 version$version.string
 
 citation("lme4")
+
+
+#file.create("2023_2024_All_Data_Oct_25.md")
+
+getwd()
+
+
+xfun::Rscript_call(
+  rmarkdown::render,
+  list(input = "Report/2023_2024_All_Data_Oct_25.Rmd", 
+       output_format = "html_document")
+)
+
+
+
 
 # Censored data - brms ----------------------------------------------------
 
