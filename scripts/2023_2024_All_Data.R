@@ -1,6 +1,8 @@
 
 #### 21-02-25
 
+#install.packages(c("glmmTMB", "lme4"))
+
 library(tidyverse)
 library(lme4)
 library(performance)
@@ -326,16 +328,22 @@ print(moth_by_stand_summary_stats_2, n=22)
 
 ##Order Stand Types so shown on X-axis in order of decreasing oak
 
+
+
+# Oak/Pine nested models --------------------------------------------------
+
+
 #Poisson, using all levels of data collection as a random effect, except Oak
 #which is being fitted as a fixed effect
-model_complete_poisson_oak <- glmer(
-  round(clean_complete) ~ (1|trap_name) +
-    (Percent_Oak) + (1|patch_name),
-  family =poisson(), data = stand_ID_filtered)
-summary(model_complete_poisson_oak)
 
-performance::check_overdispersion(model_complete_poisson_oak)
-performance::check_model(model_complete_poisson_oak)
+#model_complete_poisson_oak <- glmer(
+ # round(clean_complete) ~ (1|trap_name) +
+  #  (Percent_Oak) + (1|patch_name),
+  #family =poisson(), data = stand_ID_filtered)
+#summary(model_complete_poisson_oak)
+
+#performance::check_overdispersion(model_complete_poisson_oak)
+#performance::check_model(model_complete_poisson_oak)
 #Heavily underdispersed, indicating that the moth counts are less variable
 #than expected
 
@@ -343,19 +351,19 @@ performance::check_model(model_complete_poisson_oak)
 #random effects, first keeping in trap_name as a random effect and then 
 #removing it
 
-model_complete_poisson_oak_nested <- glmer(
-  round(clean_complete) ~ Percent_Oak + 
-    (1 | trap_name) + 
-    (1 | patch_name/stand_ID),   # nesting structure
-  family = poisson(),
-  data = stand_ID_filtered
-)
-summary(model_complete_poisson_oak_nested)
+#model_complete_poisson_oak_nested <- glmer(
+ # round(clean_complete) ~ Percent_Oak + 
+  #  (1 | trap_name) + 
+   # (1 | patch_name/stand_ID),   # nesting structure
+  #family = poisson(),
+  #data = stand_ID_filtered
+#)
+#summary(model_complete_poisson_oak_nested)
 
-performance::check_overdispersion(model_complete_poisson_oak_nested)
-performance::check_model(model_complete_poisson_oak_nested)
+#performance::check_overdispersion(model_complete_poisson_oak_nested)
+#performance::check_model(model_complete_poisson_oak_nested)
 
-
+#Poisson w Oak
 model_complete_poisson_oak_nested_1 <- glmer(
   round(clean_complete) ~ Percent_Oak + 
     #(1 | trap_name) + 
@@ -370,16 +378,16 @@ performance::check_model(model_complete_poisson_oak_nested_1)
 
 
 #Try 3 levels of random effects
-model_complete_poisson_oak_nested_2 <- glmer(
-  round(clean_complete) ~ Percent_Oak + 
-    (1 | patch_name/stand_ID/trap_name),   # nesting structure
-  family = poisson(),
-  data = stand_ID_filtered
-)
-summary(model_complete_poisson_oak_nested_2)
+#model_complete_poisson_oak_nested_2 <- glmer(
+ # round(clean_complete) ~ Percent_Oak + 
+  #  (1 | patch_name/stand_ID/trap_name),   # nesting structure
+  #family = poisson(),
+  #data = stand_ID_filtered
+#)
+#summary(model_complete_poisson_oak_nested_2)
 
-performance::check_overdispersion(model_complete_poisson_oak_nested_2)
-performance::check_model(model_complete_poisson_oak_nested_2)
+#performance::check_overdispersion(model_complete_poisson_oak_nested_2)
+#performance::check_model(model_complete_poisson_oak_nested_2)
 
 
 ## to account for the fact that the model is UNDERdispersed 
@@ -390,24 +398,24 @@ performance::check_model(model_complete_poisson_oak_nested_2)
 packageVersion("TMB")
 packageVersion("glmmTMB")
 
-model_complete_comp_oak <- glmmTMB(
-  round(clean_complete) ~ Percent_Oak + (1 | trap_name) + (1 | patch_name),
-  family = compois(),
-  data = stand_ID_filtered
-)
+#model_complete_comp_oak <- glmmTMB(
+ # round(clean_complete) ~ Percent_Oak + (1 | trap_name) + (1 | patch_name),
+  #family = compois(),
+  #data = stand_ID_filtered
+#)
 
 
 
 #Poisson, using all levels of data collection as a random effect, except Pine
 #which is being fitted as a fixed effect
-model_complete_poisson_pine <- glmer(
-  round(clean_complete) ~ (1|trap_name) +
-    (Percent_Pine) + (1|patch_name),
-  family =poisson(), data = stand_ID_filtered)
-summary(model_complete_poisson_pine)
+#model_complete_poisson_pine <- glmer(
+ # round(clean_complete) ~ (1|trap_name) +
+  #  (Percent_Pine) + (1|patch_name),
+  #family =poisson(), data = stand_ID_filtered)
+#summary(model_complete_poisson_pine)
 
-performance::check_overdispersion(model_complete_poisson_pine)
-performance::check_model(model_complete_poisson_pine)
+#performance::check_overdispersion(model_complete_poisson_pine)
+#performance::check_model(model_complete_poisson_pine)
 
 #Again, heavily underdispersed, indicating that the moth counts are 
 #less variable than expected
@@ -415,16 +423,18 @@ performance::check_model(model_complete_poisson_pine)
 #random effects, first keeping in trap_name as a random effect and then 
 #removing it
 
-model_complete_poisson_pine_nested <- glmer(
-  round(clean_complete) ~ (Percent_Pine) + 
-    (1 | trap_name) + 
-    (1 | patch_name/stand_ID),   # nesting structure
-  family = poisson(),
-  data = stand_ID_filtered)
-summary(model_complete_poisson_pine_nested)
+#model_complete_poisson_pine_nested <- glmer(
+ # round(clean_complete) ~ (Percent_Pine) + 
+  #  (1 | trap_name) + 
+   # (1 | patch_name/stand_ID),   # nesting structure
+#  family = poisson(),
+ # data = stand_ID_filtered)
+#summary(model_complete_poisson_pine_nested)
 
-performance::check_overdispersion(model_complete_poisson_pine_nested)
-performance::check_model(model_complete_poisson_pine_nested)
+#performance::check_overdispersion(model_complete_poisson_pine_nested)
+#performance::check_model(model_complete_poisson_pine_nested)
+
+#Poisson w Pine
 
 model_complete_poisson_pine_nested_1 <- glmer(
   round(clean_complete) ~ (Percent_Pine) + 
@@ -437,23 +447,23 @@ summary(model_complete_poisson_pine_nested_1)
 performance::check_overdispersion(model_complete_poisson_pine_nested_1)
 performance::check_model(model_complete_poisson_pine_nested_1)
 
-model_complete_poisson_pine_nested_2 <- glmer(
-  round(clean_complete) ~ (Percent_Pine) + 
-    (1 | patch_name/stand_ID/trap_name),   # nesting structure
-  family = poisson(),
-  data = stand_ID_filtered)
-summary(model_complete_poisson_pine_nested_2)
+#model_complete_poisson_pine_nested_2 <- glmer(
+ # round(clean_complete) ~ (Percent_Pine) + 
+  #  (1 | patch_name/stand_ID/trap_name),   # nesting structure
+#  family = poisson(),
+ # data = stand_ID_filtered)
+#summary(model_complete_poisson_pine_nested_2)
 
-performance::check_overdispersion(model_complete_poisson_pine_nested_2)
-performance::check_model(model_complete_poisson_pine_nested_2)
+#performance::check_overdispersion(model_complete_poisson_pine_nested_2)
+#performance::check_model(model_complete_poisson_pine_nested_2)
 
 #model for Oak and Pine together
-model_both <- glmer(round(clean_complete) ~ Percent_Pine + Percent_Oak + 
-                      (1 | trap_name) + (1 | patch_name), 
-                    data = stand_ID_filtered, family = poisson)
+#model_both <- glmer(round(clean_complete) ~ Percent_Pine + Percent_Oak + 
+ #                     (1 | trap_name) + (1 | patch_name), 
+  #                  data = stand_ID_filtered, family = poisson)
 
-summary(model_both)
-performance::check_overdispersion(model_both)
+#summary(model_both)
+#performance::check_overdispersion(model_both)
 
 #Again, heavily underdispersed, indicating that the moth counts are 
 #less variable than expected
@@ -461,16 +471,17 @@ performance::check_overdispersion(model_both)
 #random effects, first keeping in trap_name as a random effect and then 
 #removing it
 
-model_both_nested <- glmer(
-            round(clean_complete) ~ Percent_Pine + Percent_Oak + 
-            (1 | trap_name) + 
-            (1 | patch_name/stand_ID), # nesting structure
-            family = poisson(), 
-            data = stand_ID_filtered)
+#model_both_nested <- glmer(
+ #           round(clean_complete) ~ Percent_Pine + Percent_Oak + 
+  #          (1 | trap_name) + 
+   #         (1 | patch_name/stand_ID), # nesting structure
+    #        family = poisson(), 
+     #       data = stand_ID_filtered)
 
-summary(model_both_nested)
-performance::check_overdispersion(model_both_nested)
+#summary(model_both_nested)
+#performance::check_overdispersion(model_both_nested)
 
+#Poisson w Oak and Pine
 
 model_both_nested_1 <- glmer(
   round(clean_complete) ~ Percent_Pine + Percent_Oak + 
@@ -483,24 +494,24 @@ summary(model_both_nested_1)
 performance::check_overdispersion(model_both_nested_1)
 
 
-model_both_nested_2 <- glmer(
-  round(clean_complete) ~ Percent_Pine + Percent_Oak + 
-    (1 | patch_name/stand_ID/trap_name), # nesting structure
-  family = poisson(), 
-  data = stand_ID_filtered)
+#model_both_nested_2 <- glmer(
+ # round(clean_complete) ~ Percent_Pine + Percent_Oak + 
+  #  (1 | patch_name/stand_ID/trap_name), # nesting structure
+#  family = poisson(), 
+ # data = stand_ID_filtered)
 
-summary(model_both_nested_2)
-performance::check_overdispersion(model_both_nested_2)
+#summary(model_both_nested_2)
+#performance::check_overdispersion(model_both_nested_2)
 
 
 #model for Oak and Pine together, adding an interaction of oak & pine
-model_both_2 <- glmer(round(clean_complete) ~ Percent_Pine + Percent_Oak + 
-                      (1 | trap_name) + (1 | patch_name) + 
-                      (Percent_Pine * Percent_Oak), 
-                    data = stand_ID_filtered, family = poisson)
+#model_both_2 <- glmer(round(clean_complete) ~ Percent_Pine + Percent_Oak + 
+ #                     (1 | trap_name) + (1 | patch_name) + 
+  #                    (Percent_Pine * Percent_Oak), 
+   #                 data = stand_ID_filtered, family = poisson)
 
-summary(model_both_2)
-performance::check_overdispersion(model_both_2)
+#summary(model_both_2)
+#performance::check_overdispersion(model_both_2)
 
 
 
@@ -555,6 +566,86 @@ model_all <- glmer(round(clean_complete) ~ Percent_Maple + Percent_Oak +
 summary(model_all)
 performance::check_overdispersion(model_all)
 
+
+# Negative Binomial models ------------------------------------------------
+
+#checking compatibility of glmmTMB and lme4 packages
+packageVersion("glmmTMB")
+packageVersion("lme4")
+packageVersion("Matrix")
+packageVersion("TMB")
+packageVersion("mgcv")
+
+sapply(c("Matrix", "TMB", "lme4", "glmmTMB"), find.package)
+
+#install.packages("remotes")
+#remotes::install_version("lme4", version = "1.1.35")
+#remotes::install_version("glmmTMB", version = "1.1.13")
+#install.packages("Matrix", type="source")
+#install.packages("TMB", type="source")
+#install.packages("glmmTMB", type="source", INSTALL_opts = "--no-multiarch --configure-vars='INCLUDE_DIRS=/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/TMB/include'")
+
+#simple test of glmmTMB - failing due to incompatibility.  Need older source
+#of lme4, but not possible with this version of MacOS.  
+#library(glmmTMB)
+#test_data <- data.frame(
+ # y = rpois(100, 10),
+#  x = runif(100),
+ # g = rep(letters[1:10], each = 10)
+#)
+
+#m_test <- glmmTMB(y ~ x + (1|g), family = nbinom2, data = test_data)
+#summary(m_test)
+
+
+
+#need to convert to 'factor' for negative binomial
+stand_ID_filtered$patch_name <- as.factor(stand_ID_filtered$patch_name)
+stand_ID_filtered$stand_ID <- as.factor(stand_ID_filtered$stand_ID)
+
+library(mgcv)
+
+gam_model <- gam(round(clean_complete) ~ Percent_Oak + 
+                   s(patch_name, bs = "re") +  # random effect for patch_name
+                   s(stand_ID, bs = "re"),     # random effect for stand_ID
+                 family = nb(),                # negative binomial
+                 data = stand_ID_filtered)
+summary(gam_model)
+
+
+# Fit GAM with nested random effects
+gam_model_nested <- gam(
+  round(clean_complete) ~ Percent_Oak + 
+    s(patch_name, bs = "re") +                       # random intercept for patch_name
+    s(stand_ID, bs = "re") +                         # random intercept for stand_ID
+    s(stand_ID, by = patch_name, bs = "re"),        # nested effect: stand_ID within patch_name
+  family = nb(),                                     # negative binomial
+  data = stand_ID_filtered,
+  method = "REML"
+)
+
+# View summary of fixed and random effects
+summary(gam_model_nested)
+
+# Optional: visualize random effects
+plot(gam_model_nested, pages = 1)
+
+
+
+
+#NB w Oak
+model_complete_nb_oak_nested <- glmmTMB(
+  round(clean_complete) ~ Percent_Oak + 
+    (1 | patch_name/stand_ID),
+  family = nbinom2,
+  data = stand_ID_filtered
+)
+
+summary(model_complete_nb_oak_nested)
+
+
+performance::check_overdispersion(model_complete_nb_oak_nested)
+performance::check_model(model_complete_nb_oak_nested)
 
 ##Negative binomial, with all levels, except the lowest (trap name)
 ##Worked, in comparison to Poisson model, but still gave a message of
