@@ -1,0 +1,2370 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+]{article}
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={2023\_2024\_All\_Data\_partial.R},
+  pdfauthor={Noa},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{2023\_2024\_All\_Data\_partial.R}
+\author{Noa}
+\date{2025-11-04}
+
+\begin{document}
+\maketitle
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#\#\# 21{-}02{-}25}
+
+\CommentTok{\#install.packages(c("glmmTMB", "lme4"))}
+
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## -- Attaching core tidyverse packages ------------------------ tidyverse 2.0.0 --
+## v dplyr     1.1.4     v readr     2.1.5
+## v forcats   1.0.0     v stringr   1.5.1
+## v ggplot2   4.0.0     v tibble    3.2.1
+## v lubridate 1.9.3     v tidyr     1.3.1
+## v purrr     1.0.2     
+## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+## i Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(lme4)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: Matrix
+## 
+## Attaching package: 'Matrix'
+## 
+## The following objects are masked from 'package:tidyr':
+## 
+##     expand, pack, unpack
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(performance)}
+\FunctionTok{library}\NormalTok{(summarytools)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'summarytools'
+## 
+## The following object is masked from 'package:tibble':
+## 
+##     view
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggeffects)}
+\FunctionTok{library}\NormalTok{(marginaleffects)}
+\FunctionTok{library}\NormalTok{(brms)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: Rcpp
+## Loading 'brms' package (version 2.22.10). Useful instructions
+## can be found by typing help('brms'). A more detailed introduction
+## to the package is available through vignette('brms_overview').
+## 
+## Attaching package: 'brms'
+## 
+## The following object is masked from 'package:lme4':
+## 
+##     ngrps
+## 
+## The following object is masked from 'package:stats':
+## 
+##     ar
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(car)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: carData
+## 
+## Attaching package: 'car'
+## 
+## The following object is masked from 'package:dplyr':
+## 
+##     recode
+## 
+## The following object is masked from 'package:purrr':
+## 
+##     some
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(viridis)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: viridisLite
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(broom)}
+\FunctionTok{library}\NormalTok{(knitr)}
+\FunctionTok{library}\NormalTok{(dplyr)}
+\FunctionTok{library}\NormalTok{(kableExtra)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in attr(.knitEnv$meta, "knit_meta_id"): 'xfun::attr()' is deprecated.
+## Use 'xfun::attr2()' instead.
+## See help("Deprecated")
+## Warning in attr(.knitEnv$meta, "knit_meta_id"): 'xfun::attr()' is deprecated.
+## Use 'xfun::attr2()' instead.
+## See help("Deprecated")
+## Warning in attr(.knitEnv$meta, "knit_meta_id"): 'xfun::attr()' is deprecated.
+## Use 'xfun::attr2()' instead.
+## See help("Deprecated")
+## Warning in attr(.knitEnv$meta, "knit_meta_id"): 'xfun::attr()' is deprecated.
+## Use 'xfun::attr2()' instead.
+## See help("Deprecated")
+## Warning in attr(.knitEnv$meta, "knit_meta_id"): 'xfun::attr()' is deprecated.
+## Use 'xfun::attr2()' instead.
+## See help("Deprecated")
+## Warning in attr(.knitEnv$meta, "knit_meta_id"): 'xfun::attr()' is deprecated.
+## Use 'xfun::attr2()' instead.
+## See help("Deprecated")
+## Warning in attr(.knitEnv$meta, "knit_meta_id"): 'xfun::attr()' is deprecated.
+## Use 'xfun::attr2()' instead.
+## See help("Deprecated")
+## Warning in attr(.knitEnv$meta, "knit_meta_id"): 'xfun::attr()' is deprecated.
+## Use 'xfun::attr2()' instead.
+## See help("Deprecated")
+## Warning in attr(.knitEnv$meta, "knit_meta_id"): 'xfun::attr()' is deprecated.
+## Use 'xfun::attr2()' instead.
+## See help("Deprecated")
+## Warning in attr(.knitEnv$meta, "knit_meta_id"): 'xfun::attr()' is deprecated.
+## Use 'xfun::attr2()' instead.
+## See help("Deprecated")
+## Warning in attr(.knitEnv$meta, "knit_meta_id"): 'xfun::attr()' is deprecated.
+## Use 'xfun::attr2()' instead.
+## See help("Deprecated")
+## Warning in attr(.knitEnv$meta, "knit_meta_id"): 'xfun::attr()' is deprecated.
+## Use 'xfun::attr2()' instead.
+## See help("Deprecated")
+## Warning in attr(.knitEnv$meta, "knit_meta_id"): 'xfun::attr()' is deprecated.
+## Use 'xfun::attr2()' instead.
+## See help("Deprecated")
+## Warning in attr(.knitEnv$meta, "knit_meta_id"): 'xfun::attr()' is deprecated.
+## Use 'xfun::attr2()' instead.
+## See help("Deprecated")
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'kableExtra'
+## 
+## The following object is masked from 'package:dplyr':
+## 
+##     group_rows
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(gt)}
+\FunctionTok{library}\NormalTok{(modelsummary)}
+\FunctionTok{library}\NormalTok{(sjPlot)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'sjPlot'
+## 
+## The following object is masked from 'package:ggplot2':
+## 
+##     set_theme
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(glmmTMB)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in check_dep_version(dep_pkg = "TMB"): package version mismatch: 
+## glmmTMB was built with TMB package version 1.9.17
+## Current TMB package version is 1.9.18
+## Please re-install glmmTMB from source or restore original 'TMB' package (see '?reinstalling' for more information)
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'glmmTMB'
+## 
+## The following object is masked from 'package:brms':
+## 
+##     lognormal
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(COMPoissonReg)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: numDeriv
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(Rcpp)}
+\FunctionTok{library}\NormalTok{(numDeriv)}
+
+
+\NormalTok{complete\_2023\_2024 }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"input/2023\_2024\_all\_moth\_counts.csv"}\NormalTok{)}
+\CommentTok{\#clean\_complete {-} full summer complete moth counts available for 2023 and 2024}
+
+
+\CommentTok{\# Data Cleaning {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+
+
+\DocumentationTok{\#\#To explore the distribution of your variables and count data like clean\_complete}
+\CommentTok{\# quick visualizations}
+\FunctionTok{dfSummary}\NormalTok{(complete\_2023\_2024)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Data Frame Summary  
+## complete_2023_2024  
+## Dimensions: 255 x 20  
+## Duplicates: 0  
+## 
+## ------------------------------------------------------------------------------------------------------------------------
+## No   Variable            Stats / Values                Freqs (% of Valid)    Graph                 Valid      Missing   
+## ---- ------------------- ----------------------------- --------------------- --------------------- ---------- ----------
+## 1    patch_name          1. Oka                        44 (17.3%)            III                   255        0         
+##      [character]         2. Orford                     39 (15.3%)            III                   (100.0%)   (0.0%)    
+##                          3. Rigaud                     30 (11.8%)            II                                         
+##                          4. Mont_Saint_Hilaire         29 (11.4%)            II                                         
+##                          5. Montebello                 22 ( 8.6%)            I                                          
+##                          6. Notre_Dame_de_Bonsecours   18 ( 7.1%)            I                                          
+##                          7. Mont_Royal                 13 ( 5.1%)            I                                          
+##                          8. Mont_Saint_Bruno           12 ( 4.7%)                                                       
+##                          9. Papineauville              12 ( 4.7%)                                                       
+##                          10. Brownsburg                 6 ( 2.4%)                                                       
+##                          [ 5 others ]                  30 (11.8%)            II                                         
+## 
+## 2    Years               Min  : 2023                   2023 : 102 (40.0%)    IIIIIIII              255        0         
+##      [integer]           Mean : 2023.6                 2024 : 153 (60.0%)    IIIIIIIIIIII          (100.0%)   (0.0%)    
+##                          Max  : 2024                                                                                    
+## 
+## 3    Year                Min  : 0                      0 : 102 (40.0%)       IIIIIIII              255        0         
+##      [integer]           Mean : 0.6                    1 : 153 (60.0%)       IIIIIIIIIIII          (100.0%)   (0.0%)    
+##                          Max  : 1                                                                                       
+## 
+## 4    stand_type          1. MOM                        10 ( 3.9%)                                  255        0         
+##      [character]         2. Oak                        73 (28.6%)            IIIII                 (100.0%)   (0.0%)    
+##                          3. Oak/Other                  33 (12.9%)            II                                         
+##                          4. Oak/Pine                   41 (16.1%)            III                                        
+##                          5. Other                      30 (11.8%)            II                                         
+##                          6. Pine                       39 (15.3%)            III                                        
+##                          7. Pine/Oak                   29 (11.4%)            II                                         
+## 
+## 5    landscape_type      1. agricultural               139 (54.5%)           IIIIIIIIII            255        0         
+##      [character]         2. forest·                     85 (33.3%)           IIIIII                (100.0%)   (0.0%)    
+##                          3. urban                       31 (12.2%)           II                                         
+## 
+## 6    stand_category      1. C                          35 (17.9%)            III                   196        59        
+##      [character]         2. I                          29 (14.8%)            II                    (76.9%)    (23.1%)   
+##                          3. E                          24 (12.2%)            II                                         
+##                          4. H                          18 ( 9.2%)            I                                          
+##                          5. F                          17 ( 8.7%)            I                                          
+##                          6. L                          15 ( 7.7%)            I                                          
+##                          7. A                          10 ( 5.1%)            I                                          
+##                          8. D                          10 ( 5.1%)            I                                          
+##                          9. K                          10 ( 5.1%)            I                                          
+##                          10. MOM                       10 ( 5.1%)            I                                          
+##                          [ 4 others ]                  18 ( 9.2%)            I                                          
+## 
+## 7    Percent_Oak         Mean (sd) : 0.3 (0.2)         0.00 : 48 (18.8%)     III                   255        0         
+##      [numeric]           min < med < max:              0.10 : 22 ( 8.6%)     I                     (100.0%)   (0.0%)    
+##                          0 < 0.3 < 0.8                 0.20 : 10 ( 3.9%)                                                
+##                          IQR (CV) : 0.4 (0.7)          0.30 : 58 (22.7%)     IIII                                       
+##                                                        0.40 : 50 (19.6%)     III                                        
+##                                                        0.50 : 18 ( 7.1%)     I                                          
+##                                                        0.60 : 18 ( 7.1%)     I                                          
+##                                                        0.70 : 19 ( 7.5%)     I                                          
+##                                                        0.80 : 12 ( 4.7%)                                                
+## 
+## 8    Percent_Pine        Mean (sd) : 0.2 (0.2)         0.00 : 117 (45.9%)    IIIIIIIII             255        0         
+##      [numeric]           min < med < max:              0.10 :  29 (11.4%)    II                    (100.0%)   (0.0%)    
+##                          0 < 0.1 < 0.8                 0.20 :  27 (10.6%)    II                                         
+##                          IQR (CV) : 0.4 (1.2)          0.30 :  12 ( 4.7%)                                               
+##                                                        0.40 :  21 ( 8.2%)    I                                          
+##                                                        0.50 :  19 ( 7.5%)    I                                          
+##                                                        0.60 :   9 ( 3.5%)                                               
+##                                                        0.70 :  15 ( 5.9%)    I                                          
+##                                                        0.80 :   6 ( 2.4%)                                               
+## 
+## 9    Percent_Maple       Mean (sd) : 0.3 (0.2)         10 distinct values    II                    246        9         
+##      [numeric]           min < med < max:                                    III                   (96.5%)    (3.5%)    
+##                          0 < 0.2 < 0.9                                       IIII                                       
+##                          IQR (CV) : 0.3 (0.6)                                IIII                                       
+##                                                                              IIII                                       
+## 
+## 10   Forest_Type         1. oak                        65 (25.5%)            IIIII                 255        0         
+##      [character]         2. oak_maple                  48 (18.8%)            III                   (100.0%)   (0.0%)    
+##                          3. pine                       45 (17.6%)            III                                        
+##                          4. oak_pine                   21 ( 8.2%)            I                                          
+##                          5. maple_oak                  16 ( 6.3%)            I                                          
+##                          6. pine_oak                   14 ( 5.5%)            I                                          
+##                          7. maple                      12 ( 4.7%)                                                       
+##                          8. maple_birch                 7 ( 2.7%)                                                       
+##                          9. maple_hardwood?             5 ( 2.0%)                                                       
+##                          10. pine_hemlock               5 ( 2.0%)                                                       
+##                          [ 9 others ]                  17 ( 6.7%)            I                                          
+## 
+## 11   stand_area_ha       Mean (sd) : 8.4 (3.5)         67 distinct values      . :                 255        0         
+##      [numeric]           min < med < max:                                    : : :                 (100.0%)   (0.0%)    
+##                          3.5 < 8 < 25.9                                      : : :                                      
+##                          IQR (CV) : 3.2 (0.4)                                : : : :                                    
+##                                                                              : : : : :   .                              
+## 
+## 12   forest_area_km2     Mean (sd) : 210.2 (436.8)     13 distinct values    :                     255        0         
+##      [numeric]           min < med < max:                                    :                     (100.0%)   (0.0%)    
+##                          1.6 < 14 < 1282                                     :                                          
+##                          IQR (CV) : 95.7 (2.1)                               :                                          
+##                                                                              :           :                              
+## 
+## 13   trap_name           1. BC Co-Dom1                   1 ( 0.4%)                                 255        0         
+##      [character]         2. BC Co-Dom2                   1 ( 0.4%)                                 (100.0%)   (0.0%)    
+##                          3. BC Dom1                      1 ( 0.4%)                                                      
+##                          4. BC Dom2                      1 ( 0.4%)                                                      
+##                          5. BC Low 1                     1 ( 0.4%)                                                      
+##                          6. BC Low 2                     1 ( 0.4%)                                                      
+##                          7. Bolt Co-Dom1                 1 ( 0.4%)                                                      
+##                          8. Bolt Co-Dom2                 1 ( 0.4%)                                                      
+##                          9. Bolt Dom1                    1 ( 0.4%)                                                      
+##                          10. Bolt Dom2                   1 ( 0.4%)                                                      
+##                          [ 245 others ]                245 (96.1%)           IIIIIIIIIIIIIIIIIII                        
+## 
+## 14   longitude           Mean (sd) : -73.7 (1)         255 distinct values       :                 255        0         
+##      [numeric]           min < med < max:                                        :                 (100.0%)   (0.0%)    
+##                          -75 < -74 < -72                                       : :   :   :                              
+##                          IQR (CV) : 1.2 (0)                                    : :   :   :                              
+##                                                                              : : : : :   : .                            
+## 
+## 15   total_moth_count    Mean (sd) : 57.6 (51.4)       113 distinct values   :                     252        3         
+##      [integer]           min < med < max:                                    :                     (98.8%)    (1.2%)    
+##                          0 < 47.5 < 378                                      : .                                        
+##                          IQR (CV) : 55.5 (0.9)                               : :                                        
+##                                                                              : : :                                      
+## 
+## 16   complete            Mean (sd) : 72.8 (60.9)       92 distinct values    :                     142        113       
+##      [integer]           min < med < max:                                    : :                   (55.7%)    (44.3%)   
+##                          3 < 61 < 378                                        : :                                        
+##                          IQR (CV) : 68.8 (0.8)                               : : :                                      
+##                                                                              : : : .   .                                
+## 
+## 17   clean_complete      Mean (sd) : 62.3 (55.4)       140 distinct values   :                     200        55        
+##      [numeric]           min < med < max:                                    : .                   (78.4%)    (21.6%)   
+##                          0 < 49.8 < 378                                      : :                                        
+##                          IQR (CV) : 59 (0.9)                                 : :                                        
+##                                                                              : : :                                      
+## 
+## 18   censored            Min  : 0                      0 : 200 (78.4%)       IIIIIIIIIIIIIII       255        0         
+##      [integer]           Mean : 0.2                    1 :  55 (21.6%)       IIII                  (100.0%)   (0.0%)    
+##                          Max  : 1                                                                                       
+## 
+## 19   reason_incomplete   1. (Empty string)             84 (60.4%)            IIIIIIIIIIII          139        116       
+##      [character]         2. Missing in field            2 ( 1.4%)                                  (54.5%)    (45.5%)   
+##                          3. Muck                       44 (31.7%)            IIIIII                                     
+##                          4. Trap damaged·               9 ( 6.5%)            I                                          
+## 
+## 20   X                   All NA's                                                                  0          255       
+##      [logical]                                                                                     (0.0%)     (100.0%)  
+## ------------------------------------------------------------------------------------------------------------------------
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{str}\NormalTok{(complete\_2023\_2024)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    255 obs. of  20 variables:
+##  $ patch_name       : chr  "Mont_Royal" "Mont_Royal" "Mont_Royal" "Mont_Royal" ...
+##  $ Years            : int  2024 2024 2024 2024 2024 2024 2024 2024 2024 2024 ...
+##  $ Year             : int  1 1 1 1 1 1 1 1 1 1 ...
+##  $ stand_type       : chr  "Oak" "Oak" "Oak" "Oak" ...
+##  $ landscape_type   : chr  "urban" "urban" "urban" "urban" ...
+##  $ stand_category   : chr  "E" "A" "C" "C" ...
+##  $ Percent_Oak      : num  0.4 0.8 0.6 0.6 0.6 0.4 0.4 0.4 0.4 0.4 ...
+##  $ Percent_Pine     : num  0 0 0 0 0 0 0 0 0.1 0.1 ...
+##  $ Percent_Maple    : num  0.3 0.1 0.3 0.3 0.3 0.3 0.3 0.3 0 0 ...
+##  $ Forest_Type      : chr  "oak_maple" "oak" "oak" "oak" ...
+##  $ stand_area_ha    : num  14 6.4 8.6 8.6 8.6 11.7 11.7 11.7 8.9 8.9 ...
+##  $ forest_area_km2  : num  4.89 4.89 4.89 4.89 4.89 4.89 4.89 4.89 4.89 4.89 ...
+##  $ trap_name        : chr  "MRMOM" "MROak2.1" "MROak1.1" "MROak1.2" ...
+##  $ longitude        : num  -73.6 -73.6 -73.6 -73.6 -73.6 ...
+##  $ total_moth_count : int  93 15 7 20 6 96 52 NA 60 20 ...
+##  $ complete         : int  93 15 7 20 6 96 52 NA 60 20 ...
+##  $ clean_complete   : num  93 15 7 20 6 96 52 NA 60 20 ...
+##  $ censored         : int  0 0 0 0 0 0 0 1 0 0 ...
+##  $ reason_incomplete: chr  NA NA NA NA ...
+##  $ X                : logi  NA NA NA NA NA NA ...
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# change \textquotesingle{}Year\textquotesingle{} from int to chr}
+\NormalTok{complete\_2023\_2024}\SpecialCharTok{$}\NormalTok{Year }\OtherTok{\textless{}{-}} \FunctionTok{as.character}\NormalTok{(complete\_2023\_2024}\SpecialCharTok{$}\NormalTok{Year)}
+
+\FunctionTok{str}\NormalTok{(complete\_2023\_2024)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    255 obs. of  20 variables:
+##  $ patch_name       : chr  "Mont_Royal" "Mont_Royal" "Mont_Royal" "Mont_Royal" ...
+##  $ Years            : int  2024 2024 2024 2024 2024 2024 2024 2024 2024 2024 ...
+##  $ Year             : chr  "1" "1" "1" "1" ...
+##  $ stand_type       : chr  "Oak" "Oak" "Oak" "Oak" ...
+##  $ landscape_type   : chr  "urban" "urban" "urban" "urban" ...
+##  $ stand_category   : chr  "E" "A" "C" "C" ...
+##  $ Percent_Oak      : num  0.4 0.8 0.6 0.6 0.6 0.4 0.4 0.4 0.4 0.4 ...
+##  $ Percent_Pine     : num  0 0 0 0 0 0 0 0 0.1 0.1 ...
+##  $ Percent_Maple    : num  0.3 0.1 0.3 0.3 0.3 0.3 0.3 0.3 0 0 ...
+##  $ Forest_Type      : chr  "oak_maple" "oak" "oak" "oak" ...
+##  $ stand_area_ha    : num  14 6.4 8.6 8.6 8.6 11.7 11.7 11.7 8.9 8.9 ...
+##  $ forest_area_km2  : num  4.89 4.89 4.89 4.89 4.89 4.89 4.89 4.89 4.89 4.89 ...
+##  $ trap_name        : chr  "MRMOM" "MROak2.1" "MROak1.1" "MROak1.2" ...
+##  $ longitude        : num  -73.6 -73.6 -73.6 -73.6 -73.6 ...
+##  $ total_moth_count : int  93 15 7 20 6 96 52 NA 60 20 ...
+##  $ complete         : int  93 15 7 20 6 96 52 NA 60 20 ...
+##  $ clean_complete   : num  93 15 7 20 6 96 52 NA 60 20 ...
+##  $ censored         : int  0 0 0 0 0 0 0 1 0 0 ...
+##  $ reason_incomplete: chr  NA NA NA NA ...
+##  $ X                : logi  NA NA NA NA NA NA ...
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# remove space in trap\_name}
+\CommentTok{\# replace \textquotesingle{}{-}\textquotesingle{} with \textquotesingle{}\_\textquotesingle{} in trap\_name}
+\NormalTok{complete\_2023\_2024 }\OtherTok{\textless{}{-}}\NormalTok{ complete\_2023\_2024 }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{trap\_name =} \FunctionTok{str\_replace}\NormalTok{(trap\_name, }\StringTok{" "}\NormalTok{, }\StringTok{""}\NormalTok{))}
+\NormalTok{complete\_2023\_2024 }\OtherTok{\textless{}{-}}\NormalTok{ complete\_2023\_2024 }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{trap\_name =} \FunctionTok{str\_replace}\NormalTok{(trap\_name, }\StringTok{"{-}"}\NormalTok{, }\StringTok{"\_"}\NormalTok{))}
+
+\CommentTok{\#Remove MOM traps from either "stand type" or "stand category"}
+\NormalTok{stand\_type\_filtered }\OtherTok{\textless{}{-}}\NormalTok{ complete\_2023\_2024 }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(stand\_type }\SpecialCharTok{!=} \StringTok{"MOM"}\NormalTok{)}
+\NormalTok{stand\_category\_filtered }\OtherTok{\textless{}{-}}\NormalTok{ complete\_2023\_2024 }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(stand\_category }\SpecialCharTok{!=} \StringTok{"MOM"}\NormalTok{)}
+
+
+
+\CommentTok{\# looking for mistakes}
+\FunctionTok{unique}\NormalTok{(complete\_2023\_2024}\SpecialCharTok{$}\NormalTok{stand\_type)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Oak"       "Oak/Pine"  "Pine"      "MOM"       "Pine/Oak"  "Oak/Other"
+## [7] "Other"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{unique}\NormalTok{(complete\_2023\_2024}\SpecialCharTok{$}\NormalTok{patch\_name)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "Mont_Royal"               "Mont_Saint_Hilaire"      
+##  [3] "Montebello"               "Notre_Dame_de_Bonsecours"
+##  [5] "Oka"                      "Orford"                  
+##  [7] "Papineauville"            "Rigaud"                  
+##  [9] "Brownsburg"               "Hatley"                  
+## [11] "Kenauk"                   "Mont_Gauvin/Glen "       
+## [13] "Mont_Saint_Bruno"         "Parc_Michel_Chartrand"   
+## [15] "Parc_Pointe_aux_Prairies"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{unique}\NormalTok{(complete\_2023\_2024}\SpecialCharTok{$}\NormalTok{Year)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "1" "0"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{unique}\NormalTok{(complete\_2023\_2024}\SpecialCharTok{$}\NormalTok{landscape\_type)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "urban"        "agricultural" "forest "
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{unique}\NormalTok{(complete\_2023\_2024}\SpecialCharTok{$}\NormalTok{stand\_category)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "E"   "A"   "C"   "L"   "MOM" "D"   "H"   "I"   "B"   "G"   "K"   "M"  
+## [13] "F"   "J"   NA
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{unique}\NormalTok{(stand\_type\_filtered}\SpecialCharTok{$}\NormalTok{stand\_type)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Oak"       "Oak/Pine"  "Pine"      "Pine/Oak"  "Oak/Other" "Other"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{unique}\NormalTok{(stand\_category\_filtered}\SpecialCharTok{$}\NormalTok{stand\_category)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "E" "A" "C" "L" "D" "H" "I" "B" "G" "K" "M" "F" "J"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Data Summaries {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+
+\DocumentationTok{\#\#separate Stand Type column so that we have a Stand ID for each stand in each patch}
+\NormalTok{stand\_ID\_filtered }\OtherTok{\textless{}{-}}\NormalTok{ stand\_type\_filtered }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{separate}\NormalTok{(trap\_name, }\AttributeTok{into =} \FunctionTok{c}\NormalTok{(}\StringTok{"stand\_ID"}\NormalTok{, }\StringTok{"trap\_number"}\NormalTok{), }\AttributeTok{remove =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{sep =} \StringTok{"}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{."}\NormalTok{ ) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{glimpse}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Expected 2 pieces. Missing pieces filled with `NA` in 103 rows [1, 144, 145,
+## 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161,
+## 162, ...].
+\end{verbatim}
+
+\begin{verbatim}
+## Rows: 245
+## Columns: 22
+## $ patch_name        <chr> "Mont_Royal", "Mont_Royal", "Mont_Royal", "Mont_Roya~
+## $ Years             <int> 2024, 2024, 2024, 2024, 2024, 2024, 2024, 2024, 2024~
+## $ Year              <chr> "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1~
+## $ stand_type        <chr> "Oak", "Oak", "Oak", "Oak", "Oak", "Oak", "Oak", "Oa~
+## $ landscape_type    <chr> "urban", "urban", "urban", "urban", "urban", "urban"~
+## $ stand_category    <chr> "E", "A", "C", "C", "C", "E", "E", "E", "E", "E", "E~
+## $ Percent_Oak       <dbl> 0.4, 0.8, 0.6, 0.6, 0.6, 0.4, 0.4, 0.4, 0.4, 0.4, 0.~
+## $ Percent_Pine      <dbl> 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.1, 0.1, 0.~
+## $ Percent_Maple     <dbl> 0.3, 0.1, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.0, 0.0, 0.~
+## $ Forest_Type       <chr> "oak_maple", "oak", "oak", "oak", "oak", "oak_maple"~
+## $ stand_area_ha     <dbl> 14.0, 6.4, 8.6, 8.6, 8.6, 11.7, 11.7, 11.7, 8.9, 8.9~
+## $ forest_area_km2   <dbl> 4.89, 4.89, 4.89, 4.89, 4.89, 4.89, 4.89, 4.89, 4.89~
+## $ trap_name         <chr> "MRMOM", "MROak2.1", "MROak1.1", "MROak1.2", "MROak1~
+## $ stand_ID          <chr> "MRMOM", "MROak2", "MROak1", "MROak1", "MROak1", "MR~
+## $ trap_number       <chr> NA, "1", "1", "2", "3", "1", "2", "3", "1", "2", "3"~
+## $ longitude         <dbl> -73.59218, -73.58859, -73.58863, -73.58738, -73.5892~
+## $ total_moth_count  <int> 93, 15, 7, 20, 6, 96, 52, NA, 60, 20, 15, 17, 25, 3,~
+## $ complete          <int> 93, 15, 7, 20, 6, 96, 52, NA, 60, 20, 15, 17, 25, 3,~
+## $ clean_complete    <dbl> 93, 15, 7, 20, 6, 96, 52, NA, 60, 20, 15, 17, 25, 3,~
+## $ censored          <int> 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1~
+## $ reason_incomplete <chr> NA, NA, NA, NA, NA, NA, NA, "Missing in field", NA, ~
+## $ X                 <lgl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, ~
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{stand\_ID\_filtered\_1 }\OtherTok{\textless{}{-}}\NormalTok{ stand\_category\_filtered }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{separate}\NormalTok{(trap\_name, }\AttributeTok{into =} \FunctionTok{c}\NormalTok{(}\StringTok{"stand\_ID"}\NormalTok{, }\StringTok{"trap\_number"}\NormalTok{), }\AttributeTok{remove =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{sep =} \StringTok{"}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{."}\NormalTok{ ) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{glimpse}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Expected 2 pieces. Missing pieces filled with `NA` in 44 rows [1, 144, 145,
+## 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161,
+## 162, ...].
+\end{verbatim}
+
+\begin{verbatim}
+## Rows: 186
+## Columns: 22
+## $ patch_name        <chr> "Mont_Royal", "Mont_Royal", "Mont_Royal", "Mont_Roya~
+## $ Years             <int> 2024, 2024, 2024, 2024, 2024, 2024, 2024, 2024, 2024~
+## $ Year              <chr> "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1~
+## $ stand_type        <chr> "Oak", "Oak", "Oak", "Oak", "Oak", "Oak", "Oak", "Oa~
+## $ landscape_type    <chr> "urban", "urban", "urban", "urban", "urban", "urban"~
+## $ stand_category    <chr> "E", "A", "C", "C", "C", "E", "E", "E", "E", "E", "E~
+## $ Percent_Oak       <dbl> 0.4, 0.8, 0.6, 0.6, 0.6, 0.4, 0.4, 0.4, 0.4, 0.4, 0.~
+## $ Percent_Pine      <dbl> 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.1, 0.1, 0.~
+## $ Percent_Maple     <dbl> 0.3, 0.1, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.0, 0.0, 0.~
+## $ Forest_Type       <chr> "oak_maple", "oak", "oak", "oak", "oak", "oak_maple"~
+## $ stand_area_ha     <dbl> 14.0, 6.4, 8.6, 8.6, 8.6, 11.7, 11.7, 11.7, 8.9, 8.9~
+## $ forest_area_km2   <dbl> 4.89, 4.89, 4.89, 4.89, 4.89, 4.89, 4.89, 4.89, 4.89~
+## $ trap_name         <chr> "MRMOM", "MROak2.1", "MROak1.1", "MROak1.2", "MROak1~
+## $ stand_ID          <chr> "MRMOM", "MROak2", "MROak1", "MROak1", "MROak1", "MR~
+## $ trap_number       <chr> NA, "1", "1", "2", "3", "1", "2", "3", "1", "2", "3"~
+## $ longitude         <dbl> -73.59218, -73.58859, -73.58863, -73.58738, -73.5892~
+## $ total_moth_count  <int> 93, 15, 7, 20, 6, 96, 52, NA, 60, 20, 15, 17, 25, 3,~
+## $ complete          <int> 93, 15, 7, 20, 6, 96, 52, NA, 60, 20, 15, 17, 25, 3,~
+## $ clean_complete    <dbl> 93, 15, 7, 20, 6, 96, 52, NA, 60, 20, 15, 17, 25, 3,~
+## $ censored          <int> 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1~
+## $ reason_incomplete <chr> NA, NA, NA, NA, NA, NA, NA, "Missing in field", NA, ~
+## $ X                 <lgl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, ~
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{total\_moths\_2023\_2024 }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(complete\_2023\_2024}\SpecialCharTok{$}\NormalTok{clean\_complete, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\FunctionTok{print}\NormalTok{(total\_moths\_2023\_2024)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 12456
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{n\_distinct}\NormalTok{(complete\_2023\_2024}\SpecialCharTok{$}\NormalTok{trap\_name)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 255
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{n\_distinct}\NormalTok{(stand\_ID\_filtered}\SpecialCharTok{$}\NormalTok{stand\_ID)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 155
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{n\_distinct}\NormalTok{(stand\_ID\_filtered}\SpecialCharTok{$}\NormalTok{patch\_name)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 15
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#total\_traps\_2023\_2024 \textless{}{-} sum(complete\_2023\_2024$trap\_name, na.rm = TRUE)}
+\CommentTok{\#print(total\_traps\_2023\_2024)}
+
+\CommentTok{\#total\_stands\_2023\_2024 \textless{}{-} sum(stand\_ID\_filtered$stand\_ID, na.rm = TRUE)}
+\CommentTok{\#print(total\_stands\_2023\_2024)}
+
+\CommentTok{\#total\_patches\_2023\_2024 \textless{}{-} sum(stand\_ID\_filtered$patch\_name, na.rm = TRUE)}
+\CommentTok{\#print(total\_patches\_2023\_2024)}
+
+
+\CommentTok{\#check to see the distribution of moth count data}
+\FunctionTok{hist}\NormalTok{(complete\_2023\_2024}\SpecialCharTok{$}\NormalTok{clean\_complete, }
+          \AttributeTok{main =} \StringTok{" "}\NormalTok{, }
+          \AttributeTok{xlab =} \StringTok{"Spongy moth count/trap"}\NormalTok{, }
+          \AttributeTok{ylab =} \StringTok{"Frequency"}\NormalTok{, }
+          \AttributeTok{col =} \StringTok{"darkblue"}\NormalTok{, }
+          \AttributeTok{border =} \StringTok{"black"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{2023_2024_All_Data_partial_files/figure-latex/unnamed-chunk-1-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{hist}\NormalTok{(complete\_2023\_2024}\SpecialCharTok{$}\NormalTok{clean\_complete, }
+     \AttributeTok{main =} \StringTok{" "}\NormalTok{, }
+     \AttributeTok{xlab =} \StringTok{"Spongy moth count/trap"}\NormalTok{, }
+     \AttributeTok{ylab =} \StringTok{"Frequency"}\NormalTok{, }
+     \AttributeTok{col =} \StringTok{"blue"}\NormalTok{, }
+     \AttributeTok{border =} \StringTok{"black"}\NormalTok{,}
+     \AttributeTok{breaks =} \DecValTok{50}\NormalTok{)  }\CommentTok{\# increase this number to make bins smaller}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{2023_2024_All_Data_partial_files/figure-latex/unnamed-chunk-1-2.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Calculate the mean and standard deviation of moth counts for each }
+\CommentTok{\#level of stand\_category to see if there are differences.}
+
+\CommentTok{\# Checking unique combinations}
+
+\FunctionTok{table}\NormalTok{(stand\_category\_filtered}\SpecialCharTok{$}\NormalTok{stand\_category, }
+\NormalTok{      stand\_category\_filtered}\SpecialCharTok{$}\NormalTok{patch\_name)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    
+##     Brownsburg Hatley Kenauk Mont_Gauvin/Glen  Mont_Royal Mont_Saint_Bruno
+##   A          0      0      1                 0          1                1
+##   B          0      0      0                 0          0                0
+##   C          2      2      1                 2          3                3
+##   D          0      0      0                 0          0                0
+##   E          0      0      0                 0          8                0
+##   F          0      0      0                 0          0                0
+##   G          0      0      0                 0          0                0
+##   H          0      0      0                 0          0                0
+##   I          0      0      0                 0          0                0
+##   J          0      0      0                 0          0                0
+##   K          0      0      0                 0          0                0
+##   L          2      0      0                 0          1                0
+##   M          0      0      0                 0          0                0
+##    
+##     Mont_Saint_Hilaire Montebello Notre_Dame_de_Bonsecours Oka Orford
+##   A                  0          0                        0   0      3
+##   B                  0          2                        0   0      0
+##   C                  8          4                        6   0      2
+##   D                  3          0                        0   0      0
+##   E                  0          0                        0   8      6
+##   F                  2          0                        5   0      5
+##   G                  0          2                        0   1      0
+##   H                  4          0                        1   8      0
+##   I                  2          5                        0  18      0
+##   J                  0          0                        0   0      4
+##   K                  0          2                        0   5      0
+##   L                  1          0                        0   2      7
+##   M                  0          2                        2   0      2
+##    
+##     Papineauville Parc_Michel_Chartrand Rigaud
+##   A             4                     0      0
+##   B             0                     0      0
+##   C             0                     2      0
+##   D             0                     0      7
+##   E             2                     0      0
+##   F             0                     0      5
+##   G             0                     0      0
+##   H             2                     0      3
+##   I             0                     0      4
+##   J             0                     0      3
+##   K             0                     0      3
+##   L             0                     0      2
+##   M             0                     0      0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{table}\NormalTok{(stand\_type\_filtered}\SpecialCharTok{$}\NormalTok{stand\_type,}
+\NormalTok{      stand\_type\_filtered}\SpecialCharTok{$}\NormalTok{patch\_name)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##            
+##             Brownsburg Hatley Kenauk Mont_Gauvin/Glen  Mont_Royal
+##   Oak                2      2      1                 2          8
+##   Oak/Other          2      2      2                 2          0
+##   Oak/Pine           0      0      1                 0          4
+##   Other              0      2      2                 2          0
+##   Pine               2      0      0                 0          1
+##   Pine/Oak           0      0      0                 0          0
+##            
+##             Mont_Saint_Bruno Mont_Saint_Hilaire Montebello
+##   Oak                      3                  8          6
+##   Oak/Other                5                  3          2
+##   Oak/Pine                 0                  8          2
+##   Other                    4                  4          2
+##   Pine                     0                  1          5
+##   Pine/Oak                 0                  2          4
+##            
+##             Notre_Dame_de_Bonsecours Oka Orford Papineauville
+##   Oak                              6   6     14             6
+##   Oak/Other                        1   2      4             2
+##   Oak/Pine                         5   9      2             2
+##   Other                            2   0      4             2
+##   Pine                             2   7     13             0
+##   Pine/Oak                         1  18      0             0
+##            
+##             Parc_Michel_Chartrand Parc_Pointe_aux_Prairies Rigaud
+##   Oak                           2                        0      7
+##   Oak/Other                     2                        2      2
+##   Oak/Pine                      0                        0      8
+##   Other                         2                        4      0
+##   Pine                          0                        0      8
+##   Pine/Oak                      0                        0      4
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Set the levels of \textquotesingle{}stand\_type\textquotesingle{} to ensure the correct order}
+\NormalTok{stand\_type\_filtered}\SpecialCharTok{$}\NormalTok{stand\_type }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(stand\_type\_filtered}\SpecialCharTok{$}\NormalTok{stand\_type, }
+                              \AttributeTok{levels =} \FunctionTok{c}\NormalTok{(}\StringTok{"Oak"}\NormalTok{, }\StringTok{"Oak/Pine"}\NormalTok{, }\StringTok{"Oak/Other"}\NormalTok{, }
+                                  \StringTok{"Pine/Oak"}\NormalTok{, }\StringTok{"Pine"}\NormalTok{, }\StringTok{"Other"}\NormalTok{))}
+
+\CommentTok{\# Create the \textquotesingle{}stand{-}type by patch\textquotesingle{} table}
+\FunctionTok{table}\NormalTok{(stand\_type\_filtered}\SpecialCharTok{$}\NormalTok{stand\_type, stand\_type\_filtered}\SpecialCharTok{$}\NormalTok{patch\_name)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##            
+##             Brownsburg Hatley Kenauk Mont_Gauvin/Glen  Mont_Royal
+##   Oak                2      2      1                 2          8
+##   Oak/Pine           0      0      1                 0          4
+##   Oak/Other          2      2      2                 2          0
+##   Pine/Oak           0      0      0                 0          0
+##   Pine               2      0      0                 0          1
+##   Other              0      2      2                 2          0
+##            
+##             Mont_Saint_Bruno Mont_Saint_Hilaire Montebello
+##   Oak                      3                  8          6
+##   Oak/Pine                 0                  8          2
+##   Oak/Other                5                  3          2
+##   Pine/Oak                 0                  2          4
+##   Pine                     0                  1          5
+##   Other                    4                  4          2
+##            
+##             Notre_Dame_de_Bonsecours Oka Orford Papineauville
+##   Oak                              6   6     14             6
+##   Oak/Pine                         5   9      2             2
+##   Oak/Other                        1   2      4             2
+##   Pine/Oak                         1  18      0             0
+##   Pine                             2   7     13             0
+##   Other                            2   0      4             2
+##            
+##             Parc_Michel_Chartrand Parc_Pointe_aux_Prairies Rigaud
+##   Oak                           2                        0      7
+##   Oak/Pine                      0                        0      8
+##   Oak/Other                     2                        2      2
+##   Pine/Oak                      0                        0      4
+##   Pine                          0                        0      8
+##   Other                         2                        4      0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Create the contingency table}
+\NormalTok{contingency\_table }\OtherTok{\textless{}{-}} \FunctionTok{table}\NormalTok{(stand\_type\_filtered}\SpecialCharTok{$}\NormalTok{stand\_type, stand\_type\_filtered}\SpecialCharTok{$}\NormalTok{patch\_name)}
+
+\CommentTok{\# Convert the table to a data frame}
+\NormalTok{contingency\_df }\OtherTok{\textless{}{-}} \FunctionTok{as.data.frame}\NormalTok{(contingency\_table)}
+
+
+\CommentTok{\# Heatmap stands by patch {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+
+\CommentTok{\# Create a plot (heatmap) of the contingency table}
+\NormalTok{contingency\_df }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##         Var1                     Var2 Freq
+## 1        Oak               Brownsburg    2
+## 2   Oak/Pine               Brownsburg    0
+## 3  Oak/Other               Brownsburg    2
+## 4   Pine/Oak               Brownsburg    0
+## 5       Pine               Brownsburg    2
+## 6      Other               Brownsburg    0
+## 7        Oak                   Hatley    2
+## 8   Oak/Pine                   Hatley    0
+## 9  Oak/Other                   Hatley    2
+## 10  Pine/Oak                   Hatley    0
+## 11      Pine                   Hatley    0
+## 12     Other                   Hatley    2
+## 13       Oak                   Kenauk    1
+## 14  Oak/Pine                   Kenauk    1
+## 15 Oak/Other                   Kenauk    2
+## 16  Pine/Oak                   Kenauk    0
+## 17      Pine                   Kenauk    0
+## 18     Other                   Kenauk    2
+## 19       Oak        Mont_Gauvin/Glen     2
+## 20  Oak/Pine        Mont_Gauvin/Glen     0
+## 21 Oak/Other        Mont_Gauvin/Glen     2
+## 22  Pine/Oak        Mont_Gauvin/Glen     0
+## 23      Pine        Mont_Gauvin/Glen     0
+## 24     Other        Mont_Gauvin/Glen     2
+## 25       Oak               Mont_Royal    8
+## 26  Oak/Pine               Mont_Royal    4
+## 27 Oak/Other               Mont_Royal    0
+## 28  Pine/Oak               Mont_Royal    0
+## 29      Pine               Mont_Royal    1
+## 30     Other               Mont_Royal    0
+## 31       Oak         Mont_Saint_Bruno    3
+## 32  Oak/Pine         Mont_Saint_Bruno    0
+## 33 Oak/Other         Mont_Saint_Bruno    5
+## 34  Pine/Oak         Mont_Saint_Bruno    0
+## 35      Pine         Mont_Saint_Bruno    0
+## 36     Other         Mont_Saint_Bruno    4
+## 37       Oak       Mont_Saint_Hilaire    8
+## 38  Oak/Pine       Mont_Saint_Hilaire    8
+## 39 Oak/Other       Mont_Saint_Hilaire    3
+## 40  Pine/Oak       Mont_Saint_Hilaire    2
+## 41      Pine       Mont_Saint_Hilaire    1
+## 42     Other       Mont_Saint_Hilaire    4
+## 43       Oak               Montebello    6
+## 44  Oak/Pine               Montebello    2
+## 45 Oak/Other               Montebello    2
+## 46  Pine/Oak               Montebello    4
+## 47      Pine               Montebello    5
+## 48     Other               Montebello    2
+## 49       Oak Notre_Dame_de_Bonsecours    6
+## 50  Oak/Pine Notre_Dame_de_Bonsecours    5
+## 51 Oak/Other Notre_Dame_de_Bonsecours    1
+## 52  Pine/Oak Notre_Dame_de_Bonsecours    1
+## 53      Pine Notre_Dame_de_Bonsecours    2
+## 54     Other Notre_Dame_de_Bonsecours    2
+## 55       Oak                      Oka    6
+## 56  Oak/Pine                      Oka    9
+## 57 Oak/Other                      Oka    2
+## 58  Pine/Oak                      Oka   18
+## 59      Pine                      Oka    7
+## 60     Other                      Oka    0
+## 61       Oak                   Orford   14
+## 62  Oak/Pine                   Orford    2
+## 63 Oak/Other                   Orford    4
+## 64  Pine/Oak                   Orford    0
+## 65      Pine                   Orford   13
+## 66     Other                   Orford    4
+## 67       Oak            Papineauville    6
+## 68  Oak/Pine            Papineauville    2
+## 69 Oak/Other            Papineauville    2
+## 70  Pine/Oak            Papineauville    0
+## 71      Pine            Papineauville    0
+## 72     Other            Papineauville    2
+## 73       Oak    Parc_Michel_Chartrand    2
+## 74  Oak/Pine    Parc_Michel_Chartrand    0
+## 75 Oak/Other    Parc_Michel_Chartrand    2
+## 76  Pine/Oak    Parc_Michel_Chartrand    0
+## 77      Pine    Parc_Michel_Chartrand    0
+## 78     Other    Parc_Michel_Chartrand    2
+## 79       Oak Parc_Pointe_aux_Prairies    0
+## 80  Oak/Pine Parc_Pointe_aux_Prairies    0
+## 81 Oak/Other Parc_Pointe_aux_Prairies    2
+## 82  Pine/Oak Parc_Pointe_aux_Prairies    0
+## 83      Pine Parc_Pointe_aux_Prairies    0
+## 84     Other Parc_Pointe_aux_Prairies    4
+## 85       Oak                   Rigaud    7
+## 86  Oak/Pine                   Rigaud    8
+## 87 Oak/Other                   Rigaud    2
+## 88  Pine/Oak                   Rigaud    4
+## 89      Pine                   Rigaud    8
+## 90     Other                   Rigaud    0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(contingency\_df, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Var1, }\AttributeTok{y =}\NormalTok{ Var2, }\AttributeTok{fill =}\NormalTok{ Freq)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_tile}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_gradient}\NormalTok{(}\AttributeTok{low =} \StringTok{"white"}\NormalTok{, }\AttributeTok{high =} \StringTok{"darkred"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Stand Type"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Patch Name"}\NormalTok{, }\AttributeTok{fill =} \StringTok{"Frequency"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{2023_2024_All_Data_partial_files/figure-latex/unnamed-chunk-1-3.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Save the plot as an image (e.g., PNG)}
+\CommentTok{\#ggsave("contingency\_table\_heatmap.png", width = 7.5, height = 6)}
+
+\CommentTok{\#convert the data in the heatmap plot to a table format}
+\NormalTok{wide\_table }\OtherTok{\textless{}{-}}\NormalTok{ contingency\_df }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{pivot\_wider}\NormalTok{(}\AttributeTok{names\_from =}\NormalTok{ Var1, }\AttributeTok{values\_from =}\NormalTok{ Freq, }\AttributeTok{values\_fill =} \DecValTok{0}\NormalTok{)}
+
+\NormalTok{wide\_table }\OtherTok{\textless{}{-}}\NormalTok{ wide\_table }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}
+    \AttributeTok{Var2 =} \FunctionTok{trimws}\NormalTok{(}\FunctionTok{as.character}\NormalTok{(Var2)),}
+    \AttributeTok{Var2 =}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{recode}\NormalTok{(Var2,}
+                          \StringTok{"Mont\_Gauvin/Glen"} \OtherTok{=} \StringTok{"Mont Gauvin"}\NormalTok{,}
+                          \StringTok{"Mont\_Royal"} \OtherTok{=} \StringTok{"Mont Royal"}\NormalTok{,}
+                          \StringTok{"Mont\_Saint\_Bruno"} \OtherTok{=} \StringTok{"Mont Saint Bruno"}\NormalTok{,}
+                          \StringTok{"Mont\_Saint\_Hilaire"} \OtherTok{=} \StringTok{"Mont Saint Hilaire"}\NormalTok{,}
+                          \StringTok{"Notre\_Dame\_de\_Bonsecours"} \OtherTok{=} \StringTok{"Notre Dame de Bonsecours"}\NormalTok{,}
+                          \StringTok{"Oka"} \OtherTok{=} \StringTok{"Parc Oka"}\NormalTok{,}
+                          \StringTok{"Orford"} \OtherTok{=} \StringTok{"Mont Orford"}\NormalTok{,}
+                          \StringTok{"Parc\_Michel\_Chartrand"} \OtherTok{=} \StringTok{"Parc Michel Chartrand"}\NormalTok{,}
+                          \StringTok{"Parc\_Pointe\_aux\_Prairies"} \OtherTok{=} \StringTok{"Parc Pointe aux Prairies"}\NormalTok{,}
+                          \StringTok{"Rigaud"} \OtherTok{=} \StringTok{"Mont Rigaud"}\NormalTok{,}
+\NormalTok{                         ))}
+
+
+\DocumentationTok{\#\#print(wide\_table)}
+
+\NormalTok{patch\_order }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Papineauville"}\NormalTok{, }\StringTok{"Montebello"}\NormalTok{, }\StringTok{"Notre Dame de Bonsecours"}\NormalTok{,}
+                 \StringTok{"Kenauk"}\NormalTok{, }\StringTok{"Brownsburg"}\NormalTok{, }\StringTok{"Mont Rigaud"}\NormalTok{, }\StringTok{"Parc Oka"}\NormalTok{,}
+                 \StringTok{"Mont Royal"}\NormalTok{,}
+                 \StringTok{"Parc Pointe aux Prairies"}\NormalTok{, }\StringTok{"Parc Michel Chartrand"}\NormalTok{,}
+                 \StringTok{"Mont Saint Bruno"}\NormalTok{, }\StringTok{"Mont Saint Hilaire"}\NormalTok{,}\StringTok{"Mont Gauvin"}\NormalTok{,}
+                 \StringTok{"Mont Orford"}\NormalTok{, }\StringTok{"Hatley"}\NormalTok{)}
+\NormalTok{wide\_table }\OtherTok{\textless{}{-}}\NormalTok{ wide\_table }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Var2 =} \FunctionTok{factor}\NormalTok{(Var2, }\AttributeTok{levels =}\NormalTok{ patch\_order)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{arrange}\NormalTok{(Var2)}
+
+\DocumentationTok{\#\#print(wide\_table)}
+
+\NormalTok{gt\_table }\OtherTok{\textless{}{-}}\NormalTok{ wide\_table }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{gt}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{cols\_label}\NormalTok{(}
+    \AttributeTok{Var2 =} \StringTok{"Patch Name"}
+\NormalTok{  ) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{tab\_options}\NormalTok{(}
+    \AttributeTok{table.font.size =} \DecValTok{12}\NormalTok{,}
+    \AttributeTok{heading.title.font.size =} \DecValTok{16}\NormalTok{,}
+    \AttributeTok{heading.subtitle.font.size =} \DecValTok{14}
+\NormalTok{  ) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{cols\_align}\NormalTok{(}
+    \AttributeTok{align =} \StringTok{"center"}\NormalTok{,}
+    \AttributeTok{columns =} \FunctionTok{everything}\NormalTok{()}
+\NormalTok{  ) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{tab\_style}\NormalTok{(}
+    \AttributeTok{style =} \FunctionTok{cell\_text}\NormalTok{(}\AttributeTok{weight =} \StringTok{"bold"}\NormalTok{),}
+    \AttributeTok{locations =} \FunctionTok{cells\_column\_labels}\NormalTok{(}\FunctionTok{everything}\NormalTok{())}
+\NormalTok{  ) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{tab\_style}\NormalTok{(  }\CommentTok{\# Custom striping on even{-}numbered rows}
+    \AttributeTok{style =} \FunctionTok{cell\_fill}\NormalTok{(}\AttributeTok{color =} \StringTok{"\#f9f9f0"}\NormalTok{),  }\CommentTok{\# You can change this color}
+    \AttributeTok{locations =} \FunctionTok{cells\_body}\NormalTok{(}\AttributeTok{rows =} \FunctionTok{seq}\NormalTok{(}\DecValTok{2}\NormalTok{, }\FunctionTok{nrow}\NormalTok{(wide\_table), }\DecValTok{2}\NormalTok{))}
+\NormalTok{  )}
+
+\DocumentationTok{\#\#gtsave(gt\_table, "heatmap\_table.png")      \# Image}
+\DocumentationTok{\#\#gtsave(gt\_table, "heatmap\_table.html")     \# Web preview}
+
+\NormalTok{version}\SpecialCharTok{$}\NormalTok{version.string}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "R version 4.4.3 (2025-02-28)"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Summary statistics for moth count by stand\_category and stand\_type}
+\NormalTok{summary\_stats }\OtherTok{\textless{}{-}}\NormalTok{ stand\_type\_filtered }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(stand\_category, stand\_type, patch\_name) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}
+    \AttributeTok{mean\_count =} \FunctionTok{mean}\NormalTok{(total\_moth\_count, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+    \AttributeTok{sd\_count =} \FunctionTok{sd}\NormalTok{(total\_moth\_count, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+    \AttributeTok{var\_count =} \FunctionTok{var}\NormalTok{(total\_moth\_count, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+    \AttributeTok{count =} \FunctionTok{n}\NormalTok{()}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `summarise()` has grouped output by 'stand_category', 'stand_type'. You can
+## override using the `.groups` argument.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#print(summary\_stats, n=22)}
+
+
+\CommentTok{\# Summary statistics moth count by stand\_category only}
+\CommentTok{\# summary\_stats\_2 \textless{}{-} stand\_category\_filtered \%\textgreater{}\%}
+\CommentTok{\#   group\_by(stand\_category) \%\textgreater{}\%}
+\CommentTok{\#   summarise(}
+\CommentTok{\#     mean\_count = mean(clean\_complete, na.rm = TRUE),}
+\CommentTok{\#     sd\_count = sd(clean\_complete, na.rm = TRUE),}
+\CommentTok{\#     count = n()}
+\CommentTok{\#   )}
+\CommentTok{\# }
+\CommentTok{\# print(summary\_stats\_2, n=22)}
+
+
+\CommentTok{\# Table to use {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+
+\CommentTok{\# Summary statistics for moth count by stand\_type, differentiating between}
+\DocumentationTok{\#\#traps set and traps with usable data}
+\NormalTok{summary\_stats\_3 }\OtherTok{\textless{}{-}}\NormalTok{ stand\_type\_filtered }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(stand\_type) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}
+    \AttributeTok{mean\_count =} \FunctionTok{mean}\NormalTok{(clean\_complete, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+    \AttributeTok{sd\_count =} \FunctionTok{sd}\NormalTok{(clean\_complete, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+    \AttributeTok{n\_traps =} \FunctionTok{n}\NormalTok{(),}
+    \AttributeTok{n\_obs =} \FunctionTok{sum}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{ (clean\_complete))}
+\NormalTok{  )}
+
+\FunctionTok{print}\NormalTok{(summary\_stats\_3, }\AttributeTok{n=}\DecValTok{22}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 5
+##   stand_type mean_count sd_count n_traps n_obs
+##   <fct>           <dbl>    <dbl>   <int> <int>
+## 1 Oak              77.0     69.8      73    57
+## 2 Oak/Pine         64.4     52.6      41    30
+## 3 Oak/Other        37.3     27.0      33    29
+## 4 Pine/Oak         85.8     61.1      29    20
+## 5 Pine             54.8     33.2      39    27
+## 6 Other            36.9     26.8      30    27
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Round numeric columns to 2 decimal places}
+\NormalTok{summary\_stats\_3}\SpecialCharTok{$}\NormalTok{mean\_count }\OtherTok{\textless{}{-}} \FunctionTok{round}\NormalTok{(summary\_stats\_3}\SpecialCharTok{$}\NormalTok{mean\_count, }\DecValTok{2}\NormalTok{)}
+\NormalTok{summary\_stats\_3}\SpecialCharTok{$}\NormalTok{sd\_count }\OtherTok{\textless{}{-}} \FunctionTok{round}\NormalTok{(summary\_stats\_3}\SpecialCharTok{$}\NormalTok{sd\_count, }\DecValTok{2}\NormalTok{)}
+\NormalTok{summary\_stats\_3}\SpecialCharTok{$}\NormalTok{count }\OtherTok{\textless{}{-}} \FunctionTok{round}\NormalTok{(summary\_stats\_3}\SpecialCharTok{$}\NormalTok{n\_obs, }\DecValTok{2}\NormalTok{)}
+
+
+\CommentTok{\# Convert the table to a data frame}
+\CommentTok{\#summary\_table \textless{}{-} as.data.frame(summary\_stats\_3)}
+
+\CommentTok{\# Save it as a CSV file}
+\CommentTok{\#write.csv(summary\_table, file = "Summary Stats by Stand Type.csv", }
+          \CommentTok{\#row.names = FALSE)}
+
+
+\CommentTok{\# Summary statistics for moth count by patch}
+\NormalTok{summary\_stats\_4 }\OtherTok{\textless{}{-}}\NormalTok{ stand\_type\_filtered }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(patch\_name) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}
+    \AttributeTok{mean\_count =} \FunctionTok{mean}\NormalTok{(clean\_complete, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+    \AttributeTok{sd\_count =} \FunctionTok{sd}\NormalTok{(clean\_complete, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+    \AttributeTok{count =} \FunctionTok{n}\NormalTok{()}
+\NormalTok{  )}
+
+\FunctionTok{print}\NormalTok{(summary\_stats\_4, }\AttributeTok{n=}\DecValTok{22}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 15 x 4
+##    patch_name                 mean_count sd_count count
+##    <chr>                           <dbl>    <dbl> <int>
+##  1 "Brownsburg"                     38.6     9.40     6
+##  2 "Hatley"                         74.8    18.4      6
+##  3 "Kenauk"                         26.8    20.4      6
+##  4 "Mont_Gauvin/Glen "              34.1    11.6      6
+##  5 "Mont_Royal"                     35.5    32.0     13
+##  6 "Mont_Saint_Bruno"               24.7    13.9     12
+##  7 "Mont_Saint_Hilaire"             23.5    29.6     26
+##  8 "Montebello"                     54      44.8     21
+##  9 "Notre_Dame_de_Bonsecours"       54.8    32.9     17
+## 10 "Oka"                           105.     63.6     42
+## 11 "Orford"                         88.0    67.9     37
+## 12 "Papineauville"                  71.0    56.2     12
+## 13 "Parc_Michel_Chartrand"          70.2    17.4      6
+## 14 "Parc_Pointe_aux_Prairies"       43.3    32.7      6
+## 15 "Rigaud"                         38.1    26.4     29
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Summary statistics for moth count by stand\_type and patch}
+\CommentTok{\# summary\_stats\_5 \textless{}{-} stand\_type\_filtered \%\textgreater{}\%}
+\CommentTok{\#   group\_by(stand\_type, patch\_name) \%\textgreater{}\%}
+\CommentTok{\#   summarise(}
+\CommentTok{\#     mean\_count = mean(clean\_complete, na.rm = TRUE),}
+\CommentTok{\#     sd\_count = sd(clean\_complete, na.rm = TRUE),}
+\CommentTok{\#     var\_count = var(clean\_complete, na.rm = TRUE),}
+\CommentTok{\#     n\_traps = n(),}
+\CommentTok{\#     n\_obs = sum(!is.na (clean\_complete))}
+\CommentTok{\#     }
+\CommentTok{\#   )}
+\CommentTok{\# }
+\CommentTok{\# print(summary\_stats\_5, n=22)}
+
+\DocumentationTok{\#\# Remove MOM row in \textquotesingle{}complete\textquotesingle{} moth counts}
+\NormalTok{moth\_by\_stand\_summary\_stats }\OtherTok{\textless{}{-}}\NormalTok{ summary\_stats\_3[}\SpecialCharTok{{-}}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{),]}
+\FunctionTok{print}\NormalTok{(moth\_by\_stand\_summary\_stats, }\AttributeTok{n=}\DecValTok{22}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 5 x 6
+##   stand_type mean_count sd_count n_traps n_obs count
+##   <fct>           <dbl>    <dbl>   <int> <int> <dbl>
+## 1 Oak/Pine         64.4     52.6      41    30    30
+## 2 Oak/Other        37.3     27.0      33    29    29
+## 3 Pine/Oak         85.8     61.1      29    20    20
+## 4 Pine             54.8     33.2      39    27    27
+## 5 Other            36.9     26.8      30    27    27
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# Remove MOM row in \textquotesingle{}clean\_complete\textquotesingle{} moth counts}
+\NormalTok{moth\_by\_stand\_summary\_stats\_2 }\OtherTok{\textless{}{-}}\NormalTok{ summary\_stats\_4[}\SpecialCharTok{{-}}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{),]}
+\FunctionTok{print}\NormalTok{(moth\_by\_stand\_summary\_stats\_2, }\AttributeTok{n=}\DecValTok{22}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 14 x 4
+##    patch_name                 mean_count sd_count count
+##    <chr>                           <dbl>    <dbl> <int>
+##  1 "Hatley"                         74.8     18.4     6
+##  2 "Kenauk"                         26.8     20.4     6
+##  3 "Mont_Gauvin/Glen "              34.1     11.6     6
+##  4 "Mont_Royal"                     35.5     32.0    13
+##  5 "Mont_Saint_Bruno"               24.7     13.9    12
+##  6 "Mont_Saint_Hilaire"             23.5     29.6    26
+##  7 "Montebello"                     54       44.8    21
+##  8 "Notre_Dame_de_Bonsecours"       54.8     32.9    17
+##  9 "Oka"                           105.      63.6    42
+## 10 "Orford"                         88.0     67.9    37
+## 11 "Papineauville"                  71.0     56.2    12
+## 12 "Parc_Michel_Chartrand"          70.2     17.4     6
+## 13 "Parc_Pointe_aux_Prairies"       43.3     32.7     6
+## 14 "Rigaud"                         38.1     26.4    29
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#\#NEED TO SAVE AND EXPORT THESE SUMMARY TABLES\#\#\#}
+
+
+\CommentTok{\# Visualizations {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+
+\DocumentationTok{\#\#separate Stand Type column so that we have a Stand ID for each stand in each patch}
+\CommentTok{\#stand\_ID\_filtered \textless{}{-} stand\_type\_filtered \%\textgreater{}\% }
+ \CommentTok{\# separate(trap\_name, into = c("stand\_ID", "trap\_number"), remove = FALSE, sep = "\textbackslash{}\textbackslash{}." ) \%\textgreater{}\% }
+ \CommentTok{\# glimpse()}
+
+\CommentTok{\#stand\_ID\_filtered\_1 \textless{}{-} stand\_category\_filtered \%\textgreater{}\% }
+  \CommentTok{\#separate(trap\_name, into = c("stand\_ID", "trap\_number"), remove = FALSE, sep = "\textbackslash{}\textbackslash{}." ) \%\textgreater{}\% }
+  \CommentTok{\#glimpse()}
+
+\DocumentationTok{\#\#Order Stand Types so shown on X{-}axis in order of decreasing oak}
+
+
+
+\CommentTok{\# Oak/Pine nested models {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+
+
+\CommentTok{\#Poisson, using all levels of data collection as a random effect, except Oak}
+\CommentTok{\#which is being fitted as a fixed effect}
+
+\CommentTok{\#model\_complete\_poisson\_oak \textless{}{-} glmer(}
+ \CommentTok{\# round(clean\_complete) \textasciitilde{} (1|trap\_name) +}
+  \CommentTok{\#  (Percent\_Oak) + (1|patch\_name),}
+  \CommentTok{\#family =poisson(), data = stand\_ID\_filtered)}
+\CommentTok{\#summary(model\_complete\_poisson\_oak)}
+
+\CommentTok{\#performance::check\_overdispersion(model\_complete\_poisson\_oak)}
+\CommentTok{\#performance::check\_model(model\_complete\_poisson\_oak)}
+\CommentTok{\#Heavily underdispersed, indicating that the moth counts are less variable}
+\CommentTok{\#than expected}
+
+\DocumentationTok{\#\#Run the same basic model, but have stands nested within patches as a }
+\CommentTok{\#random effects, first keeping in trap\_name as a random effect and then }
+\CommentTok{\#removing it}
+
+\CommentTok{\#model\_complete\_poisson\_oak\_nested \textless{}{-} glmer(}
+ \CommentTok{\# round(clean\_complete) \textasciitilde{} Percent\_Oak + }
+  \CommentTok{\#  (1 | trap\_name) + }
+   \CommentTok{\# (1 | patch\_name/stand\_ID),   \# nesting structure}
+  \CommentTok{\#family = poisson(),}
+  \CommentTok{\#data = stand\_ID\_filtered}
+\CommentTok{\#)}
+\CommentTok{\#summary(model\_complete\_poisson\_oak\_nested)}
+
+\CommentTok{\#performance::check\_overdispersion(model\_complete\_poisson\_oak\_nested)}
+\CommentTok{\#performance::check\_model(model\_complete\_poisson\_oak\_nested)}
+
+\CommentTok{\#Poisson w Oak}
+\NormalTok{model\_complete\_poisson\_oak\_nested\_1 }\OtherTok{\textless{}{-}} \FunctionTok{glmer}\NormalTok{(}
+  \FunctionTok{round}\NormalTok{(clean\_complete) }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Percent\_Oak }\SpecialCharTok{+} 
+    \CommentTok{\#(1 | trap\_name) + }
+\NormalTok{    (}\DecValTok{1} \SpecialCharTok{|}\NormalTok{ patch\_name}\SpecialCharTok{/}\NormalTok{stand\_ID),   }\CommentTok{\# nesting structure}
+  \AttributeTok{family =} \FunctionTok{poisson}\NormalTok{(),}
+  \AttributeTok{data =}\NormalTok{ stand\_ID\_filtered}
+\NormalTok{)}
+\FunctionTok{summary}\NormalTok{(model\_complete\_poisson\_oak\_nested\_1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Generalized linear mixed model fit by maximum likelihood (Laplace
+##   Approximation) [glmerMod]
+##  Family: poisson  ( log )
+## Formula: round(clean_complete) ~ Percent_Oak + (1 | patch_name/stand_ID)
+##    Data: stand_ID_filtered
+## 
+##       AIC       BIC    logLik -2*log(L)  df.resid 
+##    2887.1    2900.1   -1439.6    2879.1       186 
+## 
+## Scaled residuals: 
+##     Min      1Q  Median      3Q     Max 
+## -9.0329 -0.7169 -0.0228  0.1485 13.3173 
+## 
+## Random effects:
+##  Groups              Name        Variance Std.Dev.
+##  stand_ID:patch_name (Intercept) 0.6051   0.7779  
+##  patch_name          (Intercept) 0.2183   0.4672  
+## Number of obs: 190, groups:  stand_ID:patch_name, 131; patch_name, 15
+## 
+## Fixed effects:
+##             Estimate Std. Error z value Pr(>|z|)    
+## (Intercept)   3.3726     0.1777  18.982   <2e-16 ***
+## Percent_Oak   0.6415     0.3083   2.081   0.0374 *  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Correlation of Fixed Effects:
+##             (Intr)
+## Percent_Oak -0.596
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{performance}\SpecialCharTok{::}\FunctionTok{check\_overdispersion}\NormalTok{(model\_complete\_poisson\_oak\_nested\_1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # Overdispersion test
+## 
+##        dispersion ratio =    6.476
+##   Pearson's Chi-Squared = 1204.591
+##                 p-value =  < 0.001
+\end{verbatim}
+
+\begin{verbatim}
+## Overdispersion detected.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{performance}\SpecialCharTok{::}\FunctionTok{check\_model}\NormalTok{(model\_complete\_poisson\_oak\_nested\_1)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{2023_2024_All_Data_partial_files/figure-latex/unnamed-chunk-1-4.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Try 3 levels of random effects}
+\CommentTok{\#model\_complete\_poisson\_oak\_nested\_2 \textless{}{-} glmer(}
+ \CommentTok{\# round(clean\_complete) \textasciitilde{} Percent\_Oak + }
+  \CommentTok{\#  (1 | patch\_name/stand\_ID/trap\_name),   \# nesting structure}
+  \CommentTok{\#family = poisson(),}
+  \CommentTok{\#data = stand\_ID\_filtered}
+\CommentTok{\#)}
+\CommentTok{\#summary(model\_complete\_poisson\_oak\_nested\_2)}
+
+\CommentTok{\#performance::check\_overdispersion(model\_complete\_poisson\_oak\_nested\_2)}
+\CommentTok{\#performance::check\_model(model\_complete\_poisson\_oak\_nested\_2)}
+
+
+\DocumentationTok{\#\# to account for the fact that the model is UNDERdispersed }
+\CommentTok{\#(counts vary less than expected under a Poisson model), use a }
+\CommentTok{\#Conway–Maxwell–Poisson (COM{-}Poisson) distribution model which allows }
+\CommentTok{\#the estimated ν (an introduced dispersion parameter) to increase (\textgreater{}1), }
+\CommentTok{\#shrinking the variance toward the observed level.}
+\FunctionTok{packageVersion}\NormalTok{(}\StringTok{"TMB"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] '1.9.18'
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{packageVersion}\NormalTok{(}\StringTok{"glmmTMB"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] '1.1.13'
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#model\_complete\_comp\_oak \textless{}{-} glmmTMB(}
+ \CommentTok{\# round(clean\_complete) \textasciitilde{} Percent\_Oak + (1 | trap\_name) + (1 | patch\_name),}
+  \CommentTok{\#family = compois(),}
+  \CommentTok{\#data = stand\_ID\_filtered}
+\CommentTok{\#)}
+
+
+
+\CommentTok{\#Poisson, using all levels of data collection as a random effect, except Pine}
+\CommentTok{\#which is being fitted as a fixed effect}
+\CommentTok{\#model\_complete\_poisson\_pine \textless{}{-} glmer(}
+ \CommentTok{\# round(clean\_complete) \textasciitilde{} (1|trap\_name) +}
+  \CommentTok{\#  (Percent\_Pine) + (1|patch\_name),}
+  \CommentTok{\#family =poisson(), data = stand\_ID\_filtered)}
+\CommentTok{\#summary(model\_complete\_poisson\_pine)}
+
+\CommentTok{\#performance::check\_overdispersion(model\_complete\_poisson\_pine)}
+\CommentTok{\#performance::check\_model(model\_complete\_poisson\_pine)}
+
+\CommentTok{\#Again, heavily underdispersed, indicating that the moth counts are }
+\CommentTok{\#less variable than expected}
+\DocumentationTok{\#\#Run the same basic model, but have stands nested within patches as a }
+\CommentTok{\#random effects, first keeping in trap\_name as a random effect and then }
+\CommentTok{\#removing it}
+
+\CommentTok{\#model\_complete\_poisson\_pine\_nested \textless{}{-} glmer(}
+ \CommentTok{\# round(clean\_complete) \textasciitilde{} (Percent\_Pine) + }
+  \CommentTok{\#  (1 | trap\_name) + }
+   \CommentTok{\# (1 | patch\_name/stand\_ID),   \# nesting structure}
+\CommentTok{\#  family = poisson(),}
+ \CommentTok{\# data = stand\_ID\_filtered)}
+\CommentTok{\#summary(model\_complete\_poisson\_pine\_nested)}
+
+\CommentTok{\#performance::check\_overdispersion(model\_complete\_poisson\_pine\_nested)}
+\CommentTok{\#performance::check\_model(model\_complete\_poisson\_pine\_nested)}
+
+\CommentTok{\#Poisson w Pine}
+
+\NormalTok{model\_complete\_poisson\_pine\_nested\_1 }\OtherTok{\textless{}{-}} \FunctionTok{glmer}\NormalTok{(}
+  \FunctionTok{round}\NormalTok{(clean\_complete) }\SpecialCharTok{\textasciitilde{}}\NormalTok{ (Percent\_Pine) }\SpecialCharTok{+} 
+    \CommentTok{\#(1 | trap\_name) + }
+\NormalTok{    (}\DecValTok{1} \SpecialCharTok{|}\NormalTok{ patch\_name}\SpecialCharTok{/}\NormalTok{stand\_ID),   }\CommentTok{\# nesting structure}
+  \AttributeTok{family =} \FunctionTok{poisson}\NormalTok{(),}
+  \AttributeTok{data =}\NormalTok{ stand\_ID\_filtered)}
+\FunctionTok{summary}\NormalTok{(model\_complete\_poisson\_pine\_nested\_1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Generalized linear mixed model fit by maximum likelihood (Laplace
+##   Approximation) [glmerMod]
+##  Family: poisson  ( log )
+## Formula: round(clean_complete) ~ (Percent_Pine) + (1 | patch_name/stand_ID)
+##    Data: stand_ID_filtered
+## 
+##       AIC       BIC    logLik -2*log(L)  df.resid 
+##    2889.1    2902.1   -1440.6    2881.1       186 
+## 
+## Scaled residuals: 
+##     Min      1Q  Median      3Q     Max 
+## -9.0307 -0.6664 -0.0092  0.1470 13.3232 
+## 
+## Random effects:
+##  Groups              Name        Variance Std.Dev.
+##  stand_ID:patch_name (Intercept) 0.6281   0.7925  
+##  patch_name          (Intercept) 0.1994   0.4466  
+## Number of obs: 190, groups:  stand_ID:patch_name, 131; patch_name, 15
+## 
+## Fixed effects:
+##              Estimate Std. Error z value Pr(>|z|)    
+## (Intercept)    3.5296     0.1451  24.331   <2e-16 ***
+## Percent_Pine   0.5442     0.3650   1.491    0.136    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Correlation of Fixed Effects:
+##             (Intr)
+## Percent_Pin -0.287
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{performance}\SpecialCharTok{::}\FunctionTok{check\_overdispersion}\NormalTok{(model\_complete\_poisson\_pine\_nested\_1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # Overdispersion test
+## 
+##        dispersion ratio =    6.474
+##   Pearson's Chi-Squared = 1204.143
+##                 p-value =  < 0.001
+\end{verbatim}
+
+\begin{verbatim}
+## Overdispersion detected.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{performance}\SpecialCharTok{::}\FunctionTok{check\_model}\NormalTok{(model\_complete\_poisson\_pine\_nested\_1)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{2023_2024_All_Data_partial_files/figure-latex/unnamed-chunk-1-5.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#model\_complete\_poisson\_pine\_nested\_2 \textless{}{-} glmer(}
+ \CommentTok{\# round(clean\_complete) \textasciitilde{} (Percent\_Pine) + }
+  \CommentTok{\#  (1 | patch\_name/stand\_ID/trap\_name),   \# nesting structure}
+\CommentTok{\#  family = poisson(),}
+ \CommentTok{\# data = stand\_ID\_filtered)}
+\CommentTok{\#summary(model\_complete\_poisson\_pine\_nested\_2)}
+
+\CommentTok{\#performance::check\_overdispersion(model\_complete\_poisson\_pine\_nested\_2)}
+\CommentTok{\#performance::check\_model(model\_complete\_poisson\_pine\_nested\_2)}
+
+\CommentTok{\#model for Oak and Pine together}
+\CommentTok{\#model\_both \textless{}{-} glmer(round(clean\_complete) \textasciitilde{} Percent\_Pine + Percent\_Oak + }
+ \CommentTok{\#                     (1 | trap\_name) + (1 | patch\_name), }
+  \CommentTok{\#                  data = stand\_ID\_filtered, family = poisson)}
+
+\CommentTok{\#summary(model\_both)}
+\CommentTok{\#performance::check\_overdispersion(model\_both)}
+
+\CommentTok{\#Again, heavily underdispersed, indicating that the moth counts are }
+\CommentTok{\#less variable than expected}
+\DocumentationTok{\#\#Run the same basic model, but have stands nested within patches as a }
+\CommentTok{\#random effects, first keeping in trap\_name as a random effect and then }
+\CommentTok{\#removing it}
+
+\CommentTok{\#model\_both\_nested \textless{}{-} glmer(}
+ \CommentTok{\#           round(clean\_complete) \textasciitilde{} Percent\_Pine + Percent\_Oak + }
+  \CommentTok{\#          (1 | trap\_name) + }
+   \CommentTok{\#         (1 | patch\_name/stand\_ID), \# nesting structure}
+    \CommentTok{\#        family = poisson(), }
+     \CommentTok{\#       data = stand\_ID\_filtered)}
+
+\CommentTok{\#summary(model\_both\_nested)}
+\CommentTok{\#performance::check\_overdispersion(model\_both\_nested)}
+
+\CommentTok{\#Poisson w Oak and Pine}
+
+\NormalTok{model\_both\_nested\_1 }\OtherTok{\textless{}{-}} \FunctionTok{glmer}\NormalTok{(}
+  \FunctionTok{round}\NormalTok{(clean\_complete) }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Percent\_Pine }\SpecialCharTok{+}\NormalTok{ Percent\_Oak }\SpecialCharTok{+} 
+    \CommentTok{\#(1 | trap\_name) + }
+\NormalTok{    (}\DecValTok{1} \SpecialCharTok{|}\NormalTok{ patch\_name}\SpecialCharTok{/}\NormalTok{stand\_ID), }\CommentTok{\# nesting structure}
+  \AttributeTok{family =} \FunctionTok{poisson}\NormalTok{(), }
+  \AttributeTok{data =}\NormalTok{ stand\_ID\_filtered)}
+
+\FunctionTok{summary}\NormalTok{(model\_both\_nested\_1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Generalized linear mixed model fit by maximum likelihood (Laplace
+##   Approximation) [glmerMod]
+##  Family: poisson  ( log )
+## Formula: 
+## round(clean_complete) ~ Percent_Pine + Percent_Oak + (1 | patch_name/stand_ID)
+##    Data: stand_ID_filtered
+## 
+##       AIC       BIC    logLik -2*log(L)  df.resid 
+##    2881.9    2898.1   -1435.9    2871.9       185 
+## 
+## Scaled residuals: 
+##     Min      1Q  Median      3Q     Max 
+## -9.0299 -0.7789 -0.0275  0.1466 13.3255 
+## 
+## Random effects:
+##  Groups              Name        Variance Std.Dev.
+##  stand_ID:patch_name (Intercept) 0.5731   0.7570  
+##  patch_name          (Intercept) 0.2117   0.4601  
+## Number of obs: 190, groups:  stand_ID:patch_name, 131; patch_name, 15
+## 
+## Fixed effects:
+##              Estimate Std. Error z value Pr(>|z|)    
+## (Intercept)    3.1210     0.1980  15.761  < 2e-16 ***
+## Percent_Pine   1.0561     0.3896   2.711  0.00671 ** 
+## Percent_Oak    1.0370     0.3349   3.097  0.00196 ** 
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Correlation of Fixed Effects:
+##             (Intr) Prcn_P
+## Percent_Pin -0.476       
+## Percent_Oak -0.677  0.438
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{performance}\SpecialCharTok{::}\FunctionTok{check\_overdispersion}\NormalTok{(model\_both\_nested\_1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # Overdispersion test
+## 
+##        dispersion ratio =    6.509
+##   Pearson's Chi-Squared = 1204.198
+##                 p-value =  < 0.001
+\end{verbatim}
+
+\begin{verbatim}
+## Overdispersion detected.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#model\_both\_nested\_2 \textless{}{-} glmer(}
+ \CommentTok{\# round(clean\_complete) \textasciitilde{} Percent\_Pine + Percent\_Oak + }
+  \CommentTok{\#  (1 | patch\_name/stand\_ID/trap\_name), \# nesting structure}
+\CommentTok{\#  family = poisson(), }
+ \CommentTok{\# data = stand\_ID\_filtered)}
+
+\CommentTok{\#summary(model\_both\_nested\_2)}
+\CommentTok{\#performance::check\_overdispersion(model\_both\_nested\_2)}
+
+
+\CommentTok{\#model for Oak and Pine together, adding an interaction of oak \& pine}
+\CommentTok{\#model\_both\_2 \textless{}{-} glmer(round(clean\_complete) \textasciitilde{} Percent\_Pine + Percent\_Oak + }
+ \CommentTok{\#                     (1 | trap\_name) + (1 | patch\_name) + }
+  \CommentTok{\#                    (Percent\_Pine * Percent\_Oak), }
+   \CommentTok{\#                 data = stand\_ID\_filtered, family = poisson)}
+
+\CommentTok{\#summary(model\_both\_2)}
+\CommentTok{\#performance::check\_overdispersion(model\_both\_2)}
+
+
+
+\FunctionTok{ggplot}\NormalTok{(stand\_ID\_filtered, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Percent\_Oak, }\AttributeTok{y =}\NormalTok{ clean\_complete)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{alpha =} \FloatTok{0.5}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{stat\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{"glm"}\NormalTok{, }\AttributeTok{method.args =} \FunctionTok{list}\NormalTok{(}\AttributeTok{family =} \StringTok{"poisson"}\NormalTok{), }
+              \AttributeTok{se =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{color =} \StringTok{"darkgreen"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Effect of Percent Oak on Moth Counts"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"\% Oak Cover"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Moth Count"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using formula = 'y ~ x'
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Removed 55 rows containing non-finite outside the scale range
+## (`stat_smooth()`).
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in dpois(y, mu, log = TRUE): non-integer x = 28.250000
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in dpois(y, mu, log = TRUE): non-integer x = 39.250000
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in dpois(y, mu, log = TRUE): non-integer x = 33.750000
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in dpois(y, mu, log = TRUE): non-integer x = 53.500000
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in dpois(y, mu, log = TRUE): non-integer x = 91.250000
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in dpois(y, mu, log = TRUE): non-integer x = 71.250000
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in dpois(y, mu, log = TRUE): non-integer x = 77.250000
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in dpois(y, mu, log = TRUE): non-integer x = 5.250000
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in dpois(y, mu, log = TRUE): non-integer x = 16.750000
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in dpois(y, mu, log = TRUE): non-integer x = 46.250000
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in dpois(y, mu, log = TRUE): non-integer x = 25.250000
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in dpois(y, mu, log = TRUE): non-integer x = 15.500000
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in dpois(y, mu, log = TRUE): non-integer x = 35.250000
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in dpois(y, mu, log = TRUE): non-integer x = 40.500000
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in dpois(y, mu, log = TRUE): non-integer x = 18.500000
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in dpois(y, mu, log = TRUE): non-integer x = 8.500000
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in dpois(y, mu, log = TRUE): non-integer x = 6.250000
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in dpois(y, mu, log = TRUE): non-integer x = 42.750000
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in dpois(y, mu, log = TRUE): non-integer x = 18.500000
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in dpois(y, mu, log = TRUE): non-integer x = 27.500000
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in dpois(y, mu, log = TRUE): non-integer x = 6.500000
+## Warning in dpois(y, mu, log = TRUE): non-integer x = 6.500000
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in dpois(y, mu, log = TRUE): non-integer x = 26.750000
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in dpois(y, mu, log = TRUE): non-integer x = 12.250000
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in dpois(y, mu, log = TRUE): non-integer x = 27.250000
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in dpois(y, mu, log = TRUE): non-integer x = 43.250000
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in dpois(y, mu, log = TRUE): non-integer x = 86.250000
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in dpois(y, mu, log = TRUE): non-integer x = 29.500000
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in dpois(y, mu, log = TRUE): non-integer x = 68.250000
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in dpois(y, mu, log = TRUE): non-integer x = 92.500000
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in dpois(y, mu, log = TRUE): non-integer x = 80.750000
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in dpois(y, mu, log = TRUE): non-integer x = 57.750000
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in dpois(y, mu, log = TRUE): non-integer x = 81.750000
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in dpois(y, mu, log = TRUE): non-integer x = 59.250000
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in dpois(y, mu, log = TRUE): non-integer x = 50.500000
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in dpois(y, mu, log = TRUE): non-integer x = 54.250000
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in dpois(y, mu, log = TRUE): non-integer x = 55.250000
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in dpois(y, mu, log = TRUE): non-integer x = 62.750000
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in dpois(y, mu, log = TRUE): non-integer x = 34.250000
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in dpois(y, mu, log = TRUE): non-integer x = 50.750000
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in dpois(y, mu, log = TRUE): non-integer x = 18.250000
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in dpois(y, mu, log = TRUE): non-integer x = 32.250000
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in dpois(y, mu, log = TRUE): non-integer x = 77.250000
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in dpois(y, mu, log = TRUE): non-integer x = 49.500000
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in dpois(y, mu, log = TRUE): non-integer x = 79.250000
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in dpois(y, mu, log = TRUE): non-integer x = 97.500000
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in dpois(y, mu, log = TRUE): non-integer x = 64.250000
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in dpois(y, mu, log = TRUE): non-integer x = 40.250000
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Removed 55 rows containing missing values or values outside the scale range
+## (`geom_point()`).
+\end{verbatim}
+
+\pandocbounded{\includegraphics[keepaspectratio]{2023_2024_All_Data_partial_files/figure-latex/unnamed-chunk-1-6.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Negative Binomial models {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+
+\CommentTok{\#checking compatibility of glmmTMB and lme4 packages}
+\FunctionTok{packageVersion}\NormalTok{(}\StringTok{"glmmTMB"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] '1.1.13'
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{packageVersion}\NormalTok{(}\StringTok{"lme4"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] '1.1.37'
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{packageVersion}\NormalTok{(}\StringTok{"Matrix"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] '1.7.4'
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{packageVersion}\NormalTok{(}\StringTok{"TMB"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] '1.9.18'
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{packageVersion}\NormalTok{(}\StringTok{"mgcv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] '1.9.1'
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sapply}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"Matrix"}\NormalTok{, }\StringTok{"TMB"}\NormalTok{, }\StringTok{"lme4"}\NormalTok{, }\StringTok{"glmmTMB"}\NormalTok{), find.package)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                                                                         Matrix 
+##  "/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/Matrix" 
+##                                                                            TMB 
+##     "/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/TMB" 
+##                                                                           lme4 
+##    "/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/lme4" 
+##                                                                        glmmTMB 
+## "/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/glmmTMB"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#install.packages("remotes")}
+\CommentTok{\#remotes::install\_version("lme4", version = "1.1.35")}
+\CommentTok{\#remotes::install\_version("glmmTMB", version = "1.1.13")}
+\CommentTok{\#install.packages("Matrix", type="source")}
+\CommentTok{\#install.packages("TMB", type="source")}
+\CommentTok{\#install.packages("glmmTMB", type="source", INSTALL\_opts = "{-}{-}no{-}multiarch {-}{-}configure{-}vars=\textquotesingle{}INCLUDE\_DIRS=/Library/Frameworks/R.framework/Versions/4.4{-}arm64/Resources/library/TMB/include\textquotesingle{}")}
+
+\CommentTok{\#simple test of glmmTMB {-} failing due to incompatibility.  Need older source}
+\CommentTok{\#of lme4, but not possible with this version of MacOS.  }
+\CommentTok{\#library(glmmTMB)}
+\CommentTok{\#test\_data \textless{}{-} data.frame(}
+ \CommentTok{\# y = rpois(100, 10),}
+\CommentTok{\#  x = runif(100),}
+ \CommentTok{\# g = rep(letters[1:10], each = 10)}
+\CommentTok{\#)}
+
+\CommentTok{\#m\_test \textless{}{-} glmmTMB(y \textasciitilde{} x + (1|g), family = nbinom2, data = test\_data)}
+\CommentTok{\#summary(m\_test)}
+
+
+\CommentTok{\#need to convert to \textquotesingle{}factor\textquotesingle{} for negative binomial}
+\NormalTok{stand\_ID\_filtered}\SpecialCharTok{$}\NormalTok{patch\_name }\OtherTok{\textless{}{-}} \FunctionTok{as.factor}\NormalTok{(stand\_ID\_filtered}\SpecialCharTok{$}\NormalTok{patch\_name)}
+\NormalTok{stand\_ID\_filtered}\SpecialCharTok{$}\NormalTok{stand\_ID }\OtherTok{\textless{}{-}} \FunctionTok{as.factor}\NormalTok{(stand\_ID\_filtered}\SpecialCharTok{$}\NormalTok{stand\_ID)}
+
+\FunctionTok{library}\NormalTok{(mgcv)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: nlme
+## 
+## Attaching package: 'nlme'
+## 
+## The following object is masked from 'package:lme4':
+## 
+##     lmList
+## 
+## The following object is masked from 'package:dplyr':
+## 
+##     collapse
+## 
+## This is mgcv 1.9-1. For overview type 'help("mgcv-package")'.
+## 
+## Attaching package: 'mgcv'
+## 
+## The following objects are masked from 'package:brms':
+## 
+##     s, t2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#NB with Oak}
+
+\NormalTok{Oak\_nb\_model }\OtherTok{\textless{}{-}} \FunctionTok{gam}\NormalTok{(}\FunctionTok{round}\NormalTok{(clean\_complete) }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Percent\_Oak }\SpecialCharTok{+} 
+                   \FunctionTok{s}\NormalTok{(patch\_name, }\AttributeTok{bs =} \StringTok{"re"}\NormalTok{) }\SpecialCharTok{+}  \CommentTok{\# random effect for patch\_name}
+                   \FunctionTok{s}\NormalTok{(stand\_ID, }\AttributeTok{bs =} \StringTok{"re"}\NormalTok{),     }\CommentTok{\# random effect for stand\_ID}
+                 \AttributeTok{family =} \FunctionTok{nb}\NormalTok{(),                }\CommentTok{\# negative binomial}
+                 \AttributeTok{method =} \StringTok{"REML"}\NormalTok{, }
+                 \AttributeTok{data =}\NormalTok{ stand\_ID\_filtered)}
+\FunctionTok{summary}\NormalTok{(Oak\_nb\_model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Family: Negative Binomial(2.488) 
+## Link function: log 
+## 
+## Formula:
+## round(clean_complete) ~ Percent_Oak + s(patch_name, bs = "re") + 
+##     s(stand_ID, bs = "re")
+## 
+## Parametric coefficients:
+##             Estimate Std. Error z value Pr(>|z|)    
+## (Intercept)   3.5213     0.1636  21.524  < 2e-16 ***
+## Percent_Oak   0.6857     0.2653   2.585  0.00975 ** 
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Approximate significance of smooth terms:
+##                 edf Ref.df Chi.sq p-value    
+## s(patch_name) 10.46     14 185.75 < 2e-16 ***
+## s(stand_ID)   35.46    129  65.87 0.00472 ** 
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## R-sq.(adj) =  0.456   Deviance explained = 56.1%
+## -REML =  942.8  Scale est. = 1         n = 190
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(Oak\_nb\_model, }\AttributeTok{pages =} \DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{2023_2024_All_Data_partial_files/figure-latex/unnamed-chunk-1-7.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Fitted values}
+\NormalTok{fitted\_vals\_oak }\OtherTok{\textless{}{-}} \FunctionTok{fitted}\NormalTok{(Oak\_nb\_model)}
+
+\CommentTok{\# Pearson residuals}
+\NormalTok{pearson\_resid\_oak }\OtherTok{\textless{}{-}} \FunctionTok{residuals}\NormalTok{(Oak\_nb\_model, }\AttributeTok{type =} \StringTok{"pearson"}\NormalTok{)}
+
+\CommentTok{\# Residual degrees of freedom}
+\NormalTok{rdf\_oak }\OtherTok{\textless{}{-}} \FunctionTok{df.residual}\NormalTok{(Oak\_nb\_model)}
+
+\FunctionTok{plot}\NormalTok{(fitted\_vals\_oak, pearson\_resid\_oak, }
+     \AttributeTok{xlab=}\StringTok{"Fitted values"}\NormalTok{, }\AttributeTok{ylab=}\StringTok{"Pearson residuals"}\NormalTok{)}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{h=}\DecValTok{0}\NormalTok{, }\AttributeTok{col=}\StringTok{"red"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{2023_2024_All_Data_partial_files/figure-latex/unnamed-chunk-1-8.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Dispersion ratio}
+\NormalTok{dispersion\_oak }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(pearson\_resid\_oak}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{) }\SpecialCharTok{/}\NormalTok{ rdf\_oak}
+\NormalTok{dispersion\_oak}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.8515649
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#dispersion = 0.852, indicating that there is no over (or much under) dispersion}
+
+\NormalTok{performance}\SpecialCharTok{::}\FunctionTok{check\_model}\NormalTok{(Oak\_nb\_model, }\AttributeTok{residual\_type =} \StringTok{"normal"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{2023_2024_All_Data_partial_files/figure-latex/unnamed-chunk-1-9.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#NB with Pine}
+
+\NormalTok{Pine\_nb\_model }\OtherTok{\textless{}{-}} \FunctionTok{gam}\NormalTok{(}\FunctionTok{round}\NormalTok{(clean\_complete) }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Percent\_Pine }\SpecialCharTok{+} 
+                      \FunctionTok{s}\NormalTok{(patch\_name, }\AttributeTok{bs =} \StringTok{"re"}\NormalTok{) }\SpecialCharTok{+}  \CommentTok{\# random effect for patch\_name}
+                      \FunctionTok{s}\NormalTok{(stand\_ID, }\AttributeTok{bs =} \StringTok{"re"}\NormalTok{),     }\CommentTok{\# random effect for stand\_ID}
+                    \AttributeTok{family =} \FunctionTok{nb}\NormalTok{(),                }\CommentTok{\# negative binomial}
+                    \AttributeTok{method =} \StringTok{"REML"}\NormalTok{, }
+                    \AttributeTok{data =}\NormalTok{ stand\_ID\_filtered)}
+\FunctionTok{summary}\NormalTok{(Pine\_nb\_model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Family: Negative Binomial(2.518) 
+## Link function: log 
+## 
+## Formula:
+## round(clean_complete) ~ Percent_Pine + s(patch_name, bs = "re") + 
+##     s(stand_ID, bs = "re")
+## 
+## Parametric coefficients:
+##              Estimate Std. Error z value Pr(>|z|)    
+## (Intercept)    3.7206     0.1376  27.036   <2e-16 ***
+## Percent_Pine   0.2016     0.3034   0.664    0.506    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Approximate significance of smooth terms:
+##                 edf Ref.df Chi.sq p-value    
+## s(patch_name) 10.06     14 161.96 < 2e-16 ***
+## s(stand_ID)   41.21    129  82.84 0.00112 ** 
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## R-sq.(adj) =  0.448   Deviance explained = 57.9%
+## -REML = 945.55  Scale est. = 1         n = 190
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(Pine\_nb\_model, }\AttributeTok{pages =} \DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{2023_2024_All_Data_partial_files/figure-latex/unnamed-chunk-1-10.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Fitted values}
+\NormalTok{fitted\_vals\_pine }\OtherTok{\textless{}{-}} \FunctionTok{fitted}\NormalTok{(Pine\_nb\_model)}
+
+\CommentTok{\# Pearson residuals}
+\NormalTok{pearson\_resid\_pine }\OtherTok{\textless{}{-}} \FunctionTok{residuals}\NormalTok{(Pine\_nb\_model, }\AttributeTok{type =} \StringTok{"pearson"}\NormalTok{)}
+
+\CommentTok{\# Residual degrees of freedom}
+\NormalTok{rdf\_pine }\OtherTok{\textless{}{-}} \FunctionTok{df.residual}\NormalTok{(Pine\_nb\_model)}
+
+\FunctionTok{plot}\NormalTok{(fitted\_vals\_pine, pearson\_resid\_pine, }
+     \AttributeTok{xlab=}\StringTok{"Fitted values"}\NormalTok{, }\AttributeTok{ylab=}\StringTok{"Pearson residuals"}\NormalTok{)}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{h=}\DecValTok{0}\NormalTok{, }\AttributeTok{col=}\StringTok{"red"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{2023_2024_All_Data_partial_files/figure-latex/unnamed-chunk-1-11.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Dispersion ratio}
+\NormalTok{dispersion\_pine }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(pearson\_resid\_pine}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{) }\SpecialCharTok{/}\NormalTok{ rdf\_pine}
+\NormalTok{dispersion\_pine}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.8448824
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#dispersion = 0.845, indicating that there is no over (or much under) dispersion}
+
+\NormalTok{performance}\SpecialCharTok{::}\FunctionTok{check\_model}\NormalTok{(Pine\_nb\_model, }\AttributeTok{residual\_type =} \StringTok{"normal"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{2023_2024_All_Data_partial_files/figure-latex/unnamed-chunk-1-12.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#NB with both Oak and Pine}
+
+\NormalTok{Both\_nb\_model }\OtherTok{\textless{}{-}} \FunctionTok{gam}\NormalTok{(}\FunctionTok{round}\NormalTok{(clean\_complete) }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Percent\_Oak }\SpecialCharTok{+}\NormalTok{ Percent\_Pine }\SpecialCharTok{+} 
+                       \FunctionTok{s}\NormalTok{(patch\_name, }\AttributeTok{bs =} \StringTok{"re"}\NormalTok{) }\SpecialCharTok{+}  \CommentTok{\# random effect for patch\_name}
+                       \FunctionTok{s}\NormalTok{(stand\_ID, }\AttributeTok{bs =} \StringTok{"re"}\NormalTok{),     }\CommentTok{\# random effect for stand\_ID}
+                     \AttributeTok{family =} \FunctionTok{nb}\NormalTok{(),                }\CommentTok{\# negative binomial}
+                     \AttributeTok{method =} \StringTok{"REML"}\NormalTok{, }
+                     \AttributeTok{data =}\NormalTok{ stand\_ID\_filtered)}
+\FunctionTok{summary}\NormalTok{(Both\_nb\_model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Family: Negative Binomial(2.593) 
+## Link function: log 
+## 
+## Formula:
+## round(clean_complete) ~ Percent_Oak + Percent_Pine + s(patch_name, 
+##     bs = "re") + s(stand_ID, bs = "re")
+## 
+## Parametric coefficients:
+##              Estimate Std. Error z value Pr(>|z|)    
+## (Intercept)    3.2787     0.1872  17.511  < 2e-16 ***
+## Percent_Oak    1.0766     0.3048   3.532 0.000412 ***
+## Percent_Pine   0.8024     0.3368   2.382 0.017202 *  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Approximate significance of smooth terms:
+##                 edf Ref.df Chi.sq p-value    
+## s(patch_name) 10.34     14 162.90 < 2e-16 ***
+## s(stand_ID)   37.37    128  70.22 0.00175 ** 
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## R-sq.(adj) =  0.455   Deviance explained = 58.5%
+## -REML = 940.41  Scale est. = 1         n = 190
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(Both\_nb\_model, }\AttributeTok{pages =} \DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{2023_2024_All_Data_partial_files/figure-latex/unnamed-chunk-1-13.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Fitted values}
+\NormalTok{fitted\_vals\_both }\OtherTok{\textless{}{-}} \FunctionTok{fitted}\NormalTok{(Both\_nb\_model)}
+
+\CommentTok{\# Pearson residuals}
+\NormalTok{pearson\_resid\_both }\OtherTok{\textless{}{-}} \FunctionTok{residuals}\NormalTok{(Both\_nb\_model, }\AttributeTok{type =} \StringTok{"pearson"}\NormalTok{)}
+
+\CommentTok{\# Residual degrees of freedom}
+\NormalTok{rdf\_both }\OtherTok{\textless{}{-}} \FunctionTok{df.residual}\NormalTok{(Both\_nb\_model)}
+
+\FunctionTok{plot}\NormalTok{(fitted\_vals\_both, pearson\_resid\_both, }
+     \AttributeTok{xlab=}\StringTok{"Fitted values"}\NormalTok{, }\AttributeTok{ylab=}\StringTok{"Pearson residuals"}\NormalTok{)}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{h=}\DecValTok{0}\NormalTok{, }\AttributeTok{col=}\StringTok{"red"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{2023_2024_All_Data_partial_files/figure-latex/unnamed-chunk-1-14.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Dispersion ratio}
+\NormalTok{dispersion\_both }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(pearson\_resid\_both}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{) }\SpecialCharTok{/}\NormalTok{ rdf\_both}
+\NormalTok{dispersion\_both}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.851848
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#dispersion = 0.852, indicating that there is no over (or much under) dispersion}
+
+\NormalTok{performance}\SpecialCharTok{::}\FunctionTok{check\_model}\NormalTok{(Both\_nb\_model, }\AttributeTok{residual\_type =} \StringTok{"normal"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{2023_2024_All_Data_partial_files/figure-latex/unnamed-chunk-1-15.pdf}}
+
+\end{document}
