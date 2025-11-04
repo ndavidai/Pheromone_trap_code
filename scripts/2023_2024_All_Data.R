@@ -598,22 +598,112 @@ sapply(c("Matrix", "TMB", "lme4", "glmmTMB"), find.package)
 #summary(m_test)
 
 
-
 #need to convert to 'factor' for negative binomial
 stand_ID_filtered$patch_name <- as.factor(stand_ID_filtered$patch_name)
 stand_ID_filtered$stand_ID <- as.factor(stand_ID_filtered$stand_ID)
 
 library(mgcv)
 
-gam_model <- gam(round(clean_complete) ~ Percent_Oak + 
+##NB with Oak
+
+Oak_nb_model <- gam(round(clean_complete) ~ Percent_Oak + 
                    s(patch_name, bs = "re") +  # random effect for patch_name
                    s(stand_ID, bs = "re"),     # random effect for stand_ID
                  family = nb(),                # negative binomial
+                 method = "REML", 
                  data = stand_ID_filtered)
-summary(gam_model)
+summary(Oak_nb_model)
+plot(Oak_nb_model, pages = 1)
+
+# Fitted values
+fitted_vals_oak <- fitted(Oak_nb_model)
+
+# Pearson residuals
+pearson_resid_oak <- residuals(Oak_nb_model, type = "pearson")
+
+# Residual degrees of freedom
+rdf_oak <- df.residual(Oak_nb_model)
+
+plot(fitted_vals_oak, pearson_resid_oak, 
+     xlab="Fitted values", ylab="Pearson residuals")
+abline(h=0, col="red")
+
+# Dispersion ratio
+dispersion_oak <- sum(pearson_resid_oak^2) / rdf_oak
+dispersion_oak
+#dispersion = 0.852, indicating that there is no over (or much under) dispersion
+
+performance::check_model(Oak_nb_model, residual_type = "normal")
 
 
-# Fit GAM with nested random effects
+##NB with Pine
+
+Pine_nb_model <- gam(round(clean_complete) ~ Percent_Pine + 
+                      s(patch_name, bs = "re") +  # random effect for patch_name
+                      s(stand_ID, bs = "re"),     # random effect for stand_ID
+                    family = nb(),                # negative binomial
+                    method = "REML", 
+                    data = stand_ID_filtered)
+summary(Pine_nb_model)
+plot(Pine_nb_model, pages = 1)
+
+# Fitted values
+fitted_vals_pine <- fitted(Pine_nb_model)
+
+# Pearson residuals
+pearson_resid_pine <- residuals(Pine_nb_model, type = "pearson")
+
+# Residual degrees of freedom
+rdf_pine <- df.residual(Pine_nb_model)
+
+plot(fitted_vals_pine, pearson_resid_pine, 
+     xlab="Fitted values", ylab="Pearson residuals")
+abline(h=0, col="red")
+
+# Dispersion ratio
+dispersion_pine <- sum(pearson_resid_pine^2) / rdf_pine
+dispersion_pine
+#dispersion = 0.845, indicating that there is no over (or much under) dispersion
+
+performance::check_model(Pine_nb_model, residual_type = "normal")
+
+
+##NB with both Oak and Pine
+
+Both_nb_model <- gam(round(clean_complete) ~ Percent_Oak + Percent_Pine + 
+                       s(patch_name, bs = "re") +  # random effect for patch_name
+                       s(stand_ID, bs = "re"),     # random effect for stand_ID
+                     family = nb(),                # negative binomial
+                     method = "REML", 
+                     data = stand_ID_filtered)
+summary(Both_nb_model)
+plot(Both_nb_model, pages = 1)
+
+# Fitted values
+fitted_vals_both <- fitted(Both_nb_model)
+
+# Pearson residuals
+pearson_resid_both <- residuals(Both_nb_model, type = "pearson")
+
+# Residual degrees of freedom
+rdf_both <- df.residual(Both_nb_model)
+
+plot(fitted_vals_both, pearson_resid_both, 
+     xlab="Fitted values", ylab="Pearson residuals")
+abline(h=0, col="red")
+
+# Dispersion ratio
+dispersion_both <- sum(pearson_resid_both^2) / rdf_both
+dispersion_both
+#dispersion = 0.852, indicating that there is no over (or much under) dispersion
+
+performance::check_model(Both_nb_model, residual_type = "normal")
+
+
+
+
+# Fit GAM with nested random effects - !!!nested line seems to bug out
+#R, and after running it, nothing else works until R is restarted!!!
 gam_model_nested <- gam(
   round(clean_complete) ~ Percent_Oak + 
     s(patch_name, bs = "re") +                       # random intercept for patch_name
