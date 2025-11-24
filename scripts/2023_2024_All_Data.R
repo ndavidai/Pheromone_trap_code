@@ -700,6 +700,70 @@ dispersion_both
 performance::check_model(Both_nb_model, residual_type = "normal")
 
 
+#Adding a variable looking at year 1 and 2 
+
+Year_nb_model <- gam(round(clean_complete) ~ 
+                         Year +
+                         s(patch_name, bs = "re") +  # random effect for patch_name
+                         s(stand_ID, bs = "re"),     # random effect for stand_ID
+                       family = nb(),                # negative binomial
+                       method = "REML", 
+                       data = stand_ID_filtered)
+summary(Year_nb_model)
+plot(Year_nb_model, pages = 1)
+
+# Fitted values
+fitted_vals_year <- fitted(Year_nb_model)
+
+# Pearson residuals
+pearson_resid_year <- residuals(Year_nb_model, type = "pearson")
+
+# Residual degrees of freedom
+rdf_year <- df.residual(Year_nb_model)
+
+plot(fitted_vals_year, pearson_resid_year, 
+     xlab="Fitted values", ylab="Pearson residuals")
+abline(h=0, col="red")
+
+# Dispersion ratio
+dispersion_year <- sum(pearson_resid_year^2) / rdf_year
+dispersion_year
+#dispersion = 0.820, indicating that there is no over (or much under) dispersion
+
+performance::check_model(Year_nb_model, residual_type = "normal")
+
+
+Both_nb_model_2 <- gam(round(clean_complete) ~ Percent_Oak + Percent_Pine + 
+                       Year +
+                       s(patch_name, bs = "re") +  # random effect for patch_name
+                       s(stand_ID, bs = "re"),     # random effect for stand_ID
+                     family = nb(),                # negative binomial
+                     method = "REML", 
+                     data = stand_ID_filtered)
+summary(Both_nb_model_2)
+plot(Both_nb_model_2, pages = 1)
+
+# Fitted values
+fitted_vals_both_2 <- fitted(Both_nb_model_2)
+
+# Pearson residuals
+pearson_resid_both_2 <- residuals(Both_nb_model_2, type = "pearson")
+
+# Residual degrees of freedom
+rdf_both_2 <- df.residual(Both_nb_model_2)
+
+plot(fitted_vals_both_2, pearson_resid_both_2, 
+     xlab="Fitted values", ylab="Pearson residuals")
+abline(h=0, col="red")
+
+# Dispersion ratio
+dispersion_both_2 <- sum(pearson_resid_both_2^2) / rdf_both_2
+dispersion_both_2
+#dispersion = 0.852, indicating that there is no over (or much under) dispersion
+
+performance::check_model(Both_nb_model_2, residual_type = "normal")
+
+
 
 
 # Fit GAM with nested random effects - !!!nested line seems to bug out
@@ -841,27 +905,84 @@ tab_model(all_variables_poisson,
           p.style = "numeric") # show numeric p-values
 
 
+#removing trap as a random variable, adding stand type as a random variable
+all_variables_poisson_2 <- glmer(round(clean_complete) ~  
+        Percent_Oak + Percent_Pine + landscape_type + longitude + 
+        forest_area_km2 + stand_area_ha + (1|patch_name) + (1|stand_type),
+        family = poisson(), data = stand_ID_filtered)
+
+summary(all_variables_poisson_2)
+AIC(all_variables_poisson_2)
+
+print(summary(all_variables_poisson_2))
+
+tab_model(all_variables_poisson_2,
+          show.ci = FALSE,     # hide CI since you only want SE & p
+          show.stat = TRUE,    # show test statistics
+          p.style = "numeric") # show numeric p-values
+
+
+all_variable_nb <- gam(round(clean_complete) ~ Percent_Oak + Percent_Pine + 
+                      + landscape_type + longitude + 
+                        forest_area_km2 + stand_area_ha +
+                       s(patch_name, bs = "re") +  # random effect for patch_name
+                       s(stand_ID, bs = "re"),     # random effect for stand_ID
+                     family = nb(),                # negative binomial
+                     method = "REML", 
+                     data = stand_ID_filtered)
+summary(all_variable_nb)
+plot(all_variable_nb, pages = 1)
+
+# Fitted values
+fitted_vals_all <- fitted(all_variable_nb)
+
+# Pearson residuals
+pearson_resid_all <- residuals(all_variable_nb, type = "pearson")
+
+# Residual degrees of freedom
+rdf_all <- df.residual(all_variable_nb)
+
+plot(fitted_vals_all, pearson_resid_all, 
+     xlab="Fitted values", ylab="Pearson residuals")
+abline(h=0, col="red")
+
+# Dispersion ratio
+dispersion_all <- sum(pearson_resid_all^2) / rdf_all
+dispersion_all
+#dispersion = 0.893, indicating that there is no over (or much under) dispersion
+
+performance::check_model(all_variable_nb, residual_type = "normal")
 # Print a clean table to the console or a markdown/HTML-friendly output
 # Save directly to a file
-#tab_model(all_variables_poisson,
-#          show.stat = TRUE,
-#          p.style = "numeric",
-#          file = "model_summary.doc")   # can be .doc, .html, .htm
+tab_model(all_variable_nb,
+         show.stat = TRUE,
+         p.style = "numeric",
+         file = "model_summary.doc")   # can be .doc, .html, .htm
 
 #checking for collinearity between variables
 #using the 'performance' package, which is built for linear 
 #mixed models (glmer)
-collinearity <- check_collinearity(all_variables_poisson)
-print(collinearity)
+#VIF = 1 indicates no multicollinearity
+collinearity_all <- check_collinearity(all_variable_nb)
+print(collinearity_all)
+
+collinearity_2 <- check_collinearity(all_variables_poisson_2)
+print(collinearity_2)
 
 # Convert to a regular data frame
 col_df <- as.data.frame(collinearity)
 print(col_df)
 
+col_df_2 <- as.data.frame(collinearity_2)
+print(col_df_2)
+
 #write.csv(as.data.frame(collinearity),
  #         "Multicollinearity check (VIF).csv",
  #         row.names = FALSE)
 
+#write.csv(as.data.frame(collinearity_2),
+#         "Multicollinearity 2 check (VIF).csv",
+#         row.names = FALSE)
 
 # checking for co-variation between numeric predictors
 #in a Pearson correlation matrix
@@ -891,7 +1012,7 @@ performance::check_overdispersion(interaction_model)
 interaction_model_glm <- glmer(round(clean_complete) ~ 
                                  Percent_Oak * landscape_type + 
                                  Percent_Pine + 
-                      (1 | trap_name) + (1 | patch_name), 
+                      (1 | stand_type) + (1 | patch_name), 
                     data = stand_ID_filtered, family = poisson)
 
 summary(interaction_model_glm)
@@ -1029,6 +1150,7 @@ ggplot(contingency_df, aes(x = Var1, y = Var2, fill = Freq)) +
 version$version.string
 
 citation("lme4")
+citation("mgcv")
 
 
 #file.create("2023_2024_All_Data_Oct_25.md")

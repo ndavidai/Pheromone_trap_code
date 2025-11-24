@@ -91,16 +91,6 @@ n_distinct(stand_ID_filtered$patch_name)
 
 
 
-#total_traps_2023_2024 <- sum(complete_2023_2024$trap_name, na.rm = TRUE)
-#print(total_traps_2023_2024)
-
-#total_stands_2023_2024 <- sum(stand_ID_filtered$stand_ID, na.rm = TRUE)
-#print(total_stands_2023_2024)
-
-#total_patches_2023_2024 <- sum(stand_ID_filtered$patch_name, na.rm = TRUE)
-#print(total_patches_2023_2024)
-
-
 #check to see the distribution of moth count data
 hist(complete_2023_2024$clean_complete, 
           main = " ", 
@@ -238,16 +228,6 @@ summary_stats <- stand_type_filtered %>%
 ##print(summary_stats, n=22)
 
 
-# Summary statistics moth count by stand_category only
-# summary_stats_2 <- stand_category_filtered %>%
-#   group_by(stand_category) %>%
-#   summarise(
-#     mean_count = mean(clean_complete, na.rm = TRUE),
-#     sd_count = sd(clean_complete, na.rm = TRUE),
-#     count = n()
-#   )
-# 
-# print(summary_stats_2, n=22)
 
 
 # Table to use -----------------------------------------------------------
@@ -271,13 +251,6 @@ summary_stats_3$sd_count <- round(summary_stats_3$sd_count, 2)
 summary_stats_3$count <- round(summary_stats_3$n_obs, 2)
 
 
-# Convert the table to a data frame
-#summary_table <- as.data.frame(summary_stats_3)
-
-# Save it as a CSV file
-#write.csv(summary_table, file = "Summary Stats by Stand Type.csv", 
-          #row.names = FALSE)
-
 
 # Summary statistics for moth count by patch
 summary_stats_4 <- stand_type_filtered %>%
@@ -290,19 +263,6 @@ summary_stats_4 <- stand_type_filtered %>%
 
 print(summary_stats_4, n=22)
 
-# Summary statistics for moth count by stand_type and patch
-# summary_stats_5 <- stand_type_filtered %>%
-#   group_by(stand_type, patch_name) %>%
-#   summarise(
-#     mean_count = mean(clean_complete, na.rm = TRUE),
-#     sd_count = sd(clean_complete, na.rm = TRUE),
-#     var_count = var(clean_complete, na.rm = TRUE),
-#     n_traps = n(),
-#     n_obs = sum(!is.na (clean_complete))
-#     
-#   )
-# 
-# print(summary_stats_5, n=22)
 
 ## Remove MOM row in 'complete' moth counts
 moth_by_stand_summary_stats <- summary_stats_3[-c(1),]
@@ -316,204 +276,6 @@ print(moth_by_stand_summary_stats_2, n=22)
 
 
 # Visualizations ----------------------------------------------------------
-
-##separate Stand Type column so that we have a Stand ID for each stand in each patch
-#stand_ID_filtered <- stand_type_filtered %>% 
- # separate(trap_name, into = c("stand_ID", "trap_number"), remove = FALSE, sep = "\\." ) %>% 
- # glimpse()
-
-#stand_ID_filtered_1 <- stand_category_filtered %>% 
-  #separate(trap_name, into = c("stand_ID", "trap_number"), remove = FALSE, sep = "\\." ) %>% 
-  #glimpse()
-
-##Order Stand Types so shown on X-axis in order of decreasing oak
-
-
-
-# Oak/Pine nested models --------------------------------------------------
-
-
-#Poisson, using all levels of data collection as a random effect, except Oak
-#which is being fitted as a fixed effect
-
-#model_complete_poisson_oak <- glmer(
- # round(clean_complete) ~ (1|trap_name) +
-  #  (Percent_Oak) + (1|patch_name),
-  #family =poisson(), data = stand_ID_filtered)
-#summary(model_complete_poisson_oak)
-
-#performance::check_overdispersion(model_complete_poisson_oak)
-#performance::check_model(model_complete_poisson_oak)
-#Heavily underdispersed, indicating that the moth counts are less variable
-#than expected
-
-##Run the same basic model, but have stands nested within patches as a 
-#random effects, first keeping in trap_name as a random effect and then 
-#removing it
-
-#model_complete_poisson_oak_nested <- glmer(
- # round(clean_complete) ~ Percent_Oak + 
-  #  (1 | trap_name) + 
-   # (1 | patch_name/stand_ID),   # nesting structure
-  #family = poisson(),
-  #data = stand_ID_filtered
-#)
-#summary(model_complete_poisson_oak_nested)
-
-#performance::check_overdispersion(model_complete_poisson_oak_nested)
-#performance::check_model(model_complete_poisson_oak_nested)
-
-#Poisson w Oak
-model_complete_poisson_oak_nested_1 <- glmer(
-  round(clean_complete) ~ Percent_Oak + 
-    #(1 | trap_name) + 
-    (1 | patch_name/stand_ID),   # nesting structure
-  family = poisson(),
-  data = stand_ID_filtered
-)
-summary(model_complete_poisson_oak_nested_1)
-
-performance::check_overdispersion(model_complete_poisson_oak_nested_1)
-performance::check_model(model_complete_poisson_oak_nested_1)
-
-
-#Try 3 levels of random effects
-#model_complete_poisson_oak_nested_2 <- glmer(
- # round(clean_complete) ~ Percent_Oak + 
-  #  (1 | patch_name/stand_ID/trap_name),   # nesting structure
-  #family = poisson(),
-  #data = stand_ID_filtered
-#)
-#summary(model_complete_poisson_oak_nested_2)
-
-#performance::check_overdispersion(model_complete_poisson_oak_nested_2)
-#performance::check_model(model_complete_poisson_oak_nested_2)
-
-
-## to account for the fact that the model is UNDERdispersed 
-#(counts vary less than expected under a Poisson model), use a 
-#Conway–Maxwell–Poisson (COM-Poisson) distribution model which allows 
-#the estimated ν (an introduced dispersion parameter) to increase (>1), 
-#shrinking the variance toward the observed level.
-packageVersion("TMB")
-packageVersion("glmmTMB")
-
-#model_complete_comp_oak <- glmmTMB(
- # round(clean_complete) ~ Percent_Oak + (1 | trap_name) + (1 | patch_name),
-  #family = compois(),
-  #data = stand_ID_filtered
-#)
-
-
-
-#Poisson, using all levels of data collection as a random effect, except Pine
-#which is being fitted as a fixed effect
-#model_complete_poisson_pine <- glmer(
- # round(clean_complete) ~ (1|trap_name) +
-  #  (Percent_Pine) + (1|patch_name),
-  #family =poisson(), data = stand_ID_filtered)
-#summary(model_complete_poisson_pine)
-
-#performance::check_overdispersion(model_complete_poisson_pine)
-#performance::check_model(model_complete_poisson_pine)
-
-#Again, heavily underdispersed, indicating that the moth counts are 
-#less variable than expected
-##Run the same basic model, but have stands nested within patches as a 
-#random effects, first keeping in trap_name as a random effect and then 
-#removing it
-
-#model_complete_poisson_pine_nested <- glmer(
- # round(clean_complete) ~ (Percent_Pine) + 
-  #  (1 | trap_name) + 
-   # (1 | patch_name/stand_ID),   # nesting structure
-#  family = poisson(),
- # data = stand_ID_filtered)
-#summary(model_complete_poisson_pine_nested)
-
-#performance::check_overdispersion(model_complete_poisson_pine_nested)
-#performance::check_model(model_complete_poisson_pine_nested)
-
-#Poisson w Pine
-
-model_complete_poisson_pine_nested_1 <- glmer(
-  round(clean_complete) ~ (Percent_Pine) + 
-    #(1 | trap_name) + 
-    (1 | patch_name/stand_ID),   # nesting structure
-  family = poisson(),
-  data = stand_ID_filtered)
-summary(model_complete_poisson_pine_nested_1)
-
-performance::check_overdispersion(model_complete_poisson_pine_nested_1)
-performance::check_model(model_complete_poisson_pine_nested_1)
-
-#model_complete_poisson_pine_nested_2 <- glmer(
- # round(clean_complete) ~ (Percent_Pine) + 
-  #  (1 | patch_name/stand_ID/trap_name),   # nesting structure
-#  family = poisson(),
- # data = stand_ID_filtered)
-#summary(model_complete_poisson_pine_nested_2)
-
-#performance::check_overdispersion(model_complete_poisson_pine_nested_2)
-#performance::check_model(model_complete_poisson_pine_nested_2)
-
-#model for Oak and Pine together
-#model_both <- glmer(round(clean_complete) ~ Percent_Pine + Percent_Oak + 
- #                     (1 | trap_name) + (1 | patch_name), 
-  #                  data = stand_ID_filtered, family = poisson)
-
-#summary(model_both)
-#performance::check_overdispersion(model_both)
-
-#Again, heavily underdispersed, indicating that the moth counts are 
-#less variable than expected
-##Run the same basic model, but have stands nested within patches as a 
-#random effects, first keeping in trap_name as a random effect and then 
-#removing it
-
-#model_both_nested <- glmer(
- #           round(clean_complete) ~ Percent_Pine + Percent_Oak + 
-  #          (1 | trap_name) + 
-   #         (1 | patch_name/stand_ID), # nesting structure
-    #        family = poisson(), 
-     #       data = stand_ID_filtered)
-
-#summary(model_both_nested)
-#performance::check_overdispersion(model_both_nested)
-
-#Poisson w Oak and Pine
-
-model_both_nested_1 <- glmer(
-  round(clean_complete) ~ Percent_Pine + Percent_Oak + 
-    #(1 | trap_name) + 
-    (1 | patch_name/stand_ID), # nesting structure
-  family = poisson(), 
-  data = stand_ID_filtered)
-
-summary(model_both_nested_1)
-performance::check_overdispersion(model_both_nested_1)
-
-
-#model_both_nested_2 <- glmer(
- # round(clean_complete) ~ Percent_Pine + Percent_Oak + 
-  #  (1 | patch_name/stand_ID/trap_name), # nesting structure
-#  family = poisson(), 
- # data = stand_ID_filtered)
-
-#summary(model_both_nested_2)
-#performance::check_overdispersion(model_both_nested_2)
-
-
-#model for Oak and Pine together, adding an interaction of oak & pine
-#model_both_2 <- glmer(round(clean_complete) ~ Percent_Pine + Percent_Oak + 
- #                     (1 | trap_name) + (1 | patch_name) + 
-  #                    (Percent_Pine * Percent_Oak), 
-   #                 data = stand_ID_filtered, family = poisson)
-
-#summary(model_both_2)
-#performance::check_overdispersion(model_both_2)
-
-
 
 ggplot(stand_ID_filtered, aes(x = Percent_Oak, y = clean_complete)) +
   geom_point(alpha = 0.5) +
@@ -537,25 +299,6 @@ packageVersion("TMB")
 packageVersion("mgcv")
 
 sapply(c("Matrix", "TMB", "lme4", "glmmTMB"), find.package)
-
-#install.packages("remotes")
-#remotes::install_version("lme4", version = "1.1.35")
-#remotes::install_version("glmmTMB", version = "1.1.13")
-#install.packages("Matrix", type="source")
-#install.packages("TMB", type="source")
-#install.packages("glmmTMB", type="source", INSTALL_opts = "--no-multiarch --configure-vars='INCLUDE_DIRS=/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/TMB/include'")
-
-#simple test of glmmTMB - failing due to incompatibility.  Need older source
-#of lme4, but not possible with this version of MacOS.  
-#library(glmmTMB)
-#test_data <- data.frame(
- # y = rpois(100, 10),
-#  x = runif(100),
- # g = rep(letters[1:10], each = 10)
-#)
-
-#m_test <- glmmTMB(y ~ x + (1|g), family = nbinom2, data = test_data)
-#summary(m_test)
 
 
 #need to convert to 'factor' for negative binomial
@@ -631,6 +374,7 @@ performance::check_model(Pine_nb_model, residual_type = "normal")
 ##NB with both Oak and Pine
 
 Both_nb_model <- gam(round(clean_complete) ~ Percent_Oak + Percent_Pine + 
+                       Percent_Oak*Percent_Pine +
                        s(patch_name, bs = "re") +  # random effect for patch_name
                        s(stand_ID, bs = "re"),     # random effect for stand_ID
                      family = nb(),                # negative binomial
@@ -659,5 +403,109 @@ dispersion_both
 
 performance::check_model(Both_nb_model, residual_type = "normal")
 
+#Adding a variable looking at year 1 and 2 
+
+Year_nb_model <- gam(round(clean_complete) ~ 
+                       Year +
+                       s(patch_name, bs = "re") +  # random effect for patch_name
+                       s(stand_ID, bs = "re"),     # random effect for stand_ID
+                     family = nb(),                # negative binomial
+                     method = "REML", 
+                     data = stand_ID_filtered)
+summary(Year_nb_model)
+plot(Year_nb_model, pages = 1)
+
+# Fitted values
+fitted_vals_year <- fitted(Year_nb_model)
+
+# Pearson residuals
+pearson_resid_year <- residuals(Year_nb_model, type = "pearson")
+
+# Residual degrees of freedom
+rdf_year <- df.residual(Year_nb_model)
+
+plot(fitted_vals_year, pearson_resid_year, 
+     xlab="Fitted values", ylab="Pearson residuals")
+abline(h=0, col="red")
+
+# Dispersion ratio
+dispersion_year <- sum(pearson_resid_year^2) / rdf_year
+dispersion_year
+#dispersion = 0.820, indicating that there is no over (or much under) dispersion
+
+performance::check_model(Year_nb_model, residual_type = "normal")
+
+# All Variables -----------------------------------------------------------
+
+##Fitting a gam model with all of the possible response variables, to 
+#explore a correlation between all possible variables and moth counts
+
+all_variable_nb <- gam(round(clean_complete) ~ Percent_Oak + Percent_Pine + 
+                         + landscape_type + longitude + 
+                         forest_area_km2 + stand_area_ha +
+                         s(patch_name, bs = "re") +  # random effect for patch_name
+                         s(stand_ID, bs = "re"),     # random effect for stand_ID
+                       family = nb(),                # negative binomial
+                       method = "REML", 
+                       data = stand_ID_filtered)
+summary(all_variable_nb)
+plot(all_variable_nb, pages = 1)
+
+# Fitted values
+fitted_vals_all <- fitted(all_variable_nb)
+
+# Pearson residuals
+pearson_resid_all <- residuals(all_variable_nb, type = "pearson")
+
+# Residual degrees of freedom
+rdf_all <- df.residual(all_variable_nb)
+
+plot(fitted_vals_all, pearson_resid_all, 
+     xlab="Fitted values", ylab="Pearson residuals")
+abline(h=0, col="red")
+
+# Dispersion ratio
+dispersion_all <- sum(pearson_resid_all^2) / rdf_all
+dispersion_all
+#dispersion = 0.893, indicating that there is no over (or much under) dispersion
+
+performance::check_model(all_variable_nb, residual_type = "normal")
+# Print a clean table to the console or a markdown/HTML-friendly output
+# Save directly to a file
+tab_model(all_variable_nb,
+          show.stat = TRUE,
+          p.style = "numeric",
+          file = "model_summary.doc")   # can be .doc, .html, .htm
+
+#checking for collinearity between variables
+
+#VIF = 1 indicates no multicollinearity
+collinearity_all <- check_collinearity(all_variable_nb)
+print(collinearity_all)
+
+# checking for co-variation between numeric predictors
+#in a Pearson correlation matrix
+numeric_vars <- stand_ID_filtered[, c("Percent_Oak", "Percent_Pine", "longitude", 
+                                      "forest_area_km2", "stand_area_ha")]
+# Correlation matrix
+cor(numeric_vars, use = "complete.obs")
+
+library(gt)
+
+cor_mat <- cor(numeric_vars, use = "complete.obs")
+cor_df <- as.data.frame(round(cor_mat, 3))
+cor_df |> gt::gt() |> gt::tab_caption("Correlation Matrix")
 
 
+
+ggplot(stand_ID_filtered, aes(x = Percent_Oak, y = clean_complete, color = landscape_type)) +
+  geom_point(alpha = 0.6) +  # Add raw data points with transparency
+  geom_smooth(method = "lm", se = FALSE) +  # Add regression lines by group
+  theme_minimal() +
+  labs(
+    title = " ",
+    x = "Percent Oak",
+    y = "Moth Counts",
+    color = "Landscape Type"
+  ) +
+  scale_color_viridis_d(option = "D")  # You can also try options "A", "B", "C", "E"
