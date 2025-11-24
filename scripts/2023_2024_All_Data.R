@@ -765,6 +765,8 @@ performance::check_model(Both_nb_model_2, residual_type = "normal")
 
 
 
+# Nested NB models --------------------------------------------------------
+
 
 # Fit GAM with nested random effects - !!!nested line seems to bug out
 #R, and after running it, nothing else works until R is restarted!!!

@@ -435,6 +435,63 @@ dispersion_year
 
 performance::check_model(Year_nb_model, residual_type = "normal")
 
+# Nested NB models --------------------------------------------------------
+
+
+# Fit GAM with nested random effects - !!!nested line seems to bug out
+#R, and after running it, nothing else works until R is restarted!!!
+
+#checking structure of nesting
+with(stand_ID_filtered, table(patch_name, stand_ID))
+
+Oak_nb_model_nested <- gam(
+  round(clean_complete) ~ Percent_Oak +
+    s(patch_name, bs = "re") +               # random effect for patch_name
+    s(patch_name, stand_ID, bs = "re"),      # nested random effect: stand_ID within patch_name
+  family = nb(),
+  method = "REML",
+  data = stand_ID_filtered
+)
+
+summary(Oak_nb_model_nested)
+plot(Oak_nb_model_nested, pages = 1)
+
+
+Oak_nb_nested <- gam(round(clean_complete) ~ Percent_Oak + 
+                       s(patch_name, bs = "re") +  # random effect for patch_name
+                       s(stand_ID, bs = "re") +     # random effect for stand_ID
+                       s(stand_ID, by = patch_name, bs = "re"), # nested effect: stand_ID within patch_name
+                     family = nb(),                # negative binomial
+                     method = "REML", 
+                     data = stand_ID_filtered)
+summary(Oak_nb_nested)
+plot(Oak_nb_nested, pages = 1)
+
+
+# View summary of fixed and random effects
+summary(gam_model_nested)
+
+# Optional: visualize random effects
+plot(gam_model_nested, pages = 1)
+
+
+
+
+#NB w Oak - not working due to a compatibility issue between 
+#lme4 with MacOS
+model_complete_nb_oak_nested <- glmmTMB(
+  round(clean_complete) ~ Percent_Oak + 
+    (1 | patch_name/stand_ID),
+  family = nbinom2,
+  data = stand_ID_filtered
+)
+
+summary(model_complete_nb_oak_nested)
+
+
+performance::check_overdispersion(model_complete_nb_oak_nested)
+performance::check_model(model_complete_nb_oak_nested)
+
 # All Variables -----------------------------------------------------------
 
 ##Fitting a gam model with all of the possible response variables, to 
