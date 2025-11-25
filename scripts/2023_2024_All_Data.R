@@ -961,10 +961,60 @@ tab_model(all_variable_nb,
          p.style = "numeric",
          file = "model_summary.doc")   # can be .doc, .html, .htm
 
+# Remove longitude and forest area from all variables model--------------------------------------------------------
+
+all_variable_nb_clean <- gam(round(clean_complete) ~ Percent_Oak + 
+                               Percent_Pine + landscape_type + 
+                               stand_area_ha + 
+                               s(patch_name, bs = "re") +  # random effect for patch_name
+                               s(stand_ID, bs = "re"),     # random effect for stand_ID
+                             family = nb(),                # negative binomial
+                             method = "REML", 
+                             data = stand_ID_filtered)
+summary(all_variable_nb_clean)
+plot(all_variable_nb_clean, pages = 1)
+
+# Fitted values
+fitted_vals_all_clean <- fitted(all_variable_nb_clean)
+
+# Pearson residuals
+pearson_resid_all_clean <- residuals(all_variable_nb_clean, type = "pearson")
+
+# Residual degrees of freedom
+rdf_all_clean <- df.residual(all_variable_nb_clean)
+
+plot(fitted_vals_all_clean, pearson_resid_all_clean, 
+     xlab="Fitted values", ylab="Pearson residuals")
+abline(h=0, col="red")
+
+# Dispersion ratio
+dispersion_all_clean <- sum(pearson_resid_all_clean^2) / rdf_all_clean
+dispersion_all_clean
+#dispersion = 0.893, indicating that there is no over (or much under) dispersion
+
+performance::check_model(all_variable_nb_clean, residual_type = "normal")
+# Print a clean table to the console or a markdown/HTML-friendly output
+# Save directly to a file
+tab_model(all_variable_nb_clean,
+          show.stat = TRUE,
+          p.style = "numeric",
+          file = "model_summary.doc")   # can be .doc, .html, .htm
+
+
+# Correlation tests -------------------------------------------------------
+
+
 #checking for collinearity between variables
 #using the 'performance' package, which is built for linear 
 #mixed models (glmer)
 #VIF = 1 indicates no multicollinearity
+collinearity_all_clean <- check_collinearity(all_variable_nb_clean)
+print(collinearity_all_clean)
+
+#write.csv(as.data.frame(collinearity_all_clean),
+#          "Multicollinearity check nb w year (VIF).csv",
+ #         row.names = FALSE)
+
 collinearity_all <- check_collinearity(all_variable_nb)
 print(collinearity_all)
 
@@ -972,15 +1022,15 @@ collinearity_2 <- check_collinearity(all_variables_poisson_2)
 print(collinearity_2)
 
 # Convert to a regular data frame
-col_df <- as.data.frame(collinearity)
+col_df <- as.data.frame(collinearity_all)
 print(col_df)
 
 col_df_2 <- as.data.frame(collinearity_2)
 print(col_df_2)
 
-#write.csv(as.data.frame(collinearity),
- #         "Multicollinearity check (VIF).csv",
- #         row.names = FALSE)
+#write.csv(as.data.frame(collinearity_all),
+ #         "Multicollinearity check nb (VIF).csv",
+  #        row.names = FALSE)
 
 #write.csv(as.data.frame(collinearity_2),
 #         "Multicollinearity 2 check (VIF).csv",

@@ -309,7 +309,7 @@ library(mgcv)
 
 ##NB with Oak
 
-Oak_nb_model <- gam(round(clean_complete) ~ Percent_Oak + 
+Oak_nb_model <- gam(round(clean_complete) ~ Percent_Oak + Year +
                    s(patch_name, bs = "re") +  # random effect for patch_name
                    s(stand_ID, bs = "re"),     # random effect for stand_ID
                  family = nb(),                # negative binomial
@@ -341,7 +341,7 @@ performance::check_model(Oak_nb_model, residual_type = "normal")
 
 ##NB with Pine
 
-Pine_nb_model <- gam(round(clean_complete) ~ Percent_Pine + 
+Pine_nb_model <- gam(round(clean_complete) ~ Percent_Pine + Year +
                       s(patch_name, bs = "re") +  # random effect for patch_name
                       s(stand_ID, bs = "re"),     # random effect for stand_ID
                     family = nb(),                # negative binomial
@@ -374,6 +374,7 @@ performance::check_model(Pine_nb_model, residual_type = "normal")
 ##NB with both Oak and Pine
 
 Both_nb_model <- gam(round(clean_complete) ~ Percent_Oak + Percent_Pine + 
+                       Year +
                        Percent_Oak*Percent_Pine +
                        s(patch_name, bs = "re") +  # random effect for patch_name
                        s(stand_ID, bs = "re"),     # random effect for stand_ID
@@ -499,7 +500,7 @@ performance::check_model(model_complete_nb_oak_nested)
 
 all_variable_nb <- gam(round(clean_complete) ~ Percent_Oak + Percent_Pine + 
                          + landscape_type + longitude + 
-                         forest_area_km2 + stand_area_ha +
+                         forest_area_km2 + stand_area_ha + Year +
                          s(patch_name, bs = "re") +  # random effect for patch_name
                          s(stand_ID, bs = "re"),     # random effect for stand_ID
                        family = nb(),                # negative binomial
@@ -539,6 +540,70 @@ tab_model(all_variable_nb,
 #VIF = 1 indicates no multicollinearity
 collinearity_all <- check_collinearity(all_variable_nb)
 print(collinearity_all)
+
+write.csv(as.data.frame(collinearity_all),
+          "Multicollinearity check nb w year (VIF).csv",
+          row.names = FALSE)
+
+
+# Remove longitude and forest area from all variables model--------------------------------------------------------
+
+all_variable_nb_clean <- gam(round(clean_complete) ~ Percent_Oak + 
+                               Percent_Pine + landscape_type + 
+                         stand_area_ha + Year +
+                         s(patch_name, bs = "re") +  # random effect for patch_name
+                         s(stand_ID, bs = "re"),     # random effect for stand_ID
+                       family = nb(),                # negative binomial
+                       method = "REML", 
+                       data = stand_ID_filtered)
+summary(all_variable_nb_clean)
+plot(all_variable_nb_clean, pages = 1)
+
+# Fitted values
+fitted_vals_all_clean <- fitted(all_variable_nb_clean)
+
+# Pearson residuals
+pearson_resid_all_clean <- residuals(all_variable_nb_clean, type = "pearson")
+
+# Residual degrees of freedom
+rdf_all_clean <- df.residual(all_variable_nb_clean)
+
+plot(fitted_vals_all_clean, pearson_resid_all_clean, 
+     xlab="Fitted values", ylab="Pearson residuals")
+abline(h=0, col="red")
+
+# Dispersion ratio
+dispersion_all_clean <- sum(pearson_resid_all_clean^2) / rdf_all_clean
+dispersion_all_clean
+#dispersion = 0.893, indicating that there is no over (or much under) dispersion
+
+performance::check_model(all_variable_nb_clean, residual_type = "normal")
+# Print a clean table to the console or a markdown/HTML-friendly output
+# Save directly to a file
+tab_model(all_variable_nb_clean,
+          show.stat = TRUE,
+          p.style = "numeric",
+          file = "model_summary.doc")   # can be .doc, .html, .htm
+
+
+# Correlation tests -------------------------------------------------------
+
+#checking for collinearity between variables
+
+#VIF = 1 indicates no multicollinearity
+collinearity_all <- check_collinearity(all_variable_nb)
+print(collinearity_all)
+
+#write.csv(as.data.frame(collinearity_all),
+#          "Multicollinearity check nb w year (VIF).csv",
+ #         row.names = FALSE)
+
+collinearity_all_clean <- check_collinearity(all_variable_nb_clean)
+print(collinearity_all_clean)
+
+write.csv(as.data.frame(collinearity_all_clean),
+          "Multicollinearity check nb w year (VIF).csv",
+          row.names = FALSE)
 
 # checking for co-variation between numeric predictors
 #in a Pearson correlation matrix
