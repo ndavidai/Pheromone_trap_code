@@ -631,3 +631,36 @@ ggplot(stand_ID_filtered, aes(x = Percent_Oak, y = clean_complete, color = lands
     color = "Landscape Type"
   ) +
   scale_color_viridis_d(option = "D")  # You can also try options "A", "B", "C", "E"
+
+
+# Oak/Pine graphs ---------------------------------------------------------
+
+library(ggplot2)
+
+ggplot(data = complete_2023_2024, 
+       aes(x = Percent_Oak, 
+           y = Percent_Pine, 
+           size = clean_complete,
+           color = as.factor(Year))) +   
+  # treat Year as category for distinct colors
+    geom_point(alpha = 0.8, 
+             position = position_jitter(width = 0.03, height = 0.03)) +
+    scale_size_continuous(range = c(0.8, 11), name = "Moth counts") +
+    guides(size = guide_legend(override.aes = list(size = c(2,3,4,5))))+
+                # scale sizes for moth counts
+  scale_color_viridis_d(
+    option = "cividis",
+    name = "Year",
+    labels = c("1", "2")
+  ) +
+  labs(x = "Proportion Oak",
+       y = "Proportion Pine",
+       title = "Moth Counts along Oak–Pine Gradient") +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(hjust = 0.5),
+    legend.position = "right"
+  )
+
+
+
