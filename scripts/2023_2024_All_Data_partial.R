@@ -23,6 +23,7 @@ library(glmmTMB)
 library(COMPoissonReg)
 library(Rcpp)
 library(numDeriv)
+library(ggplot2)
 
 
 complete_2023_2024 <- read.csv("input/2023_2024_all_moth_counts.csv")
@@ -634,8 +635,6 @@ ggplot(stand_ID_filtered, aes(x = Percent_Oak, y = clean_complete, color = lands
 
 
 # Oak/Pine graphs ---------------------------------------------------------
-
-library(ggplot2)
 
 ggplot(data = complete_2023_2024, 
        aes(x = Percent_Oak, 
