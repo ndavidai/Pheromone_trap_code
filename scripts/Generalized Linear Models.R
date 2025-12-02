@@ -44,7 +44,9 @@ moth_glm$patch_name <- factor(moth_glm$patch_name)
 
 #using the glm.nb function from the MASS package to estimate a negative binomial regression
 
-moth_glmmod1<- gam(total_continuous ~ prop_oak + site_area + x_acer + x_pinus +  surrounded_by+  s(patch_name, bs="re"), data = moth_glm, method = "REML", family = "nb")
+moth_glmmod1<- gam(total_continuous ~ prop_oak + site_area + x_acer + x_pinus +  
+                     surrounded_by+  s(patch_name, bs="re"), data = moth_glm, 
+                   method = "REML", family = "nb")
 
 summary(moth_glmmod1)
 

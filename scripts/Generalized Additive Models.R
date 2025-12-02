@@ -22,6 +22,173 @@ moth_GAM <- read.csv("input/old/moth_glm.csv")
 summary(moth_GAM)
 str(moth_GAM)
 
+# All Variables GAM -------------------------------------------------------
+
+#using the glm.nb function from the MASS package to estimate a 
+#negative binomial regression - all variables from year 1 
+moth_gam1_all<- gam(total_continuous ~ prop_oak + site_area + x_acer + 
+                      x_pinus + surrounded_by + longitude_e_w + 
+                     #densite_du_couvert +
+                     s(patch_name, bs="re"), 
+                   data = moth_glm, 
+                   method = "REML", family = "nb")
+
+summary(moth_gam1_all)
+plot(moth_gam1_all, pages = 1)
+
+# Print a clean table to the console or a markdown/HTML-friendly output
+# Save directly to a file
+tab_model(moth_gam1_all,
+          show.stat = TRUE,
+          p.style = "numeric",
+          file = "year1_all_variable_modelsummary.doc")   # can be .doc, .html, .htm
+
+# Fitted values
+fitted_vals_all <- fitted(moth_gam1_all)
+
+# Pearson residuals
+pearson_resid_all <- residuals(moth_gam1_all, type = "pearson")
+
+# Residual degrees of freedom
+rdf_all <- df.residual(moth_gam1_all)
+
+plot(fitted_vals_all, pearson_resid_all, 
+     xlab="Fitted values", ylab="Pearson residuals")
+abline(h=0, col="red")
+
+# Dispersion ratio
+moth_gam1_all <- sum(pearson_resid_all^2) / rdf_all
+moth_gam1_all
+#dispersion = 0.6074, indicating that there is mild underdispersion, not too concerning
+
+# Correlation tests -------------------------------------------------------
+
+#checking for collinearity between variables
+
+#VIF = 1 indicates no multicollinearity
+collinearity_all_y1 <- check_collinearity(moth_gam1_all)
+print(collinearity_all_y1)
+
+#write.csv(as.data.frame(collinearity_all_y1),
+#          "Multicollinearity check all variables year 1 (VIF).csv",
+#         row.names = FALSE)
+
+# Pearson's correlation test between different continuous variables
+
+pairs <- list(
+  c("prop_oak", "x_pinus"),
+  c("prop_oak", "x_conifers"),
+  c("prop_oak", "x_acer"),
+  c("prop_oak", "longitude_e_w"),
+  c("prop_oak", "site_area"),
+  c("x_conifers", "x_pinus"),
+  c("x_acer", "x_pinus"),
+  c("prop_oak", "site_area"),
+  c("site_area", "longitude_e_w")
+)
+
+corr_results <- do.call(rbind, lapply(pairs, function(p) {
+  x <- moth_glm[[p[1]]]
+  y <- moth_glm[[p[2]]]
+  test <- cor.test(x, y)
+  
+  data.frame(
+    var1 = p[1],
+    var2 = p[2],
+    correlation = test$estimate,
+    p_value = test$p.value,
+    method = test$method
+  )
+}))
+
+write.csv(as.data.frame(corr_results),
+        "Correlation of all variables year 1.csv",
+          row.names = FALSE)
+
+
+# GAMS each variable ------------------------------------------------------
+
+moth_gam1_oak<- gam(total_continuous ~ prop_oak +
+                      s(patch_name, bs="re"), 
+                    data = moth_glm, 
+                    method = "REML", family = "nb")
+
+summary(moth_gam1_oak)
+
+# Fitted values
+fitted_vals_oak <- fitted(moth_gam1_oak)
+
+# Pearson residuals
+pearson_resid_oak <- residuals(moth_gam1_oak, type = "pearson")
+
+# Residual degrees of freedom
+rdf_oak <- df.residual(moth_gam1_oak)
+
+plot(fitted_vals_oak, pearson_resid_oak, 
+     xlab="Fitted values", ylab="Pearson residuals")
+abline(h=0, col="red")
+
+# Dispersion ratio
+moth_gam1_oak <- sum(pearson_resid_oak^2) / rdf_oak
+moth_gam1_oak
+#dispersion = 0.6106, indicating that there is mild underdispersion, not too concerning
+
+moth_gam1_pine<- gam(total_continuous ~ x_pinus +
+                      s(patch_name, bs="re"), 
+                    data = moth_glm, 
+                    method = "REML", family = "nb")
+
+summary(moth_gam1_pine)
+
+# Fitted values
+fitted_vals_pine <- fitted(moth_gam1_pine)
+
+# Pearson residuals
+pearson_resid_pine <- residuals(moth_gam1_pine, type = "pearson")
+
+# Residual degrees of freedom
+rdf_pine <- df.residual(moth_gam1_pine)
+
+plot(fitted_vals_pine, pearson_resid_pine, 
+     xlab="Fitted values", ylab="Pearson residuals")
+abline(h=0, col="red")
+
+# Dispersion ratio
+moth_gam1_pine <- sum(pearson_resid_pine^2) / rdf_pine
+moth_gam1_pine
+#dispersion = 0.6094, indicating that there is mild underdispersion, not too concerning
+
+moth_gam1_both<- gam(total_continuous ~ prop_oak + x_pinus +
+                      s(patch_name, bs="re"), 
+                    data = moth_glm, 
+                    method = "REML", family = "nb")
+
+summary(moth_gam1_both)
+
+# Fitted values
+fitted_vals_both <- fitted(moth_gam1_both)
+
+# Pearson residuals
+pearson_resid_both <- residuals(moth_gam1_both, type = "pearson")
+
+# Residual degrees of freedom
+rdf_both <- df.residual(moth_gam1_both)
+
+plot(fitted_vals_both, pearson_resid_both, 
+     xlab="Fitted values", ylab="Pearson residuals")
+abline(h=0, col="red")
+
+# Dispersion ratio
+moth_gam1_both <- sum(pearson_resid_both^2) / rdf_both
+moth_gam1_both
+#dispersion = 0.6109, indicating that there is mild underdispersion, not too concerning
+
+
+
+
+
+
+
 ##fit a linear regression model to the relationship between Moth Count and Prop Oak
 linear_model <- gam(total_continuous ~ prop_oak, data = moth_GAM)
 summary(linear_model)
