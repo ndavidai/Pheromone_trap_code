@@ -538,6 +538,32 @@ Oak_nb_model_nested <- gam(
 summary(Oak_nb_model_nested)
 plot(Oak_nb_model_nested, pages = 1)
 
+# Fitted values
+fitted_vals_oak <- fitted(Oak_nb_model_nested)
+
+# Pearson residuals
+pearson_resid_oak <- residuals(Oak_nb_model_nested, type = "pearson")
+
+# Residual degrees of freedom
+rdf_oak <- df.residual(Oak_nb_model_nested)
+
+plot(fitted_vals_oak, pearson_resid_oak, 
+     xlab="Fitted values", ylab="Pearson residuals")
+abline(h=0, col="red")
+
+# Dispersion ratio
+dispersion_oak <- sum(pearson_resid_oak^2) / rdf_oak
+dispersion_oak
+#dispersion = 0.893, indicating that there is no over (or much under) dispersion
+
+performance::check_model(Oak_nb_model_nested, residual_type = "normal")
+# Print a clean table to the console or a markdown/HTML-friendly output
+# Save directly to a file
+tab_model(Oak_nb_model_nested,
+          show.stat = TRUE,
+          p.style = "numeric",
+          file = "model_summary.doc")   # can be .doc, .html, .htm
+
 
 Oak_nb_nested <- gam(round(clean_complete) ~ Percent_Oak + 
                        s(patch_name, bs = "re") +  # random effect for patch_name
@@ -549,6 +575,36 @@ Oak_nb_nested <- gam(round(clean_complete) ~ Percent_Oak +
 summary(Oak_nb_nested)
 plot(Oak_nb_nested, pages = 1)
 
+performance::check_overdispersion(Oak_nb_nested)
+performance::check_model(Oak_nb_nested)
+
+Pine_nb_nested <- gam(round(clean_complete) ~ Percent_Pine + 
+                       s(patch_name, bs = "re") +  # random effect for patch_name
+                       s(stand_ID, bs = "re") +     # random effect for stand_ID
+                       s(stand_ID, by = patch_name, bs = "re"), # nested effect: stand_ID within patch_name
+                     family = nb(),                # negative binomial
+                     method = "REML", 
+                     data = stand_ID_filtered)
+summary(Pine_nb_nested)
+plot(Pine_nb_nested, pages = 1)
+
+performance::check_overdispersion(Pine_nb_nested)
+performance::check_model(Pine_nb_nested)
+
+All_var_nb_nested <- gam(round(clean_complete) ~ Percent_Oak + Percent_Pine + 
+                           + landscape_type + longitude + 
+                           forest_area_km2 + stand_area_ha
+                       s(patch_name, bs = "re") +  # random effect for patch_name
+                       s(stand_ID, bs = "re") +     # random effect for stand_ID
+                       s(stand_ID, by = patch_name, bs = "re"), # nested effect: stand_ID within patch_name
+                     family = nb(),                # negative binomial
+                     method = "REML", 
+                     data = stand_ID_filtered)
+summary(All_var_nb_nested)
+plot(All_var_nb_nested, pages = 1)
+
+performance::check_overdispersion(All_var_nb_nested)
+performance::check_model(All_var_nb_nested)
 
 # View summary of fixed and random effects
 summary(gam_model_nested)
@@ -556,23 +612,6 @@ summary(gam_model_nested)
 # Optional: visualize random effects
 plot(gam_model_nested, pages = 1)
 
-
-
-
-#NB w Oak - not working due to a compatibility issue between 
-#lme4 with MacOS
-model_complete_nb_oak_nested <- glmmTMB(
-  round(clean_complete) ~ Percent_Oak + 
-    (1 | patch_name/stand_ID),
-  family = nbinom2,
-  data = stand_ID_filtered
-)
-
-summary(model_complete_nb_oak_nested)
-
-
-performance::check_overdispersion(model_complete_nb_oak_nested)
-performance::check_model(model_complete_nb_oak_nested)
 
 # All Variables -----------------------------------------------------------
 
