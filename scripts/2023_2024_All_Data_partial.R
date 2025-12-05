@@ -481,7 +481,7 @@ abline(h=0, col="red")
 # Dispersion ratio
 dispersion_both <- sum(pearson_resid_both^2) / rdf_both
 dispersion_both
-#dispersion = 0.852, indicating that there is no over (or much under) dispersion
+#dispersion = 0.862, indicating that there is no over (or much under) dispersion
 
 performance::check_model(Both_nb_model, residual_type = "normal")
 
@@ -554,7 +554,7 @@ abline(h=0, col="red")
 # Dispersion ratio
 dispersion_oak <- sum(pearson_resid_oak^2) / rdf_oak
 dispersion_oak
-#dispersion = 0.893, indicating that there is no over (or much under) dispersion
+#dispersion = 0.852, indicating that there is no over (or much under) dispersion
 
 performance::check_model(Oak_nb_model_nested, residual_type = "normal")
 # Print a clean table to the console or a markdown/HTML-friendly output
@@ -563,6 +563,48 @@ tab_model(Oak_nb_model_nested,
           show.stat = TRUE,
           p.style = "numeric",
           file = "model_summary.doc")   # can be .doc, .html, .htm
+
+
+Pine_nb_model_nested <- gam(
+  round(clean_complete) ~ Percent_Pine +
+    s(patch_name, bs = "re") +               # random effect for patch_name
+    s(patch_name, stand_ID, bs = "re"),      # nested random effect: stand_ID within patch_name
+  family = nb(),
+  method = "REML",
+  data = stand_ID_filtered
+)
+
+summary(Pine_nb_model_nested)
+plot(Pine_nb_model_nested, pages = 1)
+
+# Fitted values
+fitted_vals_pine <- fitted(Pine_nb_model_nested)
+
+# Pearson residuals
+pearson_resid_pine <- residuals(Pine_nb_model_nested, type = "pearson")
+
+# Residual degrees of freedom
+rdf_pine <- df.residual(Pine_nb_model_nested)
+
+plot(fitted_vals_pine, pearson_resid_pine, 
+     xlab="Fitted values", ylab="Pearson residuals")
+abline(h=0, col="red")
+
+# Dispersion ratio
+dispersion_pine <- sum(pearson_resid_pine^2) / rdf_pine
+dispersion_pine
+#dispersion = 0.845, indicating that there is no over (or much under) dispersion
+
+performance::check_model(Pine_nb_model_nested, residual_type = "normal")
+# Print a clean table to the console or a markdown/HTML-friendly output
+# Save directly to a file
+tab_model(Pine_nb_model_nested,
+          show.stat = TRUE,
+          p.style = "numeric",
+          file = "model_summary.doc")   # can be .doc, .html, .htm
+
+
+
 
 
 Oak_nb_nested <- gam(round(clean_complete) ~ Percent_Oak + 
@@ -645,7 +687,7 @@ abline(h=0, col="red")
 # Dispersion ratio
 dispersion_all <- sum(pearson_resid_all^2) / rdf_all
 dispersion_all
-#dispersion = 0.893, indicating that there is no over (or much under) dispersion
+#dispersion = 0.865, indicating that there is no over (or much under) dispersion
 
 performance::check_model(all_variable_nb, residual_type = "normal")
 # Print a clean table to the console or a markdown/HTML-friendly output
@@ -661,16 +703,16 @@ tab_model(all_variable_nb,
 collinearity_all <- check_collinearity(all_variable_nb)
 print(collinearity_all)
 
-write.csv(as.data.frame(collinearity_all),
-          "Multicollinearity check nb w year (VIF).csv",
-          row.names = FALSE)
+#write.csv(as.data.frame(collinearity_all),
+ #         "Multicollinearity check nb w year (VIF).csv",
+  #        row.names = FALSE)
 
 
 # Remove longitude and forest area from all variables model--------------------------------------------------------
 
 all_variable_nb_clean <- gam(round(clean_complete) ~ Percent_Oak + 
                                Percent_Pine + landscape_type + 
-                         stand_area_ha + Year +
+                         stand_area_ha + 
                          s(patch_name, bs = "re") +  # random effect for patch_name
                          s(stand_ID, bs = "re"),     # random effect for stand_ID
                        family = nb(),                # negative binomial
@@ -695,15 +737,15 @@ abline(h=0, col="red")
 # Dispersion ratio
 dispersion_all_clean <- sum(pearson_resid_all_clean^2) / rdf_all_clean
 dispersion_all_clean
-#dispersion = 0.893, indicating that there is no over (or much under) dispersion
+#dispersion = 0.882, indicating that there is no over (or much under) dispersion
 
 performance::check_model(all_variable_nb_clean, residual_type = "normal")
 # Print a clean table to the console or a markdown/HTML-friendly output
 # Save directly to a file
-tab_model(all_variable_nb_clean,
-          show.stat = TRUE,
-          p.style = "numeric",
-          file = "model_summary.doc")   # can be .doc, .html, .htm
+#tab_model(all_variable_nb_clean,
+#          show.stat = TRUE,
+#          p.style = "numeric",
+#          file = "model_summary.doc")   # can be .doc, .html, .htm
 
 
 # Correlation tests -------------------------------------------------------
@@ -721,9 +763,9 @@ print(collinearity_all)
 collinearity_all_clean <- check_collinearity(all_variable_nb_clean)
 print(collinearity_all_clean)
 
-write.csv(as.data.frame(collinearity_all_clean),
-          "Multicollinearity check nb w year (VIF).csv",
-          row.names = FALSE)
+#write.csv(as.data.frame(collinearity_all_clean),
+#          "Multicollinearity check nb w year (VIF).csv",
+ #         row.names = FALSE)
 
 # checking for co-variation between numeric predictors
 #in a Pearson correlation matrix
@@ -739,18 +781,17 @@ cor_df <- as.data.frame(round(cor_mat, 3))
 cor_df |> gt::gt() |> gt::tab_caption("Correlation Matrix")
 
 
+# checking for co-variation between oak and pine, just in year 2
+#in a Pearson correlation matrix
+# Filter for Year 2
+oak_pine_cor_y2 <- stand_ID_filtered[stand_ID_filtered$Year == 1, 
+                                     c("Percent_Oak", "Percent_Pine")]
 
-ggplot(stand_ID_filtered, aes(x = Percent_Oak, y = clean_complete, color = landscape_type)) +
-  geom_point(alpha = 0.6) +  # Add raw data points with transparency
-  geom_smooth(method = "lm", se = FALSE) +  # Add regression lines by group
-  theme_minimal() +
-  labs(
-    title = " ",
-    x = "Percent Oak",
-    y = "Moth Counts",
-    color = "Landscape Type"
-  ) +
-  scale_color_viridis_d(option = "D")  # You can also try options "A", "B", "C", "E"
+# Compute correlation matrix using only complete cases
+cor(oak_pine_cor_y2, use = "complete.obs")
+
+
+
 
 
 # Oak/Pine graphs ---------------------------------------------------------
@@ -761,10 +802,10 @@ ggplot(data = complete_2023_2024,
            size = clean_complete,
            color = as.factor(Year))) +   
   # treat Year as category for distinct colors
-    geom_point(alpha = 0.8, 
-             position = position_jitter(width = 0.03, height = 0.03)) +
-    scale_size_continuous(range = c(0.8, 11), name = "Moth counts") +
-    guides(size = guide_legend(override.aes = list(size = c(2,3,4,5))))+
+          geom_point(alpha = 0.8, 
+          position = position_jitter(width = 0.03, height = 0.03)) +
+          scale_size_continuous(range = c(0.8, 11), name = "Moth counts") +
+          guides(size = guide_legend(override.aes = list(size = c(2,3,4,5))))+
                 # scale sizes for moth counts
   scale_color_viridis_d(
     option = "cividis",
@@ -780,5 +821,43 @@ ggplot(data = complete_2023_2024,
     legend.position = "right"
   )
 
+#test...
+# Create binned moth counts
+complete_2023_2024 <- complete_2023_2024 %>%
+  mutate(moth_bin = cut(clean_complete,
+                        breaks = seq(0, max(clean_complete, na.rm = TRUE) + 99, by = 100),
+                        include.lowest = TRUE,
+                        right = FALSE,
+                        labels = paste(seq(0, max(clean_complete, na.rm = TRUE), by = 100),
+                                       seq(99, max(clean_complete, na.rm = TRUE) + 99, by = 100),
+                                       sep = "-")
+  )
+  )
 
-
+# Plot
+ggplot(data = complete_2023_2024, 
+       aes(x = Percent_Oak, 
+           y = Percent_Pine, 
+           size = moth_bin,    # use binned counts for legend
+           color = as.factor(Year))) +   
+  
+  geom_point(alpha = 0.8, 
+             position = position_jitter(width = 0.03, height = 0.03)) +
+  
+  scale_size_discrete(name = "Moth counts") +   # discrete size legend for bins
+  
+  scale_color_viridis_d(
+    option = "cividis",
+    name = "Year",
+    labels = c("2023", "2024")
+  ) +
+  
+  labs(x = "Proportion Oak",
+       y = "Proportion Pine",
+       title = "Moth Counts along Oak–Pine Gradient") +
+  
+  theme_minimal() +
+  theme(
+    plot.title = element_text(hjust = 0.5),
+    legend.position = "right"
+  )
