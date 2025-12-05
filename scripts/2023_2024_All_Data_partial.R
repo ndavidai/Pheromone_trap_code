@@ -90,15 +90,13 @@ n_distinct(stand_ID_filtered$stand_ID)
 
 n_distinct(stand_ID_filtered$patch_name)
 
-
-
 #check to see the distribution of moth count data
 hist(complete_2023_2024$clean_complete, 
-          main = " ", 
-          xlab = "Spongy moth count/trap", 
-          ylab = "Frequency", 
-          col = "darkblue", 
-          border = "black")
+     main = " ", 
+     xlab = "Spongy moth count/trap", 
+     ylab = "Frequency", 
+     col = "darkblue", 
+     border = "black")
 
 hist(complete_2023_2024$clean_complete, 
      main = " ", 
@@ -122,8 +120,8 @@ table(stand_type_filtered$stand_type,
 
 # Set the levels of 'stand_type' to ensure the correct order
 stand_type_filtered$stand_type <- factor(stand_type_filtered$stand_type, 
-                              levels = c("Oak", "Oak/Pine", "Oak/Other", 
-                                  "Pine/Oak", "Pine", "Other"))
+                                         levels = c("Oak", "Oak/Pine", "Oak/Other", 
+                                                    "Pine/Oak", "Pine", "Other"))
 
 # Create the 'stand-type by patch' table
 table(stand_type_filtered$stand_type, stand_type_filtered$patch_name)
@@ -133,6 +131,89 @@ contingency_table <- table(stand_type_filtered$stand_type, stand_type_filtered$p
 
 # Convert the table to a data frame
 contingency_df <- as.data.frame(contingency_table)
+
+
+# stand overlap -----------------------------------------------------------
+
+#check for overlapping stands between year 1 and 2
+stand_year_matrix <- stand_ID_filtered %>%
+  select(stand_ID, Year) %>%
+  distinct() %>%
+  mutate(value = 1) %>%
+  pivot_wider(names_from = Year, values_from = value, values_fill = 0)
+
+stand_year_matrix 
+View(stand_year_matrix)
+#no overlap by stand ID
+
+#same thing, but by longitude, to the nearest thousandth
+
+stand_ID_filtered$lon_round <- round(stand_ID_filtered$longitude, 3)
+
+lon_matrix <- stand_ID_filtered %>%
+  select(lon_round, Year) %>%
+  distinct() %>%
+  mutate(value = 1) %>%
+  pivot_wider(names_from = Year,
+              values_from = value,
+              values_fill = 0)
+
+lon_matrix
+View(lon_matrix)
+
+#keep only locations that appear in both years
+overlapping_lons <- stand_ID_filtered %>%
+  distinct(lon_round, Year) %>%
+  count(lon_round) %>%
+  filter(n == 2) %>%      # appears in both years
+  pull(lon_round)
+
+stand_overlap <- stand_ID_filtered %>% 
+  filter(lon_round %in% overlapping_lons)
+
+dat_overlap <- stand_overlap %>%
+  group_by(lon_round, Year) %>%
+  mutate(entry_id = row_number()) %>%
+  ungroup()
+
+dat_wide <- dat_overlap %>%
+  select(lon_round, Year, entry_id, clean_complete) %>%
+  pivot_wider(
+    names_from = Year,
+    values_from = clean_complete,
+    names_prefix = "year_"
+  )
+
+dat_wide <- dat_wide %>%
+  mutate(diff = year_0 - year_1)
+
+#plot the differences, indicating longitude pairs and year 
+
+ggplot(dat_overlap, aes(x = factor(lon_round), 
+                        y = clean_complete, 
+                        color = factor(Year),
+                        group = interaction(lon_round))) +
+  # treat Year as category for distinct colors
+  scale_color_viridis_d(
+    option = "cividis",
+    name = "Year",
+    labels = c("2023", "2024")
+  ) +
+  geom_point(size = 3) +
+  geom_line(aes(group = lon_round), alpha = 0.5) +
+  labs(x = "Longitude (rounded)",
+       y = "Moth count",
+       color = "Year") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1))
+
+#test if there's a significant difference in moth counts in similar locations
+#between the 2 years
+
+head(dat_wide)
+summary(dat_wide$diff)
+
+
 
 
 # Heatmap stands by patch -------------------------------------------------
@@ -310,7 +391,7 @@ library(mgcv)
 
 ##NB with Oak
 
-Oak_nb_model <- gam(round(clean_complete) ~ Percent_Oak + Year +
+Oak_nb_model <- gam(round(clean_complete) ~ Percent_Oak +
                    s(patch_name, bs = "re") +  # random effect for patch_name
                    s(stand_ID, bs = "re"),     # random effect for stand_ID
                  family = nb(),                # negative binomial
@@ -342,7 +423,7 @@ performance::check_model(Oak_nb_model, residual_type = "normal")
 
 ##NB with Pine
 
-Pine_nb_model <- gam(round(clean_complete) ~ Percent_Pine + Year +
+Pine_nb_model <- gam(round(clean_complete) ~ Percent_Pine +
                       s(patch_name, bs = "re") +  # random effect for patch_name
                       s(stand_ID, bs = "re"),     # random effect for stand_ID
                     family = nb(),                # negative binomial
@@ -375,7 +456,6 @@ performance::check_model(Pine_nb_model, residual_type = "normal")
 ##NB with both Oak and Pine
 
 Both_nb_model <- gam(round(clean_complete) ~ Percent_Oak + Percent_Pine + 
-                       Year +
                        Percent_Oak*Percent_Pine +
                        s(patch_name, bs = "re") +  # random effect for patch_name
                        s(stand_ID, bs = "re"),     # random effect for stand_ID
@@ -650,7 +730,7 @@ ggplot(data = complete_2023_2024,
   scale_color_viridis_d(
     option = "cividis",
     name = "Year",
-    labels = c("1", "2")
+    labels = c("2023", "2024")
   ) +
   labs(x = "Proportion Oak",
        y = "Proportion Pine",

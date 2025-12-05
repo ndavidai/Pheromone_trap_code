@@ -26,6 +26,7 @@ str(moth_GAM)
 
 #using the glm.nb function from the MASS package to estimate a 
 #negative binomial regression - all variables from year 1 
+#for this to run - need to first run first ~50 lines of code in 'Generalized Linear Models' script
 moth_gam1_all<- gam(total_continuous ~ prop_oak + site_area + x_acer + 
                       x_pinus + surrounded_by + longitude_e_w + 
                      #densite_du_couvert +
@@ -60,6 +61,7 @@ abline(h=0, col="red")
 moth_gam1_all <- sum(pearson_resid_all^2) / rdf_all
 moth_gam1_all
 #dispersion = 0.6074, indicating that there is mild underdispersion, not too concerning
+
 
 # Correlation tests -------------------------------------------------------
 
