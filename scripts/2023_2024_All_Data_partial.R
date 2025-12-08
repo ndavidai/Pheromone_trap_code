@@ -821,6 +821,8 @@ ggplot(data = complete_2023_2024,
     legend.position = "right"
   )
 
+
+
 #test...
 # Create binned moth counts
 complete_2023_2024 <- complete_2023_2024 %>%
@@ -840,24 +842,25 @@ ggplot(data = complete_2023_2024,
            y = Percent_Pine, 
            size = moth_bin,    # use binned counts for legend
            color = as.factor(Year))) +   
-  
+  # treat Year as category for distinct colors 
   geom_point(alpha = 0.8, 
              position = position_jitter(width = 0.03, height = 0.03)) +
   
-  scale_size_discrete(name = "Moth counts") +   # discrete size legend for bins
-  
-  scale_color_viridis_d(
+  scale_size_discrete(range = c(0.8, 11), name = "Moth counts") +   # discrete size legend for bins
+  #guides(size = guide_legend(override.aes = list(size = c(2,3,4,5))))+
+    # scale sizes for moth counts
+    scale_color_viridis_d(
     option = "cividis",
     name = "Year",
     labels = c("2023", "2024")
   ) +
-  
-  labs(x = "Proportion Oak",
+
+      labs(x = "Proportion Oak",
        y = "Proportion Pine",
        title = "Moth Counts along Oak–Pine Gradient") +
-  
   theme_minimal() +
   theme(
     plot.title = element_text(hjust = 0.5),
     legend.position = "right"
   )
+
