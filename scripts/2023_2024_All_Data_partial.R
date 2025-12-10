@@ -673,8 +673,7 @@ tab_model(Oak_Pine_nb_model_nested,
 
 
 All_var_nb_nested <- gam(round(clean_complete) ~ Percent_Oak + Percent_Pine + 
-                           Year + landscape_type + longitude + 
-                           forest_area_km2 + stand_area_ha +
+                           Year + landscape_type + stand_area_ha +
                        s(patch_name, bs = "re") +  # random effect for patch_name
                        s(stand_ID, by = patch_name, bs = "re"), # nested effect: stand_ID within patch_name
                      family = nb(),                # negative binomial
@@ -762,16 +761,16 @@ tab_model(all_variable_nb,
 collinearity_all <- check_collinearity(all_variable_nb)
 print(collinearity_all)
 
-#write.csv(as.data.frame(collinearity_all),
- #         "Multicollinearity check nb w year (VIF).csv",
-  #        row.names = FALSE)
+write.csv(as.data.frame(collinearity_all),
+         "Multicollinearity check nb w year (VIF).csv",
+        row.names = FALSE)
 
 
 # Remove longitude and forest area from all variables model--------------------------------------------------------
 
 all_variable_nb_clean <- gam(round(clean_complete) ~ Percent_Oak + 
                                Percent_Pine + landscape_type + 
-                         stand_area_ha + 
+                         stand_area_ha + Year +
                          s(patch_name, bs = "re") +  # random effect for patch_name
                          s(stand_ID, bs = "re"),     # random effect for stand_ID
                        family = nb(),                # negative binomial
@@ -816,8 +815,8 @@ collinearity_all <- check_collinearity(all_variable_nb)
 print(collinearity_all)
 
 #write.csv(as.data.frame(collinearity_all),
-#          "Multicollinearity check nb w year (VIF).csv",
- #         row.names = FALSE)
+ #         "Multicollinearity check nb w year (VIF).csv",
+  #        row.names = FALSE)
 
 collinearity_all_clean <- check_collinearity(all_variable_nb_clean)
 print(collinearity_all_clean)
