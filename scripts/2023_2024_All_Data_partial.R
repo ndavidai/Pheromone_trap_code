@@ -466,6 +466,8 @@ summary(Both_nb_model)
 plot(Both_nb_model, pages = 1)
 
 
+#3D and contour graphs of oak/pine model
+
 par(mgp = c(6, 1, 0))  # move titles outward
 
 vis.gam(
@@ -493,7 +495,15 @@ vis.gam(
   ylab = "% Pine"
 )
 
-
+#contour graph displaying only the sampled sites (nothing where pine+oak would 
+#equal >1)
+vis.gam(
+  Both_nb_model,
+  view = c("Percent_Oak", "Percent_Pine"),
+  type = "response",
+  plot.type = "contour",
+  too.far = 0.05
+)
 
 # Fitted values
 fitted_vals_both <- fitted(Both_nb_model)
@@ -864,7 +874,13 @@ ggplot(data = complete_2023_2024,
           position = position_jitter(width = 0.03, height = 0.03)) +
           scale_size_continuous(range = c(0.8, 11), name = "Moth counts") +
           guides(size = guide_legend(override.aes = list(size = c(2,3,4,5))))+
-                # scale sizes for moth counts
+  # Add diagonal line 
+  geom_abline(slope = -1, intercept = 1,
+              color = "red",
+              linetype = "dashed",
+              linewidth = 1) +
+  
+                  # scale sizes for moth counts
   scale_color_viridis_d(
     option = "cividis",
     name = "Year",
@@ -881,44 +897,27 @@ ggplot(data = complete_2023_2024,
 
 
 
-#test...
-# Create binned moth counts
-complete_2023_2024 <- complete_2023_2024 %>%
-  mutate(moth_bin = cut(clean_complete,
-                        breaks = seq(0, max(clean_complete, na.rm = TRUE) + 99, by = 100),
-                        include.lowest = TRUE,
-                        right = FALSE,
-                        labels = paste(seq(0, max(clean_complete, na.rm = TRUE), by = 100),
-                                       seq(99, max(clean_complete, na.rm = TRUE) + 99, by = 100),
-                                       sep = "-")
-  )
-  )
 
-# Plot
-ggplot(data = complete_2023_2024, 
-       aes(x = Percent_Oak, 
-           y = Percent_Pine, 
-           size = moth_bin,    # use binned counts for legend
-           color = as.factor(Year))) +   
-  # treat Year as category for distinct colors 
-  geom_point(alpha = 0.8, 
-             position = position_jitter(width = 0.03, height = 0.03)) +
-  
-  scale_size_discrete(range = c(0.8, 11), name = "Moth counts") +   # discrete size legend for bins
-  #guides(size = guide_legend(override.aes = list(size = c(2,3,4,5))))+
-    # scale sizes for moth counts
-    scale_color_viridis_d(
-    option = "cividis",
-    name = "Year",
-    labels = c("2023", "2024")
-  ) +
+# Ordination --------------------------------------------------------------
 
-      labs(x = "Proportion Oak",
-       y = "Proportion Pine",
-       title = "Moth Counts along Oak–Pine Gradient") +
-  theme_minimal() +
-  theme(
-    plot.title = element_text(hjust = 0.5),
-    legend.position = "right"
-  )
+##From Eric - pseudocode
 
+#find multidimensional scaling of community matrix|
+comm_dist = dist(community_matrix)
+#get 2-dimensional variables
+comp_variables = MDS(comm_dist, d = 2)
+
+dat$x1 = comp_variables$X[,1]
+dat$x2 = comp_variables$X[,2]
+
+mod = gam(moth_count ~ s(x1, x2), data = dat)
+
+
+#axes 1 vs axes 2 
+
+comp_PCA = princomp(comm_dist)
+
+dat$x1 = comp_PCA$scores[,1]
+dat$x2 = comp_PCA$scores[,2]
+
+mod = gam(moth_count ~ te(x1, x2), data = dat)
