@@ -90,6 +90,16 @@ n_distinct(stand_ID_filtered$stand_ID)
 
 n_distinct(stand_ID_filtered$patch_name)
 
+#how many of the moth counts are lower than 10
+sum(complete_2023_2024$clean_complete < 10, na.rm = TRUE)
+
+#how many of the moth counts are lower than 51
+sum(complete_2023_2024$clean_complete < 51, na.rm = TRUE)
+
+#how many of the moth counts are higher than 50
+sum(complete_2023_2024$clean_complete > 50, na.rm = TRUE)
+
+
 #check to see the distribution of moth count data
 hist(complete_2023_2024$clean_complete, 
      main = " ", 
@@ -771,9 +781,9 @@ tab_model(all_variable_nb,
 collinearity_all <- check_collinearity(all_variable_nb)
 print(collinearity_all)
 
-write.csv(as.data.frame(collinearity_all),
+#write.csv(as.data.frame(collinearity_all),
          "Multicollinearity check nb w year (VIF).csv",
-        row.names = FALSE)
+ #       row.names = FALSE)
 
 
 # Remove longitude and forest area from all variables model--------------------------------------------------------
@@ -872,8 +882,8 @@ ggplot(data = complete_2023_2024,
   # treat Year as category for distinct colors
           geom_point(alpha = 0.8, 
           position = position_jitter(width = 0.03, height = 0.03)) +
-          scale_size_continuous(range = c(0.8, 11), name = "Moth counts") +
-          guides(size = guide_legend(override.aes = list(size = c(2,3,4,5))))+
+          scale_size_continuous(range = c(2, 13), name = "Moth counts") +
+          guides(size = guide_legend(override.aes = list(size = c(2,5,8,11))))+
   # Add diagonal line 
   geom_abline(slope = -1, intercept = 1,
               color = "red",
