@@ -90,6 +90,12 @@ n_distinct(stand_ID_filtered$stand_ID)
 
 n_distinct(stand_ID_filtered$patch_name)
 
+#how many of the moth counts are higher than 0
+sum(complete_2023_2024$clean_complete > 0, na.rm = TRUE)
+
+#how many of the moth counts were NA
+sum(is.na(complete_2023_2024$clean_complete))
+
 #how many of the moth counts are lower than 10
 sum(complete_2023_2024$clean_complete < 10, na.rm = TRUE)
 
@@ -98,6 +104,10 @@ sum(complete_2023_2024$clean_complete < 51, na.rm = TRUE)
 
 #how many of the moth counts are higher than 50
 sum(complete_2023_2024$clean_complete > 50, na.rm = TRUE)
+
+#which stands had a moth count of 0
+complete_2023_2024[complete_2023_2024$clean_complete == 0, "trap_name"]
+
 
 
 #check to see the distribution of moth count data
@@ -883,7 +893,7 @@ ggplot(data = complete_2023_2024,
           geom_point(alpha = 0.8, 
           position = position_jitter(width = 0.03, height = 0.03)) +
           scale_size_continuous(range = c(2, 13), name = "Moth counts") +
-          guides(size = guide_legend(override.aes = list(size = c(2,5,8,11))))+
+          guides(size = guide_legend(override.aes = list(size = c(2,4.5,7,9.5))))+
   # Add diagonal line 
   geom_abline(slope = -1, intercept = 1,
               color = "red",
