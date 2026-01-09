@@ -167,6 +167,14 @@ moth_gam1_both<- gam(total_continuous ~ prop_oak + x_pinus +
 
 summary(moth_gam1_both)
 
+moth_gam1_interaction<- gam(total_continuous ~ prop_oak + x_pinus + 
+                              prop_oak * x_pinus +
+                       s(patch_name, bs="re"), 
+                     data = moth_glm, 
+                     method = "REML", family = "nb")
+
+summary(moth_gam1_interaction)
+
 # Fitted values
 fitted_vals_both <- fitted(moth_gam1_both)
 
